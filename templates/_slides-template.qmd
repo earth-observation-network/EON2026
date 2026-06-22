@@ -1,0 +1,131 @@
+---
+title: "YOUR  TITLE"
+author: "Peter PAN"
+institute: "YOUR ORGANIZATION"
+date: last-modified
+date-format: "DD MMM, YYYY"
+title-slide-attributes: # title screen only
+  data-background-image: "preview-image-mof.png"
+  data-background-size: contain
+  data-background-opacity: "0.7"
+format:
+  organization-revealjs:
+    theme: simple 
+    echo: true
+    highlight-style: github
+    slide-number: true
+    width: 1600
+    height: 900
+    footer: "[YOUR ORG](https://example.com/)"
+    header: the incredible talk about making sense scales
+    header-logo: logo2.png
+    hide-from-titleSlide: text
+
+    spotlight:
+      useAsPointer: true
+      size: 5
+
+filters:
+  - roughnotation
+  - reveal-header
+
+revealjs-plugins:
+  - spotlight
+
+---
+
+```{r}
+#| echo: false
+options(tidyverse.quiet=TRUE)
+library(tidyverse)
+```
+
+## { background-image="preview-image-mof.png" background-opacity="0.7" background-size="contain"  } 
+::: header
+
+This is a slide with a background image
+
+:::
+
+
+# NEW SECTION 
+
+## Bullets 
+
+Remove the incremental ::: bracketed div for plain lists
+
+::: {.incremental}
+- the quick
+- brown fox
+- jumps over
+- the lazy dog
+:::
+
+## Columns
+
+:::: {.columns}
+
+::: {.column width="50%"}
+Some text on the left of the slide
+:::
+
+::: {.column width="50%"}
+Some text on the right of the slide
+:::
+
+::::
+
+## Smaller Slide {.smaller}
+
+The text on this slide will be, um, _smaller_.
+
+# Speaker Notes
+
+This is how to add speaker notes and replace the footer on a single slide.
+
+**SPEAKER NOTES REQUIRE A WEB SERVER**
+
+::: footer
+Custom!
+:::
+
+::: {.notes}
+do re me fa so la ti doh!
+:::
+
+## Sneaky Info (Asides & Bootnotes) 
+
+This is cool! ^[No it is not] 
+
+Add `reference-location: document` to the YAML for end notes.
+
+::: aside
+I am at the bottom of the slide
+:::
+
+## Scrolly Slide {.scrollable}
+
+Overflowed content will be scrollable on this slide.
+
+## Bootnotes
+
+## A slide with a plot
+
+```{r}
+#| echo: true
+#| fig.retina: 2
+#| fig.height: 9
+#| fig.width: 16
+#| output-location: column
+# ^^ could be fragment, slide, column, column-fragment
+ggplot() +
+  geom_point(
+    data = mtcars,
+    aes(wt, mpg),
+    color = "goldenrod"
+  ) +
+  labs(
+    title = "Some Dots"
+  ) 
+```
+

@@ -1,0 +1,129 @@
+---
+title: "EON Summer School 2025 (31.08-05.09.2025)"
+open-graph:
+  description: "EON Summer School 2025 (31.08-05.09.2025)"
+  image: /images/clausiwood.png
+comments: false
+---
+
+```{=html}
+<style>
+  body {
+  background-image: url("");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+  
+</style>
+```
+
+<!-- # Welcome EON Summer School 2025 (31.08-05.09.2025) -->
+
+<!-- ideas (2025): -->
+<!-- - storing data from previous years -->
+<!-- - inform about packages and data prereqs in advance (before the summer school -- due to the cabin weak wifi) -->
+
+## Workshop Program
+
+-   Sunday (Waldhaus):
+    -   17:00-17:30 Check-in @ "The Cabin" (Waldhaus) Oderbrück
+    -   17:30-19:00 Welcome & Introduction
+    
+-   Monday (Waldhaus):
+    -    09:00-12:00 **Excursion with a local forest district manager** to get an introduction to the Harz region and its current situation
+    -    13:00 Lunch @ Waldaus
+    -    14:00-16:00 **Block 1 Collection of reference data for forest monitoring** in the context of forest monitoring (Paul Magdon, HAWK)
+    -    16:00-18:00 Group work
+      
+-   Tuesday (Waldhaus & Excursion):
+    -   09:00-13:00 **Joint data collection campaign**
+    -   13:30 Lunch @ Waldhaus
+    -   14:00-16:00 **Block 2 Current topics of remote sensing assisted forest inventories in the context of forest management planning** (N.N.) 
+    -   16:00-18:00 Group work
+      
+-   Wednesday (Waldhaus & Excursion):
+    <!-- -   09:00-13:00 **Excursion to NP-Harz** (Walk & Talk) -->
+    <!-- -   13:30 Lunch @ Polsterbergerhubhaus -->
+    -   08:30-14:30 **Hike to the Brocken and back (with lunch there)**  (Walk & Talk)
+    -   15:00-17:00 **Block 3 Machine learning and validation** (Hanna Meyer, Uni Münster)
+    -   17:00-18:00 Group work
+    
+-   Thursday (Waldhaus):
+    -   09:00-10:00 **Block 4 Measuring microclimate with mobile climate station** (Chris Reudenbach, Uni Marburg)
+    -   10:00-11:00 **Block 5 Modelling microclimate** (Chris Reudenbach, Uni Marburg)
+    -   11:00-12:00 Group work
+    -   12:30 Lunch @ Waldhaus
+    -   14:00-16:00 **Block 6 Describing and comparing spatial patterns** (Jakub Nowosad, Uni Münster and Adam Mickiewicz Uni)
+    -   16:00-18:00 Group work
+
+-   Friday (Waldhaus):
+    -   09:00-10:00 Group work
+    -   10:00-11:30 **Final presentations of the group work** (Students)
+    -   11:30-11:45 Closing Seminar, Evaluation
+    -   11:45-13:00 Tidy up rooms, lunch, check out
+    -   13:15 **Departure**
+
+------------------------------------------------------------------------
+
+## Accommodation
+
+-   We will stay at: [The Cabin Oderbrück](https://oderbrueck.de/uebernachten-2/the-cabin-oderbrueck)
+-   Costs: 25€ per person/night (plus the local tax of 3€ per person/night); we will collect the money in cash from you
+-   You can bring you own bed linen and towels or rent it for \~15€
+
+## Catering
+
+-   The house offers a great kitchen which will be used for the self catering.
+-   We plan to buy food & drinks jointly and organise the cooking, etc., on our own. So be prepared to help with the cooking, etc.
+
+## What to bring?
+
+-   Enthusiasm for field work in forest monitoring and remote sensing :)
+-   At least a basic understanding of the R programming language
+-   A laptop where you have admin permissions and with the following software installed:
+    -   R/RStudio
+    -   QGIS
+    -   Notepad++/geany
+-   Outdoor/Hiking gear
+-   You can bring you own bed linen and towel or rent it
+-   Slippers
+
+::: {layout-ncol="2"}
+![Site Area Polsterberger Hubhaus 2022](/images/clausiwood.png)
+
+![Site Area Polsterberger Hubhaus 2023](/images/2023.jpg)
+:::
+
+## Area of Interest
+
+We plan to work in the area of the forest district "Claustahl" which is in the west of the city Claustahl-Zellerfeld.
+
+![](https://pad.gwdg.de/uploads/632f2325-7a43-447e-8a23-1eb989b9218f.png)
+
+This forest area was dominate by spruce trees which all died in the last years.
+
+![](/images/aoi.png)
+
+You can download the geopackage with the AOI [here](https://cloud.hawk.de/index.php/s/yomQwefzLDwyTa6):
+
+## Sensors & Equipment
+
+-   HAWK:
+    -   Mavic 3 (Enterprise + Thermal + Multispectral)
+    -   Matrics RTK350 incl. L1, P1 & Micasence 
+    -   GNSS (Emlid, Garmin)
+    -   Tablets (Android)
+    -   Forest Measurement Devices (diameter tapes, calipers, vertex, laser range finders, ...)
+    -   GeoSlam Mobile Laser Scanner
+-   Uni Münster:
+    -   Mica Sens red edge (Multispectral)
+    -   WIRIS thermal camera
+    -   L1 Lidar (Dji)
+    -   Sony Alpha (42mp) RGB camera
+    -   ppm 10xx GNSS Sensor
+    -   Drill and drop sensors
+-   Uni Marburg:
+    - Mavic 3 (Enterprise + Thermal + Multispectral) 
+    - Mavic 3 Mini Pro
+    - LoRa based real time climate sensors 
+

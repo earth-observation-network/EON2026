@@ -1,0 +1,10 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+/.quarto
+.github/workflows/quarto.yml
+/docs/
+/.quarto/
+
+/.luarc.json
