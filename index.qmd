@@ -1,7 +1,7 @@
 ---
-title: "EON Summer School 2025 (31.08-05.09.2025)"
+title: "EON Summer School 2026 (30.08-04.09.2026)"
 open-graph:
-  description: "EON Summer School 2025 (31.08-05.09.2025)"
+  description: "EON Summer School 2026 (30.08-05.09.2026)"
   image: /images/clausiwood.png
 comments: false
 ---
@@ -44,7 +44,7 @@ comments: false
 -   Wednesday (Waldhaus & Excursion):
     <!-- -   09:00-13:00 **Excursion to NP-Harz** (Walk & Talk) -->
     <!-- -   13:30 Lunch @ Polsterbergerhubhaus -->
-    -   08:30-14:30 **Hike to the Brocken and back (with lunch there)**  (Walk & Talk)
+    -   08:30-14:30 **Excursion to NP-Harz**  (Maria Bönisch, NP)
     -   15:00-17:00 **Block 3 Machine learning and validation** (Hanna Meyer, Uni Münster)
     -   17:00-18:00 Group work
     
