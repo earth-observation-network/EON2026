@@ -38,7 +38,7 @@ comments: false
 -   Tuesday (Waldhaus & Excursion):
     -   09:00-13:00 **Joint data collection campaign**
     -   13:30 Lunch @ Waldhaus
-    -   14:00-16:00 **Block 2 Current topics of remote sensing assisted forest inventories in the context of forest management planning** (N.N.) 
+    -   14:00-16:00 **Block 2 Describing and comparing spatial patterns** (Jakub Nowosad, Uni Münster and Adam Mickiewicz Uni)
     -   16:00-18:00 Group work
       
 -   Wednesday (Waldhaus & Excursion):
@@ -53,7 +53,7 @@ comments: false
     -   10:00-11:00 **Block 5 Modelling microclimate** (Chris Reudenbach, Uni Marburg)
     -   11:00-12:00 Group work
     -   12:30 Lunch @ Waldhaus
-    -   14:00-16:00 **Block 6 Describing and comparing spatial patterns** (Jakub Nowosad, Uni Münster and Adam Mickiewicz Uni)
+    -   14:00-16:00 **Block 6 ** (N.N.) 
     -   16:00-18:00 Group work
 
 -   Friday (Waldhaus):
