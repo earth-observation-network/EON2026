@@ -33,28 +33,27 @@ comments: false
     -    09:00-12:00 **Excursion with a local forest district manager** to get an introduction to the Harz region and its current situation
     -    13:00 Lunch @ Waldaus
     -    14:00-16:00 **Block 1 Collection of reference data for forest monitoring** in the context of forest monitoring (Paul Magdon, HAWK)
-    -    16:00-18:00 Group work
+    -    16:00-18:00  Group Work
       
 -   Tuesday (Waldhaus & Excursion):
     -   09:00-13:00 **Joint data collection campaign**
     -   13:30 Lunch @ Waldhaus
     -   14:00-16:00 **Block 2 Describing and comparing spatial patterns** (Jakub Nowosad, Uni Münster and Adam Mickiewicz Uni)
-    -   16:00-18:00 Group work
+    -   16:00-18:00 **Block 3 Processing of 3D LiDAR data to assess forest structure** (Svenja Dobelmann, HAWK) 
       
 -   Wednesday (Waldhaus & Excursion):
     <!-- -   09:00-13:00 **Excursion to NP-Harz** (Walk & Talk) -->
     <!-- -   13:30 Lunch @ Polsterbergerhubhaus -->
     -   08:30-14:30 **Excursion to NP-Harz**  (Maria Bönisch, NP)
-    -   15:00-17:00 **Block 3 Machine learning and validation** (Hanna Meyer, Uni Münster)
+    -   15:00-17:00 **Block 4 Machine learning and validation** (Hanna Meyer, Uni Münster)
     -   17:00-18:00 Group work
     
 -   Thursday (Waldhaus):
-    -   09:00-10:00 **Block 4 Measuring microclimate with mobile climate station** (Chris Reudenbach, Uni Marburg)
-    -   10:00-11:00 **Block 5 Modelling microclimate** (Chris Reudenbach, Uni Marburg)
+    -   09:00-11:00 ** Block 5 Measuring and modelling microclimate with mobile climate station** (Chris Reudenbach, Uni Marburg)
     -   11:00-12:00 Group work
     -   12:30 Lunch @ Waldhaus
-    -   14:00-16:00 **Block 6 ** (N.N.) 
-    -   16:00-18:00 Group work
+    -   14:00-16:00 Group work 
+    -   16:00-18:00 Preparation of presentations
 
 -   Friday (Waldhaus):
     -   09:00-10:00 Group work
