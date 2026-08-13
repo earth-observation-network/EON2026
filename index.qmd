@@ -65,7 +65,7 @@ comments: false
 ## Accommodation
 
 -   We will stay at: [The Cabin Oderbrück](https://oderbrueck.de/uebernachten-2/the-cabin-oderbrueck)
--   Costs: 25€ per person/night (plus the local tax of 3€ per person/night); we will collect the money in cash from you
+-   Costs: approx. 25€ per person/night (plus the local tax of 3€ per person/night); we will collect the money in cash from you (Students from Göttingen have to pay in advance directly to HAWK)
 -   You can bring you own bed linen and towels or rent it for \~15€
 
 ## Catering
@@ -99,11 +99,7 @@ We plan to work in the area of the forest district "Claustahl" which is in the w
 
 This forest area was dominate by spruce trees which all died in the last years.
 
-![](/images/aoi.png)
-
-You can download the geopackage with the AOI [here](https://cloud.hawk.de/index.php/s/yomQwefzLDwyTa6):
-
-## Sensors & Equipment
+## We can offer to bring the following equpiment Sensors & Equipment
 
 -   HAWK:
     -   Mavic 3 (Enterprise + Thermal + Multispectral)
