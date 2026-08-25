@@ -36,28 +36,28 @@ website:
           - tdv_session/01_TrainingDataCollection.qmd
           - tdv_session/02_ValidationDataCollection.qmd
       - text: "---"
-      - section: "Block 2: Remote Sensing applications in forest management planning"
-        contents: 
-          - R_session/Compare_BI_plots.qmd
-          - R_session/Tree_detection.qmd
-      - text: "---"
-      - section: "Block 3: Machine Learning"
+      - section: "Block 2: Describing and comparing spatial patterns"
         contents:
-          - ml_session/ML_AOA.qmd
+          - block2/index.qmd
+      - text: "---"
+      # - section: "Block 2: Remote Sensing applications in forest management planning"
+      #   contents: 
+      #     - R_session/Compare_BI_plots.qmd
+      #     - R_session/Tree_detection.qmd
+      # - text: "---"
+      # - section: "Block 3: Machine Learning"
+      #   contents:
+      #     - ml_session/ML_AOA.qmd
           # - href: https://gisma-courses.github.io/LV-uav-workflow/modules/module-introduction/
           #   text: Basic Readings        
           # - href: https://gisma-courses.github.io/LV-uav-workflow/modules/module-fieldwork/
           #   text: uav/Flight Planning
-      - text: "---"
-      - section: "Block 4 and 5: Microclimate Data Retrieval & Spatial Data Interpolation"
-        contents:
-          - mc_session/mc1.qmd
-          - mc_session/mc3.qmd
-          - mc_session/mc4.qmd
-      - text: "---"
-      - section: "Block 6: Describing and comparing spatial patterns"
-        contents:
-          - block6/describing_and_comparing_spaital_patterns.qmd
+      # - text: "---"
+      # - section: "Block 4 and 5: Microclimate Data Retrieval & Spatial Data Interpolation"
+      #   contents:
+      #     - mc_session/mc1.qmd
+      #     - mc_session/mc3.qmd
+      #     - mc_session/mc4.qmd
 
 format:
   html:
