@@ -1,0 +1,321 @@
+---
+title: "Validation of continuous maps using design-based sampling methods"
+subtitle: "Tutorial for the EON Summer School 2025"
+author: Paul Magdon[University of Applied Sciences and Arts (HAWK), paul.magdon@hawk.de]
+date: "2025-08-26"
+---
+
+
+```{r setup}
+rm(list=ls())
+library(sf)
+library(terra)
+library(ggplot2)
+library(rprojroot)
+library(patchwork)
+
+data_dir=paste0(find_rstudio_root_file(),"/block1_magdon/data/")
+
+```
+
+# Introduction
+In this tutorial we will explore the principles of design-based sampling. The
+simulation part is based on a presentation of Gerad Heuveling from Wageningen 
+University, which he gave in the OpenGeoHub Summer School[https://opengeohub.org/summer-school/ogh-summer-school-2021/].  
+
+1. Learn how to draw a spatial random sample
+2. Learn how to draw a systematic grid for a given area of interest
+3. Run a simulation for design-based sampling
+
+# Data sets
+
+For demonstration purposes we will work with a map of forest above ground
+biomass (AGB) produced by the Joint Research Center(JRC) for the European Union
+European Commission (Joint Research Centre (JRC) (2020) http://data.europa.eu/89h/d1fdf7aa-df33-49af-b7d5-40d226ec0da3.)
+
+To provide a synthetic example we will assume that this map (agb_pop) is an
+error free representation of the population. Additionally we use a second map
+(agb_model) compiled using a machine learning model (RF) also depicting the AGB 
+distribution. 
+
+Before we can start you may download the following files:
+
+1. [AGB_pop](https://cloud.hawk.de/index.php/s/BBHMksRC3bjc2WD)
+2. [AGB_model](https://cloud.hawk.de/index.php/s/fJzigXwzbHRLNdy)
+3. [National park boundary](https://cloud.hawk.de/index.php/s/2G4XCatn87S8FsX)
+
+Place all files into the sub folder 'data' of this tutorial. 
+
+```{r import}
+
+#Import the boundary of the national park
+np_boundary = st_transform(st_read(paste0(data_dir,"nlp-harz_aussengrenze.gpkg")),25832)
+
+agb_pop <- terra::rast(paste0(data_dir,"agb_np_harz_truth.tif"))
+
+agb_model <-terra::rast(paste0(data_dir,"agb_np_harz_model.tif"))
+
+```
+
+If we assume the $z(x_i)=$ agb.pop to be an exact representation of the 
+population we can calculate the Root mean Square Error (RMSE) as the difference
+between the model predictions $\hat{z(x_i)}$ and the population map with:
+
+$$
+RMSE = \sqrt{\frac{1}{N}\sum{(z(x_{})-\hat{z}(x_{i}))^2}}
+$$
+```{r RMSE_pop}
+RMSE_pop = as.numeric(sqrt(terra::global((agb_pop-agb_model)^2,fun='mean',na.rm=TRUE)))
+```
+
+By looking at the difference from the "true" AGB and the difference we get a true
+RMSE of *`r round(RMSE_pop,2)`* t/ha. 
+
+# Collect a random sample
+
+Since we know the true RMSE, we can test if a random sample estimate has 
+a similar RMSE. We start with a random sample with $n=100$ sample points. 
+
+```{r RMSEest}
+n=100
+
+p1 = sf::st_sample(np_boundary,size=n)
+ggplot()+geom_sf(data=np_boundary,fill=NA)+
+  geom_sf(data=p1)
+```
+
+We can now extract the population values and the model values at the sample
+locations and calculate the RMSE for all sample points.
+
+```{r RMSE_sample}
+sample <- terra::extract((agb_pop-agb_model),vect(p1))
+names(sample)<-c('ID','Diff')
+RMSE_est <- sqrt(mean((sample$Diff)^2,na.rm=T))
+```
+
+The random sample estimates the RMSE as `r round(RMSE_est,2)`. 
+
+But is this an unbiased estimate?
+
+# Simulation of many random samples
+
+To check if our sample based estimates are unbiased we will repeat the sampling
+$k$ times. 
+
+```{r simulation, echo=FALSE}
+dif <- agb_pop-agb_model
+seed<- 12324
+names(dif)<-'dif'
+
+
+k <- 100
+n <- 50
+RMSE <- rep(0,k) 
+
+for (i in 1:k) {
+  print(i)
+  p1 = sf::st_sample(np_boundary,size=n)
+  error<- terra::extract(dif,vect(p1))
+  RMSE[i] <- sqrt(mean((error$dif)^2,na.rm=T))
+}
+
+df <- data.frame(x=RMSE, y=rep('a',k))
+
+ggplot(data=df,aes(x=x))+
+  geom_density(data=subset(df,y=='a'),
+               fill='blue', alpha=0.5)+
+  xlab('RMSE (t/ha)')+geom_vline(xintercept=RMSE_pop,linewidth=1.5,
+                          color ='black', linetype='longdash')+
+  geom_vline(xintercept=mean(df$x),linewidth=1.5,
+                          color ='black')
+
+```
+We see that the true RMSE and the mean of the $k$ simulation runs are almost equal.
+Thus, we can assume an unbiased estimate of the RMSE.
+
+But how does the sample size $n$ affects the accuracy?
+
+```{r Simulation2, echo=FALSE}
+k <- 100
+n <- 100
+RMSE_2 <- rep(0,k) 
+
+for (i in 1:k) {
+  print(i)
+  p1 = sf::st_sample(np_boundary,size=n)
+  error<- terra::extract(dif,vect(p1))
+  RMSE_2[i] <- sqrt(mean((error$dif)^2,na.rm=T))
+}
+
+df_2 <- data.frame(x=RMSE_2, y=rep('b',k))
+df<-rbind(df,df_2)
+
+ggplot(data=df,aes(x=x,fill=y))+
+  geom_density(alpha=0.5)+
+  scale_fill_discrete(labels=c('Random, n=50', 'Random, n=100'))+
+  xlab('RMSE (t/ha)')+geom_vline(xintercept=RMSE_pop,linewidth=1.5,
+                          color ='black', linetype='longdash')+
+  geom_vline(xintercept=mean(df$x),linewidth=1.5,
+                          color ='black')
+
+```
+
+We see that the precision of the estimates is increased. How much did the
+uncertainty decrease when we increase the sample size from $n=50$ 
+to $n=100$?
+
+```{r}
+sd(RMSE_2)/sd(RMSE)
+```
+
+
+# Systematic sampling
+
+Instead of a random sampling, systematic designs are more common in forest 
+inventories for the following reasons:
+
+* Easy to establish and to document
+* Ensures a balanced spatial coverage
+
+```{r systematicSample}
+p1 = sf::st_sample(np_boundary,size=n,type='regular')
+
+ggplot()+geom_sf(data=np_boundary,fill=NA)+
+  geom_sf(data=p1)
+```
+
+
+
+```{r SystematicSimlation}
+k <- 100
+n <- 100
+RMSE_3 <- rep(0,k) 
+
+for (i in 1:k) {
+  print(i)
+  p1 = sf::st_sample(np_boundary,size=n,type='regular')
+  error<- terra::extract(dif,vect(p1))
+  RMSE_3[i] <- sqrt(mean((error$dif)^2,na.rm=T))
+}
+
+df_3<- data.frame(x=RMSE_3, y=rep('c',k))
+df<-rbind(df,df_3)
+
+ggplot(data=df,aes(x=x, fill=y))+
+  geom_density(alpha=0.5)+
+  scale_fill_discrete(labels=c('Random, n=50', 'Random, n=100','Systematic, n=100'))+
+  xlab('RMSE (t/ha)')+geom_vline(xintercept=RMSE_pop,linewidth=1.5,
+                          color ='black', linetype='longdash')+
+  geom_vline(xintercept=mean(df$x),linewidth=1.5,
+                       color ='black')
+
+```
+
+# Evaluating the AGB-Model 
+
+## Systematic sample to collect reference data for map validation
+
+To validate the map we use a systematic sample grid. In a real world
+application we do not know the true population values. Therefore, field
+work would be needed to collect reference data at the selected sample
+points. In this workshop we assume that the agp_pop map represents the
+true value without any errors. Thus, we don't need to go to field but we
+can sample the data by extracting the true values from the map at the
+sample locations.
+
+```{r Sample, cache=TRUE}
+# we will use n=100 sample plots
+n=100
+p1 = sf::st_sample(np_boundary,size=n,type='regular')
+
+ggplot()+geom_sf(data=np_boundary,fill=NA)+
+  geom_sf(data=p1)
+```
+
+At each sample point we extract the predicted and observed AGB value.
+
+```{r extract}
+obs <- terra::extract(agb_pop,vect(p1))
+names(obs)<-c('ID','obs')
+
+pred <- terra::extract(agb_model,vect(p1))
+names(pred)<-c('ID','pred')
+validation<-data.frame(observed=obs$obs, predicted=pred$pred)
+
+# we need to remove the na values from this dataframe. In real world applications
+# such NA values can,  occur for example at inaccessible field plots.
+
+validation<-validation[complete.cases(validation),]
+
+```
+
+## Assessment of the ABG-model performance
+
+
+```{r Collect Values, cache=TRUE}
+ggplot(data=validation,aes(x=observed, y=predicted))+
+  geom_point(alpha=0.5)+
+  xlab('Observed AGB t/ha')+ylab('Predicted AGB t/ha')
+```
+
+### Sample RMSE
+Again we can use the RMSE to express the mean difference between observed and
+predicted AGB.
+
+```{r RMSE}
+RMSE_sample = sqrt(sum((validation$observed-validation$predicted)^2)/nrow(validation))
+```
+
+The sample RMSE is `r round(RMSE_sample,2)`\* t/ha.
+To better compare the values between different target variables and models is
+can also express as a proportion relative to the mean value of the predictions.
+
+```{r relRMSE}
+rRMSE = RMSE_sample/mean(validation$predicted)
+```
+
+On average we expect that the AGB estimate of our model has an error of 
+`r round(rRMSE,3)*100` %.
+
+### Error distribution
+
+But is this RMSE valid for the entire range of the observed values or do we
+expect higher errors for higher AGB values?
+
+To see how the model performs over target value range we can use the following
+analysis plots.
+
+```{r Model-Performance}
+
+validation$resid<-validation$observed-validation$predicted
+
+p1<-ggplot(data=validation,aes(x=observed, y=predicted))+
+  geom_point(alpha=0.5)+
+  xlab('Observed AGB t/ha')+ylab('Predicted AGB t/ha')+
+  xlim(0,250)+ylim(0,250)+
+  geom_abline(slope=1,intercept = 0)+
+  stat_summary(fun.data= mean_cl_normal) + 
+  geom_smooth(method='lm')
+
+
+
+p2<-ggplot(data=validation,aes(x=observed, y=resid))+
+  geom_point(alpha=0.5)+
+  xlab('Observed AGB t/ha')+ylab('Residuals')+
+  xlim(0,250)+ylim(-50,+50)+
+  geom_abline(slope=0,intercept = 1)
+
+p3<-ggplot(data=validation,aes(x=resid))+
+  geom_histogram(aes(y=..density..),fill='grey',binwidth=10)+
+  xlab('Observed AGB t/ha')+ylab('Density')+
+  xlim(-150,150)+
+  stat_function(fun = dnorm, geom="polygon",args = list(mean = mean(validation$resid), sd = sd(validation$resid)),color='blue',alpha=0.4,fill='blue')+
+  geom_vline(xintercept=0,color='blue')+
+  geom_vline(xintercept=mean(validation$resid),color='red')
+p1+p2+p3+plot_layout(ncol=3)
+
+```
+
+
+
+

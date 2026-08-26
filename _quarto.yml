@@ -31,10 +31,10 @@ website:
         contents:
           - index.qmd
       - text: "---"
-      - section: "Block 1: Reference Data Collection"
+      - section: "Block 1: Introduction to forest monitoring"
         contents: 
-          - tdv_session/01_TrainingDataCollection.qmd
-          - tdv_session/02_ValidationDataCollection.qmd
+          - block1_magdon/01_TrainingDataCollection.qmd
+          - block1_magdon/02_ValidationDataCollection.qmd
       - text: "---"
       - section: "Block 2: Remote Sensing applications in forest management planning"
         contents: 

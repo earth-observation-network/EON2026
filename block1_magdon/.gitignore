@@ -1,0 +1,5 @@
+01_TrainingDataCollection_cache
+02_ValidationDataCollection_cache
+/data/
+*.tif
+*.gpkg
