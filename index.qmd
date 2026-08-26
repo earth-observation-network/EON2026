@@ -17,11 +17,6 @@ comments: false
 </style>
 ```
 
-<!-- # Welcome EON Summer School 2025 (31.08-05.09.2025) -->
-
-<!-- ideas (2025): -->
-<!-- - storing data from previous years -->
-<!-- - inform about packages and data prereqs in advance (before the summer school -- due to the cabin weak wifi) -->
 
 ## Workshop Program
 
@@ -32,7 +27,7 @@ comments: false
 -   Monday (Waldhaus):
     -    09:00-12:00 **Excursion with a local forest district manager** to get an introduction to the Harz region and its current situation
     -    13:00 Lunch @ Waldaus
-    -    14:00-16:00 **Block 1 Collection of reference data for forest monitoring** in the context of forest monitoring (Paul Magdon, HAWK)
+    -    14:00-16:00 **Block 1 Introduction to forest monitoring ** (Paul Magdon, HAWK)
     -    16:00-18:00  Group Work
       
 -   Tuesday (Waldhaus & Excursion):

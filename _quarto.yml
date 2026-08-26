@@ -31,33 +31,35 @@ website:
         contents:
           - index.qmd
       - text: "---"
-      - section: "Block 1: Reference Data Collection"
+      - section: "Block 1: Introduction to forest monitoring"
         contents: 
-          - tdv_session/01_TrainingDataCollection.qmd
-          - tdv_session/02_ValidationDataCollection.qmd
+          - block1_magdon/01_TrainingDataCollection.qmd
+          - block1_magdon/02_ValidationDataCollection.qmd
       - text: "---"
       - section: "Block 2: Describing and comparing spatial patterns"
-        contents:
+        contents: 
           - block2/index.qmd
       - text: "---"
-      # - section: "Block 2: Remote Sensing applications in forest management planning"
-      #   contents: 
-      #     - R_session/Compare_BI_plots.qmd
-      #     - R_session/Tree_detection.qmd
-      # - text: "---"
-      # - section: "Block 3: Machine Learning"
-      #   contents:
-      #     - ml_session/ML_AOA.qmd
+      - section: "Block 3: Processing of 3D LiDAR data to assess forest structure"
+        contents:
+          - to_be_defined
+          
           # - href: https://gisma-courses.github.io/LV-uav-workflow/modules/module-introduction/
           #   text: Basic Readings        
           # - href: https://gisma-courses.github.io/LV-uav-workflow/modules/module-fieldwork/
           #   text: uav/Flight Planning
-      # - text: "---"
-      # - section: "Block 4 and 5: Microclimate Data Retrieval & Spatial Data Interpolation"
-      #   contents:
-      #     - mc_session/mc1.qmd
-      #     - mc_session/mc3.qmd
-      #     - mc_session/mc4.qmd
+      - text: "---"
+      - section: "Block 4  Machine learning and validation"
+        contents:
+          - ml_session/ML_AOA.qmd
+        
+      - text: "---"
+      - section: "Block 5: Measuring and modelling microclimate with mobile climate station"
+        contents:
+          - mc_session/mc1.qmd
+          - mc_session/mc3.qmd
+          - mc_session/mc4.qmd
+          
 
 format:
   html:
