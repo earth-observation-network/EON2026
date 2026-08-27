@@ -38,7 +38,7 @@ website:
       - text: "---"
       - section: "Block 2: Describing and comparing spatial patterns"
         contents: 
-          - to_be_defined
+          - block2/index.qmd
       - text: "---"
       - section: "Block 3: Processing of 3D LiDAR data to assess forest structure"
         contents:

@@ -1,0 +1,30 @@
+# Understanding spatial patterns: how to measure and compare them
+
+## Slides
+
+The workshop slides are at <https://jakubnowosad.com/eon2026/>.
+
+## Prerequisites
+
+Participants are expected to have a recent version of R and an R IDE installed.
+
+- R: https://cloud.r-project.org/
+- RStudio: https://posit.co/download/rstudio-desktop/#download
+
+Install the required packages from CRAN before working on the exercises.
+
+```r
+install.packages(c(
+  "terra",
+  "sf",
+  "landscapemetrics",
+  "motif",
+  "dplyr",
+  "tidyr"
+))
+```
+
+## Exercises
+
+Download the exercises repository as a ZIP file from https://github.com/Nowosad/eon2026-exercises/archive/refs/heads/main.zip and unpack it on your computer.
+Then open the `.Rproj` file in RStudio and start working on the exercises.
