@@ -10,7 +10,7 @@ execute:
 website:
   open-graph: true
   page-navigation: true  
-  title: "EON Summer School 2026"
+  title: "Forest Monitoring Summer School 2026"
   site-url: https://earth-observation-network.github.io/EON2026
   repo-url: https://github.com/earth-observation-network/EON2026
   repo-actions: [edit, issue]
