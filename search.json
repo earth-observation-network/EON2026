@@ -77,6 +77,39 @@
     ]
   },
   {
+    "objectID": "block1_magdon/02_ValidationDataCollection.html",
+    "href": "block1_magdon/02_ValidationDataCollection.html",
+    "title": "Validation of continuous maps using design-based sampling methods",
+    "section": "",
+    "text": "rm(list=ls())\nlibrary(sf)\n\nLinking to GEOS 3.14.1, GDAL 3.12.1, PROJ 9.7.1; sf_use_s2() is TRUE\n\nlibrary(terra)\n\nterra 1.9.27\n\nlibrary(ggplot2)\nlibrary(rprojroot)\nlibrary(patchwork)\n\n\nAttache Paket: 'patchwork'\n\n\nDas folgende Objekt ist maskiert 'package:terra':\n\n    area\n\ndata_dir=paste0(find_rstudio_root_file(),\"/block1_magdon/data/\")",
+    "crumbs": [
+      "Block 1: Introduction to forest monitoring",
+      "Validation of continuous maps using design-based sampling methods"
+    ]
+  },
+  {
+    "objectID": "block1_magdon/02_ValidationDataCollection.html#systematic-sample-to-collect-reference-data-for-map-validation",
+    "href": "block1_magdon/02_ValidationDataCollection.html#systematic-sample-to-collect-reference-data-for-map-validation",
+    "title": "Validation of continuous maps using design-based sampling methods",
+    "section": "Systematic sample to collect reference data for map validation",
+    "text": "Systematic sample to collect reference data for map validation\nTo validate the map we use a systematic sample grid. In a real world application we do not know the true population values. Therefore, field work would be needed to collect reference data at the selected sample points. In this workshop we assume that the agp_pop map represents the true value without any errors. Thus, we don’t need to go to field but we can sample the data by extracting the true values from the map at the sample locations.\n\n# we will use n=100 sample plots\nn=100\np1 = sf::st_sample(np_boundary,size=n,type='regular')\n\nggplot()+geom_sf(data=np_boundary,fill=NA)+\n  geom_sf(data=p1)\n\n\n\n\n\n\n\n\nAt each sample point we extract the predicted and observed AGB value.\n\nobs &lt;- terra::extract(agb_pop,vect(p1))\nnames(obs)&lt;-c('ID','obs')\n\npred &lt;- terra::extract(agb_model,vect(p1))\nnames(pred)&lt;-c('ID','pred')\nvalidation&lt;-data.frame(observed=obs$obs, predicted=pred$pred)\n\n# we need to remove the na values from this dataframe. In real world applications\n# such NA values can,  occur for example at inaccessible field plots.\n\nvalidation&lt;-validation[complete.cases(validation),]",
+    "crumbs": [
+      "Block 1: Introduction to forest monitoring",
+      "Validation of continuous maps using design-based sampling methods"
+    ]
+  },
+  {
+    "objectID": "block1_magdon/02_ValidationDataCollection.html#assessment-of-the-abg-model-performance",
+    "href": "block1_magdon/02_ValidationDataCollection.html#assessment-of-the-abg-model-performance",
+    "title": "Validation of continuous maps using design-based sampling methods",
+    "section": "Assessment of the ABG-model performance",
+    "text": "Assessment of the ABG-model performance\n\nggplot(data=validation,aes(x=observed, y=predicted))+\n  geom_point(alpha=0.5)+\n  xlab('Observed AGB t/ha')+ylab('Predicted AGB t/ha')\n\n\n\n\n\n\n\n\n\nSample RMSE\nAgain we can use the RMSE to express the mean difference between observed and predicted AGB.\n\nRMSE_sample = sqrt(sum((validation$observed-validation$predicted)^2)/nrow(validation))\n\nThe sample RMSE is 38.89* t/ha. To better compare the values between different target variables and models is can also express as a proportion relative to the mean value of the predictions.\n\nrRMSE = RMSE_sample/mean(validation$predicted)\n\nOn average we expect that the AGB estimate of our model has an error of 24.1 %.\n\n\nError distribution\nBut is this RMSE valid for the entire range of the observed values or do we expect higher errors for higher AGB values?\nTo see how the model performs over target value range we can use the following analysis plots.\n\nvalidation$resid&lt;-validation$observed-validation$predicted\n\np1&lt;-ggplot(data=validation,aes(x=observed, y=predicted))+\n  geom_point(alpha=0.5)+\n  xlab('Observed AGB t/ha')+ylab('Predicted AGB t/ha')+\n  xlim(0,250)+ylim(0,250)+\n  geom_abline(slope=1,intercept = 0)+\n  stat_summary(fun.data= mean_cl_normal) + \n  geom_smooth(method='lm')\n\n\n\np2&lt;-ggplot(data=validation,aes(x=observed, y=resid))+\n  geom_point(alpha=0.5)+\n  xlab('Observed AGB t/ha')+ylab('Residuals')+\n  xlim(0,250)+ylim(-50,+50)+\n  geom_abline(slope=0,intercept = 1)\n\np3&lt;-ggplot(data=validation,aes(x=resid))+\n  geom_histogram(aes(y=..density..),fill='grey',binwidth=10)+\n  xlab('Observed AGB t/ha')+ylab('Density')+\n  xlim(-150,150)+\n  stat_function(fun = dnorm, geom=\"polygon\",args = list(mean = mean(validation$resid), sd = sd(validation$resid)),color='blue',alpha=0.4,fill='blue')+\n  geom_vline(xintercept=0,color='blue')+\n  geom_vline(xintercept=mean(validation$resid),color='red')\np1+p2+p3+plot_layout(ncol=3)\n\nWarning: Removed 1 row containing non-finite outside the scale range\n(`stat_summary()`).\n\n\nWarning: Computation failed in `stat_summary()`.\nCaused by error in `fun.data()`:\n! The package \"Hmisc\" is required.\n\n\n`geom_smooth()` using formula = 'y ~ x'\n\n\nWarning: Removed 1 row containing non-finite outside the scale range\n(`stat_smooth()`).\n\n\nWarning: Removed 1 row containing missing values or values outside the scale range\n(`geom_point()`).\n\n\nWarning: Removed 18 rows containing missing values or values outside the scale range\n(`geom_point()`).\n\n\nWarning: The dot-dot notation (`..density..`) was deprecated in ggplot2 3.4.0.\nℹ Please use `after_stat(density)` instead.\n\n\nWarning: Removed 2 rows containing missing values or values outside the scale range\n(`geom_bar()`).",
+    "crumbs": [
+      "Block 1: Introduction to forest monitoring",
+      "Validation of continuous maps using design-based sampling methods"
+    ]
+  },
+  {
     "objectID": "block1_magdon/01_TrainingDataCollection.html",
     "href": "block1_magdon/01_TrainingDataCollection.html",
     "title": "Collection of training data for remote sensing modelling based on spectral variability",
@@ -121,36 +154,47 @@
     ]
   },
   {
-    "objectID": "block1_magdon/02_ValidationDataCollection.html",
-    "href": "block1_magdon/02_ValidationDataCollection.html",
-    "title": "Validation of continuous maps using design-based sampling methods",
+    "objectID": "block2/index.html",
+    "href": "block2/index.html",
+    "title": "Understanding spatial patterns: how to measure and compare them",
     "section": "",
-    "text": "rm(list=ls())\nlibrary(sf)\n\nLinking to GEOS 3.14.1, GDAL 3.12.1, PROJ 9.7.1; sf_use_s2() is TRUE\n\nlibrary(terra)\n\nterra 1.9.27\n\nlibrary(ggplot2)\nlibrary(rprojroot)\nlibrary(patchwork)\n\n\nAttache Paket: 'patchwork'\n\n\nDas folgende Objekt ist maskiert 'package:terra':\n\n    area\n\ndata_dir=paste0(find_rstudio_root_file(),\"/block1_magdon/data/\")",
+    "text": "The workshop slides are at https://jakubnowosad.com/eon2026/.\n\n\n\nParticipants are expected to have a recent version of R and an R IDE installed.\n\nR: https://cloud.r-project.org/\nRStudio: https://posit.co/download/rstudio-desktop/#download\n\nInstall the required packages from CRAN before working on the exercises.\ninstall.packages(c(\n  \"terra\",\n  \"sf\",\n  \"landscapemetrics\",\n  \"motif\",\n  \"dplyr\",\n  \"tidyr\"\n))\n\n\n\nDownload the exercises repository as a ZIP file from https://github.com/Nowosad/eon2026-exercises/archive/refs/heads/main.zip and unpack it on your computer. Then open the .Rproj file in RStudio and start working on the exercises.",
     "crumbs": [
-      "Block 1: Introduction to forest monitoring",
-      "Validation of continuous maps using design-based sampling methods"
+      "Block 2: Describing and comparing spatial patterns",
+      "Understanding spatial patterns: how to measure and compare them"
     ]
   },
   {
-    "objectID": "block1_magdon/02_ValidationDataCollection.html#systematic-sample-to-collect-reference-data-for-map-validation",
-    "href": "block1_magdon/02_ValidationDataCollection.html#systematic-sample-to-collect-reference-data-for-map-validation",
-    "title": "Validation of continuous maps using design-based sampling methods",
-    "section": "Systematic sample to collect reference data for map validation",
-    "text": "Systematic sample to collect reference data for map validation\nTo validate the map we use a systematic sample grid. In a real world application we do not know the true population values. Therefore, field work would be needed to collect reference data at the selected sample points. In this workshop we assume that the agp_pop map represents the true value without any errors. Thus, we don’t need to go to field but we can sample the data by extracting the true values from the map at the sample locations.\n\n# we will use n=100 sample plots\nn=100\np1 = sf::st_sample(np_boundary,size=n,type='regular')\n\nggplot()+geom_sf(data=np_boundary,fill=NA)+\n  geom_sf(data=p1)\n\n\n\n\n\n\n\n\nAt each sample point we extract the predicted and observed AGB value.\n\nobs &lt;- terra::extract(agb_pop,vect(p1))\nnames(obs)&lt;-c('ID','obs')\n\npred &lt;- terra::extract(agb_model,vect(p1))\nnames(pred)&lt;-c('ID','pred')\nvalidation&lt;-data.frame(observed=obs$obs, predicted=pred$pred)\n\n# we need to remove the na values from this dataframe. In real world applications\n# such NA values can,  occur for example at inaccessible field plots.\n\nvalidation&lt;-validation[complete.cases(validation),]",
+    "objectID": "block2/index.html#slides",
+    "href": "block2/index.html#slides",
+    "title": "Understanding spatial patterns: how to measure and compare them",
+    "section": "",
+    "text": "The workshop slides are at https://jakubnowosad.com/eon2026/.",
     "crumbs": [
-      "Block 1: Introduction to forest monitoring",
-      "Validation of continuous maps using design-based sampling methods"
+      "Block 2: Describing and comparing spatial patterns",
+      "Understanding spatial patterns: how to measure and compare them"
     ]
   },
   {
-    "objectID": "block1_magdon/02_ValidationDataCollection.html#assessment-of-the-abg-model-performance",
-    "href": "block1_magdon/02_ValidationDataCollection.html#assessment-of-the-abg-model-performance",
-    "title": "Validation of continuous maps using design-based sampling methods",
-    "section": "Assessment of the ABG-model performance",
-    "text": "Assessment of the ABG-model performance\n\nggplot(data=validation,aes(x=observed, y=predicted))+\n  geom_point(alpha=0.5)+\n  xlab('Observed AGB t/ha')+ylab('Predicted AGB t/ha')\n\n\n\n\n\n\n\n\n\nSample RMSE\nAgain we can use the RMSE to express the mean difference between observed and predicted AGB.\n\nRMSE_sample = sqrt(sum((validation$observed-validation$predicted)^2)/nrow(validation))\n\nThe sample RMSE is 38.89* t/ha. To better compare the values between different target variables and models is can also express as a proportion relative to the mean value of the predictions.\n\nrRMSE = RMSE_sample/mean(validation$predicted)\n\nOn average we expect that the AGB estimate of our model has an error of 24.1 %.\n\n\nError distribution\nBut is this RMSE valid for the entire range of the observed values or do we expect higher errors for higher AGB values?\nTo see how the model performs over target value range we can use the following analysis plots.\n\nvalidation$resid&lt;-validation$observed-validation$predicted\n\np1&lt;-ggplot(data=validation,aes(x=observed, y=predicted))+\n  geom_point(alpha=0.5)+\n  xlab('Observed AGB t/ha')+ylab('Predicted AGB t/ha')+\n  xlim(0,250)+ylim(0,250)+\n  geom_abline(slope=1,intercept = 0)+\n  stat_summary(fun.data= mean_cl_normal) + \n  geom_smooth(method='lm')\n\n\n\np2&lt;-ggplot(data=validation,aes(x=observed, y=resid))+\n  geom_point(alpha=0.5)+\n  xlab('Observed AGB t/ha')+ylab('Residuals')+\n  xlim(0,250)+ylim(-50,+50)+\n  geom_abline(slope=0,intercept = 1)\n\np3&lt;-ggplot(data=validation,aes(x=resid))+\n  geom_histogram(aes(y=..density..),fill='grey',binwidth=10)+\n  xlab('Observed AGB t/ha')+ylab('Density')+\n  xlim(-150,150)+\n  stat_function(fun = dnorm, geom=\"polygon\",args = list(mean = mean(validation$resid), sd = sd(validation$resid)),color='blue',alpha=0.4,fill='blue')+\n  geom_vline(xintercept=0,color='blue')+\n  geom_vline(xintercept=mean(validation$resid),color='red')\np1+p2+p3+plot_layout(ncol=3)\n\nWarning: Removed 1 row containing non-finite outside the scale range\n(`stat_summary()`).\n\n\nWarning: Computation failed in `stat_summary()`.\nCaused by error in `fun.data()`:\n! The package \"Hmisc\" is required.\n\n\n`geom_smooth()` using formula = 'y ~ x'\n\n\nWarning: Removed 1 row containing non-finite outside the scale range\n(`stat_smooth()`).\n\n\nWarning: Removed 1 row containing missing values or values outside the scale range\n(`geom_point()`).\n\n\nWarning: Removed 18 rows containing missing values or values outside the scale range\n(`geom_point()`).\n\n\nWarning: The dot-dot notation (`..density..`) was deprecated in ggplot2 3.4.0.\nℹ Please use `after_stat(density)` instead.\n\n\nWarning: Removed 2 rows containing missing values or values outside the scale range\n(`geom_bar()`).",
+    "objectID": "block2/index.html#prerequisites",
+    "href": "block2/index.html#prerequisites",
+    "title": "Understanding spatial patterns: how to measure and compare them",
+    "section": "",
+    "text": "Participants are expected to have a recent version of R and an R IDE installed.\n\nR: https://cloud.r-project.org/\nRStudio: https://posit.co/download/rstudio-desktop/#download\n\nInstall the required packages from CRAN before working on the exercises.\ninstall.packages(c(\n  \"terra\",\n  \"sf\",\n  \"landscapemetrics\",\n  \"motif\",\n  \"dplyr\",\n  \"tidyr\"\n))",
     "crumbs": [
-      "Block 1: Introduction to forest monitoring",
-      "Validation of continuous maps using design-based sampling methods"
+      "Block 2: Describing and comparing spatial patterns",
+      "Understanding spatial patterns: how to measure and compare them"
+    ]
+  },
+  {
+    "objectID": "block2/index.html#exercises",
+    "href": "block2/index.html#exercises",
+    "title": "Understanding spatial patterns: how to measure and compare them",
+    "section": "",
+    "text": "Download the exercises repository as a ZIP file from https://github.com/Nowosad/eon2026-exercises/archive/refs/heads/main.zip and unpack it on your computer. Then open the .Rproj file in RStudio and start working on the exercises.",
+    "crumbs": [
+      "Block 2: Describing and comparing spatial patterns",
+      "Understanding spatial patterns: how to measure and compare them"
     ]
   }
 ]

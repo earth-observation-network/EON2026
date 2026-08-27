@@ -2,14 +2,18 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://earth-observation-network.github.io/EON2026/index.html</loc>
-    <lastmod>2026-08-26T12:27:37.211Z</lastmod>
-  </url>
-  <url>
-    <loc>https://earth-observation-network.github.io/EON2026/block1_magdon/01_TrainingDataCollection.html</loc>
-    <lastmod>2026-08-26T12:27:37.201Z</lastmod>
+    <lastmod>2026-08-27T12:13:47.889Z</lastmod>
   </url>
   <url>
     <loc>https://earth-observation-network.github.io/EON2026/block1_magdon/02_ValidationDataCollection.html</loc>
-    <lastmod>2026-08-26T12:27:37.201Z</lastmod>
+    <lastmod>2026-08-27T12:13:47.878Z</lastmod>
+  </url>
+  <url>
+    <loc>https://earth-observation-network.github.io/EON2026/block1_magdon/01_TrainingDataCollection.html</loc>
+    <lastmod>2026-08-27T12:13:47.878Z</lastmod>
+  </url>
+  <url>
+    <loc>https://earth-observation-network.github.io/EON2026/block2/index.html</loc>
+    <lastmod>2026-08-27T12:13:47.878Z</lastmod>
   </url>
 </urlset>
