@@ -42,7 +42,8 @@ website:
       - text: "---"
       - section: "Block 3: Processing of 3D LiDAR data to assess forest structure"
         contents:
-          - to_be_defined
+          - block3_dobelmann/lidar_forest_structure.qmd
+          - block3_dobelmann/Box_dimension.qmd
           
           # - href: https://gisma-courses.github.io/LV-uav-workflow/modules/module-introduction/
           #   text: Basic Readings        
