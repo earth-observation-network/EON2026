@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Prakash Basnet, [University of Applied Sciences and Arts (HAWK)">
+<meta name="dcterms.date" content="2025-08-26">
 
-<title>EON Summer School 2026 (30.08-04.09.2026) – Forest Monitoring Summer School 2026</title>
+<title>Measuring Tree/Forest Structural Complexity with (Fractal) Box Dimension (D_b) from 3D Point Clouds – Forest Monitoring Summer School 2026</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -29,26 +31,27 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-5ff8fa04d2d2c4cd6ffc440e289005c2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-008e11d28145fd507e0d18440456b0ca.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-5ff8fa04d2d2c4cd6ffc440e289005c2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../block3_dobelmann/lidar_forest_structure.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-5ff8fa04d2d2c4cd6ffc440e289005c2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-008e11d28145fd507e0d18440456b0ca.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-5ff8fa04d2d2c4cd6ffc440e289005c2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -106,13 +109,13 @@ window.Quarto = {
 };
 </script>
 
-<link rel="stylesheet" href="css/styles.css">
-<meta property="og:title" content="EON Summer School 2026 (30.08-04.09.2026) – Forest Monitoring Summer School 2026">
-<meta property="og:description" content="EON Summer School 2026 (30.08-05.09.2026)">
-<meta property="og:image" content="https://earth-observation-network.github.io/EON2026/images/clausiwood.png">
+<link rel="stylesheet" href="../css/styles.css">
+<meta property="og:title" content="Measuring Tree/Forest Structural Complexity with (Fractal) Box Dimension \((D_b)\) from 3D Point Clouds – Forest Monitoring Summer School 2026">
+<meta property="og:description" content="">
+<meta property="og:image" content="https://earth-observation-network.github.io/EON2026/block3_dobelmann/images/koch_curve.png">
 <meta property="og:site_name" content="Forest Monitoring Summer School 2026">
-<meta property="og:image:height" content="1536">
-<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="344">
+<meta property="og:image:width" content="1230">
 </head>
 
 <body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
@@ -284,11 +287,11 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    <img src="./images/logooil.jpg" alt="" class="navbar-logo light-content">
-    <img src="./images/logooil.jpg" alt="" class="navbar-logo dark-content">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../images/logooil.jpg" alt="" class="navbar-logo light-content">
+    <img src="../images/logooil.jpg" alt="" class="navbar-logo dark-content">
     </a>
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Forest Monitoring Summer School 2026</span>
     </a>
   </div>
@@ -303,7 +306,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Welcome</a></li><li class="breadcrumb-item"><a href="./index.html">EON Summer School 2026 (30.08-04.09.2026)</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../block3_dobelmann/lidar_forest_structure.html">Block 3: Processing of 3D LiDAR data to assess forest structure</a></li><li class="breadcrumb-item"><a href="../block3_dobelmann/Box_dimension.html">Measuring Tree/Forest Structural Complexity with (Fractal) Box Dimension <span class="math inline">\((D_b)\)</span> from 3D Point Clouds</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -317,16 +320,16 @@ window.Quarto = {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
  <span class="menu-text">Welcome</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">EON Summer School 2026 (30.08-04.09.2026)</span></a>
   </div>
 </li>
@@ -344,13 +347,13 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./block1_magdon/01_TrainingDataCollection.html" class="sidebar-item-text sidebar-link">
+  <a href="../block1_magdon/01_TrainingDataCollection.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Collection of training data for remote sensing modelling based on spectral variability</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./block1_magdon/02_ValidationDataCollection.html" class="sidebar-item-text sidebar-link">
+  <a href="../block1_magdon/02_ValidationDataCollection.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Validation of continuous maps using design-based sampling methods</span></a>
   </div>
 </li>
@@ -368,7 +371,7 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./block2/index.html" class="sidebar-item-text sidebar-link">
+  <a href="../block2/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Understanding spatial patterns: how to measure and compare them</span></a>
   </div>
 </li>
@@ -377,22 +380,22 @@ window.Quarto = {
         <li class="px-0"><hr class="sidebar-divider hi "></li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
  <span class="menu-text">Block 3: Processing of 3D LiDAR data to assess forest structure</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./block3_dobelmann/lidar_forest_structure.html" class="sidebar-item-text sidebar-link">
+  <a href="../block3_dobelmann/lidar_forest_structure.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Processing of 3D Lidar data to assess forest structure</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./block3_dobelmann/Box_dimension.html" class="sidebar-item-text sidebar-link">
+  <a href="../block3_dobelmann/Box_dimension.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Measuring Tree/Forest Structural Complexity with (Fractal) Box Dimension <span class="math inline">\((D_b)\)</span> from 3D Point Clouds</span></a>
   </div>
 </li>
@@ -410,7 +413,7 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./block4_machineLearning/ML_AOA.html" class="sidebar-item-text sidebar-link">
+  <a href="../block4_machineLearning/ML_AOA.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Machine learning for remote sensing applications</span></a>
   </div>
 </li>
@@ -447,29 +450,49 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#workshop-program" id="toc-workshop-program" class="nav-link active" data-scroll-target="#workshop-program">Workshop Program</a></li>
-  <li><a href="#accommodation" id="toc-accommodation" class="nav-link" data-scroll-target="#accommodation">Accommodation</a></li>
-  <li><a href="#catering" id="toc-catering" class="nav-link" data-scroll-target="#catering">Catering</a></li>
-  <li><a href="#what-to-bring" id="toc-what-to-bring" class="nav-link" data-scroll-target="#what-to-bring">What to bring?</a></li>
-  <li><a href="#area-of-interest" id="toc-area-of-interest" class="nav-link" data-scroll-target="#area-of-interest">Area of Interest</a></li>
-  <li><a href="#we-can-offer-to-bring-the-following-equpiment-sensors-equipment" id="toc-we-can-offer-to-bring-the-following-equpiment-sensors-equipment" class="nav-link" data-scroll-target="#we-can-offer-to-bring-the-following-equpiment-sensors-equipment">We can offer to bring the following equpiment Sensors &amp; Equipment</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
+  <ul class="collapse">
+  <li><a href="#how-do-you-measure-the-fractal-dimension" id="toc-how-do-you-measure-the-fractal-dimension" class="nav-link" data-scroll-target="#how-do-you-measure-the-fractal-dimension">How do you measure the fractal dimension?</a></li>
+  <li><a href="#why-are-we-discussing-this-here" id="toc-why-are-we-discussing-this-here" class="nav-link" data-scroll-target="#why-are-we-discussing-this-here">Why are we discussing this here?</a></li>
+  <li><a href="#from-euclidean-to-fractal-dimension-quick-intuition" id="toc-from-euclidean-to-fractal-dimension-quick-intuition" class="nav-link" data-scroll-target="#from-euclidean-to-fractal-dimension-quick-intuition">From Euclidean to Fractal Dimension (Quick Intuition)</a></li>
+  <li><a href="#box-dimension" id="toc-box-dimension" class="nav-link" data-scroll-target="#box-dimension">Box Dimension</a>
+  <ul class="collapse">
+  <li><a href="#data-sensitivities" id="toc-data-sensitivities" class="nav-link" data-scroll-target="#data-sensitivities">Data sensitivities</a></li>
+  <li><a href="#box-dimension-vs.-voxel-counting" id="toc-box-dimension-vs.-voxel-counting" class="nav-link" data-scroll-target="#box-dimension-vs.-voxel-counting">Box Dimension vs.&nbsp;Voxel Counting</a></li>
+  <li><a href="#interpretation" id="toc-interpretation" class="nav-link" data-scroll-target="#interpretation">Interpretation</a></li>
+  <li><a href="#how-to-measure-d_b-it-in-reality" id="toc-how-to-measure-d_b-it-in-reality" class="nav-link" data-scroll-target="#how-to-measure-d_b-it-in-reality">How to measure <span class="math inline">\(D_b\)</span> it in reality?</a></li>
+  </ul></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/earth-observation-network/EON2026/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/earth-observation-network/EON2026/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/earth-observation-network/EON2026/edit/main/block3_dobelmann/Box_dimension.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/earth-observation-network/EON2026/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Welcome</a></li><li class="breadcrumb-item"><a href="./index.html">EON Summer School 2026 (30.08-04.09.2026)</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../block3_dobelmann/lidar_forest_structure.html">Block 3: Processing of 3D LiDAR data to assess forest structure</a></li><li class="breadcrumb-item"><a href="../block3_dobelmann/Box_dimension.html">Measuring Tree/Forest Structural Complexity with (Fractal) Box Dimension <span class="math inline">\((D_b)\)</span> from 3D Point Clouds</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">EON Summer School 2026 (30.08-04.09.2026)</h1>
+<h1 class="title">Measuring Tree/Forest Structural Complexity with (Fractal) Box Dimension <span class="math inline">\((D_b)\)</span> from 3D Point Clouds</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Prakash Basnet, [University of Applied Sciences and Arts (HAWK) </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">August 26, 2025</p>
+    </div>
+  </div>
   
     
   </div>
@@ -479,148 +502,144 @@ window.Quarto = {
 </header>
 
 
-<style>
-  body {
-  background-image: url("");
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-  
-</style>
-<section id="workshop-program" class="level2">
-<h2 class="anchored" data-anchor-id="workshop-program">Workshop Program</h2>
-<ul>
-<li>Sunday (Waldhaus):
-<ul>
-<li>17:00-17:30 Check-in @ “The Cabin” (Waldhaus) Oderbrück</li>
-<li>17:30-19:00 Welcome &amp; Introduction</li>
-</ul></li>
-<li>Monday (Waldhaus):
-<ul>
-<li>09:00-12:00 <strong>Excursion with a local forest district manager</strong> to get an introduction to the Harz region and its current situation</li>
-<li>13:00 Lunch @ Waldaus</li>
-<li>14:00-16:00 <strong>Block 1 Introduction to forest monitoring </strong> (Paul Magdon, HAWK)</li>
-<li>16:00-18:00 Group Work</li>
-</ul></li>
-<li>Tuesday (Waldhaus &amp; Excursion):
-<ul>
-<li>09:00-13:00 <strong>Joint data collection campaign</strong></li>
-<li>13:30 Lunch @ Waldhaus</li>
-<li>14:00-16:00 <strong>Block 2 Describing and comparing spatial patterns</strong> (Jakub Nowosad, Uni Münster and Adam Mickiewicz Uni)</li>
-<li>16:00-18:00 <strong>Block 3 Processing of 3D LiDAR data to assess forest structure</strong> (Svenja Dobelmann, HAWK)</li>
-</ul></li>
-<li>Wednesday (Waldhaus &amp; Excursion):
-<ul>
-<li>09:00-13:30 <strong>Excursion to NP-Harz</strong> (Maria Bönisch, NP)</li>
-<li>15:00-17:00 <strong>Block 4 Machine learning and validation</strong> (Hanna Meyer, Uni Münster)</li>
-<li>17:00-18:00 Group work</li>
-</ul></li>
-<li>Thursday (Waldhaus):
-<ul>
-<li>09:00-11:00 <strong>Block 5 Measuring and modelling microclimate with mobile climate station</strong> (Chris Reudenbach, Uni Marburg)</li>
-<li>11:00-12:00 Group work</li>
-<li>12:30 Lunch @ Waldhaus</li>
-<li>14:00-16:00 Walk &amp; Talk</li>
-<li>16:00-18:00 Preparation of presentations</li>
-</ul></li>
-<li>Friday (Waldhaus):
-<ul>
-<li>09:00-10:00 Group work</li>
-<li>10:00-11:30 <strong>Final presentations of the group work</strong> (Students)</li>
-<li>11:30-11:45 Closing Seminar, Evaluation</li>
-<li>11:45-13:00 Tidy up rooms, lunch, check out</li>
-<li>13:15 <strong>Departure</strong></li>
-</ul></li>
-</ul>
-<hr>
-</section>
-<section id="accommodation" class="level2">
-<h2 class="anchored" data-anchor-id="accommodation">Accommodation</h2>
-<ul>
-<li>We will stay at: <a href="https://oderbrueck.de/uebernachten-2/the-cabin-oderbrueck">The Cabin Oderbrück</a></li>
-<li>Costs: approx. 25€ per person/night (plus the local tax of 3€ per person/night); we will collect the money in cash from you (Students from Göttingen have to pay in advance directly to HAWK)</li>
-<li>You can bring you own bed linen and towels or rent it for ~15€</li>
-</ul>
-</section>
-<section id="catering" class="level2">
-<h2 class="anchored" data-anchor-id="catering">Catering</h2>
-<ul>
-<li>The house offers a great kitchen which will be used for the self catering.</li>
-<li>We plan to buy food &amp; drinks jointly and organise the cooking, etc., on our own. So be prepared to help with the cooking, etc.</li>
-</ul>
-</section>
-<section id="what-to-bring" class="level2">
-<h2 class="anchored" data-anchor-id="what-to-bring">What to bring?</h2>
-<ul>
-<li>Enthusiasm for field work in forest monitoring and remote sensing :)</li>
-<li>At least a basic understanding of the R programming language</li>
-<li>A laptop where you have admin permissions and with the following software installed:
-<ul>
-<li>R/RStudio</li>
-<li>QGIS</li>
-<li>Notepad++/geany</li>
-</ul></li>
-<li>Outdoor/Hiking gear</li>
-<li>You can bring you own bed linen and towel or rent it</li>
-<li>Slippers</li>
-</ul>
-<div class="quarto-layout-panel" data-layout-ncol="2">
-<div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p><em>Clouds are not spheres, mountains are not cones, coastlines are not circles, and bark is not smooth, nor does lightning travel in a straight line.” - Mandelbrot (1983)</em></p>
+<p>A fractal is a geometric object that shows <strong>self-similarity</strong>; its parts resemble the whole, no matter the scale of observation. Imagine zooming in on a fern leaf, a coastline, or a broccoli head: at each magnification, similar patterns reappear. Unlike simple geometric figures, fractals are <strong>irregular and infinitely nested</strong> in structure. They are found widely in nature and are best described not by whole-number dimensions (like 1D lines or 2D surfaces), but by <strong>fractional, non-integer dimensions</strong>, known as the <strong>fractal dimension</strong>. This dimension is crucial for quantifying the complexity of self-similar systems, whether exact (mathematical fractals) or statistical (natural systems).</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="./images/clausiwood.png" class="img-fluid figure-img"></p>
-<figcaption>Site Area Polsterberger Hubhaus 2022</figcaption>
+<p><img src="images/koch_curve.png" class="img-fluid figure-img"></p>
+<figcaption>Koch Curve</figcaption>
 </figure>
 </div>
-</div>
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="./images/2023.jpg" class="img-fluid figure-img"></p>
-<figcaption>Site Area Polsterberger Hubhaus 2023</figcaption>
+<p><img src="images/Sierpinski triangle.png" class="img-fluid figure-img"></p>
+<figcaption>Sierpinski triangle</figcaption>
 </figure>
 </div>
+<section id="how-do-you-measure-the-fractal-dimension" class="level2">
+<h2 class="anchored" data-anchor-id="how-do-you-measure-the-fractal-dimension">How do you measure the fractal dimension?</h2>
+<p>The <strong>fractal dimension</strong> quantifies how complex and space-filling a pattern is. Unlike familiar Euclidean dimensions (1D for a line, 2D for a surface), fractal dimensions can take <strong>non-integer values</strong> between whole numbers.</p>
+<p>Several methods exist to estimate fractal dimension, but the <strong>box-counting method</strong> is the most widely used. In this approach, the object is covered with boxes of a certain size, and the number of boxes required to contain the shape is counted. This process is repeated with progressively smaller boxes.</p>
+<p>If the logarithm of the number of boxes is plotted against the logarithm of the box size, the result is typically a straight line. The <strong>slope of this line</strong> gives the fractal dimension: steeper slopes correspond to more intricate, space-filling structures.</p>
+</section>
+<section id="why-are-we-discussing-this-here" class="level2">
+<h2 class="anchored" data-anchor-id="why-are-we-discussing-this-here">Why are we discussing this here?</h2>
+<p>Because <strong>trees are fractal structures.</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/fractal_tree.png" class="img-fluid figure-img"></p>
+<figcaption>Trees are fractals</figcaption>
+</figure>
 </div>
+<p>Trees exhibit self-similar branching patterns: smaller branches resemble the overall structure of the tree. While we can measure conventional forestry attributes such as height, DBH, basal area, crown dimensions, and volume, these do not capture <strong>overall structural complexity</strong>. To do this, we turn to fractal analysis—specifically the <strong>box dimension</strong>.</p>
+</section>
+<section id="from-euclidean-to-fractal-dimension-quick-intuition" class="level2">
+<h2 class="anchored" data-anchor-id="from-euclidean-to-fractal-dimension-quick-intuition">From Euclidean to Fractal Dimension (Quick Intuition)</h2>
+<ul>
+<li><strong>0-D</strong>: point<br>
+</li>
+<li><strong>1-D</strong>: line<br>
+</li>
+<li><strong>2-D</strong>: plane/filled region<br>
+</li>
+<li><strong>3-D</strong>: solid volume<br>
+</li>
+<li><strong>Fractal dimension</strong> fills the gaps between integers and quantifies <strong>how space-filling</strong> a structure is.</li>
+</ul>
+<p>A classic example is the <strong>Menger sponge</strong>, which has a box dimension ≈ 2.7268. Despite its infinite surface area, it has zero volume, an extreme case of fractal geometry.</p>
+</section>
+<section id="box-dimension" class="level2">
+<h2 class="anchored" data-anchor-id="box-dimension">Box Dimension</h2>
+<p>The <strong>box dimension</strong> is a method of fractal analysis used to quantify the <em>structural complexity</em> of an object, often derived from 3D point cloud data. The idea is simple:<br>
+- Cover the object with boxes of decreasing size.<br>
+- Count how many boxes are required to contain the shape.<br>
+- Plot the logarithm of the box count against the logarithm of box size.</p>
+<p>If the relationship is linear, the <strong>slope</strong> of that line gives the <strong>box dimension</strong>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Seidel et al 2019.png" class="img-fluid figure-img"></p>
+<figcaption>Seidel et al 2019</figcaption>
+</figure>
 </div>
+<p>Formally, if the box size is <span class="math inline">\((\varepsilon)\)</span> and the number of occupied boxes is <span class="math inline">\(N(\varepsilon)\)</span>:</p>
+<p><span class="math display">\[
+N(\varepsilon) \propto \varepsilon^{-D_b}
+\quad\Rightarrow\quad
+\log N(\varepsilon) = D_b \,\log(1/\varepsilon) + c
+\]</span></p>
+<p>Where: - <span class="math inline">\((D_b)\)</span> is the <strong>box dimension</strong>.<br>
+- For 3D point clouds:<br>
+- <span class="math inline">\((D_b \approx 1)\)</span>: line-like structures<br>
+- <span class="math inline">\((D_b \approx 2)\)</span>: sheet-like structures<br>
+- <span class="math inline">\((D_b \approx 3)\)</span>: volume-filling structures<br>
+- Trees typically have <span class="math inline">\((D_b)\)</span> between 1.0 and 2.2 (method and data dependent).<br>
+- A higher <span class="math inline">\(R^2\)</span> of the fit indicates stronger self-similarity across scales.</p>
+<section id="data-sensitivities" class="level3">
+<h3 class="anchored" data-anchor-id="data-sensitivities">Data sensitivities</h3>
+<p>Box dimension estimates depend on: 1. <strong>Point density/resolution</strong><br>
+2. <strong>Occlusion or shadowing</strong><br>
+3. <strong>Extent of the scanned scene</strong><br>
+4. <strong>Scale interval chosen for fitting</strong></p>
+<p>High-quality point clouds (low occlusion, ~0–1 cm spacing) are optimal for robust estimates.</p>
+</section>
+<section id="box-dimension-vs.-voxel-counting" class="level3">
+<h3 class="anchored" data-anchor-id="box-dimension-vs.-voxel-counting">Box Dimension vs.&nbsp;Voxel Counting</h3>
+<p>In practice, box-counting in 3D is implemented as <strong>voxel counting</strong>. Voxels are the 3D equivalent of pixels, small cubic volume elements. A point cloud is discretized into a voxel grid, and the occupied voxels are counted at multiple scales.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Seidel et al 2020.png" class="img-fluid figure-img"></p>
+<figcaption>Source Seidel et al (2020)</figcaption>
+</figure>
+</div>
+<p>This process converts a 3D model or point cloud into a grid of voxels, each labeled as “occupied” or “empty.”</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Dorji et al 2021.png" class="img-fluid figure-img"></p>
+<figcaption>Source: Dorji et al (2021)</figcaption>
+</figure>
 </div>
 </section>
-<section id="area-of-interest" class="level2">
-<h2 class="anchored" data-anchor-id="area-of-interest">Area of Interest</h2>
-<p>We plan to work in the area of the forest district “Claustahl” which is in the west of the city Claustahl-Zellerfeld.</p>
-<p><img src="https://pad.gwdg.de/uploads/632f2325-7a43-447e-8a23-1eb989b9218f.png" class="img-fluid"></p>
-<p>This forest area was dominate by spruce trees which all died in the last years.</p>
+<section id="interpretation" class="level3">
+<h3 class="anchored" data-anchor-id="interpretation">Interpretation</h3>
+<ul>
+<li><strong>Box dimension ranges from 1 (line) to 3 (solid cube).</strong><br>
+</li>
+<li>A dimension of <strong>2.72</strong> corresponds to the Menger sponge (infinite surface, zero volume).<br>
+</li>
+<li><strong>Most trees</strong> fall between <strong>1.0 and 2.2</strong>, reflecting their branching complexity.<br>
+</li>
+<li>Low resolution → oversimplification (underestimates (<span class="math inline">\(D_b\)</span>)).<br>
+</li>
+<li>High occlusion → too few boxes at small scales (also biases (<span class="math inline">\(D_b\)</span>)).</li>
+</ul>
+<p>Thus, careful preprocessing and high-quality scans are critical for meaningful box-dimension analysis.</p>
 </section>
-<section id="we-can-offer-to-bring-the-following-equpiment-sensors-equipment" class="level2">
-<h2 class="anchored" data-anchor-id="we-can-offer-to-bring-the-following-equpiment-sensors-equipment">We can offer to bring the following equpiment Sensors &amp; Equipment</h2>
+<section id="how-to-measure-d_b-it-in-reality" class="level3">
+<h3 class="anchored" data-anchor-id="how-to-measure-d_b-it-in-reality">How to measure <span class="math inline">\(D_b\)</span> it in reality?</h3>
+<p>To apply this concept to forests, we calculate the <strong>box-dimension (<span class="math inline">\((D_b\)</span>)</strong> as a measure of tree or stand structural complexity using the <strong>rTwig</strong> package in R.</p>
+<p>The algorithm for <span class="math inline">\((D_b)\)</span> was developed initially in <em>Mathematica</em> (Wolfram Research, Champaign, IL, USA) (Seidel, 2018; Ehbrecht, 2019; Basnet, 2025). It integrates <strong>all elements of a scanned scene</strong> into a single value, thereby fully leveraging the potential of 3D laser scanning.</p>
+<p>In short:<br>
+- The point cloud of a tree or stand is enclosed in boxes of decreasing size.<br>
+- For each box size, the number of occupied boxes is counted.<br>
+- The scaling relationship between box size and number of boxes gives the <strong>box dimension $(D_b$)</strong>.</p>
+<p>This workflow is implemented in the <strong>rTwig</strong> R package, making it straightforward to estimate structural complexity directly from normalized point cloud data.</p>
+</section>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
 <ul>
-<li>HAWK:
-<ul>
-<li>Mavic 3 (Enterprise + Thermal + Multispectral)</li>
-<li>Matrics RTK350 incl.&nbsp;L1, P1 &amp; Micasence</li>
-<li>GNSS (Emlid, Garmin)</li>
-<li>Tablets (Android)</li>
-<li>Forest Measurement Devices (diameter tapes, calipers, vertex, laser range finders, …)</li>
-<li>GeoSlam Mobile Laser Scanner</li>
-</ul></li>
-<li>Uni Münster:
-<ul>
-<li>Mica Sens red edge (Multispectral)</li>
-<li>WIRIS thermal camera</li>
-<li>L1 Lidar (Dji)</li>
-<li>Sony Alpha (42mp) RGB camera</li>
-<li>ppm 10xx GNSS Sensor</li>
-<li>Drill and drop sensors</li>
-</ul></li>
-<li>Uni Marburg:
-<ul>
-<li>Mavic 3 (Enterprise + Thermal + Multispectral)</li>
-<li>Mavic 3 Mini Pro</li>
-<li>LoRa based real time climate sensors</li>
-</ul></li>
+<li><p>Mandelbrot, B. B. (1983). The Fractal Geometry of Nature. W.H. Freeman.</p></li>
+<li><p>Seidel, D. et al.&nbsp;(2019). How a measure of tree structural complexity relates to architectural benefit-to-cost ratio, light availability, and growth of trees. Ecology and Evolution, 9(12), 7134–7142. https://doi.org/10.1002/ece3.5281</p></li>
+<li><p>Seidel, D., Annighöfer, P., Ehbrecht, M., Magdon, P., Wöllauer, S., &amp; Ammer, C. (2020). Deriving Stand Structural Complexity from Airborne Laser Scanning Data—What Does It Tell Us about a Forest? Remote Sensing, 12(11), 1854. https://doi.org/10.3390/rs12111854</p></li>
+<li><p>Dorji, Y., Schuldt, B., Neudam, L., Dorji, R., Middleby, K., Isasa, E., &amp; Körber, K. et al.&nbsp;(2021). Trees, 35(4), 1385–1398. https://doi.org/10.1007/s00468-021-02124-9</p></li>
+<li><p>Basnet, P., Das, S., Hölscher, D., Pierick, K., &amp; Seidel, D. (2025). Drivers of forest structural complexity in mountain forests of Nepal. Mountain Research and Development, 45(1), R1–R10. https://doi.org/10.1659/mrd.2024.00009</p></li>
+<li><p>rTwig vignette (Box Dimension): https://cran.r-project.org/web/packages/rTwig/vignettes/Box-Dimension.html</p></li>
 </ul>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -1044,6 +1063,15 @@ window.Quarto = {
     }
   });
   </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../block3_dobelmann/lidar_forest_structure.html" class="pagination-link" aria-label="Processing of 3D Lidar data to assess forest structure">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Processing of 3D Lidar data to assess forest structure</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
@@ -1052,7 +1080,7 @@ window.Quarto = {
     </div>   
     <div class="nav-footer-center">
 <p>Earth Observation Network Harz Summer School (2026)</p>
-<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/earth-observation-network/EON2026/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/earth-observation-network/EON2026/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/earth-observation-network/EON2026/edit/main/block3_dobelmann/Box_dimension.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/earth-observation-network/EON2026/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>index – EON Summer School 2026</title>
+<title>index – Forest Monitoring Summer School 2026</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -111,10 +111,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../css/styles.css">
-<meta property="og:title" content="EON Summer School 2026">
-<meta property="og:site_name" content="EON Summer School 2026">
+<meta property="og:title" content="Forest Monitoring Summer School 2026">
+<meta property="og:site_name" content="Forest Monitoring Summer School 2026">
 </head>
 
 <body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
@@ -291,7 +320,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <img src="../images/logooil.jpg" alt="" class="navbar-logo dark-content">
     </a>
     <a class="navbar-brand" href="../index.html">
-    <span class="navbar-title">EON Summer School 2026</span>
+    <span class="navbar-title">Forest Monitoring Summer School 2026</span>
     </a>
   </div>
         <div class="quarto-navbar-tools tools-end">
@@ -387,8 +416,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       </div>
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
- <span class="menu-text">to_be_defined</span>
-  </li>
+  <div class="sidebar-item-container"> 
+  <a href="../block3_dobelmann/lidar_forest_structure.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Processing of 3D Lidar data to assess forest structure</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../block3_dobelmann/Box_dimension.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Measuring Tree/Forest Structural Complexity with (Fractal) Box Dimension <span class="math inline">\((D_b)\)</span> from 3D Point Clouds</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="px-0"><hr class="sidebar-divider hi "></li>
@@ -402,8 +440,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       </div>
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
- <span class="menu-text">ml_session/ML_AOA.qmd</span>
-  </li>
+  <div class="sidebar-item-container"> 
+  <a href="../block4_machineLearning/ML_AOA.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Machine learning for remote sensing applications</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="px-0"><hr class="sidebar-divider hi "></li>
