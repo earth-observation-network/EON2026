@@ -52,7 +52,7 @@ website:
       - text: "---"
       - section: "Block 4  Machine learning and validation"
         contents:
-          - ml_session/ML_AOA.qmd
+          - block4_machineLearning/ML_AOA.qmd
         
       - text: "---"
       - section: "Block 5: Measuring and modelling microclimate with mobile climate station"
