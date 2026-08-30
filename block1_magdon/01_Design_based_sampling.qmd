@@ -21,7 +21,7 @@ data_dir=paste0(find_rstudio_root_file(),"/block1_magdon/data/")
 In this tutorial, we will explore the principles of design-based sampling. We will learn how to 
 implement statistically sound sampling designs. Furthermore, we will run some simulations to understand
 the properties of probability sampling. The simulation part is based on a presentation of 
-Gerad Heuveling from Wageningen University, which he gave in the [OpenGeoHub Summer Schoo](https://opengeohub.org/summer-school/ogh-summer-school-2021/).  
+Gerad Heuveling from Wageningen University, which he gave in the [OpenGeoHub Summer School](https://opengeohub.org/summer-school/ogh-summer-school-2021/).  
 
 1. Learn how to draw a spatial random sample
 2. Learn how to draw a systematic grid for a given area of interest
