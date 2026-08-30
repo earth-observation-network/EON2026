@@ -1,9 +1,8 @@
 ---
-title: "Collection of training data for remote sensing modelling based on spectral variability
-"
-subtitle: "Tutorial: EON Summer School 2025"
+title: "Collection of training data for remote sensing based modelling"
+subtitle: "Using feature space variability to guide training data collection"
 author: Paul Magdon, University of Applied Sciences and Arts (HAWK)
-date: "2025-08-26"
+date: "2026-08-30"
 editor_options: 
   chunk_output_type: console
 editor: 
@@ -15,6 +14,7 @@ editor:
 
 #install.packages("devtools")
 #devtools::install_github("bleutner/RStoolbox")
+rm(list=ls())
 library(sf)
 library(RStoolbox)
 library(terra)
@@ -37,7 +37,7 @@ National Park to define our study area. Before we can start you may
 download the S2 Scene from the following link:
 [S2-download](https://cloud.hawk.de/index.php/s/fJzigXwzbHRLNdy).
 
-We also need to dowload the boundaries of the national park from the
+We also need to download the boundaries of the national park from the
 following link: [National
 Park](https://cloud.hawk.de/index.php/s/2G4XCatn87S8FsX). Place both
 files into the subfolder 'data' of this tutorial.
@@ -238,7 +238,6 @@ areas with our sample plots. By comparing the spectral distributions in
 the area and sample we can check if this was successful.
 
 ```{r checkRange}
-
 image.sample <- terra::spatSample(s2, size = 100000, 
                                   method = "random", as.df = TRUE)
 image.sample$group<-'image'

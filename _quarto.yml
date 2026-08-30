@@ -34,7 +34,7 @@ website:
       - section: "Block 1: Introduction to forest monitoring"
         contents: 
           - block1_magdon/01_Design_based_sampling.qmd
-          - block1_magdon/02_ValidationDataCollection.qmd
+          - block1_magdon/02_TrainingDataCollection.qmd
       - text: "---"
       - section: "Block 2: Describing and comparing spatial patterns"
         contents: 

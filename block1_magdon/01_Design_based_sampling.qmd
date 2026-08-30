@@ -1,7 +1,7 @@
 ---
-title: "A first dive into design-based sampling methods"
-# subtitle: "Tutorial for the EON Summer School 2026"
-author: Paul Magdon [University of Applied Sciences and Arts (HAWK), paul.magdon@hawk.de]
+title: "Design-based sampling in a Nutshell"
+subtitle: "Estimating Forest Attributes with Confidence"
+author: Paul Magdon, University of Applied Sciences and Arts (HAWK)
 date: "2026-08-29"
 ---
 
@@ -12,21 +12,20 @@ library(sf)
 library(terra)
 library(ggplot2)
 library(rprojroot)
-library(patchwork)
 
 data_dir=paste0(find_rstudio_root_file(),"/block1_magdon/data/")
 
 ```
 
 # Introduction
-In this tutorial we will explore the principles of design-based sampling. We will learn how to 
-implement statistical sound sampling designs. Furthermore, we will run some simulations to understand
+In this tutorial, we will explore the principles of design-based sampling. We will learn how to 
+implement statistically sound sampling designs. Furthermore, we will run some simulations to understand
 the properties of probability sampling. The simulation part is based on a presentation of 
 Gerad Heuveling from Wageningen University, which he gave in the [OpenGeoHub Summer Schoo](https://opengeohub.org/summer-school/ogh-summer-school-2021/).  
 
 1. Learn how to draw a spatial random sample
 2. Learn how to draw a systematic grid for a given area of interest
-3. Run a simulation to analyse the properties of the estimators
+3. Run a simulation to analyze the properties of the estimators
 
 # Data sets
 
@@ -36,15 +35,9 @@ biomass (AGB) produced by the Joint Research Center(JRC) for the European Commis
 To provide a synthetic example, we will assume that this map (agb_pop) is an
 error-free representation of the AGB in the National Park Hart which defines our population.
 
-<!--
-Additionally, we use a second map (agb_model) compiled using a machine learning model (RF) also 
-depicting the AGB distribution of the Nationalpark.
--->
-
-Before we start you should download the following files:
+Before we start, you should download the following files:
 
 1. [AGB_pop](https://cloud.hawk.de/index.php/s/BBHMksRC3bjc2WD)
-#2. [AGB_model](https://cloud.hawk.de/index.php/s/fJzigXwzbHRLNdy)
 2. [National park boundary](https://cloud.hawk.de/index.php/s/2G4XCatn87S8FsX)
 
 Place all files into a sub folder 'data' of this tutorial. 
@@ -91,13 +84,12 @@ The true population value of the mean is `r round(mean_pop,2)` t/ha and the stan
 
 # Sampling Approach
 
-In real forest monitoring applications the true population values are rarely known as it is often not
-feasible or impossible to measure all elements of the population. Therefore, sampling strategies are
+In real forest monitoring applications, the true population values are rarely known, as it is often not feasible or impossible to measure all elements of the population. Therefore, sampling strategies are
 applied to estimate the true population values. 
 
 ## SRS-Estimators
 
-Depending on the sampling design (the way how we select samples) the correct estimators need to be 
+Depending on the sampling design (the way we select samples) the correct estimators need to be 
 used to provide unbiased and precise estimates. The most simple estimators assume a pure random
 selection of samples -> Simple Random Sampling (SRS).
 
@@ -115,9 +107,9 @@ $$
 
 ## Collect a random sample
 
-To estimate the mean above ground in the National Park Harz we start with a simple random sample. 
-As common in forest inventories we assume that our population is the infinite number of dimensionless 
-points within the boundaries of the NP. Thus, for the sampling random points are choosen. We start
+To estimate the mean above ground in the National Park Harz, we start with a simple random sample. 
+As common in forest inventories, we assume that our population is the infinite number of dimensionless 
+points within the boundaries of the NP. Thus, for the sampling, random points are chosen. We start
 with a random sample with $n=100$ sample points. 
 
 ```{r SRS_estimation}
@@ -150,9 +142,9 @@ Using the random sample we estimate the mean values $\bar{y}$ as `r round(mean_e
 deviation $s$§ as $\bar{y}$ as `r round(sd_est,2)`.
 
 <div style="text-align: center;">
-| Header 1 | Header 2 |
+| $\bar{y}$ (t/ha)   |  $\mu$ (t/ha) |
 |----------|----------|
-| Cell 1   | Cell 2   |
+|`r round(mean_est,2)` | `r round(mean_pop,2)`   |
 </div>
 
 At this point, we cannot yet tell whether our estimate is unbiased. In other words: Is this result
