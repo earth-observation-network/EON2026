@@ -2,30 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://earth-observation-network.github.io/EON2026/index.html</loc>
-    <lastmod>2026-08-28T13:29:10.397Z</lastmod>
+    <lastmod>2026-08-30T08:50:54.263Z</lastmod>
   </url>
   <url>
     <loc>https://earth-observation-network.github.io/EON2026/block3_dobelmann/lidar_forest_structure.html</loc>
-    <lastmod>2026-08-28T13:29:10.180Z</lastmod>
+    <lastmod>2026-08-30T08:50:54.068Z</lastmod>
   </url>
   <url>
     <loc>https://earth-observation-network.github.io/EON2026/block2/index.html</loc>
-    <lastmod>2026-08-28T13:29:10.176Z</lastmod>
+    <lastmod>2026-08-30T08:50:54.065Z</lastmod>
   </url>
   <url>
-    <loc>https://earth-observation-network.github.io/EON2026/block1_magdon/01_TrainingDataCollection.html</loc>
-    <lastmod>2026-08-28T13:29:10.175Z</lastmod>
+    <loc>https://earth-observation-network.github.io/EON2026/block1_magdon/01_Design_based_sampling.html</loc>
+    <lastmod>2026-08-30T08:50:54.064Z</lastmod>
   </url>
   <url>
-    <loc>https://earth-observation-network.github.io/EON2026/block1_magdon/02_ValidationDataCollection.html</loc>
-    <lastmod>2026-08-28T13:29:10.175Z</lastmod>
+    <loc>https://earth-observation-network.github.io/EON2026/block1_magdon/02_TrainingDataCollection.html</loc>
+    <lastmod>2026-08-30T08:50:54.065Z</lastmod>
   </url>
   <url>
     <loc>https://earth-observation-network.github.io/EON2026/block3_dobelmann/Box_dimension.html</loc>
-    <lastmod>2026-08-28T13:29:10.176Z</lastmod>
+    <lastmod>2026-08-30T08:50:54.065Z</lastmod>
   </url>
   <url>
     <loc>https://earth-observation-network.github.io/EON2026/block4_machineLearning/ML_AOA.html</loc>
-    <lastmod>2026-08-28T13:29:10.303Z</lastmod>
+    <lastmod>2026-08-30T08:50:54.185Z</lastmod>
   </url>
 </urlset>

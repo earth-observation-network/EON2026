@@ -6,10 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Paul Magdon[University of Applied Sciences and Arts (HAWK), paul.magdon@hawk.de]">
-<meta name="dcterms.date" content="2025-08-26">
+<meta name="author" content="Paul Magdon, University of Applied Sciences and Arts (HAWK)">
+<meta name="dcterms.date" content="2026-08-29">
 
-<title>Validation of continuous maps using design-based sampling methods – Forest Monitoring Summer School 2026</title>
+<title>Design-based sampling in a Nutshell – Forest Monitoring Summer School 2026</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -72,7 +72,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../block1_magdon/01_TrainingDataCollection.html" rel="prev">
+<link href="../block1_magdon/02_TrainingDataCollection.html" rel="next">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -145,9 +145,9 @@ window.Quarto = {
 </script>
 
 <link rel="stylesheet" href="../css/styles.css">
-<meta property="og:title" content="Validation of continuous maps using design-based sampling methods – Forest Monitoring Summer School 2026">
-<meta property="og:description" content="Tutorial for the EON Summer School 2025">
-<meta property="og:image" content="https://earth-observation-network.github.io/EON2026/block1_magdon/02_ValidationDataCollection_files/figure-html/RMSEest-1.png">
+<meta property="og:title" content="Design-based sampling in a Nutshell – Forest Monitoring Summer School 2026">
+<meta property="og:description" content="Estimating Forest Attributes with Confidence">
+<meta property="og:image" content="https://earth-observation-network.github.io/EON2026/block1_magdon/01_Design_based_sampling_files/figure-html/SRS_estimation-1.png">
 <meta property="og:site_name" content="Forest Monitoring Summer School 2026">
 <meta property="og:image:height" content="960">
 <meta property="og:image:width" content="1344">
@@ -341,7 +341,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../block1_magdon/01_TrainingDataCollection.html">Block 1: Introduction to forest monitoring</a></li><li class="breadcrumb-item"><a href="../block1_magdon/02_ValidationDataCollection.html">Validation of continuous maps using design-based sampling methods</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../block1_magdon/01_Design_based_sampling.html">Block 1: Introduction to forest monitoring</a></li><li class="breadcrumb-item"><a href="../block1_magdon/01_Design_based_sampling.html">Design-based sampling in a Nutshell</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -382,14 +382,14 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../block1_magdon/01_TrainingDataCollection.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Collection of training data for remote sensing modelling based on spectral variability</span></a>
+  <a href="../block1_magdon/01_Design_based_sampling.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Design-based sampling in a Nutshell</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../block1_magdon/02_ValidationDataCollection.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Validation of continuous maps using design-based sampling methods</span></a>
+  <a href="../block1_magdon/02_TrainingDataCollection.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Collection of training data for remote sensing based modelling</span></a>
   </div>
 </li>
       </ul>
@@ -487,29 +487,29 @@ window.Quarto = {
   <ul>
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
   <li><a href="#data-sets" id="toc-data-sets" class="nav-link" data-scroll-target="#data-sets">Data sets</a></li>
+  <li><a href="#population-parameters" id="toc-population-parameters" class="nav-link" data-scroll-target="#population-parameters">Population Parameters</a></li>
+  <li><a href="#sampling-approach" id="toc-sampling-approach" class="nav-link" data-scroll-target="#sampling-approach">Sampling Approach</a>
+  <ul class="collapse">
+  <li><a href="#srs-estimators" id="toc-srs-estimators" class="nav-link" data-scroll-target="#srs-estimators">SRS-Estimators</a></li>
   <li><a href="#collect-a-random-sample" id="toc-collect-a-random-sample" class="nav-link" data-scroll-target="#collect-a-random-sample">Collect a random sample</a></li>
-  <li><a href="#simulation-of-many-random-samples" id="toc-simulation-of-many-random-samples" class="nav-link" data-scroll-target="#simulation-of-many-random-samples">Simulation of many random samples</a></li>
-  <li><a href="#systematic-sampling" id="toc-systematic-sampling" class="nav-link" data-scroll-target="#systematic-sampling">Systematic sampling</a></li>
-  <li><a href="#evaluating-the-agb-model" id="toc-evaluating-the-agb-model" class="nav-link" data-scroll-target="#evaluating-the-agb-model">Evaluating the AGB-Model</a>
-  <ul class="collapse">
-  <li><a href="#systematic-sample-to-collect-reference-data-for-map-validation" id="toc-systematic-sample-to-collect-reference-data-for-map-validation" class="nav-link" data-scroll-target="#systematic-sample-to-collect-reference-data-for-map-validation">Systematic sample to collect reference data for map validation</a></li>
-  <li><a href="#assessment-of-the-abg-model-performance" id="toc-assessment-of-the-abg-model-performance" class="nav-link" data-scroll-target="#assessment-of-the-abg-model-performance">Assessment of the ABG-model performance</a>
-  <ul class="collapse">
-  <li><a href="#sample-rmse" id="toc-sample-rmse" class="nav-link" data-scroll-target="#sample-rmse">Sample RMSE</a></li>
-  <li><a href="#error-distribution" id="toc-error-distribution" class="nav-link" data-scroll-target="#error-distribution">Error distribution</a></li>
   </ul></li>
+  <li><a href="#simulation-with-random-samples" id="toc-simulation-with-random-samples" class="nav-link" data-scroll-target="#simulation-with-random-samples">Simulation with random samples</a>
+  <ul class="collapse">
+  <li><a href="#estimate-mean-values" id="toc-estimate-mean-values" class="nav-link" data-scroll-target="#estimate-mean-values">Estimate mean values</a></li>
+  <li><a href="#precision-of-estimates" id="toc-precision-of-estimates" class="nav-link" data-scroll-target="#precision-of-estimates">Precision of estimates</a></li>
   </ul></li>
+  <li><a href="#simulation-with-systematic-sampling" id="toc-simulation-with-systematic-sampling" class="nav-link" data-scroll-target="#simulation-with-systematic-sampling">Simulation with systematic sampling</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/earth-observation-network/EON2026/edit/main/block1_magdon/02_ValidationDataCollection.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/earth-observation-network/EON2026/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/earth-observation-network/EON2026/edit/main/block1_magdon/01_Design_based_sampling.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/earth-observation-network/EON2026/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../block1_magdon/01_TrainingDataCollection.html">Block 1: Introduction to forest monitoring</a></li><li class="breadcrumb-item"><a href="../block1_magdon/02_ValidationDataCollection.html">Validation of continuous maps using design-based sampling methods</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../block1_magdon/01_Design_based_sampling.html">Block 1: Introduction to forest monitoring</a></li><li class="breadcrumb-item"><a href="../block1_magdon/01_Design_based_sampling.html">Design-based sampling in a Nutshell</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Validation of continuous maps using design-based sampling methods</h1>
-<p class="subtitle lead">Tutorial for the EON Summer School 2025</p>
+<h1 class="title">Design-based sampling in a Nutshell</h1>
+<p class="subtitle lead">Estimating Forest Attributes with Confidence</p>
 </div>
 
 
@@ -519,14 +519,14 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Paul Magdon[University of Applied Sciences and Arts (HAWK), paul.magdon@hawk.de] </p>
+             <p>Paul Magdon, University of Applied Sciences and Arts (HAWK) </p>
           </div>
   </div>
     
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">August 26, 2025</p>
+      <p class="date">August 29, 2026</p>
     </div>
   </div>
   
@@ -540,103 +540,131 @@ window.Quarto = {
 
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>())</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Linking to GEOS 3.14.1, GDAL 3.12.1, PROJ 9.7.1; sf_use_s2() is TRUE</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(terra)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>terra 1.9.27</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rprojroot)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>
-Attache Paket: 'patchwork'</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Das folgende Objekt ist maskiert 'package:terra':
-
-    area</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>data_dir<span class="ot">=</span><span class="fu">paste0</span>(<span class="fu">find_rstudio_root_file</span>(),<span class="st">"/block1_magdon/data/"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(terra)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rprojroot)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>data_dir<span class="ot">=</span><span class="fu">paste0</span>(<span class="fu">find_rstudio_root_file</span>(),<span class="st">"/block1_magdon/data/"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <section id="introduction" class="level1">
 <h1>Introduction</h1>
-<p>In this tutorial we will explore the principles of design-based sampling. The simulation part is based on a presentation of Gerad Heuveling from Wageningen University, which he gave in the OpenGeoHub Summer School[https://opengeohub.org/summer-school/ogh-summer-school-2021/].</p>
+<p>In this tutorial, we will explore the principles of design-based sampling. We will learn how to implement statistically sound sampling designs. Furthermore, we will run some simulations to understand the properties of probability sampling. The simulation part is based on a presentation of Gerad Heuveling from Wageningen University, which he gave in the <a href="https://opengeohub.org/summer-school/ogh-summer-school-2021/">OpenGeoHub Summer Schoo</a>.</p>
 <ol type="1">
 <li>Learn how to draw a spatial random sample</li>
 <li>Learn how to draw a systematic grid for a given area of interest</li>
-<li>Run a simulation for design-based sampling</li>
+<li>Run a simulation to analyze the properties of the estimators</li>
 </ol>
 </section>
 <section id="data-sets" class="level1">
 <h1>Data sets</h1>
-<p>For demonstration purposes we will work with a map of forest above ground biomass (AGB) produced by the Joint Research Center(JRC) for the European Union European Commission (Joint Research Centre (JRC) (2020) http://data.europa.eu/89h/d1fdf7aa-df33-49af-b7d5-40d226ec0da3.)</p>
-<p>To provide a synthetic example we will assume that this map (agb_pop) is an error free representation of the population. Additionally we use a second map (agb_model) compiled using a machine learning model (RF) also depicting the AGB distribution.</p>
-<p>Before we can start you may download the following files:</p>
+<p>For demonstration purposes we will work with a map of forest above ground biomass (AGB) produced by the Joint Research Center(JRC) for the European Commission <a href="http://data.europa.eu/89h/d1fdf7aa-df33-49af-b7d5-40d226ec0da3.">Joint Research Centre (JRC) (2020)</a> To provide a synthetic example, we will assume that this map (agb_pop) is an error-free representation of the AGB in the National Park Hart which defines our population.</p>
+<p>Before we start, you should download the following files:</p>
 <ol type="1">
-<li><a href="https://cloud.hawk.de/index.php/s/BBHMksRC3bjc2WD">AGB_pop</a></li>
-<li><a href="https://cloud.hawk.de/index.php/s/fJzigXwzbHRLNdy">AGB_model</a></li>
+<li><a href="https://cloud.hawk.de/index.php/s/BBHMksRC3bjc2WD">AGB_pop</a> #2. <a href="https://cloud.hawk.de/index.php/s/fJzigXwzbHRLNdy">AGB_model</a></li>
 <li><a href="https://cloud.hawk.de/index.php/s/2G4XCatn87S8FsX">National park boundary</a></li>
 </ol>
-<p>Place all files into the sub folder ‘data’ of this tutorial.</p>
+<p>Place all files into a sub folder ‘data’ of this tutorial.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Import the boundary of the national park</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>np_boundary <span class="ot">=</span> <span class="fu">st_transform</span>(<span class="fu">st_read</span>(<span class="fu">paste0</span>(data_dir,<span class="st">"nlp-harz_aussengrenze.gpkg"</span>)),<span class="dv">25832</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Reading layer `nlp-harz_aussengrenze' from data source 
-  `D:\EON2026\block1_magdon\data\nlp-harz_aussengrenze.gpkg' 
-  using driver `GPKG'
-Simple feature collection with 1 feature and 3 fields
-Geometry type: MULTIPOLYGON
-Dimension:     XY
-Bounding box:  xmin: 591196.6 ymin: 5725081 xmax: 619212.6 ymax: 5751232
-Projected CRS: WGS 84 / UTM zone 32N</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Import the boundary of the national park</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>np_boundary <span class="ot">=</span> <span class="fu">st_transform</span>(<span class="fu">st_read</span>(<span class="fu">paste0</span>(data_dir,<span class="st">"nlp-harz_aussengrenze.gpkg"</span>),<span class="at">quiet =</span> T),<span class="dv">25832</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>agb_pop <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">rast</span>(<span class="fu">paste0</span>(data_dir,<span class="st">"agb_np_harz_truth.tif"</span>),<span class="dv">25832</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">#agb_model &lt;-terra::rast(paste0(data_dir,"agb_np_harz_model.tif"),25832)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>agb_pop <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">rast</span>(<span class="fu">paste0</span>(data_dir,<span class="st">"agb_np_harz_truth.tif"</span>))</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>agb_model <span class="ot">&lt;-</span>terra<span class="sc">::</span><span class="fu">rast</span>(<span class="fu">paste0</span>(data_dir,<span class="st">"agb_np_harz_model.tif"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>If we assume the <span class="math inline">\(z(x_i)=\)</span> agb.pop to be an exact representation of the population we can calculate the Root mean Square Error (RMSE) as the difference between the model predictions <span class="math inline">\(\hat{z(x_i)}\)</span> and the population map with:</p>
+</section>
+<section id="population-parameters" class="level1">
+<h1>Population Parameters</h1>
+<p>Since we assume that the map is an error-free representation we can derive the true population values.</p>
 <p><span class="math display">\[
-RMSE = \sqrt{\frac{1}{N}\sum{(z(x_{})-\hat{z}(x_{i}))^2}}
+{\mu} = \frac{\sum_{i=1}^N{y_i}}{N}
+\]</span></p>
+<p><span class="math display">\[
+{\sigma} =\sqrt{\frac{\sum_{i=1}^N{(y_i-\mu})^2}{N}}
 \]</span></p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>RMSE_pop <span class="ot">=</span> <span class="fu">as.numeric</span>(<span class="fu">sqrt</span>(terra<span class="sc">::</span><span class="fu">global</span>((agb_pop<span class="sc">-</span>agb_model)<span class="sc">^</span><span class="dv">2</span>,<span class="at">fun=</span><span class="st">'mean'</span>,<span class="at">na.rm=</span><span class="cn">TRUE</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract raster values and remove NAs (outside the NP)</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>pop_values <span class="ot">&lt;-</span> <span class="fu">values</span>(agb_pop)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>pop_values <span class="ot">&lt;-</span> pop_values[<span class="sc">!</span><span class="fu">is.na</span>(pop_values)]</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the mean and standard deviation</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">length</span>(pop_values)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>mean_pop <span class="ot">&lt;-</span> <span class="fu">mean</span>(pop_values)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>sd_pop <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">sum</span>((pop_values <span class="sc">-</span> mean_pop)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> n)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>By looking at the difference from the “true” AGB and the difference we get a true RMSE of <em>41.23</em> t/ha.</p>
+<p>The true population value of the mean is 163.98 t/ha and the standard deviation is 53.66 t/ha.</p>
 </section>
-<section id="collect-a-random-sample" class="level1">
-<h1>Collect a random sample</h1>
-<p>Since we know the true RMSE, we can test if a random sample estimate has a similar RMSE. We start with a random sample with <span class="math inline">\(n=100\)</span> sample points.</p>
+<section id="sampling-approach" class="level1">
+<h1>Sampling Approach</h1>
+<p>In real forest monitoring applications, the true population values are rarely known, as it is often not feasible or impossible to measure all elements of the population. Therefore, sampling strategies are applied to estimate the true population values.</p>
+<section id="srs-estimators" class="level2">
+<h2 class="anchored" data-anchor-id="srs-estimators">SRS-Estimators</h2>
+<p>Depending on the sampling design (the way we select samples) the correct estimators need to be used to provide unbiased and precise estimates. The most simple estimators assume a pure random selection of samples -&gt; Simple Random Sampling (SRS).</p>
+<p>We can estimate the mean value <span class="math inline">\(\bar{y}\)</span> as:</p>
+<p><span class="math display">\[
+\bar{y} = \frac{\sum_{i=1}^n{y_i}}{n}
+\]</span></p>
+<p>and the standard deviation <span class="math inline">\(s\)</span> as:</p>
+<p><span class="math display">\[
+{s} =\sqrt{\frac{\sum_{i=1}^n{(y_i-\bar{y}})^2}{n-1}}
+\]</span></p>
+</section>
+<section id="collect-a-random-sample" class="level2">
+<h2 class="anchored" data-anchor-id="collect-a-random-sample">Collect a random sample</h2>
+<p>To estimate the mean above ground in the National Park Harz, we start with a simple random sample. As common in forest inventories, we assume that our population is the infinite number of dimensionless points within the boundaries of the NP. Thus, for the sampling, random points are chosen. We start with a random sample with <span class="math inline">\(n=100\)</span> sample points.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>n<span class="ot">=</span><span class="dv">100</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">=</span> sf<span class="sc">::</span><span class="fu">st_sample</span>(np_boundary,<span class="at">size=</span>n)</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>()<span class="sc">+</span><span class="fu">geom_sf</span>(<span class="at">data=</span>np_boundary,<span class="at">fill=</span><span class="cn">NA</span>)<span class="sc">+</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>p1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>n<span class="ot">=</span><span class="dv">100</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create n random points inside the boundary of the NP as a sample</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">=</span> sf<span class="sc">::</span><span class="fu">st_sample</span>(np_boundary,<span class="at">size=</span>n)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the samples on the map</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>()<span class="sc">+</span><span class="fu">geom_sf</span>(<span class="at">data=</span>np_boundary,<span class="at">fill=</span><span class="cn">NA</span>)<span class="sc">+</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>p1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="02_ValidationDataCollection_files/figure-html/RMSEest-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="01_Design_based_sampling_files/figure-html/SRS_estimation-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>We can now extract the population values and the model values at the sample locations and calculate the RMSE for all sample points.</p>
+<p>For our simulation study, we can now extract the true AGB observations at each sample location from the map and calculate the mean across all sample points. In a real forest monitoring project, however, this is not possible. Instead, you would have to visit each selected point in the field and manually record the observations.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>sample <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">extract</span>((agb_pop<span class="sc">-</span>agb_model),<span class="fu">vect</span>(p1))</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(sample)<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">'ID'</span>,<span class="st">'Diff'</span>)</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>RMSE_est <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">mean</span>((sample<span class="sc">$</span>Diff)<span class="sc">^</span><span class="dv">2</span>,<span class="at">na.rm=</span>T))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract population and modelled values at sample locations</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>sample <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">extract</span>((agb_pop),<span class="fu">vect</span>(p1))</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(sample)<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">'ID'</span>,<span class="st">'AGB'</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>mean_est <span class="ot">&lt;-</span> <span class="fu">mean</span>(sample<span class="sc">$</span>AGB,<span class="at">na.rm=</span>T)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>sd_est <span class="ot">&lt;-</span> <span class="fu">sd</span>(sample<span class="sc">$</span>AGB,<span class="at">na.rm=</span>T)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>The random sample estimates the RMSE as 40.02.</p>
-<p>But is this an unbiased estimate?</p>
+<p>Using the random sample we estimate the mean values <span class="math inline">\(\bar{y}\)</span> as 166.65 and the standard deviation <span class="math inline">\(s\)</span>§ as <span class="math inline">\(\bar{y}\)</span> as 52.49.</p>
+<div style="text-align: center;">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th><span class="math inline">\(\bar{y}\)</span> (t/ha)</th>
+<th><span class="math inline">\(\mu\)</span>(t/ha)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>166.65</td>
+<td>163.98</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>At this point, we cannot yet tell whether our estimate is unbiased. In other words: Is this result just due to chance, or would we obtain a similar estimate if we repeated the sampling with a different set of random points?</p>
 </section>
-<section id="simulation-of-many-random-samples" class="level1">
-<h1>Simulation of many random samples</h1>
-<p>To check if our sample based estimates are unbiased we will repeat the sampling <span class="math inline">\(k\)</span> times.</p>
+</section>
+<section id="simulation-with-random-samples" class="level1">
+<h1>Simulation with random samples</h1>
+<section id="estimate-mean-values" class="level2">
+<h2 class="anchored" data-anchor-id="estimate-mean-values">Estimate mean values</h2>
+<p>To check if our sample based estimates are unbiased we can run a small simulation and repeat the sampling <span class="math inline">\(k\)</span> times.</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1
@@ -743,13 +771,23 @@ RMSE = \sqrt{\frac{1}{N}\sum{(z(x_{})-\hat{z}(x_{i}))^2}}
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="02_ValidationDataCollection_files/figure-html/simulation-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="01_Design_based_sampling_files/figure-html/simulation-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>We see that the true RMSE and the mean of the <span class="math inline">\(k\)</span> simulation runs are almost equal. Thus, we can assume an unbiased estimate of the RMSE.</p>
-<p>But how does the sample size <span class="math inline">\(n\)</span> affects the accuracy?</p>
+<p>The simulation shows two important aspects of SRS-Sampling:</p>
+<p>1.) the true mean (<span class="math inline">\(\mu\)</span>) and the estimated mean (<span class="math inline">\(\bar{y}\)</span>) of the <span class="math inline">\(k\)</span> simulation runs are almost equal. Thus, we have shown that the SRS-Estimator is unbiased!</p>
+<p>2.) the distribution of the mean estimates over the <span class="math inline">\(k=100\)</span> simulation runs approximates a normal distribution</p>
+</section>
+<section id="precision-of-estimates" class="level2">
+<h2 class="anchored" data-anchor-id="precision-of-estimates">Precision of estimates</h2>
+<p>The figure above shows that the estimates from samples with n=100 points vary considerably. Most estimates are close to the true population mean, but some deviate substantially—for example, values around 180 t/ha. We would expect that a sampling method producing estimates with little variation is more precise than one producing highly variable estimates. When we express the variation of the estimated means as a standard deviation, we obtain what is called the <strong>standard error</strong> <span class="math inline">\(S\)</span> —a key statistic for assessing the precision of an estimate.</p>
+<p>For the mean value we can express the standard error of the mean <span class="math inline">\(S_\bar{y}\)</span> as:</p>
+<p><span class="math display">\[
+S_\bar{y} = \frac{S}{\sqrt{n}}
+\]</span></p>
+<p>But how does the sample size <span class="math inline">\(n\)</span> affects the precision?</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1
@@ -856,50 +894,59 @@ RMSE = \sqrt{\frac{1}{N}\sum{(z(x_{})-\hat{z}(x_{i}))^2}}
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="02_ValidationDataCollection_files/figure-html/Simulation2-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="01_Design_based_sampling_files/figure-html/Simulation2-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>We see that the precision of the estimates is increased. How much did the uncertainty decrease when we increase the sample size from <span class="math inline">\(n=50\)</span> to <span class="math inline">\(n=100\)</span>?</p>
+<p>We see that the precision of the estimates is increased when we use more samples.</p>
+<p>How much did the uncertainty decrease when we increase the sample size from <span class="math inline">\(n=100\)</span> to <span class="math inline">\(n=200\)</span>?</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(RMSE_2)<span class="sc">/</span><span class="fu">sd</span>(RMSE)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(mean)<span class="sc">/</span><span class="fu">sd</span>(mean_2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.7706108</code></pre>
+<pre><code>[1] 1.3079</code></pre>
 </div>
 </div>
 </section>
-<section id="systematic-sampling" class="level1">
-<h1>Systematic sampling</h1>
-<p>Instead of a random sampling, systematic designs are more common in forest inventories for the following reasons:</p>
+</section>
+<section id="simulation-with-systematic-sampling" class="level1">
+<h1>Simulation with systematic sampling</h1>
+<p>Instead of random sampling, systematic designs are more common in forest inventories for the following reasons:</p>
 <ul>
-<li>Easy to establish and to document</li>
+<li>Easy to establish and document</li>
+<li>Easy to communicated</li>
 <li>Ensures a balanced spatial coverage</li>
+<li>Result in conservative estimates of the precision</li>
 </ul>
+<p>For the simulation we repeat the same steps as before but with a systematic sample:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">=</span> sf<span class="sc">::</span><span class="fu">st_sample</span>(np_boundary,<span class="at">size=</span>n,<span class="at">type=</span><span class="st">'regular'</span>)</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>()<span class="sc">+</span><span class="fu">geom_sf</span>(<span class="at">data=</span>np_boundary,<span class="at">fill=</span><span class="cn">NA</span>)<span class="sc">+</span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>p1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create n systematically distributed points as a sample</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">=</span> sf<span class="sc">::</span><span class="fu">st_sample</span>(np_boundary,<span class="at">size=</span>n,<span class="at">type=</span><span class="st">'regular'</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>()<span class="sc">+</span><span class="fu">geom_sf</span>(<span class="at">data=</span>np_boundary,<span class="at">fill=</span><span class="cn">NA</span>)<span class="sc">+</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>p2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="02_ValidationDataCollection_files/figure-html/systematicSample-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="01_Design_based_sampling_files/figure-html/systematicSample-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
+<p>Aggain we can simulated <span class="math inline">\(k=100\)</span> repetitions of sampling with <span class="math inline">\(n=100\)</span> and <span class="math inline">\(n=200\)</span> regular points, to check if the estimates are unbiased and to analyse the effect of sample size.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="dv">100</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">100</span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>RMSE_3 <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>,k) </span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>k) {</span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(i)</span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  p1 <span class="ot">=</span> sf<span class="sc">::</span><span class="fu">st_sample</span>(np_boundary,<span class="at">size=</span>n,<span class="at">type=</span><span class="st">'regular'</span>)</span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  error<span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">extract</span>(dif,<span class="fu">vect</span>(p1))</span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>  RMSE_3[i] <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">mean</span>((error<span class="sc">$</span>dif)<span class="sc">^</span><span class="dv">2</span>,<span class="at">na.rm=</span>T))</span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>mean_3 <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>,k) </span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>k) {</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(i)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  p2 <span class="ot">=</span> sf<span class="sc">::</span><span class="fu">st_sample</span>(np_boundary,<span class="at">size=</span>n,<span class="at">type=</span><span class="st">'regular'</span>)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  sample <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">extract</span>((agb_pop),<span class="fu">vect</span>(p2))</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">names</span>(sample)<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">'ID'</span>,<span class="st">'AGB'</span>)</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  mean_3[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(sample<span class="sc">$</span>AGB,<span class="at">na.rm=</span>T)</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1
 [1] 2
@@ -1002,161 +1049,26 @@ RMSE = \sqrt{\frac{1}{N}\sum{(z(x_{})-\hat{z}(x_{i}))^2}}
 [1] 99
 [1] 100</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>df_3<span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x=</span>RMSE_3, <span class="at">y=</span><span class="fu">rep</span>(<span class="st">'c'</span>,k))</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>df<span class="ot">&lt;-</span><span class="fu">rbind</span>(df,df_3)</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>df,<span class="fu">aes</span>(<span class="at">x=</span>x, <span class="at">fill=</span>y))<span class="sc">+</span></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha=</span><span class="fl">0.5</span>)<span class="sc">+</span></span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_discrete</span>(<span class="at">labels=</span><span class="fu">c</span>(<span class="st">'Random, n=50'</span>, <span class="st">'Random, n=100'</span>,<span class="st">'Systematic, n=100'</span>))<span class="sc">+</span></span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">'RMSE (t/ha)'</span>)<span class="sc">+</span><span class="fu">geom_vline</span>(<span class="at">xintercept=</span>RMSE_pop,<span class="at">linewidth=</span><span class="fl">1.5</span>,</span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>                          <span class="at">color =</span><span class="st">'black'</span>, <span class="at">linetype=</span><span class="st">'longdash'</span>)<span class="sc">+</span></span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept=</span><span class="fu">mean</span>(df<span class="sc">$</span>x),<span class="at">linewidth=</span><span class="fl">1.5</span>,</span>
-<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>                       <span class="at">color =</span><span class="st">'black'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>df_3<span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">y=</span>mean_3, <span class="at">x=</span><span class="fu">rep</span>(<span class="st">'c'</span>,k))</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>df<span class="ot">&lt;-</span><span class="fu">rbind</span>(df,df_3)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>df,<span class="fu">aes</span>(<span class="at">x=</span>y, <span class="at">fill=</span>x))<span class="sc">+</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha=</span><span class="fl">0.5</span>)<span class="sc">+</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_discrete</span>(<span class="at">labels=</span><span class="fu">c</span>(<span class="st">'Random, n=100'</span>, <span class="st">'Random, n=200'</span>,<span class="st">'Systematic, n=100'</span>))<span class="sc">+</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">'AGB (t/ha)'</span>)<span class="sc">+</span><span class="fu">geom_vline</span>(<span class="at">xintercept=</span>mean_pop,<span class="at">linewidth=</span><span class="fl">1.5</span>,</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>                          <span class="at">color =</span><span class="st">'black'</span>, <span class="at">linetype=</span><span class="st">'longdash'</span>)<span class="sc">+</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept=</span><span class="fu">mean</span>(df<span class="sc">$</span>y),<span class="at">linewidth=</span><span class="fl">1.5</span>,</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>                       <span class="at">color =</span><span class="st">'black'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="02_ValidationDataCollection_files/figure-html/SystematicSimlation-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="evaluating-the-agb-model" class="level1">
-<h1>Evaluating the AGB-Model</h1>
-<section id="systematic-sample-to-collect-reference-data-for-map-validation" class="level2">
-<h2 class="anchored" data-anchor-id="systematic-sample-to-collect-reference-data-for-map-validation">Systematic sample to collect reference data for map validation</h2>
-<p>To validate the map we use a systematic sample grid. In a real world application we do not know the true population values. Therefore, field work would be needed to collect reference data at the selected sample points. In this workshop we assume that the agp_pop map represents the true value without any errors. Thus, we don’t need to go to field but we can sample the data by extracting the true values from the map at the sample locations.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># we will use n=100 sample plots</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>n<span class="ot">=</span><span class="dv">100</span></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">=</span> sf<span class="sc">::</span><span class="fu">st_sample</span>(np_boundary,<span class="at">size=</span>n,<span class="at">type=</span><span class="st">'regular'</span>)</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>()<span class="sc">+</span><span class="fu">geom_sf</span>(<span class="at">data=</span>np_boundary,<span class="at">fill=</span><span class="cn">NA</span>)<span class="sc">+</span></span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data=</span>p1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="02_ValidationDataCollection_files/figure-html/Sample-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>At each sample point we extract the predicted and observed AGB value.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>obs <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">extract</span>(agb_pop,<span class="fu">vect</span>(p1))</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(obs)<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">'ID'</span>,<span class="st">'obs'</span>)</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>pred <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">extract</span>(agb_model,<span class="fu">vect</span>(p1))</span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(pred)<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">'ID'</span>,<span class="st">'pred'</span>)</span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>validation<span class="ot">&lt;-</span><span class="fu">data.frame</span>(<span class="at">observed=</span>obs<span class="sc">$</span>obs, <span class="at">predicted=</span>pred<span class="sc">$</span>pred)</span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="co"># we need to remove the na values from this dataframe. In real world applications</span></span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="co"># such NA values can,  occur for example at inaccessible field plots.</span></span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>validation<span class="ot">&lt;-</span>validation[<span class="fu">complete.cases</span>(validation),]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</section>
-<section id="assessment-of-the-abg-model-performance" class="level2">
-<h2 class="anchored" data-anchor-id="assessment-of-the-abg-model-performance">Assessment of the ABG-model performance</h2>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>validation,<span class="fu">aes</span>(<span class="at">x=</span>observed, <span class="at">y=</span>predicted))<span class="sc">+</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha=</span><span class="fl">0.5</span>)<span class="sc">+</span></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">'Observed AGB t/ha'</span>)<span class="sc">+</span><span class="fu">ylab</span>(<span class="st">'Predicted AGB t/ha'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="02_ValidationDataCollection_files/figure-html/Collect Values-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<section id="sample-rmse" class="level3">
-<h3 class="anchored" data-anchor-id="sample-rmse">Sample RMSE</h3>
-<p>Again we can use the RMSE to express the mean difference between observed and predicted AGB.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>RMSE_sample <span class="ot">=</span> <span class="fu">sqrt</span>(<span class="fu">sum</span>((validation<span class="sc">$</span>observed<span class="sc">-</span>validation<span class="sc">$</span>predicted)<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span><span class="fu">nrow</span>(validation))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>The sample RMSE is 38.89* t/ha. To better compare the values between different target variables and models is can also express as a proportion relative to the mean value of the predictions.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>rRMSE <span class="ot">=</span> RMSE_sample<span class="sc">/</span><span class="fu">mean</span>(validation<span class="sc">$</span>predicted)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>On average we expect that the AGB estimate of our model has an error of 24.1 %.</p>
-</section>
-<section id="error-distribution" class="level3">
-<h3 class="anchored" data-anchor-id="error-distribution">Error distribution</h3>
-<p>But is this RMSE valid for the entire range of the observed values or do we expect higher errors for higher AGB values?</p>
-<p>To see how the model performs over target value range we can use the following analysis plots.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>validation<span class="sc">$</span>resid<span class="ot">&lt;-</span>validation<span class="sc">$</span>observed<span class="sc">-</span>validation<span class="sc">$</span>predicted</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>p1<span class="ot">&lt;-</span><span class="fu">ggplot</span>(<span class="at">data=</span>validation,<span class="fu">aes</span>(<span class="at">x=</span>observed, <span class="at">y=</span>predicted))<span class="sc">+</span></span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha=</span><span class="fl">0.5</span>)<span class="sc">+</span></span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">'Observed AGB t/ha'</span>)<span class="sc">+</span><span class="fu">ylab</span>(<span class="st">'Predicted AGB t/ha'</span>)<span class="sc">+</span></span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="dv">0</span>,<span class="dv">250</span>)<span class="sc">+</span><span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">250</span>)<span class="sc">+</span></span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">slope=</span><span class="dv">1</span>,<span class="at">intercept =</span> <span class="dv">0</span>)<span class="sc">+</span></span>
-<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun.data=</span> mean_cl_normal) <span class="sc">+</span> </span>
-<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">'lm'</span>)</span>
-<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>p2<span class="ot">&lt;-</span><span class="fu">ggplot</span>(<span class="at">data=</span>validation,<span class="fu">aes</span>(<span class="at">x=</span>observed, <span class="at">y=</span>resid))<span class="sc">+</span></span>
-<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha=</span><span class="fl">0.5</span>)<span class="sc">+</span></span>
-<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">'Observed AGB t/ha'</span>)<span class="sc">+</span><span class="fu">ylab</span>(<span class="st">'Residuals'</span>)<span class="sc">+</span></span>
-<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="dv">0</span>,<span class="dv">250</span>)<span class="sc">+</span><span class="fu">ylim</span>(<span class="sc">-</span><span class="dv">50</span>,<span class="sc">+</span><span class="dv">50</span>)<span class="sc">+</span></span>
-<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">slope=</span><span class="dv">0</span>,<span class="at">intercept =</span> <span class="dv">1</span>)</span>
-<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a>p3<span class="ot">&lt;-</span><span class="fu">ggplot</span>(<span class="at">data=</span>validation,<span class="fu">aes</span>(<span class="at">x=</span>resid))<span class="sc">+</span></span>
-<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y=</span>..density..),<span class="at">fill=</span><span class="st">'grey'</span>,<span class="at">binwidth=</span><span class="dv">10</span>)<span class="sc">+</span></span>
-<span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">'Observed AGB t/ha'</span>)<span class="sc">+</span><span class="fu">ylab</span>(<span class="st">'Density'</span>)<span class="sc">+</span></span>
-<span id="cb28-22"><a href="#cb28-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="sc">-</span><span class="dv">150</span>,<span class="dv">150</span>)<span class="sc">+</span></span>
-<span id="cb28-23"><a href="#cb28-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_function</span>(<span class="at">fun =</span> dnorm, <span class="at">geom=</span><span class="st">"polygon"</span>,<span class="at">args =</span> <span class="fu">list</span>(<span class="at">mean =</span> <span class="fu">mean</span>(validation<span class="sc">$</span>resid), <span class="at">sd =</span> <span class="fu">sd</span>(validation<span class="sc">$</span>resid)),<span class="at">color=</span><span class="st">'blue'</span>,<span class="at">alpha=</span><span class="fl">0.4</span>,<span class="at">fill=</span><span class="st">'blue'</span>)<span class="sc">+</span></span>
-<span id="cb28-24"><a href="#cb28-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept=</span><span class="dv">0</span>,<span class="at">color=</span><span class="st">'blue'</span>)<span class="sc">+</span></span>
-<span id="cb28-25"><a href="#cb28-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept=</span><span class="fu">mean</span>(validation<span class="sc">$</span>resid),<span class="at">color=</span><span class="st">'red'</span>)</span>
-<span id="cb28-26"><a href="#cb28-26" aria-hidden="true" tabindex="-1"></a>p1<span class="sc">+</span>p2<span class="sc">+</span>p3<span class="sc">+</span><span class="fu">plot_layout</span>(<span class="at">ncol=</span><span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: Removed 1 row containing non-finite outside the scale range
-(`stat_summary()`).</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: Computation failed in `stat_summary()`.
-Caused by error in `fun.data()`:
-! The package "Hmisc" is required.</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: Removed 1 row containing non-finite outside the scale range
-(`stat_smooth()`).</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: Removed 1 row containing missing values or values outside the scale range
-(`geom_point()`).</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: Removed 18 rows containing missing values or values outside the scale range
-(`geom_point()`).</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: The dot-dot notation (`..density..`) was deprecated in ggplot2 3.4.0.
-ℹ Please use `after_stat(density)` instead.</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: Removed 2 rows containing missing values or values outside the scale range
-(`geom_bar()`).</code></pre>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="02_ValidationDataCollection_files/figure-html/Model-Performance-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="01_Design_based_sampling_files/figure-html/SystematicSimlation-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 
 
-</section>
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -1582,11 +1494,11 @@ Caused by error in `fun.data()`:
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../block1_magdon/01_TrainingDataCollection.html" class="pagination-link" aria-label="Collection of training data for remote sensing modelling based on spectral variability">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Collection of training data for remote sensing modelling based on spectral variability</span>
-      </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="../block1_magdon/02_TrainingDataCollection.html" class="pagination-link" aria-label="Collection of training data for remote sensing based modelling">
+        <span class="nav-page-text">Collection of training data for remote sensing based modelling</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->
@@ -1597,7 +1509,7 @@ Caused by error in `fun.data()`:
     </div>   
     <div class="nav-footer-center">
 <p>Earth Observation Network Harz Summer School (2026)</p>
-<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/earth-observation-network/EON2026/edit/main/block1_magdon/02_ValidationDataCollection.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/earth-observation-network/EON2026/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/earth-observation-network/EON2026/edit/main/block1_magdon/01_Design_based_sampling.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/earth-observation-network/EON2026/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>

@@ -198,80 +198,102 @@
     ]
   },
   {
-    "objectID": "block1_magdon/01_TrainingDataCollection.html",
-    "href": "block1_magdon/01_TrainingDataCollection.html",
+    "objectID": "block1_magdon/01_Design_based_sampling.html",
+    "href": "block1_magdon/01_Design_based_sampling.html",
+    "title": "Design-based sampling in a Nutshell",
+    "section": "",
+    "text": "rm(list=ls())\nlibrary(sf)\nlibrary(terra)\nlibrary(ggplot2)\nlibrary(rprojroot)\n\ndata_dir=paste0(find_rstudio_root_file(),\"/block1_magdon/data/\")",
+    "crumbs": [
+      "Block 1: Introduction to forest monitoring",
+      "Design-based sampling in a Nutshell"
+    ]
+  },
+  {
+    "objectID": "block1_magdon/01_Design_based_sampling.html#srs-estimators",
+    "href": "block1_magdon/01_Design_based_sampling.html#srs-estimators",
+    "title": "Design-based sampling in a Nutshell",
+    "section": "SRS-Estimators",
+    "text": "SRS-Estimators\nDepending on the sampling design (the way we select samples) the correct estimators need to be used to provide unbiased and precise estimates. The most simple estimators assume a pure random selection of samples -&gt; Simple Random Sampling (SRS).\nWe can estimate the mean value \\(\\bar{y}\\) as:\n\\[\n\\bar{y} = \\frac{\\sum_{i=1}^n{y_i}}{n}\n\\]\nand the standard deviation \\(s\\) as:\n\\[\n{s} =\\sqrt{\\frac{\\sum_{i=1}^n{(y_i-\\bar{y}})^2}{n-1}}\n\\]",
+    "crumbs": [
+      "Block 1: Introduction to forest monitoring",
+      "Design-based sampling in a Nutshell"
+    ]
+  },
+  {
+    "objectID": "block1_magdon/01_Design_based_sampling.html#collect-a-random-sample",
+    "href": "block1_magdon/01_Design_based_sampling.html#collect-a-random-sample",
+    "title": "Design-based sampling in a Nutshell",
+    "section": "Collect a random sample",
+    "text": "Collect a random sample\nTo estimate the mean above ground in the National Park Harz, we start with a simple random sample. As common in forest inventories, we assume that our population is the infinite number of dimensionless points within the boundaries of the NP. Thus, for the sampling, random points are chosen. We start with a random sample with \\(n=100\\) sample points.\n\nn=100\n\n# Create n random points inside the boundary of the NP as a sample\np1 = sf::st_sample(np_boundary,size=n)\n\n# Plot the samples on the map\nggplot()+geom_sf(data=np_boundary,fill=NA)+\n  geom_sf(data=p1)\n\n\n\n\n\n\n\n\nFor our simulation study, we can now extract the true AGB observations at each sample location from the map and calculate the mean across all sample points. In a real forest monitoring project, however, this is not possible. Instead, you would have to visit each selected point in the field and manually record the observations.\n\n# Extract population and modelled values at sample locations\n\nsample &lt;- terra::extract((agb_pop),vect(p1))\nnames(sample)&lt;-c('ID','AGB')\n\nmean_est &lt;- mean(sample$AGB,na.rm=T)\nsd_est &lt;- sd(sample$AGB,na.rm=T)\n\nUsing the random sample we estimate the mean values \\(\\bar{y}\\) as 166.65 and the standard deviation \\(s\\)§ as \\(\\bar{y}\\) as 52.49.\n\n\n\n\n\\(\\bar{y}\\) (t/ha)\n\\(\\mu\\)(t/ha)\n\n\n\n\n166.65\n163.98\n\n\n\n\nAt this point, we cannot yet tell whether our estimate is unbiased. In other words: Is this result just due to chance, or would we obtain a similar estimate if we repeated the sampling with a different set of random points?",
+    "crumbs": [
+      "Block 1: Introduction to forest monitoring",
+      "Design-based sampling in a Nutshell"
+    ]
+  },
+  {
+    "objectID": "block1_magdon/01_Design_based_sampling.html#estimate-mean-values",
+    "href": "block1_magdon/01_Design_based_sampling.html#estimate-mean-values",
+    "title": "Design-based sampling in a Nutshell",
+    "section": "Estimate mean values",
+    "text": "Estimate mean values\nTo check if our sample based estimates are unbiased we can run a small simulation and repeat the sampling \\(k\\) times.\n\n\n[1] 1\n[1] 2\n[1] 3\n[1] 4\n[1] 5\n[1] 6\n[1] 7\n[1] 8\n[1] 9\n[1] 10\n[1] 11\n[1] 12\n[1] 13\n[1] 14\n[1] 15\n[1] 16\n[1] 17\n[1] 18\n[1] 19\n[1] 20\n[1] 21\n[1] 22\n[1] 23\n[1] 24\n[1] 25\n[1] 26\n[1] 27\n[1] 28\n[1] 29\n[1] 30\n[1] 31\n[1] 32\n[1] 33\n[1] 34\n[1] 35\n[1] 36\n[1] 37\n[1] 38\n[1] 39\n[1] 40\n[1] 41\n[1] 42\n[1] 43\n[1] 44\n[1] 45\n[1] 46\n[1] 47\n[1] 48\n[1] 49\n[1] 50\n[1] 51\n[1] 52\n[1] 53\n[1] 54\n[1] 55\n[1] 56\n[1] 57\n[1] 58\n[1] 59\n[1] 60\n[1] 61\n[1] 62\n[1] 63\n[1] 64\n[1] 65\n[1] 66\n[1] 67\n[1] 68\n[1] 69\n[1] 70\n[1] 71\n[1] 72\n[1] 73\n[1] 74\n[1] 75\n[1] 76\n[1] 77\n[1] 78\n[1] 79\n[1] 80\n[1] 81\n[1] 82\n[1] 83\n[1] 84\n[1] 85\n[1] 86\n[1] 87\n[1] 88\n[1] 89\n[1] 90\n[1] 91\n[1] 92\n[1] 93\n[1] 94\n[1] 95\n[1] 96\n[1] 97\n[1] 98\n[1] 99\n[1] 100\n\n\n\n\n\n\n\n\n\nThe simulation shows two important aspects of SRS-Sampling:\n1.) the true mean (\\(\\mu\\)) and the estimated mean (\\(\\bar{y}\\)) of the \\(k\\) simulation runs are almost equal. Thus, we have shown that the SRS-Estimator is unbiased!\n2.) the distribution of the mean estimates over the \\(k=100\\) simulation runs approximates a normal distribution",
+    "crumbs": [
+      "Block 1: Introduction to forest monitoring",
+      "Design-based sampling in a Nutshell"
+    ]
+  },
+  {
+    "objectID": "block1_magdon/01_Design_based_sampling.html#precision-of-estimates",
+    "href": "block1_magdon/01_Design_based_sampling.html#precision-of-estimates",
+    "title": "Design-based sampling in a Nutshell",
+    "section": "Precision of estimates",
+    "text": "Precision of estimates\nThe figure above shows that the estimates from samples with n=100 points vary considerably. Most estimates are close to the true population mean, but some deviate substantially—for example, values around 180 t/ha. We would expect that a sampling method producing estimates with little variation is more precise than one producing highly variable estimates. When we express the variation of the estimated means as a standard deviation, we obtain what is called the standard error \\(S\\) —a key statistic for assessing the precision of an estimate.\nFor the mean value we can express the standard error of the mean \\(S_\\bar{y}\\) as:\n\\[\nS_\\bar{y} = \\frac{S}{\\sqrt{n}}\n\\]\nBut how does the sample size \\(n\\) affects the precision?\n\n\n[1] 1\n[1] 2\n[1] 3\n[1] 4\n[1] 5\n[1] 6\n[1] 7\n[1] 8\n[1] 9\n[1] 10\n[1] 11\n[1] 12\n[1] 13\n[1] 14\n[1] 15\n[1] 16\n[1] 17\n[1] 18\n[1] 19\n[1] 20\n[1] 21\n[1] 22\n[1] 23\n[1] 24\n[1] 25\n[1] 26\n[1] 27\n[1] 28\n[1] 29\n[1] 30\n[1] 31\n[1] 32\n[1] 33\n[1] 34\n[1] 35\n[1] 36\n[1] 37\n[1] 38\n[1] 39\n[1] 40\n[1] 41\n[1] 42\n[1] 43\n[1] 44\n[1] 45\n[1] 46\n[1] 47\n[1] 48\n[1] 49\n[1] 50\n[1] 51\n[1] 52\n[1] 53\n[1] 54\n[1] 55\n[1] 56\n[1] 57\n[1] 58\n[1] 59\n[1] 60\n[1] 61\n[1] 62\n[1] 63\n[1] 64\n[1] 65\n[1] 66\n[1] 67\n[1] 68\n[1] 69\n[1] 70\n[1] 71\n[1] 72\n[1] 73\n[1] 74\n[1] 75\n[1] 76\n[1] 77\n[1] 78\n[1] 79\n[1] 80\n[1] 81\n[1] 82\n[1] 83\n[1] 84\n[1] 85\n[1] 86\n[1] 87\n[1] 88\n[1] 89\n[1] 90\n[1] 91\n[1] 92\n[1] 93\n[1] 94\n[1] 95\n[1] 96\n[1] 97\n[1] 98\n[1] 99\n[1] 100\n\n\n\n\n\n\n\n\n\nWe see that the precision of the estimates is increased when we use more samples.\nHow much did the uncertainty decrease when we increase the sample size from \\(n=100\\) to \\(n=200\\)?\n\nsd(mean)/sd(mean_2)\n\n[1] 1.3079",
+    "crumbs": [
+      "Block 1: Introduction to forest monitoring",
+      "Design-based sampling in a Nutshell"
+    ]
+  },
+  {
+    "objectID": "block1_magdon/02_TrainingDataCollection.html",
+    "href": "block1_magdon/02_TrainingDataCollection.html",
     "title": "Collection of training data for remote sensing modelling based on spectral variability",
     "section": "",
-    "text": "#install.packages(\"devtools\")\n#devtools::install_github(\"bleutner/RStoolbox\")\nlibrary(sf)\n\nLinking to GEOS 3.14.1, GDAL 3.12.1, PROJ 9.7.1; sf_use_s2() is TRUE\n\nlibrary(RStoolbox)\n\nThis is version 1.0.2.1 of RStoolbox\n\nlibrary(terra)\n\nterra 1.9.27\n\nlibrary(ggplot2)\nlibrary(mapview)\nlibrary(kableExtra)\nlibrary(dplyr)\n\n\nAttache Paket: 'dplyr'\n\n\nDas folgende Objekt ist maskiert 'package:kableExtra':\n\n    group_rows\n\n\nDie folgenden Objekte sind maskiert von 'package:terra':\n\n    intersect, union\n\n\nDie folgenden Objekte sind maskiert von 'package:stats':\n\n    filter, lag\n\n\nDie folgenden Objekte sind maskiert von 'package:base':\n\n    intersect, setdiff, setequal, union\n\nlibrary(rprojroot)\nlibrary(patchwork)\n\n\nAttache Paket: 'patchwork'\n\n\nDas folgende Objekt ist maskiert 'package:terra':\n\n    area\n\nlibrary(rmarkdown)\nlibrary(tidyr)\n\n\nAttache Paket: 'tidyr'\n\n\nDas folgende Objekt ist maskiert 'package:terra':\n\n    extract\n\nlibrary(tibble)",
+    "text": "#install.packages(\"devtools\")\n#devtools::install_github(\"bleutner/RStoolbox\")\nrm(list=ls())\nlibrary(sf)\n\nWarning: Paket 'sf' wurde unter R Version 4.5.3 erstellt\n\n\nLinking to GEOS 3.14.1, GDAL 3.12.1, PROJ 9.7.1; sf_use_s2() is TRUE\n\nlibrary(RStoolbox)\n\nWarning: Paket 'RStoolbox' wurde unter R Version 4.5.3 erstellt\n\n\nThis is version 1.0.2.3 of RStoolbox\n\nlibrary(terra)\n\nWarning: Paket 'terra' wurde unter R Version 4.5.3 erstellt\n\n\nterra 1.9.46\n\nlibrary(ggplot2)\n\nWarning: Paket 'ggplot2' wurde unter R Version 4.5.3 erstellt\n\nlibrary(mapview)\n\nWarning: Paket 'mapview' wurde unter R Version 4.5.3 erstellt\n\nlibrary(kableExtra)\n\nWarning: Paket 'kableExtra' wurde unter R Version 4.5.3 erstellt\n\nlibrary(dplyr)\n\nWarning: Paket 'dplyr' wurde unter R Version 4.5.3 erstellt\n\n\n\nAttache Paket: 'dplyr'\n\n\nDas folgende Objekt ist maskiert 'package:kableExtra':\n\n    group_rows\n\n\nDie folgenden Objekte sind maskiert von 'package:terra':\n\n    intersect, union\n\n\nDie folgenden Objekte sind maskiert von 'package:stats':\n\n    filter, lag\n\n\nDie folgenden Objekte sind maskiert von 'package:base':\n\n    intersect, setdiff, setequal, union\n\nlibrary(rprojroot)\n\nWarning: Paket 'rprojroot' wurde unter R Version 4.5.3 erstellt\n\nlibrary(patchwork)\n\nWarning: Paket 'patchwork' wurde unter R Version 4.5.3 erstellt\n\n\n\nAttache Paket: 'patchwork'\n\n\nDas folgende Objekt ist maskiert 'package:terra':\n\n    area\n\nlibrary(rmarkdown)\n\nWarning: Paket 'rmarkdown' wurde unter R Version 4.5.3 erstellt\n\nlibrary(tidyr)\n\nWarning: Paket 'tidyr' wurde unter R Version 4.5.3 erstellt\n\n\n\nAttache Paket: 'tidyr'\n\n\nDas folgende Objekt ist maskiert 'package:terra':\n\n    extract\n\nlibrary(tibble)\n\nWarning: Paket 'tibble' wurde unter R Version 4.5.3 erstellt",
     "crumbs": [
       "Block 1: Introduction to forest monitoring",
-      "Collection of training data for remote sensing modelling based on spectral variability"
+      "Collection of training data for remote sensing based modelling"
     ]
   },
   {
-    "objectID": "block1_magdon/01_TrainingDataCollection.html#dimension-reduction-pca",
-    "href": "block1_magdon/01_TrainingDataCollection.html#dimension-reduction-pca",
+    "objectID": "block1_magdon/02_TrainingDataCollection.html#dimension-reduction-pca",
+    "href": "block1_magdon/02_TrainingDataCollection.html#dimension-reduction-pca",
     "title": "Collection of training data for remote sensing modelling based on spectral variability",
     "section": "Dimension reduction (PCA)",
-    "text": "Dimension reduction (PCA)\nIn a fist step we reduce the dimensions of the 9 Sentinel-2 bands while maintaining most of the information, using a principal component analysis (PCA).\n\n# Calculation of the principlal components using the RStoolbox\npca&lt;-RStoolbox::rasterPCA(s2,nSamples = 5000, spca=TRUE )\n\n\n|---------|---------|---------|---------|\n=========================================\n                                          \n\n# Extracting the first three components\nrgb_raster &lt;- subset(pca$map, 1:3)\n\n# Function to scale the pixel values to 0-255\nscale_fun &lt;- function(x) {\n  # Calculation of the 2% and 98% quantile\n  q &lt;- quantile(x, c(0.02, 0.98), na.rm = TRUE)\n  \n  # scaling the values\n  x &lt;- (x - q[1]) / (q[2] - q[1]) * 255\n  \n  # restrict the values to 0-255\n  x &lt;- pmin(pmax(x, 0), 255)\n  \n  return(x)\n}\n\n# Scaling of each band\nfor (i in 1:3) {\n  rgb_raster[[i]] &lt;- app(rgb_raster[[i]], scale_fun)\n}\n\n# Plot the first three principal components as RGB\nplotRGB(rgb_raster, r = 1, g = 2, b = 3)\n\n\n\n\n\n\n\n# Show importance of componentes\nsummary(pca$model)\n\nImportance of components:\n                          Comp.1    Comp.2     Comp.3     Comp.4      Comp.5\nStandard deviation     2.2424019 1.8046829 0.66521635 0.37592788 0.257199799\nProportion of Variance 0.5587074 0.3618756 0.04916809 0.01570242 0.007350193\nCumulative Proportion  0.5587074 0.9205830 0.96975107 0.98545349 0.992803681\n                            Comp.6      Comp.7       Comp.8       Comp.9\nStandard deviation     0.171975139 0.156793925 0.0816838142 0.0627283170\nProportion of Variance 0.003286161 0.002731593 0.0007413606 0.0004372046\nCumulative Proportion  0.996089842 0.998821435 0.9995627954 1.0000000000\n\n\nFrom the output of the PCA we see that we can capture 92% of the variability with the first two components. Thus we will only use the PC1 and PC2 for the subsequent analysis.",
+    "text": "Dimension reduction (PCA)\nIn a fist step we reduce the dimensions of the 9 Sentinel-2 bands while maintaining most of the information, using a principal component analysis (PCA).\n\n# Calculation of the principlal components using the RStoolbox\npca&lt;-RStoolbox::rasterPCA(s2,nSamples = 5000, spca=TRUE )\n\n\n|---------|---------|---------|---------|\n=========================================\n                                          \n\n# Extracting the first three components\nrgb_raster &lt;- subset(pca$map, 1:3)\n\n# Function to scale the pixel values to 0-255\nscale_fun &lt;- function(x) {\n  # Calculation of the 2% and 98% quantile\n  q &lt;- quantile(x, c(0.02, 0.98), na.rm = TRUE)\n  \n  # scaling the values\n  x &lt;- (x - q[1]) / (q[2] - q[1]) * 255\n  \n  # restrict the values to 0-255\n  x &lt;- pmin(pmax(x, 0), 255)\n  \n  return(x)\n}\n\n# Scaling of each band\nfor (i in 1:3) {\n  rgb_raster[[i]] &lt;- app(rgb_raster[[i]], scale_fun)\n}\n\n# Plot the first three principal components as RGB\nplotRGB(rgb_raster, r = 1, g = 2, b = 3)\n\n\n\n\n\n\n\n# Show importance of componentes\nsummary(pca$model)\n\nImportance of components:\n                          Comp.1    Comp.2     Comp.3    Comp.4     Comp.5\nStandard deviation     2.2412546 1.8018943 0.67425744 0.3711219 0.26391425\nProportion of Variance 0.5581358 0.3607581 0.05051368 0.0153035 0.00773897\nCumulative Proportion  0.5581358 0.9188939 0.96940759 0.9847111 0.99245005\n                            Comp.6      Comp.7       Comp.8       Comp.9\nStandard deviation     0.175123529 0.163155072 0.0810277070 0.0640014828\nProportion of Variance 0.003407583 0.002957731 0.0007294988 0.0004551322\nCumulative Proportion  0.995857638 0.998815369 0.9995448678 1.0000000000\n\n\nFrom the output of the PCA we see that we can capture 92% of the variability with the first two components. Thus we will only use the PC1 and PC2 for the subsequent analysis.",
     "crumbs": [
       "Block 1: Introduction to forest monitoring",
-      "Collection of training data for remote sensing modelling based on spectral variability"
+      "Collection of training data for remote sensing based modelling"
     ]
   },
   {
-    "objectID": "block1_magdon/01_TrainingDataCollection.html#unsupervised-clustering",
-    "href": "block1_magdon/01_TrainingDataCollection.html#unsupervised-clustering",
+    "objectID": "block1_magdon/02_TrainingDataCollection.html#unsupervised-clustering",
+    "href": "block1_magdon/02_TrainingDataCollection.html#unsupervised-clustering",
     "title": "Collection of training data for remote sensing modelling based on spectral variability",
     "section": "Unsupervised clustering",
     "text": "Unsupervised clustering\nIn the next step we run an unsupervised classification of the PC1 and PC2 to get a clustered map. For the unsupervised classification we need to take a decision on the number of classes/clusters to be created. Here we will take \\(n=5\\) classes. However, depending on the target variable this value need to be adjusted.\n\nset.seed(2222)\ncluster &lt;- RStoolbox::unsuperClass(pca$map[[c('PC1','PC2')]], nSamples = 100, nClasses = 5, nStarts = 5)\n\n\n## Plots\ncolors &lt;- rainbow(5)\nplot(cluster$map, col = colors, legend = TRUE, axes = TRUE, box =TRUE)\n\n\n\n\n\n\n\n\nThe map shows a clear spatial patterns related to the elevation, tree species and vitality status of the National Park forests.",
     "crumbs": [
       "Block 1: Introduction to forest monitoring",
-      "Collection of training data for remote sensing modelling based on spectral variability"
+      "Collection of training data for remote sensing based modelling"
     ]
   },
   {
-    "objectID": "block1_magdon/01_TrainingDataCollection.html#implement-a-plot-design",
-    "href": "block1_magdon/01_TrainingDataCollection.html#implement-a-plot-design",
+    "objectID": "block1_magdon/02_TrainingDataCollection.html#implement-a-plot-design",
+    "href": "block1_magdon/02_TrainingDataCollection.html#implement-a-plot-design",
     "title": "Collection of training data for remote sensing modelling based on spectral variability",
     "section": "Implement a plot design",
     "text": "Implement a plot design\nTo extract pixel values for the sample location we need to define a plot design. For this exercise we will simulate a circular fixed area plot with a radius of 13 m.\n\n# Create a training by extracting the mean value of all pixels touching\n# a buffered area with 13m around the plot center\n\nplots &lt;- sf::st_buffer(sf_samples,dist = 13)\ntrain&lt;-terra::extract(s2,plots,fun='mean',bind=FALSE,na.rm=TRUE)\n\nplots &lt;- plots %&gt;% mutate(ID=row_number())\ntrain &lt;- plots %&gt;% left_join(train, by= \"ID\")\nmapview::mapview(train, zcol=\"class_unsupervised\",\n        map.types = c(\"Esri.WorldShadedRelief\", \"OpenStreetMap.DE\"))+\n  mapview(np_boundary,alpha.regions = 0.2, aplha = 1)",
     "crumbs": [
       "Block 1: Introduction to forest monitoring",
-      "Collection of training data for remote sensing modelling based on spectral variability"
-    ]
-  },
-  {
-    "objectID": "block1_magdon/02_ValidationDataCollection.html",
-    "href": "block1_magdon/02_ValidationDataCollection.html",
-    "title": "Validation of continuous maps using design-based sampling methods",
-    "section": "",
-    "text": "rm(list=ls())\nlibrary(sf)\n\nLinking to GEOS 3.14.1, GDAL 3.12.1, PROJ 9.7.1; sf_use_s2() is TRUE\n\nlibrary(terra)\n\nterra 1.9.27\n\nlibrary(ggplot2)\nlibrary(rprojroot)\nlibrary(patchwork)\n\n\nAttache Paket: 'patchwork'\n\n\nDas folgende Objekt ist maskiert 'package:terra':\n\n    area\n\ndata_dir=paste0(find_rstudio_root_file(),\"/block1_magdon/data/\")",
-    "crumbs": [
-      "Block 1: Introduction to forest monitoring",
-      "Validation of continuous maps using design-based sampling methods"
-    ]
-  },
-  {
-    "objectID": "block1_magdon/02_ValidationDataCollection.html#systematic-sample-to-collect-reference-data-for-map-validation",
-    "href": "block1_magdon/02_ValidationDataCollection.html#systematic-sample-to-collect-reference-data-for-map-validation",
-    "title": "Validation of continuous maps using design-based sampling methods",
-    "section": "Systematic sample to collect reference data for map validation",
-    "text": "Systematic sample to collect reference data for map validation\nTo validate the map we use a systematic sample grid. In a real world application we do not know the true population values. Therefore, field work would be needed to collect reference data at the selected sample points. In this workshop we assume that the agp_pop map represents the true value without any errors. Thus, we don’t need to go to field but we can sample the data by extracting the true values from the map at the sample locations.\n\n# we will use n=100 sample plots\nn=100\np1 = sf::st_sample(np_boundary,size=n,type='regular')\n\nggplot()+geom_sf(data=np_boundary,fill=NA)+\n  geom_sf(data=p1)\n\n\n\n\n\n\n\n\nAt each sample point we extract the predicted and observed AGB value.\n\nobs &lt;- terra::extract(agb_pop,vect(p1))\nnames(obs)&lt;-c('ID','obs')\n\npred &lt;- terra::extract(agb_model,vect(p1))\nnames(pred)&lt;-c('ID','pred')\nvalidation&lt;-data.frame(observed=obs$obs, predicted=pred$pred)\n\n# we need to remove the na values from this dataframe. In real world applications\n# such NA values can,  occur for example at inaccessible field plots.\n\nvalidation&lt;-validation[complete.cases(validation),]",
-    "crumbs": [
-      "Block 1: Introduction to forest monitoring",
-      "Validation of continuous maps using design-based sampling methods"
-    ]
-  },
-  {
-    "objectID": "block1_magdon/02_ValidationDataCollection.html#assessment-of-the-abg-model-performance",
-    "href": "block1_magdon/02_ValidationDataCollection.html#assessment-of-the-abg-model-performance",
-    "title": "Validation of continuous maps using design-based sampling methods",
-    "section": "Assessment of the ABG-model performance",
-    "text": "Assessment of the ABG-model performance\n\nggplot(data=validation,aes(x=observed, y=predicted))+\n  geom_point(alpha=0.5)+\n  xlab('Observed AGB t/ha')+ylab('Predicted AGB t/ha')\n\n\n\n\n\n\n\n\n\nSample RMSE\nAgain we can use the RMSE to express the mean difference between observed and predicted AGB.\n\nRMSE_sample = sqrt(sum((validation$observed-validation$predicted)^2)/nrow(validation))\n\nThe sample RMSE is 38.89* t/ha. To better compare the values between different target variables and models is can also express as a proportion relative to the mean value of the predictions.\n\nrRMSE = RMSE_sample/mean(validation$predicted)\n\nOn average we expect that the AGB estimate of our model has an error of 24.1 %.\n\n\nError distribution\nBut is this RMSE valid for the entire range of the observed values or do we expect higher errors for higher AGB values?\nTo see how the model performs over target value range we can use the following analysis plots.\n\nvalidation$resid&lt;-validation$observed-validation$predicted\n\np1&lt;-ggplot(data=validation,aes(x=observed, y=predicted))+\n  geom_point(alpha=0.5)+\n  xlab('Observed AGB t/ha')+ylab('Predicted AGB t/ha')+\n  xlim(0,250)+ylim(0,250)+\n  geom_abline(slope=1,intercept = 0)+\n  stat_summary(fun.data= mean_cl_normal) + \n  geom_smooth(method='lm')\n\n\n\np2&lt;-ggplot(data=validation,aes(x=observed, y=resid))+\n  geom_point(alpha=0.5)+\n  xlab('Observed AGB t/ha')+ylab('Residuals')+\n  xlim(0,250)+ylim(-50,+50)+\n  geom_abline(slope=0,intercept = 1)\n\np3&lt;-ggplot(data=validation,aes(x=resid))+\n  geom_histogram(aes(y=..density..),fill='grey',binwidth=10)+\n  xlab('Observed AGB t/ha')+ylab('Density')+\n  xlim(-150,150)+\n  stat_function(fun = dnorm, geom=\"polygon\",args = list(mean = mean(validation$resid), sd = sd(validation$resid)),color='blue',alpha=0.4,fill='blue')+\n  geom_vline(xintercept=0,color='blue')+\n  geom_vline(xintercept=mean(validation$resid),color='red')\np1+p2+p3+plot_layout(ncol=3)\n\nWarning: Removed 1 row containing non-finite outside the scale range\n(`stat_summary()`).\n\n\nWarning: Computation failed in `stat_summary()`.\nCaused by error in `fun.data()`:\n! The package \"Hmisc\" is required.\n\n\n`geom_smooth()` using formula = 'y ~ x'\n\n\nWarning: Removed 1 row containing non-finite outside the scale range\n(`stat_smooth()`).\n\n\nWarning: Removed 1 row containing missing values or values outside the scale range\n(`geom_point()`).\n\n\nWarning: Removed 18 rows containing missing values or values outside the scale range\n(`geom_point()`).\n\n\nWarning: The dot-dot notation (`..density..`) was deprecated in ggplot2 3.4.0.\nℹ Please use `after_stat(density)` instead.\n\n\nWarning: Removed 2 rows containing missing values or values outside the scale range\n(`geom_bar()`).",
-    "crumbs": [
-      "Block 1: Introduction to forest monitoring",
-      "Validation of continuous maps using design-based sampling methods"
+      "Collection of training data for remote sensing based modelling"
     ]
   },
   {
