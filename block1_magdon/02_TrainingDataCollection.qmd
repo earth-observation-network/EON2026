@@ -10,7 +10,7 @@ editor:
     wrap: 72
 ---
 
-```{r setup}
+```{r setup, warning=F, message=FALSE}
 
 #install.packages("devtools")
 #devtools::install_github("bleutner/RStoolbox")
@@ -49,7 +49,7 @@ data_dir=paste0(find_rstudio_root_file(),"/block1_magdon/data/")
 # Import the boundary of the national park as sf object
 np_boundary = st_transform(
                           st_read(
-                            paste0(data_dir,"nlp-harz_aussengrenze.gpkg")),
+                            paste0(data_dir,"nlp-harz_aussengrenze.gpkg"),quiet = T),
                           25832)
 
 # Import the S2-Satellite image as terra object
@@ -117,7 +117,7 @@ analysis (PCA).
 
 ```{r pca}
 
-# Calculation of the principlal components using the RStoolbox
+# Calculation of the principal components using the RStoolbox
 pca<-RStoolbox::rasterPCA(s2,nSamples = 5000, spca=TRUE )
 
 
