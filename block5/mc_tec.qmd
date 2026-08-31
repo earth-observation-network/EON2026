@@ -1,0 +1,59 @@
+---
+title: "Microclimate Sensors"
+subtitle: "Tutorial: EON Summer School 2026"
+author: Chris Reudenbach, Philipps University Marburg (PUM)
+date: "2026-08-30"
+#comments: false
+
+image: ../images/froggit_1.jpg
+about:
+  id: image-heading
+  template: solana
+  image-shape: round
+  image-width: 10em
+  links:
+    - icon: shop-window
+      text: Froggit shop [DE]
+      href: https://www.froggit.de/?cat=c40_Raumklima-und-Luftqualitaet---IP-Wettersysteme-dp-serie.html
+    - icon: shop-window
+      text: Ecowitt shop [US]
+      href: https://shop.ecowitt.com/collections/wifi-sensor
+    - icon: building-gear
+      text: Fine Offset
+      href: https://www.foshk.com/
+---
+
+
+::: {#image-heading}
+The sensors from `Fine Offset` are re-branded and partly modified by the resellers. This article deals with sensors from the german re-seller `froggit` and the US re-seller `ecowitt`. More precise the [DP-/GW SmartHubs](https://www.foshk.com/Wifi_Weather_Station/GW1100.html) WiFi Gateway with temperature, humidity & Pressure which is developed by fine offset. The unique selling point of the LoRa-Wifi gateway is the extraordinarily extensive possibility of connecting radio-bound sensors.
+:::
+
+# Features
+
+Currently, depending on the gateway, a maximum of 8 sensors of the following types can be connected at the same time:
+
+-   [DP150/WN51](https://www.froggit.de/media/products/DP150_BDA_EN.pdf) soil temperature sensors,
+-   [DP50/WH31](https://www.froggit.de/media/products/DP50_BDA(DE).pdf) multi channel temperature and humidity sensors
+-   [WN34](https://osswww.ecowitt.net/uploads/20220803/WN34S%20WN34L%20Manual.pdf) wire probe thermometer
+-   [DP10/WN35](https://www.froggit.de/media/products/DP10_BDA_EN.pdf) leaf wetness sensors
+-   [DP100](https://www.froggit.de/media/products/DP100_BDA(DE).pdf) soil moisture sensors;
+
+a maximum of 4:
+
+-   [DP200/WH41/WH43](https://www.froggit.de/media/products/DP200_BDA(DE)_1.pdf) PM2.5/PM10 sensors
+-   [WH45](https://osswww.ecowitt.net/uploads/20220803/WH55%20Manual.pdf) Water leak sensors
+
+a maximum of 2:
+
+-   [DP250/WH45](https://www.froggit.de/product_info.php?info=p483_dp250-5-in-1-co2-pm2-5-pm10-temperatur-luftfeuchte-innenraum-luftqualitaets-funksensor.html) CO2 / PM2.5 / PM10 / temperatur / moisture sensor
+-   [DP60/WH57](https://www.froggit.de/media/products/DP60-Manual_EN_.pdf) Lightning sensor
+
+For the basic weather parameters as rain, wind vector insolation temperature and humidity one of the compatible outdoor basis units as the [DP1100](https://www.froggit.de/media/products/DP1100_BDA_DE_.pdf) or [WH3000](https://www.froggit.de/media/products/WH3000_BDA_Ausseneinheit_DE_.pdf)
+
+
+## Calibration Concept
+
+The low budget sensors are usually lacking of a stable measurement quality. To obtain reliable micro climate data a two step calibration process is suggested.
+
+1.  The measurements of all sensors (preferably in a climate chamber) will be statistically analysed to identify sensor which produce systematic and significant outliers.
+2.  The sensors are calibrated against an operational running high price reference station in the field.

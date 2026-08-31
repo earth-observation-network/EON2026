@@ -1,0 +1,90 @@
+---
+title: "Data Sources"
+subtitle: "Tutorial: EON Summer School 2026"
+author: "Chris Reudenbach, Philipps University Marburg (PUM)"
+date: "2026-08-30"
+image: ../images/froggit_1.jpg
+about:
+  id: image-heading
+  template: solana
+  image-shape: rounded
+  image-width: 25em
+  links:
+    - icon: github
+      text: Tutorial project repository
+      href: https://github.com/gisma/EON-Obs2SpatState
+    - icon: file-zip
+      text: Download tutorial project ZIP
+      href: https://github.com/gisma/EON-Obs2SpatState/archive/refs/heads/main.zip
+    - icon: easel
+      text: Open slides
+      href: mc_warmup_live_slides_en.html
+---
+
+## Tutorial data
+
+The tutorial uses prepared data so that the practical work can focus on the modelling step. The raw station dashboards and position files remain listed here for transparency and later reuse.
+
+### EON 2023
+
+- [Station — Dead Fir plot, Ecowitt dashboard; login required](https://www.ecowitt.net/home/index?id=149300)
+- [Station — Clear-cut site, Ecowitt dashboard; login required](https://www.ecowitt.net/home/index?id=20166)
+- [Position data — climate stations](https://github.com/HannaMeyer/EON2023/blob/main/mc_session/data/stations_prelim.zip)
+
+### EON 2024
+
+- [Position data — climate stations](https://github.com/earth-observation-network/EON2024/blob/main/mc_session/data/raw_positions_2024.csv)
+- [Station data — Ecowitt share link](https://www.ecowitt.net/home/share?authorize=6KX30B)
+
+### EON 2025
+
+- [Station data — Douglas Fir, site 20166; Ecowitt](https://www.ecowitt.net/home/index?id=20166)
+- [Station data — Douglas Fir, site 20163; Ecowitt](https://www.ecowitt.net/home/index?id=20163)
+- [Position data — climate stations](https://github.com/earth-observation-network/EON2025/blob/main/block4_5/data/Mikroklima_Stationen_EON25.gpkg)
+
+### Tutorial project
+
+- [Download project ZIP](https://github.com/gisma/EON-Obs2SpatState/archive/refs/heads/main.zip)
+- [Open project repository](https://github.com/gisma/EON-Obs2SpatState)
+- [Open slides](mc_warmup_live_slides_en.html)
+
+## Fine Offset sensors
+
+The sensors used in the EON microclimate work are produced by `Fine Offset` and re-branded or partly modified by different resellers. This page refers mainly to sensors sold by the German reseller `froggit` and the US reseller `ecowitt`.
+
+The relevant gateway family is the [DP-/GW SmartHub](https://www.foshk.com/Wifi_Weather_Station/GW1100.html), a WiFi gateway for temperature, humidity, and pressure measurements developed by Fine Offset. Its practical strength for field courses is the large number of compatible radio-based sensors.
+
+### Sensor suppliers
+
+- [Froggit shop [DE]](https://www.froggit.de/?cat=c40_Raumklima-und-Luftqualitaet---IP-Wettersysteme-dp-serie.html)
+- [Ecowitt shop [US]](https://shop.ecowitt.com/collections/wifi-sensor)
+- [Fine Offset](https://www.foshk.com/)
+
+## Compatible sensor types
+
+Depending on the gateway, up to 8 sensors of the following types can be connected at the same time:
+
+- [DP150/WN51](https://www.froggit.de/media/products/DP150_BDA_EN.pdf) soil temperature sensors
+- [DP50/WH31](https://www.froggit.de/media/products/DP50_BDA%28DE%29.pdf) multi-channel temperature and humidity sensors
+- [WN34](https://osswww.ecowitt.net/uploads/20220803/WN34S%20WN34L%20Manual.pdf) wire probe thermometer
+- [DP10/WN35](https://www.froggit.de/media/products/DP10_BDA_EN.pdf) leaf wetness sensors
+- [DP100](https://www.froggit.de/media/products/DP100_BDA%28DE%29.pdf) soil moisture sensors
+
+Up to 4 sensors of the following types can be connected:
+
+- [DP200/WH41/WH43](https://www.froggit.de/media/products/DP200_BDA%28DE%29_1.pdf) PM2.5/PM10 sensors
+- [WH45](https://osswww.ecowitt.net/uploads/20220803/WH55%20Manual.pdf) water leak sensors
+
+Up to 2 sensors of the following types can be connected:
+
+- [DP250/WH45](https://www.froggit.de/product_info.php?info=p483_dp250-5-in-1-co2-pm2-5-pm10-temperatur-luftfeuchte-innenraum-luftqualitaets-funksensor.html) CO2 / PM2.5 / PM10 / temperature / humidity indoor air quality sensor
+- [DP60/WH57](https://www.froggit.de/media/products/DP60-Manual_EN_.pdf) lightning sensor
+
+For basic weather parameters such as rainfall, wind vector, solar radiation, temperature, and humidity, compatible outdoor base units such as the [DP1100](https://www.froggit.de/media/products/DP1100_BDA_DE_.pdf) or [WH3000](https://www.froggit.de/media/products/WH3000_BDA_Ausseneinheit_DE_.pdf) can be used.
+
+## Calibration concept
+
+Low-budget sensors usually do not provide stable measurement quality without checks. Reliable microclimate data therefore require a calibration concept before the measurements are used for spatial modelling.
+
+1. Measurements from all sensors should be analysed together, preferably under controlled conditions such as a climate chamber, to identify sensors with systematic or significant outliers.
+2. The sensors should then be checked against an operational high-quality reference station in the field.

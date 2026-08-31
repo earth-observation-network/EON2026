@@ -1,0 +1,77 @@
+---
+title: "From discrete observations to spatial statements"
+subtitle: "Workshop Materials and Setup"
+author: "Chris Reudenbach, Philipps University Marburg (PUM)"
+date: "2026-08-30"
+title-block-banner: ../images/swiss-hp.png
+title-block-banner-color: black
+order: 10
+format:
+  html:
+    toc: true
+    number-sections: false
+    code-fold: true
+    df-print: paged
+    embed-resources: false
+---
+
+## Start here
+
+This workshop shows how discrete observations become spatial statements.
+
+Microclimate measurements are used as the example. The wider problem is general: point measurements, pixels, samples, segments, training areas, and selected timestamps never speak for space by themselves. A modelling assumption is needed.
+
+## Slides
+
+Start with the slides.
+
+- [Open slides](mc_warmup_live_slides_en.html)
+
+## Optional reader
+
+The reader gives the conceptual background. It is optional because the slides contain the core structure needed for the workshop.
+
+- [Open reader](mc_warmup_reader_en.html)
+
+## Project ZIP
+
+The practical part runs from a local R project. Download and unpack the project ZIP before the session.
+
+1. Download the project ZIP.
+2. Unpack the ZIP on your computer.
+3. Open the project folder in RStudio or Positron.
+4. Install the required R packages.
+5. Run the workshop scripts from the unpacked project folder.
+
+- [Download project ZIP](block5-material.zip)
+- [Open data sources](data_sources.html)
+
+## Install R packages
+
+Use a recent R installation with RStudio or Positron.
+
+Install the required packages before the session:
+
+```r
+install.packages(c(
+  "sf",
+  "terra",
+  "gstat",
+  "randomForest"
+))
+```
+
+Geospatial packages such as `sf` and `terra` may require GDAL, GEOS, and PROJ support.
+
+## Workshop structure
+
+The workshop has two parts.
+
+First, prepared station measurements and a DEM are used to produce four spatial statements: nearest station, distance decay, altitude relation, and flexible data-driven relation.
+
+Second, the results are read critically. The central question is not which map looks best, but which statement is defensible for the data, the process, the statement area, the validation task, and the intended scale.
+
+## Core message
+
+A spatial result is not the observation itself. It is a modelled statement about space.
+

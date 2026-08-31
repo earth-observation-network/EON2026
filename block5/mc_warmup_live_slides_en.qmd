@@ -1,0 +1,790 @@
+---
+title: "Slides: From discrete observations to spatial statements"
+subtitle: "EON 2026 warmup: gap filling, assumptions, validation, model criticism"
+order: 20
+format:
+  revealjs:
+    slide-number: true
+    transition: fade
+    incremental: false
+    navigation-mode: vertical
+    controls: true
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+# Why this warmup?
+
+Geoscientific data rarely describe a complete spatial or spatio-temporal continuum.
+
+We usually work with discrete observations:
+
+```text
+points
+pixels
+samples
+segments
+training areas
+time steps
+```
+
+Nevertheless, we often make statements about the space or time between these observations.
+
+## The central problem
+
+The EON warmup asks one question:
+
+```text
+How can incomplete observations be translated into a defensible spatial statement?
+```
+
+Microclimate is the example.
+
+The modelling problem is more general.
+
+## Not a direct observation
+
+A spatial representation derived from point measurements is never a direct observation.
+
+It is a modelled statement between observed locations.
+
+The same measurement points can lead to different spatial representations:
+
+```text
+raster fields
+Voronoi polygons
+buffers
+neighbourhood zones
+```
+
+The representations differ because the assumptions differ.
+
+## Core chain
+
+```text
+discrete observations
+-> spatial statement
+-> model assumption
+-> minimal validation
+-> model criticism
+```
+
+The goal is not to find a polished map.
+
+The goal is to make the modelling decision visible.
+
+# What matters before methods?
+
+The decisive issue is the spatial claim that the model is supposed to support.
+
+Before choosing an algorithm, four things must be clear:
+
+```text
+process question
+relevant scale
+data support
+validation target
+```
+
+Only then can a modelling assumption be defended.
+
+## Process question
+
+Ask first what kind of spatial relation is plausible.
+
+Possible relations include:
+
+```text
+nearest observation
+local distance decay
+elevation relation
+wind exposure
+shade
+surface material
+cold-air drainage
+```
+
+The algorithm is only the technical expression of this assumption.
+
+## Scale
+
+A relation can be plausible at one scale and wrong at another.
+
+Elevation may explain part of a broader temperature pattern.
+
+It may fail at the scale of:
+
+```text
+single trees
+building shadows
+sensor exposure
+surface material
+small drainage structures
+```
+
+The intended scale of use must match the model assumption.
+
+## Data support
+
+Measurement points are zero-dimensional observations: they have a location, but no area.
+
+Raster cells, polygons, buffers, and zones represent spatial supports.
+
+A model always changes support:
+
+```text
+station value -> unsampled location or area
+```
+
+This support change must be visible in the interpretation.
+
+## Validation target
+
+Validation must match the claim.
+
+Predicting withheld station values is useful.
+
+But it is not the same as proving that every part of a spatial statement is correct.
+
+```text
+station prediction != full spatial process validation
+```
+
+# Course connection
+
+This warmup connects several parts of the course.
+
+```text
+Sampling           Which observations do we have?
+Drone / LiDAR      Which spatial structure can we observe?
+Segmentation       Which spatial units do we create?
+Regression         Which patterns can we transfer?
+Classification     Which type occurs where?
+Interpolation      What can we claim between observations?
+Validation         How reliable is the spatial claim?
+```
+
+The focus is spatial modelling under incomplete observation.
+
+# Live goal
+
+A short R script is read and executed during the session.
+
+The workflow makes one step visible:
+
+```text
+observed station values -> unsampled locations
+```
+
+The display is not the main point.
+
+The modelling assumption behind the display is the main point.
+
+## Project material
+
+Open the project materials from:
+
+```text
+gisma/EON-Obs2SpatState
+```
+
+Open the minimal script:
+
+```text
+microclimate_warmup_minimal_en.R
+```
+
+The script is deliberately small. It is not a full cleaning or modelling pipeline.
+
+# Data situation
+
+Measurement stations provide temperature values at selected locations.
+
+The question refers to the space between these stations.
+
+Between both stands a space-filling operation:
+
+```text
+What is assumed between the measurement points?
+```
+
+## Prepared but real
+
+The data are prepared so that the warmup can focus on the modelling step.
+
+In real projects, this step only becomes defensible after checking:
+
+```text
+sensor behaviour
+timestamps
+missing values
+CRS
+DEM fit
+station exposure
+valid statement area
+```
+
+The warmup uses prepared data. It does not pretend that raw data work has disappeared.
+
+## Example controls
+
+Microclimate varies over short distances.
+
+Possible controls include:
+
+```text
+elevation
+terrain form
+vegetation
+shade
+surface cover
+cold-air drainage
+```
+
+This exercise deliberately reduces the case to temperature, position, and elevation.
+
+# Required data
+
+The project contains:
+
+```text
+data/climdata.rds
+data/DEM1.tif
+```
+
+`climdata.rds` contains station locations and temperature columns.
+
+`DEM1.tif` contains elevation.
+
+## Code: load data
+
+```r
+library(sf)
+library(terra)
+library(gstat)
+library(randomForest)
+
+m   <- readRDS("data/climdata.rds")
+dem <- rast("data/DEM1.tif")
+names(dem) <- "altitude"
+```
+
+# One time step
+
+The warmup uses one measurement time step:
+
+```text
+A20230830
+```
+
+All model results therefore refer to the same observed situation.
+
+Differences between the results come from different assumptions, not from different timestamps.
+
+## Code: set target variable
+
+```r
+m$temp <- m[["A20230830"]]
+```
+
+# Spatial reference and elevation
+
+Points and raster must use the same coordinate reference system.
+
+Otherwise elevation extraction, distance calculation, and overlay cannot be interpreted consistently.
+
+## Code: CRS and station elevation
+
+```r
+m <- st_transform(m, crs(dem))
+m$altitude <- terra::extract(dem, terra::vect(m))$altitude
+
+pts <- m[!is.na(m$temp) & !is.na(m$altitude),
+         c("temp", "altitude")]
+```
+
+# Valid statement area
+
+The results are not reported for the whole DEM.
+
+The valid area is limited to the station network:
+
+```text
+convex hull of the stations + 20 m buffer
+```
+
+This is an explicit statement boundary, not a technical detail.
+
+## Why this matters
+
+Outside the supported area, the map would begin to act like extrapolation.
+
+The valid statement area tells students where the result may be interpreted and where it should stop.
+
+## Code: valid statement area
+
+```r
+area <- st_sf(
+  geometry = st_buffer(
+    st_convex_hull(st_union(st_geometry(pts))),
+    20
+  )
+)
+
+dem <- crop(dem, vect(area))
+dem <- mask(dem, vect(area))
+names(dem) <- "altitude"
+```
+
+# Prediction locations
+
+The models need target locations where values are predicted.
+
+In this script, target locations are raster cells inside the valid statement area.
+
+This is the technical support used for the warmup results.
+
+## Code: raster cells as target locations
+
+```r
+grid <- as.data.frame(dem, xy = TRUE, cells = TRUE, na.rm = FALSE)
+names(grid)[4] <- "altitude"
+grid <- grid[!is.na(grid$altitude), ]
+
+grid_sf <- st_as_sf(
+  grid,
+  coords = c("x", "y"),
+  crs = st_crs(pts),
+  remove = FALSE
+)
+```
+
+# Four EON model assumptions
+
+In all four variants, the measured station temperature is the value to be transferred into space.
+
+The methods differ in how they connect these measured values to unsampled locations.
+
+## Same measurements, different transfer rules
+
+```text
+Voronoi      nearest assignment
+IDW          distance weighting
+LM altitude  simple altitude relation
+RF           flexible data-driven relation
+```
+
+The important difference is not whether a method uses the measurements.
+
+All methods use the measured temperatures.
+
+The difference is how each method turns those measurements into a spatial statement.
+
+## The four alternatives
+
+- **Voronoi / nearest station** uses only station position. The measured temperature of the nearest station is assigned to each prediction location.
+- **IDW / distance decay** uses station position and distance. Nearby station temperatures receive more weight than distant station temperatures.
+- **LM altitude** uses station temperature as the response variable and elevation as an explanatory variable. The fitted altitude relation is then applied to the DEM.
+- **Random Forest** uses station temperature as the response variable and coordinates plus elevation as explanatory variables. The fitted relation is then applied to all prediction locations.
+
+# Voronoi / nearest station
+
+Voronoi uses the nearest station.
+
+The map becomes a set of hard station areas.
+
+```text
+nearest station wins
+```
+
+## Assumption
+
+The assumption is piecewise constancy:
+
+```text
+within each area, the nearest observed value is taken as representative
+```
+
+The effective scale is determined by the station layout.
+
+This is transparent and restrictive.
+
+## Why useful?
+
+Voronoi makes the support problem visible.
+
+It shows how the study area is partitioned by point location alone.
+
+It is often a good first diagnostic when nothing beyond position is justified.
+
+## Code: Voronoi / nearest station
+
+```r
+vor_df <- gstat::idw(
+  temp ~ 1,
+  locations = pts,
+  newdata = grid_sf,
+  nmax = 1
+)
+
+map_vor <- make_map(vor_df$var1.pred, "Voronoi")
+```
+
+# IDW / distance decay
+
+IDW uses distance weighting.
+
+```text
+nearby stations count more than distant stations
+```
+
+## Assumption
+
+The assumption is gradual isotropic decay from observation points.
+
+The spatial pattern is smoother than Voronoi but still mainly controlled by station geometry.
+
+IDW is useful when local spatial proximity is a plausible but limited assumption.
+
+## What IDW does not know
+
+IDW does not know the process.
+
+It does not know:
+
+```text
+wind
+shade
+cold-air drainage
+land cover
+sensor exposure
+```
+
+These factors only enter if they are indirectly reflected in the station values and station layout.
+
+## Code: IDW
+
+```r
+idw_df <- gstat::idw(
+  temp ~ 1,
+  locations = pts,
+  newdata = grid_sf,
+  nmax = 4
+)
+
+map_idw <- make_map(idw_df$var1.pred, "IDW")
+```
+
+# LM altitude / simple explanatory model
+
+The linear altitude model uses elevation as a simple explanatory variable.
+
+```text
+temperature ~ altitude
+```
+
+## Assumption
+
+Part of the temperature pattern is transferred through a relationship with altitude.
+
+The predicted values therefore inherit the spatial structure of the DEM.
+
+This can be defensible when elevation is a plausible driver at the scale of interest.
+
+## Boundary
+
+This is not a richer microclimate model.
+
+It is a deliberately narrow altitude transfer.
+
+Local shade, vegetation, surface material, buildings, and drainage processes are outside this assumption unless they are indirectly expressed through elevation or station values.
+
+## Code: LM altitude
+
+```r
+fit_lm <- lm(temp ~ altitude, data = st_drop_geometry(pts))
+
+map_lm <- predict(dem, fit_lm)
+names(map_lm) <- "LM_altitude"
+```
+
+# Random Forest / flexible relation
+
+Random Forest also transfers measured station temperatures to unsampled locations.
+
+In this warmup:
+
+```text
+response variable       measured station temperature
+explanatory variables   coordinates + elevation
+```
+
+The model learns a relation from the few station values and applies that relation to all prediction locations.
+
+## Difference to the other methods
+
+Voronoi transfers the nearest measured value.
+
+IDW transfers measured values through distance weights.
+
+The altitude model transfers measured values through one global elevation relation.
+
+Random Forest can combine coordinate position and elevation in many local decision rules.
+
+## Warning
+
+The warning is not that Random Forest is generally wrong.
+
+The warning is that technical flexibility can hide a weak spatial claim.
+
+With few stations, the model may mainly learn where high and low values happened to occur in this specific station layout.
+
+## What low error cannot prove
+
+A low error value does not prove that the predicted pattern is a defensible microclimatic relation.
+
+The result still has to be judged against:
+
+```text
+process question
+scale of use
+sampling layout
+valid statement area
+validation target
+```
+
+## Code: Random Forest
+
+```r
+xy <- st_coordinates(pts)
+pts$x <- xy[, 1]
+pts$y <- xy[, 2]
+
+fit_rf <- randomForest(
+  temp ~ x + y + altitude,
+  data = st_drop_geometry(pts),
+  ntree = 200
+)
+
+rf_pred <- predict(fit_rf, newdata = grid)
+map_rf <- make_map(rf_pred, "RF_warning")
+```
+
+# Minimal validation
+
+The warmup does not stop after producing spatial statements.
+
+It also asks whether the models can reproduce measurements that were temporarily withheld.
+
+This is the role of leave-one-out cross-validation.
+
+## LOOCV: the idea
+
+```text
+remove one station
+fit the model with the remaining stations
+predict the removed station
+store the error
+repeat for all stations
+```
+
+The difference between observed and predicted station values gives a point-based error.
+
+## RMSE
+
+RMSE summarizes these errors into one number.
+
+$$
+RMSE = \sqrt{\frac{1}{n}\sum_{i=1}^{n}(\hat{y}_i - y_i)^2}
+$$
+
+A lower RMSE means that, in this specific test, the withheld station values were predicted more closely.
+
+It does not mean that the full spatial statement is correct.
+
+## Code: LOOCV for LM and RF
+
+```r
+rmse_fun <- function(e) sqrt(mean(e * e, na.rm = TRUE))
+
+lm_cv <- rep(NA, nrow(pts))
+rf_cv <- rep(NA, nrow(pts))
+
+for (i in 1:nrow(pts)) {
+  train <- pts[-i, ]
+  test  <- pts[i, ]
+
+  fit_lm_i <- lm(temp ~ altitude, data = st_drop_geometry(train))
+  lm_cv[i] <- predict(fit_lm_i, newdata = st_drop_geometry(test))
+
+  fit_rf_i <- randomForest(
+    temp ~ x + y + altitude,
+    data = st_drop_geometry(train),
+    ntree = 200
+  )
+  rf_cv[i] <- predict(fit_rf_i, newdata = st_drop_geometry(test))
+}
+```
+
+## Code: LOOCV for Voronoi and IDW
+
+```r
+vor_model <- gstat(
+  temp ~ 1,
+  locations = pts,
+  nmax = 1,
+  set = list(idp = 2)
+)
+
+idw_model <- gstat(
+  temp ~ 1,
+  locations = pts,
+  nmax = 4,
+  set = list(idp = 2)
+)
+
+vor_cv <- gstat.cv(vor_model, nfold = nrow(pts))
+idw_cv <- gstat.cv(idw_model, nfold = nrow(pts))
+```
+
+## Code: RMSE table
+
+```r
+rmse <- data.frame(
+  model = c("LM altitude", "Voronoi", "IDW", "RF warning"),
+  RMSE = c(
+    rmse_fun(pts$temp - lm_cv),
+    rmse_fun(vor_cv$residual),
+    rmse_fun(idw_cv$residual),
+    rmse_fun(pts$temp - rf_cv)
+  )
+)
+
+print(rmse)
+```
+
+# Result display
+
+All results are displayed with the same colour scale.
+
+The measurement points are overlaid.
+
+This shows both the spatial pattern and its measurement support.
+
+## Code: display
+
+```r
+maps <- c(map_vor, map_idw, map_lm, map_rf)
+z <- range(c(pts$temp - 1, pts$temp + 1), na.rm = TRUE)
+
+par(mfrow = c(2, 2))
+
+for (i in 1:nlyr(maps)) {
+  plot(maps[[i]], range = z, main = names(maps)[i])
+  points(pts, pch = 19, cex = 0.8)
+}
+
+par(mfrow = c(1, 1))
+```
+
+# Reading spatial statements critically
+
+After the results have been produced, the main task is not to choose the best-looking map or the lowest RMSE.
+
+The task is to decide what each spatial statement is allowed to say about the real situation.
+
+## Questions for each result
+
+Ask:
+
+```text
+Which measured values are transferred into unsampled space?
+Which assumption performs this transfer?
+Which part of the area is supported by the station layout?
+Where would the statement turn into extrapolation?
+Which real process could explain the pattern?
+Which process is missing?
+What exactly did LOOCV check?
+```
+
+## What LOOCV checks
+
+LOOCV forces the model to predict known measurements without using them directly.
+
+That is useful.
+
+But it remains a point-based test under the given station layout.
+
+It does not prove that visible gradients or zones correspond to real microclimatic processes.
+
+## RMSE as criticism prompt
+
+RMSE is a prompt for model criticism.
+
+A low RMSE can make a result worth inspecting.
+
+It cannot replace the scientific question:
+
+```text
+Is this spatial statement defensible for the observed process,
+the data support,
+the scale of use,
+and the valid statement area?
+```
+
+# Reality check
+
+Prepared data make the warmup possible.
+
+Real projects require work before modelling starts.
+
+At minimum, the data situation has to be checked.
+
+## Before modelling
+
+Check:
+
+```text
+sensor plausibility
+timestamp consistency
+missing values
+coordinate reference systems
+DEM reference
+station exposure
+valid statement area
+documentation
+data provenance
+```
+
+These steps are not developed into a full cleaning workflow here.
+
+They are conditions for valid spatial statements.
+
+# Core message
+
+A map from point measurements is not an automatic output.
+
+It is a modelled spatial statement.
+
+The correct question is not:
+
+```text
+Which method is best?
+```
+
+The correct question is:
+
+```text
+Do model assumption, process logic, scale of use,
+data support, statement area, and validation boundary fit together?
+```
+
+## Final point
+
+When this cannot be shown, the simpler and more transparent assumption is often the scientifically stronger one.
+
+A simple method is not a failure.
+
+It can be the only honest spatial statement the data situation supports.

@@ -57,9 +57,8 @@ website:
       - text: "---"
       - section: "Block 5: Measuring and modelling microclimate with mobile climate station"
         contents:
-          - mc_session/mc1.qmd
-          - mc_session/mc3.qmd
-          - mc_session/mc4.qmd
+          - block5/mc_index.qmd
+
           
 
 format:
