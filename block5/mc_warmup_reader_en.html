@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Chris Reudenbach, Philipps University Marburg (PUM)">
+<meta name="dcterms.date" content="2026-08-30">
+
+<title>Reader: From Discrete Observations to Spatial Statements – Forest Monitoring Summer School 2026</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-5ff8fa04d2d2c4cd6ffc440e289005c2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-008e11d28145fd507e0d18440456b0ca.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-5ff8fa04d2d2c4cd6ffc440e289005c2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>
+
+      .quarto-title-block .quarto-title-banner h1,
+      .quarto-title-block .quarto-title-banner h2,
+      .quarto-title-block .quarto-title-banner h3,
+      .quarto-title-block .quarto-title-banner h4,
+      .quarto-title-block .quarto-title-banner h5,
+      .quarto-title-block .quarto-title-banner h6
+      {
+        color: black;
+      }
+
+      .quarto-title-block .quarto-title-banner {
+        color: black;
+background: ../images/swiss-hp.png;
+      }
+</style>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../css/styles.css">
+<meta property="og:title" content="Reader: From Discrete Observations to Spatial Statements – Forest Monitoring Summer School 2026">
+<meta property="og:description" content="Gap filling, prediction, scale, and process">
+<meta property="og:image" content="https://earth-observation-network.github.io/EON2026/block5/rgb_hub_stations.png">
+<meta property="og:site_name" content="Forest Monitoring Summer School 2026">
+<meta property="og:image:height" content="1179">
+<meta property="og:image:width" content="1631">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../images/logooil.jpg" alt="" class="navbar-logo light-content">
+    <img src="../images/logooil.jpg" alt="" class="navbar-logo dark-content">
+    </a>
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Forest Monitoring Summer School 2026</span>
+    </a>
+  </div>
+        <div class="quarto-navbar-tools tools-end">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+          <div id="quarto-search" class="" title="Search"></div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Reader: From Discrete Observations to Spatial Statements</li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Reader: From Discrete Observations to Spatial Statements</h1>
+            <p class="subtitle lead">Gap filling, prediction, scale, and process</p>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Chris Reudenbach, Philipps University Marburg (PUM) </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">August 30, 2026</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">Welcome</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">EON Summer School 2026 (30.08-04.09.2026)</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">Block 1: Introduction to forest monitoring</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../block1_magdon/01_Design_based_sampling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Design-based sampling in a Nutshell</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../block1_magdon/02_TrainingDataCollection.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Collection of training data for remote sensing based modelling</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Block 2: Describing and comparing spatial patterns</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../block2/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Understanding spatial patterns: how to measure and compare them</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">Block 3: Processing of 3D LiDAR data to assess forest structure</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../block3_dobelmann/lidar_forest_structure.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Processing of 3D Lidar data to assess forest structure</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../block3_dobelmann/Box_dimension.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Measuring Tree/Forest Structural Complexity with (Fractal) Box Dimension <span class="math inline">\((D_b)\)</span> from 3D Point Clouds</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+ <span class="menu-text">Block 4 Machine learning and validation</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../block4_machineLearning/ML_AOA.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Machine learning for remote sensing applications</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+ <span class="menu-text">Block 5: Measuring and modelling microclimate with mobile climate station</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../block5/mc_index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">From discrete observations to spatial statements</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#why-this-matters" id="toc-why-this-matters" class="nav-link active" data-scroll-target="#why-this-matters">Why this matters</a></li>
+  <li><a href="#role-of-this-reader" id="toc-role-of-this-reader" class="nav-link" data-scroll-target="#role-of-this-reader">Role of this reader</a></li>
+  <li><a href="#distance-and-data-representation" id="toc-distance-and-data-representation" class="nav-link" data-scroll-target="#distance-and-data-representation">Distance and data representation</a></li>
+  <li><a href="#filling-spatial-gaps-concepts" id="toc-filling-spatial-gaps-concepts" class="nav-link" data-scroll-target="#filling-spatial-gaps-concepts">Filling spatial gaps: concepts</a></li>
+  <li><a href="#process-scale-and-method-choice" id="toc-process-scale-and-method-choice" class="nav-link" data-scroll-target="#process-scale-and-method-choice">Process, scale, and method choice</a></li>
+  <li><a href="#four-eon-model-assumptions" id="toc-four-eon-model-assumptions" class="nav-link" data-scroll-target="#four-eon-model-assumptions">Four EON model assumptions</a>
+  <ul class="collapse">
+  <li><a href="#voronoi-nearest-station" id="toc-voronoi-nearest-station" class="nav-link" data-scroll-target="#voronoi-nearest-station">Voronoi / nearest station</a></li>
+  <li><a href="#idw-distance-decay" id="toc-idw-distance-decay" class="nav-link" data-scroll-target="#idw-distance-decay">IDW / distance decay</a></li>
+  <li><a href="#lm-altitude-simple-explanatory-model" id="toc-lm-altitude-simple-explanatory-model" class="nav-link" data-scroll-target="#lm-altitude-simple-explanatory-model">LM altitude / simple explanatory model</a></li>
+  <li><a href="#random-forest-flexible-data-driven-relation" id="toc-random-forest-flexible-data-driven-relation" class="nav-link" data-scroll-target="#random-forest-flexible-data-driven-relation">Random Forest / flexible data-driven relation</a></li>
+  </ul></li>
+  <li><a href="#hands-on-warmup-workflow" id="toc-hands-on-warmup-workflow" class="nav-link" data-scroll-target="#hands-on-warmup-workflow">Hands-on: warmup workflow</a></li>
+  <li><a href="#minimal-validation-what-is-checked" id="toc-minimal-validation-what-is-checked" class="nav-link" data-scroll-target="#minimal-validation-what-is-checked">Minimal validation: what is checked?</a></li>
+  <li><a href="#reading-the-spatial-statements-critically" id="toc-reading-the-spatial-statements-critically" class="nav-link" data-scroll-target="#reading-the-spatial-statements-critically">Reading the spatial statements critically</a></li>
+  <li><a href="#reality-check-prepared-data-are-not-raw-data" id="toc-reality-check-prepared-data-are-not-raw-data" class="nav-link" data-scroll-target="#reality-check-prepared-data-are-not-raw-data">Reality check: prepared data are not raw data</a></li>
+  <li><a href="#core-message" id="toc-core-message" class="nav-link" data-scroll-target="#core-message">Core message</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/earth-observation-network/EON2026/edit/main/block5/mc_warmup_reader_en.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/earth-observation-network/EON2026/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+
+<section id="why-this-matters" class="level2">
+<h2 class="anchored" data-anchor-id="why-this-matters">Why this matters</h2>
+<p>Geoscientific data rarely describe a complete spatial or spatio-temporal continuum. We usually work with discrete observations: measurement points, pixels, samples, segments, training areas, or selected timestamps. Nevertheless, we often need to make spatial statements about continuous areas and temporal situations.</p>
+<p>This is the central problem of the EON warmup: how can incomplete observations be translated into a defensible spatial statement?</p>
+<p>Microclimate is only one example. It makes the problem visible because a small number of sensors observe selected locations and timestamps, while the question concerns a spatially connected field. The same logic appears in sampling, UAV and LiDAR workflows, segmentation, regression, classification, interpolation, and validation.</p>
+<p>The goal of this reader is not to present interpolation as a detached method collection. The goal is to understand gap filling as a modelling step between observation and spatial claim.</p>
+<p>Spatial gap filling is the controlled translation of discrete observations into a spatial statement. The core decisions concern neighborhood, distance, process, scale, statement area, and validation.</p>
+<p>The following map shows the project region and the measurement situation used in the warmup.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="rgb_hub_stations.png" class="img-fluid figure-img"></p>
+<figcaption>Polsterhaus excursion research area stations 2023 (stars) 2024 (crosses)</figcaption>
+</figure>
+</div>
+</section>
+<section id="role-of-this-reader" class="level2">
+<h2 class="anchored" data-anchor-id="role-of-this-reader">Role of this reader</h2>
+<p>This reader provides the vocabulary for the two EON blocks.</p>
+<p>Before the hands-on, it clarifies basic terms: observation point, raster surface, neighborhood, distance, model assumption, and valid statement area. During the hands-on, it helps interpret the four simple model assumptions. In the second block, it supports the critical reading of the generated maps: what they show, what they claim, and where their validity stops.</p>
+<p>The EON structure is deliberately small:</p>
+<pre class="text"><code>discrete observations in reality
+-&gt; spatial statement
+-&gt; model assumption
+-&gt; minimal validation
+-&gt; model criticism</code></pre>
+</section>
+<section id="distance-and-data-representation" class="level2">
+<h2 class="anchored" data-anchor-id="distance-and-data-representation">Distance and data representation</h2>
+<p>The first modelling decision is the definition of <em>proximity</em>. Proximity is not only a geometric property. It is an operational statement about which observations may inform another location and how strongly they should do so.</p>
+<p>Spatial relationships can be described by <em><strong>neighborhoods</strong></em> and <em><strong>distances</strong></em>. Measurement points are zero-dimensional observations: they have a location, but no area. Their neighborhood is therefore often defined by distance: the nearest station, the nearest group of stations, all stations within a radius, or all stations inside a valid statement area. Raster cells have area, so their values refer to cell supports and their distances are evaluated between cell centres or along raster surfaces. The relevant distance rule depends on the support represented in the model.</p>
+<p>Tobler’s First Law of Geography provides a common default: near things are more related than distant things.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> This is a useful starting assumption, not a universal law for every process. In many real cases spatial influence cannot be measured directly. It must be operationalized through a distance metric, a neighborhood rule, and a model assumption.</p>
+<p>A simple Euclidean distance can be a defensible starting point when no stronger process relation or knowledge is available. Other questions may require network distance, travel time, cost distance, flow direction, slope position, wind exposure, or similarity in measurable environmental conditions (covariates). The important step is to state what “near” means for the concrete process and scale of use.</p>
+</section>
+<section id="filling-spatial-gaps-concepts" class="level2">
+<h2 class="anchored" data-anchor-id="filling-spatial-gaps-concepts">Filling spatial gaps: concepts</h2>
+<p>With distance and neighborhood defined, we can turn to gap filling: predicting or assigning values at locations where no observation exists.</p>
+<p>Each method encodes an assumption about how values continue between observations. The practical question is therefore not which method is generally best. The practical question is which assumption is defensible for this data situation, this process question, and this intended scale of use.</p>
+<p>A spatial continuum derived from point measurements is never a direct observation. It is a modelled statement between observed locations. The same measurement points can lead to different spatial representations — raster fields, Voronoi polygons, buffers, or neighbourhood zones — because the assumptions differ. This is why the this lecture compares simple alternatives instead of hiding the modelling decision inside one polished result.</p>
+<p>The four alternatives in the warmup are not a ranking of interpolation methods. They are chosen because each one makes a different modelling assumption visible:</p>
+<ul>
+<li><strong>nearest station</strong>: the closest observation is taken as the relevant reference;</li>
+<li><strong>distance decay</strong>: nearby observations receive more weight than distant observations;</li>
+<li><strong>elevation relation</strong>: temperature is linked to elevation as a simple process-related variable;</li>
+<li><strong>data-driven patterning from few observations</strong>: a flexible model can create plausible-looking spatial patterns even when the data basis is thin.</li>
+</ul>
+<p>More complex methods only become defensible when the process relation, the relevant scale, the data support, and the validation target can be stated clearly. Without that justification, additional complexity does not make the spatial statement stronger. It only hides the modelling decision.</p>
+</section>
+<section id="process-scale-and-method-choice" class="level2">
+<h2 class="anchored" data-anchor-id="process-scale-and-method-choice">Process, scale, and method choice</h2>
+<p>The decisive issue is the spatial claim that the model is supposed to support. Before choosing an algorithm, the process question, the relevant scale, the data support, and the validation target must be clear. Only then can a modelling assumption be defended.</p>
+<p>The first question is what kind of spatial relation is plausible. Is the expected pattern controlled mainly by the nearest observation, by gradual distance decay, by a covariate such as elevation, or by a data-driven combination of position and environment? The answer depends on the phenomenon, the station layout, the observation support, and the scale at which the result will be used.</p>
+<p>The second question is whether the available data can support the desired complexity. A method with more parameters or more flexible structure is not automatically better. It can produce a convincing-looking surface from very little evidence. If the process relation, scale, and validation target cannot be stated clearly, a simpler method is often the more correct method because it exposes rather than hides the assumption.</p>
+<p>For this workflow it means: Voronoi, IDW, and LM altitude are not “primitive” fallbacks. They are transparent statements. Random Forest is included as a <em>warning</em> example because a flexible data-driven surface can look plausible even when the number of points is too small to support a robust spatial interpretation.</p>
+</section>
+<section id="four-eon-model-assumptions" class="level2">
+<h2 class="anchored" data-anchor-id="four-eon-model-assumptions">Four EON model assumptions</h2>
+<p>In all four variants, the measured station temperature is the value to be transferred into space. The methods differ in how they connect these measured values to unsampled locations.</p>
+<ul>
+<li><strong>Voronoi / nearest station</strong> uses only station position. The measured temperature of the nearest station is assigned to each prediction location.</li>
+<li><strong>IDW / distance decay</strong> uses station position and distance. The measured temperatures of nearby stations receive more weight than those of distant stations.</li>
+<li><strong>LM altitude</strong> uses the measured station temperatures as the response variable and elevation as an explanatory variable. The fitted altitude relation is then applied to the DEM.</li>
+<li><strong>Random Forest</strong> uses the measured station temperatures as the response variable and coordinates plus elevation as explanatory variables. The fitted relation is then applied to all prediction locations.</li>
+</ul>
+<p>The important difference is therefore not whether a method “uses the measurements”. All methods use the measured temperatures. The difference is how each method turns those measurements into a spatial statement: by nearest assignment, by distance weighting, by a simple altitude relation, or by a flexible data-driven relation.</p>
+<section id="voronoi-nearest-station" class="level3">
+<h3 class="anchored" data-anchor-id="voronoi-nearest-station">Voronoi / nearest station</h3>
+<p>Voronoi uses the nearest station. The map becomes a set of hard station areas.</p>
+<p>The assumption is piecewise constancy: within each area, the nearest observed value is taken as representative. The effective scale is determined by the station layout. This is transparent and restrictive. It is useful when the task is to expose station control and avoid pretending to know gradients that are not supported by the data.</p>
+<p>This method is also useful because it makes the support problem visible. It shows how the study area is partitioned by point location alone. It is often a good first diagnostic when nothing beyond position is justified.</p>
+</section>
+<section id="idw-distance-decay" class="level3">
+<h3 class="anchored" data-anchor-id="idw-distance-decay">IDW / distance decay</h3>
+<p>IDW uses distance weighting. Nearby stations count more than distant stations.</p>
+<p>The assumption is gradual isotropic decay from observation points. The spatial pattern is smoother than Voronoi but still mainly controlled by station geometry. The method is easy to understand and useful when local spatial proximity is a plausible but limited assumption.</p>
+<p>IDW does not know the process. It does not know wind, shade, cold-air drainage, land cover, or sensor exposure unless these are indirectly reflected in the observed values and station layout.</p>
+</section>
+<section id="lm-altitude-simple-explanatory-model" class="level3">
+<h3 class="anchored" data-anchor-id="lm-altitude-simple-explanatory-model">LM altitude / simple explanatory model</h3>
+<p>The linear altitude model uses elevation as a simple explanatory variable.</p>
+<p>The assumption is that part of the temperature pattern can be transferred through a relationship with altitude. The predicted values therefore inherit the spatial structure of the DEM. This can be defensible when elevation is a plausible driver at the scale of interest.</p>
+<p>This is not a richer microclimate model. It is a deliberately narrow altitude transfer. Local shade, vegetation, surface material, buildings, and drainage processes are outside this assumption unless they are indirectly expressed through elevation or the station values.</p>
+</section>
+<section id="random-forest-flexible-data-driven-relation" class="level3">
+<h3 class="anchored" data-anchor-id="random-forest-flexible-data-driven-relation">Random Forest / flexible data-driven relation</h3>
+<p>Random Forest also transfers the measured station temperatures to unsampled locations. In this warmup, the measured temperature is the response variable. Coordinates and elevation are explanatory variables. The model learns a relation from the few station values and then applies that relation to all prediction locations.</p>
+<p>This is different from nearest station, IDW, and the altitude model. Voronoi transfers the nearest measured value. IDW transfers measured values through distance weights. The altitude model transfers measured values through one global elevation relation. Random Forest can combine coordinate position and elevation in many local decision rules. The resulting spatial statement can therefore look more detailed than the data situation supports.</p>
+<p>The warning is not that Random Forest is generally wrong. The warning is that technical flexibility can hide a weak spatial claim. With few stations, the model may mainly learn where high and low values happened to occur in this specific station layout. A low error value does not prove that the predicted pattern is a defensible microclimatic relation. The result still has to be judged against the process question, the scale of use, the sampling layout, the valid statement area, and the validation target.</p>
+</section>
+</section>
+<section id="hands-on-warmup-workflow" class="level2">
+<h2 class="anchored" data-anchor-id="hands-on-warmup-workflow">Hands-on: warmup workflow</h2>
+<p>The warmup follows the minimal script as a compact modelling chain. It starts from prepared station measurements and elevation information, produces four alternative spatial statements, and then reads the resulting maps and RMSE values critically.</p>
+<p>The important point is not each technical line of code. The important point is the sequence: observed station values are transferred to unsampled locations, different assumptions produce different spatial representations, and the outputs must be read as modelled statements rather than as direct observations.</p>
+<p>The data are prepared so that the warmup can focus on the modelling step. In real projects, this step only becomes defensible after sensor behaviour, timestamps, missing values, CRS, DEM fit, station exposure, and the valid statement area have been checked.</p>
+<p>The minimal script is the technical counterpart of this reader. It demonstrates how observed station values are transferred to unsampled locations, and why every resulting spatial representation depends on an explicit modelling assumption.</p>
+<p>The real-world link is important. Before such a workflow can be used in an actual project, the measurements would have to be checked: sensor behaviour, timestamps, missing values, coordinate reference systems, DEM fit, station exposure, and the valid statement area all affect what can be claimed. The warmup does not compute a full cleaning workflow. It uses prepared data so that the modelling step itself becomes visible.</p>
+</section>
+<section id="minimal-validation-what-is-checked" class="level2">
+<h2 class="anchored" data-anchor-id="minimal-validation-what-is-checked">Minimal validation: what is checked?</h2>
+<p>The warmup does not stop after producing spatial statements. It also asks whether the models can reproduce measurements that were temporarily withheld.</p>
+<p>Leave-one-out cross-validation (LOOCV) does this in a simple way: one station is removed, the model is fitted with the remaining stations, and the removed station is predicted. This is repeated for all stations. The difference between observed and predicted station values gives a point-based error.</p>
+<p>RMSE summarizes these errors into one number. A lower RMSE means that, in this specific test, the withheld station values were predicted more closely.</p>
+</section>
+<section id="reading-the-spatial-statements-critically" class="level2">
+<h2 class="anchored" data-anchor-id="reading-the-spatial-statements-critically">Reading the spatial statements critically</h2>
+<p>After the results have been produced, the main task is not to choose the best-looking map or the lowest RMSE. The task is to decide what each spatial statement is allowed to say about the real situation.</p>
+<p>For each result, ask:</p>
+<ol type="1">
+<li>Which measured values are transferred into the unsampled space?</li>
+<li>Which assumption performs this transfer?</li>
+<li>Which part of the area is supported by the station layout?</li>
+<li>Where would the statement turn into extrapolation?</li>
+<li>Which real process could explain the pattern, and which process is missing?</li>
+<li>What exactly did LOOCV check: station prediction, spatial process, or only the chosen validation task?</li>
+</ol>
+<p>LOOCV is useful because it forces the model to predict known measurements without using them directly. But it remains a point-based test under the given station layout. It does not prove that visible gradients or zones correspond to real microclimatic processes. It also does not test whether the station network covers the relevant situations in the field.</p>
+<p>RMSE is therefore a prompt for model criticism. A low RMSE can make a result worth inspecting, but it cannot replace the scientific question: is this spatial statement defensible for the observed process, the data support, the scale of use, and the valid statement area?</p>
+</section>
+<section id="reality-check-prepared-data-are-not-raw-data" class="level2">
+<h2 class="anchored" data-anchor-id="reality-check-prepared-data-are-not-raw-data">Reality check: prepared data are not raw data</h2>
+<p>The data are prepared so that the workshop can focus on the modelling step. Real projects require work before modelling starts.</p>
+<p>At minimum, the data situation has to be checked: sensor plausibility, timestamp consistency, missing values, coordinate reference systems, DEM reference, station exposure, valid statement area, documentation, and data provenance.</p>
+<p>These steps are not developed into a full cleaning workflow in this reader. They are introduced as conditions for valid spatial statements. A map can only be as defensible as the observation network, preprocessing choices, statement area, and validation design behind it.</p>
+</section>
+<section id="core-message" class="level2">
+<h2 class="anchored" data-anchor-id="core-message">Core message</h2>
+<p>A map from point measurements is not an automatic output. It is a modelled spatial statement.</p>
+<p>The correct question is not “which method is best?” The correct question is whether the model assumption, process logic, scale of use, data support, statement area, and validation boundary fit together.</p>
+<p>When this cannot be shown, the simpler and more transparent assumption is often the scientifically stronger one.</p>
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Tobler, W. R. (1970). A computer movie simulating urban growth in the Detroit region. <em>Economic Geography</em>, 46(Supplement), 234–240. https://doi.org/10.2307/143141.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("^(?:http:|https:)\/\/www\.quarto\.org\/custom");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+            // default icon
+            link.classList.add("external");
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Earth Observation Network Harz Summer School (2026)</p>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/earth-observation-network/EON2026/edit/main/block5/mc_warmup_reader_en.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/earth-observation-network/EON2026/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

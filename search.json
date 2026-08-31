@@ -77,289 +77,385 @@
     ]
   },
   {
-    "objectID": "block3_dobelmann/lidar_forest_structure.html",
-    "href": "block3_dobelmann/lidar_forest_structure.html",
-    "title": "Processing of 3D Lidar data to assess forest structure",
+    "objectID": "block5/mc_warmup_live_slides_en.html#the-central-problem",
+    "href": "block5/mc_warmup_live_slides_en.html#the-central-problem",
+    "title": "Slides: From discrete observations to spatial statements",
+    "section": "The central problem",
+    "text": "The central problem\nThe EON warmup asks one question:\nHow can incomplete observations be translated into a defensible spatial statement?\nMicroclimate is the example.\nThe modelling problem is more general."
+  },
+  {
+    "objectID": "block5/mc_warmup_live_slides_en.html#not-a-direct-observation",
+    "href": "block5/mc_warmup_live_slides_en.html#not-a-direct-observation",
+    "title": "Slides: From discrete observations to spatial statements",
+    "section": "Not a direct observation",
+    "text": "Not a direct observation\nA spatial representation derived from point measurements is never a direct observation.\nIt is a modelled statement between observed locations.\nThe same measurement points can lead to different spatial representations:\nraster fields\nVoronoi polygons\nbuffers\nneighbourhood zones\nThe representations differ because the assumptions differ."
+  },
+  {
+    "objectID": "block5/mc_warmup_live_slides_en.html#core-chain",
+    "href": "block5/mc_warmup_live_slides_en.html#core-chain",
+    "title": "Slides: From discrete observations to spatial statements",
+    "section": "Core chain",
+    "text": "Core chain\ndiscrete observations\n-&gt; spatial statement\n-&gt; model assumption\n-&gt; minimal validation\n-&gt; model criticism\nThe goal is not to find a polished map.\nThe goal is to make the modelling decision visible."
+  },
+  {
+    "objectID": "block5/mc_warmup_live_slides_en.html#process-question",
+    "href": "block5/mc_warmup_live_slides_en.html#process-question",
+    "title": "Slides: From discrete observations to spatial statements",
+    "section": "Process question",
+    "text": "Process question\nAsk first what kind of spatial relation is plausible.\nPossible relations include:\nnearest observation\nlocal distance decay\nelevation relation\nwind exposure\nshade\nsurface material\ncold-air drainage\nThe algorithm is only the technical expression of this assumption."
+  },
+  {
+    "objectID": "block5/mc_warmup_live_slides_en.html#scale",
+    "href": "block5/mc_warmup_live_slides_en.html#scale",
+    "title": "Slides: From discrete observations to spatial statements",
+    "section": "Scale",
+    "text": "Scale\nA relation can be plausible at one scale and wrong at another.\nElevation may explain part of a broader temperature pattern.\nIt may fail at the scale of:\nsingle trees\nbuilding shadows\nsensor exposure\nsurface material\nsmall drainage structures\nThe intended scale of use must match the model assumption."
+  },
+  {
+    "objectID": "block5/mc_warmup_live_slides_en.html#data-support",
+    "href": "block5/mc_warmup_live_slides_en.html#data-support",
+    "title": "Slides: From discrete observations to spatial statements",
+    "section": "Data support",
+    "text": "Data support\nMeasurement points are zero-dimensional observations: they have a location, but no area.\nRaster cells, polygons, buffers, and zones represent spatial supports.\nA model always changes support:\nstation value -&gt; unsampled location or area\nThis support change must be visible in the interpretation."
+  },
+  {
+    "objectID": "block5/mc_warmup_live_slides_en.html#validation-target",
+    "href": "block5/mc_warmup_live_slides_en.html#validation-target",
+    "title": "Slides: From discrete observations to spatial statements",
+    "section": "Validation target",
+    "text": "Validation target\nValidation must match the claim.\nPredicting withheld station values is useful.\nBut it is not the same as proving that every part of a spatial statement is correct.\nstation prediction != full spatial process validation"
+  },
+  {
+    "objectID": "block5/mc_warmup_live_slides_en.html#project-material",
+    "href": "block5/mc_warmup_live_slides_en.html#project-material",
+    "title": "Slides: From discrete observations to spatial statements",
+    "section": "Project material",
+    "text": "Project material\nOpen the project materials from:\ngisma/EON-Obs2SpatState\nOpen the minimal script:\nmicroclimate_warmup_minimal_en.R\nThe script is deliberately small. It is not a full cleaning or modelling pipeline."
+  },
+  {
+    "objectID": "block5/mc_warmup_live_slides_en.html#prepared-but-real",
+    "href": "block5/mc_warmup_live_slides_en.html#prepared-but-real",
+    "title": "Slides: From discrete observations to spatial statements",
+    "section": "Prepared but real",
+    "text": "Prepared but real\nThe data are prepared so that the warmup can focus on the modelling step.\nIn real projects, this step only becomes defensible after checking:\nsensor behaviour\ntimestamps\nmissing values\nCRS\nDEM fit\nstation exposure\nvalid statement area\nThe warmup uses prepared data. It does not pretend that raw data work has disappeared."
+  },
+  {
+    "objectID": "block5/mc_warmup_live_slides_en.html#example-controls",
+    "href": "block5/mc_warmup_live_slides_en.html#example-controls",
+    "title": "Slides: From discrete observations to spatial statements",
+    "section": "Example controls",
+    "text": "Example controls\nMicroclimate varies over short distances.\nPossible controls include:\nelevation\nterrain form\nvegetation\nshade\nsurface cover\ncold-air drainage\nThis exercise deliberately reduces the case to temperature, position, and elevation."
+  },
+  {
+    "objectID": "block5/mc_warmup_live_slides_en.html#code-load-data",
+    "href": "block5/mc_warmup_live_slides_en.html#code-load-data",
+    "title": "Slides: From discrete observations to spatial statements",
+    "section": "Code: load data",
+    "text": "Code: load data\nlibrary(sf)\nlibrary(terra)\nlibrary(gstat)\nlibrary(randomForest)\n\nm   &lt;- readRDS(\"data/climdata.rds\")\ndem &lt;- rast(\"data/DEM1.tif\")\nnames(dem) &lt;- \"altitude\""
+  },
+  {
+    "objectID": "block5/mc_warmup_live_slides_en.html#code-set-target-variable",
+    "href": "block5/mc_warmup_live_slides_en.html#code-set-target-variable",
+    "title": "Slides: From discrete observations to spatial statements",
+    "section": "Code: set target variable",
+    "text": "Code: set target variable\nm$temp &lt;- m[[\"A20230830\"]]"
+  },
+  {
+    "objectID": "block5/mc_warmup_live_slides_en.html#code-crs-and-station-elevation",
+    "href": "block5/mc_warmup_live_slides_en.html#code-crs-and-station-elevation",
+    "title": "Slides: From discrete observations to spatial statements",
+    "section": "Code: CRS and station elevation",
+    "text": "Code: CRS and station elevation\nm &lt;- st_transform(m, crs(dem))\nm$altitude &lt;- terra::extract(dem, terra::vect(m))$altitude\n\npts &lt;- m[!is.na(m$temp) & !is.na(m$altitude),\n         c(\"temp\", \"altitude\")]"
+  },
+  {
+    "objectID": "block5/mc_warmup_live_slides_en.html#why-this-matters",
+    "href": "block5/mc_warmup_live_slides_en.html#why-this-matters",
+    "title": "Slides: From discrete observations to spatial statements",
+    "section": "Why this matters",
+    "text": "Why this matters\nOutside the supported area, the map would begin to act like extrapolation.\nThe valid statement area tells students where the result may be interpreted and where it should stop."
+  },
+  {
+    "objectID": "block5/mc_warmup_live_slides_en.html#code-valid-statement-area",
+    "href": "block5/mc_warmup_live_slides_en.html#code-valid-statement-area",
+    "title": "Slides: From discrete observations to spatial statements",
+    "section": "Code: valid statement area",
+    "text": "Code: valid statement area\narea &lt;- st_sf(\n  geometry = st_buffer(\n    st_convex_hull(st_union(st_geometry(pts))),\n    20\n  )\n)\n\ndem &lt;- crop(dem, vect(area))\ndem &lt;- mask(dem, vect(area))\nnames(dem) &lt;- \"altitude\""
+  },
+  {
+    "objectID": "block5/mc_warmup_live_slides_en.html#code-raster-cells-as-target-locations",
+    "href": "block5/mc_warmup_live_slides_en.html#code-raster-cells-as-target-locations",
+    "title": "Slides: From discrete observations to spatial statements",
+    "section": "Code: raster cells as target locations",
+    "text": "Code: raster cells as target locations\ngrid &lt;- as.data.frame(dem, xy = TRUE, cells = TRUE, na.rm = FALSE)\nnames(grid)[4] &lt;- \"altitude\"\ngrid &lt;- grid[!is.na(grid$altitude), ]\n\ngrid_sf &lt;- st_as_sf(\n  grid,\n  coords = c(\"x\", \"y\"),\n  crs = st_crs(pts),\n  remove = FALSE\n)"
+  },
+  {
+    "objectID": "block5/mc_warmup_live_slides_en.html#same-measurements-different-transfer-rules",
+    "href": "block5/mc_warmup_live_slides_en.html#same-measurements-different-transfer-rules",
+    "title": "Slides: From discrete observations to spatial statements",
+    "section": "Same measurements, different transfer rules",
+    "text": "Same measurements, different transfer rules\nVoronoi      nearest assignment\nIDW          distance weighting\nLM altitude  simple altitude relation\nRF           flexible data-driven relation\nThe important difference is not whether a method uses the measurements.\nAll methods use the measured temperatures.\nThe difference is how each method turns those measurements into a spatial statement."
+  },
+  {
+    "objectID": "block5/mc_warmup_live_slides_en.html#the-four-alternatives",
+    "href": "block5/mc_warmup_live_slides_en.html#the-four-alternatives",
+    "title": "Slides: From discrete observations to spatial statements",
+    "section": "The four alternatives",
+    "text": "The four alternatives\n\nVoronoi / nearest station uses only station position. The measured temperature of the nearest station is assigned to each prediction location.\nIDW / distance decay uses station position and distance. Nearby station temperatures receive more weight than distant station temperatures.\nLM altitude uses station temperature as the response variable and elevation as an explanatory variable. The fitted altitude relation is then applied to the DEM.\nRandom Forest uses station temperature as the response variable and coordinates plus elevation as explanatory variables. The fitted relation is then applied to all prediction locations."
+  },
+  {
+    "objectID": "block5/mc_warmup_live_slides_en.html#assumption",
+    "href": "block5/mc_warmup_live_slides_en.html#assumption",
+    "title": "Slides: From discrete observations to spatial statements",
+    "section": "Assumption",
+    "text": "Assumption\nThe assumption is piecewise constancy:\nwithin each area, the nearest observed value is taken as representative\nThe effective scale is determined by the station layout.\nThis is transparent and restrictive."
+  },
+  {
+    "objectID": "block5/mc_warmup_live_slides_en.html#why-useful",
+    "href": "block5/mc_warmup_live_slides_en.html#why-useful",
+    "title": "Slides: From discrete observations to spatial statements",
+    "section": "Why useful?",
+    "text": "Why useful?\nVoronoi makes the support problem visible.\nIt shows how the study area is partitioned by point location alone.\nIt is often a good first diagnostic when nothing beyond position is justified."
+  },
+  {
+    "objectID": "block5/mc_warmup_live_slides_en.html#code-voronoi-nearest-station",
+    "href": "block5/mc_warmup_live_slides_en.html#code-voronoi-nearest-station",
+    "title": "Slides: From discrete observations to spatial statements",
+    "section": "Code: Voronoi / nearest station",
+    "text": "Code: Voronoi / nearest station\nvor_df &lt;- gstat::idw(\n  temp ~ 1,\n  locations = pts,\n  newdata = grid_sf,\n  nmax = 1\n)\n\nmap_vor &lt;- make_map(vor_df$var1.pred, \"Voronoi\")"
+  },
+  {
+    "objectID": "block5/mc_warmup_live_slides_en.html#assumption-1",
+    "href": "block5/mc_warmup_live_slides_en.html#assumption-1",
+    "title": "Slides: From discrete observations to spatial statements",
+    "section": "Assumption",
+    "text": "Assumption\nThe assumption is gradual isotropic decay from observation points.\nThe spatial pattern is smoother than Voronoi but still mainly controlled by station geometry.\nIDW is useful when local spatial proximity is a plausible but limited assumption."
+  },
+  {
+    "objectID": "block5/mc_warmup_live_slides_en.html#what-idw-does-not-know",
+    "href": "block5/mc_warmup_live_slides_en.html#what-idw-does-not-know",
+    "title": "Slides: From discrete observations to spatial statements",
+    "section": "What IDW does not know",
+    "text": "What IDW does not know\nIDW does not know the process.\nIt does not know:\nwind\nshade\ncold-air drainage\nland cover\nsensor exposure\nThese factors only enter if they are indirectly reflected in the station values and station layout."
+  },
+  {
+    "objectID": "block5/mc_warmup_live_slides_en.html#code-idw",
+    "href": "block5/mc_warmup_live_slides_en.html#code-idw",
+    "title": "Slides: From discrete observations to spatial statements",
+    "section": "Code: IDW",
+    "text": "Code: IDW\nidw_df &lt;- gstat::idw(\n  temp ~ 1,\n  locations = pts,\n  newdata = grid_sf,\n  nmax = 4\n)\n\nmap_idw &lt;- make_map(idw_df$var1.pred, \"IDW\")"
+  },
+  {
+    "objectID": "block5/mc_warmup_live_slides_en.html#assumption-2",
+    "href": "block5/mc_warmup_live_slides_en.html#assumption-2",
+    "title": "Slides: From discrete observations to spatial statements",
+    "section": "Assumption",
+    "text": "Assumption\nPart of the temperature pattern is transferred through a relationship with altitude.\nThe predicted values therefore inherit the spatial structure of the DEM.\nThis can be defensible when elevation is a plausible driver at the scale of interest."
+  },
+  {
+    "objectID": "block5/mc_warmup_live_slides_en.html#boundary",
+    "href": "block5/mc_warmup_live_slides_en.html#boundary",
+    "title": "Slides: From discrete observations to spatial statements",
+    "section": "Boundary",
+    "text": "Boundary\nThis is not a richer microclimate model.\nIt is a deliberately narrow altitude transfer.\nLocal shade, vegetation, surface material, buildings, and drainage processes are outside this assumption unless they are indirectly expressed through elevation or station values."
+  },
+  {
+    "objectID": "block5/mc_warmup_live_slides_en.html#code-lm-altitude",
+    "href": "block5/mc_warmup_live_slides_en.html#code-lm-altitude",
+    "title": "Slides: From discrete observations to spatial statements",
+    "section": "Code: LM altitude",
+    "text": "Code: LM altitude\nfit_lm &lt;- lm(temp ~ altitude, data = st_drop_geometry(pts))\n\nmap_lm &lt;- predict(dem, fit_lm)\nnames(map_lm) &lt;- \"LM_altitude\""
+  },
+  {
+    "objectID": "block5/mc_warmup_live_slides_en.html#difference-to-the-other-methods",
+    "href": "block5/mc_warmup_live_slides_en.html#difference-to-the-other-methods",
+    "title": "Slides: From discrete observations to spatial statements",
+    "section": "Difference to the other methods",
+    "text": "Difference to the other methods\nVoronoi transfers the nearest measured value.\nIDW transfers measured values through distance weights.\nThe altitude model transfers measured values through one global elevation relation.\nRandom Forest can combine coordinate position and elevation in many local decision rules."
+  },
+  {
+    "objectID": "block5/mc_warmup_live_slides_en.html#warning",
+    "href": "block5/mc_warmup_live_slides_en.html#warning",
+    "title": "Slides: From discrete observations to spatial statements",
+    "section": "Warning",
+    "text": "Warning\nThe warning is not that Random Forest is generally wrong.\nThe warning is that technical flexibility can hide a weak spatial claim.\nWith few stations, the model may mainly learn where high and low values happened to occur in this specific station layout."
+  },
+  {
+    "objectID": "block5/mc_warmup_live_slides_en.html#what-low-error-cannot-prove",
+    "href": "block5/mc_warmup_live_slides_en.html#what-low-error-cannot-prove",
+    "title": "Slides: From discrete observations to spatial statements",
+    "section": "What low error cannot prove",
+    "text": "What low error cannot prove\nA low error value does not prove that the predicted pattern is a defensible microclimatic relation.\nThe result still has to be judged against:\nprocess question\nscale of use\nsampling layout\nvalid statement area\nvalidation target"
+  },
+  {
+    "objectID": "block5/mc_warmup_live_slides_en.html#code-random-forest",
+    "href": "block5/mc_warmup_live_slides_en.html#code-random-forest",
+    "title": "Slides: From discrete observations to spatial statements",
+    "section": "Code: Random Forest",
+    "text": "Code: Random Forest\nxy &lt;- st_coordinates(pts)\npts$x &lt;- xy[, 1]\npts$y &lt;- xy[, 2]\n\nfit_rf &lt;- randomForest(\n  temp ~ x + y + altitude,\n  data = st_drop_geometry(pts),\n  ntree = 200\n)\n\nrf_pred &lt;- predict(fit_rf, newdata = grid)\nmap_rf &lt;- make_map(rf_pred, \"RF_warning\")"
+  },
+  {
+    "objectID": "block5/mc_warmup_live_slides_en.html#loocv-the-idea",
+    "href": "block5/mc_warmup_live_slides_en.html#loocv-the-idea",
+    "title": "Slides: From discrete observations to spatial statements",
+    "section": "LOOCV: the idea",
+    "text": "LOOCV: the idea\nremove one station\nfit the model with the remaining stations\npredict the removed station\nstore the error\nrepeat for all stations\nThe difference between observed and predicted station values gives a point-based error."
+  },
+  {
+    "objectID": "block5/mc_warmup_live_slides_en.html#rmse",
+    "href": "block5/mc_warmup_live_slides_en.html#rmse",
+    "title": "Slides: From discrete observations to spatial statements",
+    "section": "RMSE",
+    "text": "RMSE\nRMSE summarizes these errors into one number.\n\\[\nRMSE = \\sqrt{\\frac{1}{n}\\sum_{i=1}^{n}(\\hat{y}_i - y_i)^2}\n\\]\nA lower RMSE means that, in this specific test, the withheld station values were predicted more closely.\nIt does not mean that the full spatial statement is correct."
+  },
+  {
+    "objectID": "block5/mc_warmup_live_slides_en.html#code-loocv-for-lm-and-rf",
+    "href": "block5/mc_warmup_live_slides_en.html#code-loocv-for-lm-and-rf",
+    "title": "Slides: From discrete observations to spatial statements",
+    "section": "Code: LOOCV for LM and RF",
+    "text": "Code: LOOCV for LM and RF\nrmse_fun &lt;- function(e) sqrt(mean(e * e, na.rm = TRUE))\n\nlm_cv &lt;- rep(NA, nrow(pts))\nrf_cv &lt;- rep(NA, nrow(pts))\n\nfor (i in 1:nrow(pts)) {\n  train &lt;- pts[-i, ]\n  test  &lt;- pts[i, ]\n\n  fit_lm_i &lt;- lm(temp ~ altitude, data = st_drop_geometry(train))\n  lm_cv[i] &lt;- predict(fit_lm_i, newdata = st_drop_geometry(test))\n\n  fit_rf_i &lt;- randomForest(\n    temp ~ x + y + altitude,\n    data = st_drop_geometry(train),\n    ntree = 200\n  )\n  rf_cv[i] &lt;- predict(fit_rf_i, newdata = st_drop_geometry(test))\n}"
+  },
+  {
+    "objectID": "block5/mc_warmup_live_slides_en.html#code-loocv-for-voronoi-and-idw",
+    "href": "block5/mc_warmup_live_slides_en.html#code-loocv-for-voronoi-and-idw",
+    "title": "Slides: From discrete observations to spatial statements",
+    "section": "Code: LOOCV for Voronoi and IDW",
+    "text": "Code: LOOCV for Voronoi and IDW\nvor_model &lt;- gstat(\n  temp ~ 1,\n  locations = pts,\n  nmax = 1,\n  set = list(idp = 2)\n)\n\nidw_model &lt;- gstat(\n  temp ~ 1,\n  locations = pts,\n  nmax = 4,\n  set = list(idp = 2)\n)\n\nvor_cv &lt;- gstat.cv(vor_model, nfold = nrow(pts))\nidw_cv &lt;- gstat.cv(idw_model, nfold = nrow(pts))"
+  },
+  {
+    "objectID": "block5/mc_warmup_live_slides_en.html#code-rmse-table",
+    "href": "block5/mc_warmup_live_slides_en.html#code-rmse-table",
+    "title": "Slides: From discrete observations to spatial statements",
+    "section": "Code: RMSE table",
+    "text": "Code: RMSE table\nrmse &lt;- data.frame(\n  model = c(\"LM altitude\", \"Voronoi\", \"IDW\", \"RF warning\"),\n  RMSE = c(\n    rmse_fun(pts$temp - lm_cv),\n    rmse_fun(vor_cv$residual),\n    rmse_fun(idw_cv$residual),\n    rmse_fun(pts$temp - rf_cv)\n  )\n)\n\nprint(rmse)"
+  },
+  {
+    "objectID": "block5/mc_warmup_live_slides_en.html#code-display",
+    "href": "block5/mc_warmup_live_slides_en.html#code-display",
+    "title": "Slides: From discrete observations to spatial statements",
+    "section": "Code: display",
+    "text": "Code: display\nmaps &lt;- c(map_vor, map_idw, map_lm, map_rf)\nz &lt;- range(c(pts$temp - 1, pts$temp + 1), na.rm = TRUE)\n\npar(mfrow = c(2, 2))\n\nfor (i in 1:nlyr(maps)) {\n  plot(maps[[i]], range = z, main = names(maps)[i])\n  points(pts, pch = 19, cex = 0.8)\n}\n\npar(mfrow = c(1, 1))"
+  },
+  {
+    "objectID": "block5/mc_warmup_live_slides_en.html#questions-for-each-result",
+    "href": "block5/mc_warmup_live_slides_en.html#questions-for-each-result",
+    "title": "Slides: From discrete observations to spatial statements",
+    "section": "Questions for each result",
+    "text": "Questions for each result\nAsk:\nWhich measured values are transferred into unsampled space?\nWhich assumption performs this transfer?\nWhich part of the area is supported by the station layout?\nWhere would the statement turn into extrapolation?\nWhich real process could explain the pattern?\nWhich process is missing?\nWhat exactly did LOOCV check?"
+  },
+  {
+    "objectID": "block5/mc_warmup_live_slides_en.html#what-loocv-checks",
+    "href": "block5/mc_warmup_live_slides_en.html#what-loocv-checks",
+    "title": "Slides: From discrete observations to spatial statements",
+    "section": "What LOOCV checks",
+    "text": "What LOOCV checks\nLOOCV forces the model to predict known measurements without using them directly.\nThat is useful.\nBut it remains a point-based test under the given station layout.\nIt does not prove that visible gradients or zones correspond to real microclimatic processes."
+  },
+  {
+    "objectID": "block5/mc_warmup_live_slides_en.html#rmse-as-criticism-prompt",
+    "href": "block5/mc_warmup_live_slides_en.html#rmse-as-criticism-prompt",
+    "title": "Slides: From discrete observations to spatial statements",
+    "section": "RMSE as criticism prompt",
+    "text": "RMSE as criticism prompt\nRMSE is a prompt for model criticism.\nA low RMSE can make a result worth inspecting.\nIt cannot replace the scientific question:\nIs this spatial statement defensible for the observed process,\nthe data support,\nthe scale of use,\nand the valid statement area?"
+  },
+  {
+    "objectID": "block5/mc_warmup_live_slides_en.html#before-modelling",
+    "href": "block5/mc_warmup_live_slides_en.html#before-modelling",
+    "title": "Slides: From discrete observations to spatial statements",
+    "section": "Before modelling",
+    "text": "Before modelling\nCheck:\nsensor plausibility\ntimestamp consistency\nmissing values\ncoordinate reference systems\nDEM reference\nstation exposure\nvalid statement area\ndocumentation\ndata provenance\nThese steps are not developed into a full cleaning workflow here.\nThey are conditions for valid spatial statements."
+  },
+  {
+    "objectID": "block5/mc_warmup_live_slides_en.html#final-point",
+    "href": "block5/mc_warmup_live_slides_en.html#final-point",
+    "title": "Slides: From discrete observations to spatial statements",
+    "section": "Final point",
+    "text": "Final point\nWhen this cannot be shown, the simpler and more transparent assumption is often the scientifically stronger one.\nA simple method is not a failure.\nIt can be the only honest spatial statement the data situation supports."
+  },
+  {
+    "objectID": "block5/mc_index.html",
+    "href": "block5/mc_index.html",
+    "title": "From discrete observations to spatial statements",
     "section": "",
-    "text": "In this tutorial we will learn how to work with LiDAR data to estimate forest structure. To do so we will compare two forest plots in Lower Saxony of varying structure: One in the Göttinger Forest and the other in the Solling. Though both plots are dominated by beech stands of similar age, they differ in structural properties like tree height, canopy cover and understory regeneration. By looking into the vertical distribution of lidar returns, we can capture these differences.",
+    "text": "This workshop shows how discrete observations become spatial statements.\nMicroclimate measurements are used as the example. The wider problem is general: point measurements, pixels, samples, segments, training areas, and selected timestamps never speak for space by themselves. A modelling assumption is needed.",
     "crumbs": [
-      "Block 3: Processing of 3D LiDAR data to assess forest structure",
-      "Processing of 3D Lidar data to assess forest structure"
+      "Block 5: Measuring and modelling microclimate with mobile climate station",
+      "From discrete observations to spatial statements"
     ]
   },
   {
-    "objectID": "block3_dobelmann/lidar_forest_structure.html#the-las-format",
-    "href": "block3_dobelmann/lidar_forest_structure.html#the-las-format",
-    "title": "Processing of 3D Lidar data to assess forest structure",
-    "section": "The LAS format",
-    "text": "The LAS format\nprint() reveals that the two files are not stored identically: the Göttingen data are LAS version 1.4, point data record format 7, the Solling data LAS version 1.2, point data record format 3. Both numbers matter:\n\nThe version defines the structure of the file as a whole — its header, the coordinate scaling, and which record formats are permitted.\nThe point data record format (PDRF) defines which attributes are stored for each individual point.\n\nWhat exactly changes between versions and formats is laid out in the specification, which is maintained by the American Society for Photogrammetry and Remote Sensing (ASPRS) — also the reason the classification codes (2 = ground, 5 = high vegetation, …) are known as ASPRS classes.\nFull specification: https://publicdocuments.asprs.org/las-v14-r16-2025",
-    "crumbs": [
-      "Block 3: Processing of 3D LiDAR data to assess forest structure",
-      "Processing of 3D Lidar data to assess forest structure"
-    ]
-  },
-  {
-    "objectID": "block3_dobelmann/lidar_forest_structure.html#pointcloud-visualisation",
-    "href": "block3_dobelmann/lidar_forest_structure.html#pointcloud-visualisation",
-    "title": "Processing of 3D Lidar data to assess forest structure",
-    "section": "Pointcloud visualisation",
-    "text": "Pointcloud visualisation\nplot() opens an interactive 3D window in which the point cloud can be rotated and zoomed. Colouring the points by height makes the vertical structure easier to read.\n\nplot(las_goe, color = \"Z\", bg = \"white\")\nplot(las_sol, color = \"Z\", bg = \"white\")\n\nBased on this first visual inspection, what structural differences can you see between the two stands?\n\nCutting a transect\nThe 3D view is useful for a first impression, but it is hard to compare two stands in a rotating window, so let’s cut a slice through the pointcloud and project it onto a plane, so we can see the vertical profile. We’ll use a little helper function that cuts a 5 m wide slice along the centre line of each point cloud.\n\n# helper function for transect-clipping\nget_transect &lt;- function(las) {\n  b &lt;- st_bbox(las)\n  cy &lt;- (b$ymin + b$ymax) / 2\n  clip_transect(las, c(b$xmin, cy), c(b$xmax, cy), width = 5, xz = TRUE)\n}\n\n# clipping the transects \nlas_tr_goe &lt;- get_transect(las_goe)\nlas_tr_sol &lt;- get_transect(las_sol)\n\nprint(las_tr_goe)\n\nclass        : LAS (v1.4 format 7)\nmemory       : 18 Mb \nextent       : 0, 60.07, 0, 4.9999 (xmin, xmax, ymin, ymax)\ncoord. ref.  : WGS 84 / UTM zone 32N \narea         : 300 m²\npoints       : 262 thousand points\ntype         : terrestrial\ndensity      : 873.44 points/m²\ndensity      : 384.73 pulses/m²\n\n\n\n\nPlotting the transects\n\n## plot the transects with ggplot\np_goe &lt;- ggplot(payload(las_tr_goe), aes(X,Z)) + \n  geom_point(size = 0.5, color = \"black\") + \n  labs(title = \"Göttinger Forest\",\n       x = \"X\",\n       y = \"Height (ASL)\"\n       ) + \n  coord_equal() + \n  theme_minimal() \n\np_sol &lt;- ggplot(payload(las_tr_sol), aes(X,Z)) + \n  geom_point(size = 0.5, color = \"black\") + \n  labs(title = \"Solling Forest\",\n       x = \"X\",\n       y = \"Height (ASL)\"\n  ) +\n  coord_equal() + \n  theme_minimal() \n\n# side by side plotting using patchwork \np_goe | p_sol\n\n\n\n\n\n\n\n\nThe profiles show the vertical structure, but the Z values are still heights above sea level (ASL). Together with the sloping terrain it is impossible to compare the actual tree heights between the two sites.\nNormalisation solves this: we subtract the terrain height from every point, so that Z becomes height above ground. normalize_height() overwrites the original Z value with the height above Ground (HAG)\nThe function needs two things: which classification code identifies the ground points (2 under the ASPRS scheme), and an algorithm to interpolate a continuous terrain surface from them. Here we use tin(), a Delaunay triangulation of the ground returns, from which the height beneath each point is then subtracted.\n\n\nNormalizing Height\n\n# normalize height \nlas_goe_norm &lt;- normalize_height(las = las_goe, \n                        algorithm = tin(), \n                        use_class = 2)\n\n\nlas_sol_norm &lt;- normalize_height(las = las_sol, \n                            algorithm = tin(), \n                            use_class = 2)\n\nWith the normalised heights in place, we can cut the transects again and plot HAG instead of Z. The ground now forms a flat line at zero, and the vertical axis reads directly as tree height.\nCompare the two profiles again. Which differences that were hidden by the terrain are now visible, and how tall are the tallest trees in each stand?\n\nlas_tr_goe &lt;- get_transect(las_goe_norm)\nlas_tr_sol &lt;- get_transect(las_sol_norm)\n\np_goe &lt;- ggplot(payload(las_tr_goe), aes(X,Z)) + \n  geom_point(size = 0.5, color = \"black\") + \n  labs(title = \"Göttinger Forest\",\n       x = \"X\",\n       y = \"Height Above Ground (HAG)\"\n       ) + \n  ylim(c(0,40)) + \n  coord_equal() + \n  theme_minimal() \n\np_sol &lt;- ggplot(payload(las_tr_sol), aes(X,Z)) + \n  geom_point(size = 0.5, color = \"black\") + \n  labs(title = \"Solling Forest\",\n       x = \"X\",\n       y = \"Height Above Ground (HAG)\"\n  ) +\n  ylim(c(0,40)) + \n  coord_equal() + \n  theme_minimal() \n\n# side by side plotting \np_goe | p_sol\n\n\n\n\n\n\n\n\n\n\nAdd vertical distribution of points\nTo quantify these structural differences, we can look into the vertical distribution of the returns. Let’s add a density curve beside each transect that shows how the points are spread over height. We keep only points above ground, since ground returns would otherwise produce a spike at zero that dominates the curve.\n\n# Height distributions\nh_goe &lt;- ggplot(subset(payload(las_goe_norm), Z &gt; 0), aes(Z)) +\n  geom_density(fill = \"grey70\", color = NA) +\n  xlim(0, 40) +\n  coord_flip() +\n  theme_void()\n\nh_sol &lt;- ggplot(subset(payload(las_sol_norm), Z &gt; 0), aes(Z)) +\n  geom_density(fill = \"grey70\", color = NA) +\n  xlim(0, 40) +\n  coord_flip() +\n  theme_void()\n\n# Combine\n(p_goe | h_goe) + plot_layout(widths = c(5, 1)) \n\n\n\n\n\n\n\n(p_sol | h_sol) + plot_layout(widths = c(5, 1))",
-    "crumbs": [
-      "Block 3: Processing of 3D LiDAR data to assess forest structure",
-      "Processing of 3D Lidar data to assess forest structure"
-    ]
-  },
-  {
-    "objectID": "block3_dobelmann/lidar_forest_structure.html#calculating-canopy-height-models",
-    "href": "block3_dobelmann/lidar_forest_structure.html#calculating-canopy-height-models",
-    "title": "Processing of 3D Lidar data to assess forest structure",
-    "section": "Calculating Canopy Height Models",
-    "text": "Calculating Canopy Height Models\nSo far we have looked at the point cloud from the side. Now let’s look at it from above. A Canopy Height Model (CHM) is a raster in which every cell holds the height of the highest point within it.\nThis only works because we normalised the point clouds earlier. Since Z is now height above ground, the raster values can be read directly as tree height.\nres = 0.5 sets the cell size in metres. The resolution should match the point density\ndsmtin() builds the surface by Delaunay triangulation of the first returns, the same principle we used for the terrain model in normalize_height(), only applied to the top of the canopy instead of the ground. Each raster cell then takes its value from the triangulated surface.\n\nchm_goe &lt;- rasterize_canopy(las_goe_norm, res = 0.5, algorithm = dsmtin())\n\nchm_sol &lt;- rasterize_canopy(las_sol_norm, res = 0.5, algorithm = dsmtin())\n\npar(mfrow = c(1,2))\nplot(chm_goe, main = \"CHM Göttingen\")\nplot(chm_sol, main = \"CHM Solling\")\n\n\n\n\n\n\n\n\nCompare the two rasters and consider:\n\nWhere is the canopy closed, and where do you see gaps reaching down towards the ground?\n\nHow variable is the canopy surface within each stand? A rough, uneven surface points to trees of differing age and size, a smooth one to a uniform stand.\n\nCan you identify individual crowns? In which of the two stands is this easier, and why?\n\n\nMetrics at the plot level\nWe can also put numbers to this visual impression. cloud_metrics() calculates a set of summary statistics for the whole point cloud. .stdmetrics_z is lidR’s standard collection of height metrics. Two filters are applied before calculating the metrics: Only first returns are used and points below zero are dropped.\n\n# first returns only, and drop points below the interpolated ground surface\nprep &lt;- function(las){\n  filter_poi(filter_first(las), Z &gt;= 0)\n             }\n\n# calculate metrics\nm_goe &lt;- cloud_metrics(prep(las_goe_norm), .stdmetrics_z)\nm_sol &lt;- cloud_metrics(prep(las_sol_norm), .stdmetrics_z)\n\n# here we use a selection of metrics only \nvars &lt;- c(\"zmax\", \"zmean\", \"zsd\", \"zq95\", \"pzabove2\", \"pzabovezmean\", \"zentropy\")\n\n# combine results \nround(rbind(Göttinger = unlist(m_goe)[vars],\n            Solling   = unlist(m_sol)[vars]), 2)\n\n           zmax zmean   zsd  zq95 pzabove2 pzabovezmean zentropy\nGöttinger 38.19 28.11 10.11 34.99    90.03        79.79     0.68\nSolling   33.31 21.54  6.89 27.89    93.99        67.65     0.79\n\n\nAre these results what you expected after looking at the transects? Which stand appeared structurally more diverse there, and which one comes out on top here?",
-    "crumbs": [
-      "Block 3: Processing of 3D LiDAR data to assess forest structure",
-      "Processing of 3D Lidar data to assess forest structure"
-    ]
-  },
-  {
-    "objectID": "block3_dobelmann/lidar_forest_structure.html#individual-tree-detection",
-    "href": "block3_dobelmann/lidar_forest_structure.html#individual-tree-detection",
-    "title": "Processing of 3D Lidar data to assess forest structure",
-    "section": "Individual Tree Detection",
-    "text": "Individual Tree Detection\nSo far we have described the stands as a whole. The next step is to resolve them into individual trees.\nThis happens in two steps. Individual Tree Detection (ITD) locates the position and height of each treetop. Individual Tree Segmentation (ITS) then assigns every return in the point cloud to one of those trees.\n\nThe local maximum filter\nThe standard approach is a Local Maximum Filter (LMF). A window is moved across the canopy surface, and wherever the centre cell is the highest point within that window, a tree top is recorded. The window size is a crucial parameter here.\nSince crown size scales with tree height, we let the window grow with the height of the point being tested. we calculate window size as a function of height.\n\n# variable window size as a function of height\nf &lt;- function(x) {\n  y &lt;- 2.6 * (-(exp(-0.08 * (x - 2)) - 1)) + 3\n  # after https://r-lidar.github.io/lidRbook/itd.html\n  y[x &lt; 2]  &lt;- 3\n  y[x &gt; 20] &lt;- 5\n  return(y)\n}\n\nheights &lt;- seq(0, 40, 0.5)\n\nplot(heights, f(heights), type = \"l\", ylim = c(0, 6),\n     xlab = \"Height above ground (m)\", ylab = \"Window size (m)\",\n     main = \"Variable window size\")\n\n\n\n\n\n\n\n\n\n\nRunning the tree detection\n\nttops_goe &lt;- locate_trees(chm_goe, lmf(ws = f, hmin = 5))\nttops_sol &lt;- locate_trees(chm_sol, lmf(ws = f, hmin = 5))\n\nhmin = 5 sets a detection floor at 5 m, so that understorey vegetation and noise near the ground are not counted as trees. The result is an sf object with one point per tree, carrying its coordinates and its height. We can add the tree tops on top of the Canopy Height model to visually inspect the results.\nWhich plot has more trees in total?\n\npar(mfrow = c(1, 2))\nplot(chm_goe, main = \"Göttinger Forest\")\nplot(st_geometry(ttops_goe), add = TRUE, pch = 3, cex = 0.6)\nplot(chm_sol, main = \"Solling\")\nplot(st_geometry(ttops_sol), add = TRUE, pch = 3, cex = 0.6)",
-    "crumbs": [
-      "Block 3: Processing of 3D LiDAR data to assess forest structure",
-      "Processing of 3D Lidar data to assess forest structure"
-    ]
-  },
-  {
-    "objectID": "block3_dobelmann/lidar_forest_structure.html#individual-tree-segmentation",
-    "href": "block3_dobelmann/lidar_forest_structure.html#individual-tree-segmentation",
-    "title": "Processing of 3D Lidar data to assess forest structure",
-    "section": "Individual Tree Segmentation",
-    "text": "Individual Tree Segmentation\nDetection gives us points. Segmentation gives us trees: every return in the cloud is assigned to one of the detected treetops.\ndalponte2016() works on the raster. Starting from each treetop, it grows a region outwards into neighbouring cells as long as they stay within a plausible height range for that crown, and stops where the surface drops off or another crown is reached. segment_trees() then transfers the resulting crown outlines back to the point cloud and writes a new attribute, treeID, into every point.\n\n# segment point cloud\nlas_goe_norm &lt;- segment_trees(las_goe_norm, dalponte2016(chm_goe, ttops_goe)) \nlas_sol_norm &lt;- segment_trees(las_sol_norm, dalponte2016(chm_sol, ttops_sol)) \n\nColouring the point cloud by treeID shows how well the delineation worked.\n\n# 3D plot\nx &lt;- plot(las_goe_norm, bg = \"white\", size = 4,color = \"treeID\")\nadd_treetops3d(x, ttops_goe)\n\nx &lt;- plot(las_sol_norm, bg = \"white\", size = 4,color = \"treeID\")\nadd_treetops3d(x, ttops_sol)\n\nDid the tree segmentation work equally well in both plots? If not, what could be the reason for the differences?\n\nMetrics at the tree level\nBecause every point now knows which tree it belongs to, we can derive attributes per tree rather than per plot:\n\ncrowns_goe &lt;- crown_metrics(las_goe_norm, func = .stdtreemetrics)\ncrowns_sol &lt;- crown_metrics(las_sol_norm, func = .stdtreemetrics)\n\ncrowns_goe\n\nSimple feature collection with 87 features and 4 fields\nGeometry type: POINT\nDimension:     XYZ\nBounding box:  xmin: 572440.7 ymin: 5709015 xmax: 572499.8 ymax: 5709075\nz_range:       zmin: 33.2567 zmax: 38.1914\nProjected CRS: WGS 84 / UTM zone 32N\nFirst 10 features:\n   treeID       Z npoints convhull_area                       geometry\n1       1 35.6074   29305        28.451 POINT Z (572464 5709075 35....\n2       2 35.1106   28892        27.443 POINT Z (572479.9 5709075 3...\n3       3 34.0275   21620        20.376 POINT Z (572447.4 5709075 3...\n4       4 35.6105   13285        18.301 POINT Z (572456.9 5709075 3...\n5       5 34.9293   43504        32.055 POINT Z (572472.9 5709074 3...\n6       6 35.2873   20382        26.778 POINT Z (572488.7 5709074 3...\n7       7 34.7442   19111        17.602 POINT Z (572497.2 5709074 3...\n8       8 34.7135     321         0.238 POINT Z (572440.7 5709074 3...\n9       9 35.6219   78760        57.968 POINT Z (572486.3 5709071 3...\n10     10 35.5465   36980        42.155 POINT Z (572455.1 5709072 3...\n\ncrowns_sol\n\nSimple feature collection with 68 features and 4 fields\nGeometry type: POINT\nDimension:     XYZ\nBounding box:  xmin: 540410.7 ymin: 5733562 xmax: 540470.4 ymax: 5733622\nz_range:       zmin: 25.7802 zmax: 33.3098\nProjected CRS: WGS 84 / UTM zone 32N\nFirst 10 features:\n   treeID       Z npoints convhull_area                       geometry\n1       1 28.9618   21970        21.789 POINT Z (540425.2 5733622 2...\n2       2 27.8154   31249        37.403 POINT Z (540460.2 5733622 2...\n3       3 27.9368   26667        29.971 POINT Z (540465.9 5733621 2...\n4       4 29.4133   43033        40.053 POINT Z (540433.9 5733620 2...\n5       5 29.5430   53989        48.467 POINT Z (540412.7 5733621 2...\n6       6 29.5167   55967        55.482 POINT Z (540448.5 5733619 2...\n7       7 30.0066   44581        46.869 POINT Z (540428.9 5733618 3...\n8       8 28.7825   50441        41.740 POINT Z (540420 5733618 28....\n9       9 26.9113   25725        32.666 POINT Z (540464.6 5733617 2...\n10     10 30.0389   62112        70.262 POINT Z (540451.1 5733616 3...\n\n\nThis gives us the height of each tree and the area of each tree crown.",
-    "crumbs": [
-      "Block 3: Processing of 3D LiDAR data to assess forest structure",
-      "Processing of 3D Lidar data to assess forest structure"
-    ]
-  },
-  {
-    "objectID": "block3_dobelmann/lidar_forest_structure.html#forest-structural-complexity-the-box-dimension",
-    "href": "block3_dobelmann/lidar_forest_structure.html#forest-structural-complexity-the-box-dimension",
-    "title": "Processing of 3D Lidar data to assess forest structure",
-    "section": "Forest structural complexity: the box dimension",
-    "text": "Forest structural complexity: the box dimension\nEvery metric so far captured one aspect of structure, and each ranked our two stands differently. The box dimension (Db) condenses all of it into a single number.\nThe point cloud is divided into cubic voxels, and the occupied ones are counted. The voxels are then made progressively smaller and the count repeated. Db is the slope of the regression between log box count and log inverse box size: A structure that is simple and open gains little from finer inspection and yields a low value. One that fills space with detail at every scale — many crowns, several layers, branches occupying the gaps between them — keeps producing newly occupied voxels and yields a high one. The R² of the fit indicates how consistently that behaviour repeats across scales.\nThe concept is covered in detail in the accompanying document on fractal complexity — here we simply apply it.\nfirst we filter only points above 0,5 m height, to exclude ground and ground vegetation.\n\n# X, Y, Z of all points above 0.5 m, from the normalised clouds\ncloud_goe &lt;- las_goe_norm@data[Z &gt; 0.5, 1:3]\ncloud_sol &lt;- las_sol_norm@data[Z &gt; 0.5, 1:3]\n\nlowercutoff = 0.1 sets the smallest voxel edge to 10 cm — below that the count would describe the scanner’s sampling pattern rather than the forest. rm_int_box = TRUE drops the single box enclosing the whole cloud, which carries no structural information but would leverage the slope.\n\ndb_goe &lt;- box_dimension(cloud_goe, lowercutoff = 0.1, rm_int_box = TRUE, plot = \"2D\")\n\n\n\n\n\n\n\ndb_sol &lt;- box_dimension(cloud_sol, lowercutoff = 0.1, rm_int_box = TRUE, plot = \"2D\")\n\n\n\n\n\n\n\n\nWhich stand has the higher box dimension, and does the ranking agree with zentropy and the transect profiles?\nOne caveat: the method was developed for terrestrial scans at centimetre resolution. Our drone data are denser than most ALS but far from that standard, and the closed Göttinger canopy occludes its understorey more than the Solling does. The comparison between our two plots holds — same sensor, same configuration — but the absolute values should not be compared to published TLS-based figures.",
-    "crumbs": [
-      "Block 3: Processing of 3D LiDAR data to assess forest structure",
-      "Processing of 3D Lidar data to assess forest structure"
-    ]
-  },
-  {
-    "objectID": "block2/index.html",
-    "href": "block2/index.html",
-    "title": "Understanding spatial patterns: how to measure and compare them",
+    "objectID": "block5/mc_index.html#start-here",
+    "href": "block5/mc_index.html#start-here",
+    "title": "From discrete observations to spatial statements",
     "section": "",
-    "text": "The workshop slides are at https://jakubnowosad.com/eon2026/.\n\n\n\nParticipants are expected to have a recent version of R and an R IDE installed.\n\nR: https://cloud.r-project.org/\nRStudio: https://posit.co/download/rstudio-desktop/#download\n\nInstall the required packages from CRAN before working on the exercises.\ninstall.packages(c(\n  \"terra\",\n  \"sf\",\n  \"landscapemetrics\",\n  \"motif\",\n  \"dplyr\",\n  \"tidyr\"\n))\n\n\n\nDownload the exercises repository as a ZIP file from https://github.com/Nowosad/eon2026-exercises/archive/refs/heads/main.zip and unpack it on your computer. Then open the .Rproj file in RStudio and start working on the exercises.",
+    "text": "This workshop shows how discrete observations become spatial statements.\nMicroclimate measurements are used as the example. The wider problem is general: point measurements, pixels, samples, segments, training areas, and selected timestamps never speak for space by themselves. A modelling assumption is needed.",
     "crumbs": [
-      "Block 2: Describing and comparing spatial patterns",
-      "Understanding spatial patterns: how to measure and compare them"
+      "Block 5: Measuring and modelling microclimate with mobile climate station",
+      "From discrete observations to spatial statements"
     ]
   },
   {
-    "objectID": "block2/index.html#slides",
-    "href": "block2/index.html#slides",
-    "title": "Understanding spatial patterns: how to measure and compare them",
-    "section": "",
-    "text": "The workshop slides are at https://jakubnowosad.com/eon2026/.",
+    "objectID": "block5/mc_index.html#slides",
+    "href": "block5/mc_index.html#slides",
+    "title": "From discrete observations to spatial statements",
+    "section": "Slides",
+    "text": "Slides\nStart with the slides.\n\nOpen slides",
     "crumbs": [
-      "Block 2: Describing and comparing spatial patterns",
-      "Understanding spatial patterns: how to measure and compare them"
+      "Block 5: Measuring and modelling microclimate with mobile climate station",
+      "From discrete observations to spatial statements"
     ]
   },
   {
-    "objectID": "block2/index.html#prerequisites",
-    "href": "block2/index.html#prerequisites",
-    "title": "Understanding spatial patterns: how to measure and compare them",
-    "section": "",
-    "text": "Participants are expected to have a recent version of R and an R IDE installed.\n\nR: https://cloud.r-project.org/\nRStudio: https://posit.co/download/rstudio-desktop/#download\n\nInstall the required packages from CRAN before working on the exercises.\ninstall.packages(c(\n  \"terra\",\n  \"sf\",\n  \"landscapemetrics\",\n  \"motif\",\n  \"dplyr\",\n  \"tidyr\"\n))",
+    "objectID": "block5/mc_index.html#optional-reader",
+    "href": "block5/mc_index.html#optional-reader",
+    "title": "From discrete observations to spatial statements",
+    "section": "Optional reader",
+    "text": "Optional reader\nThe reader gives the conceptual background. It is optional because the slides contain the core structure needed for the workshop.\n\nOpen reader",
     "crumbs": [
-      "Block 2: Describing and comparing spatial patterns",
-      "Understanding spatial patterns: how to measure and compare them"
+      "Block 5: Measuring and modelling microclimate with mobile climate station",
+      "From discrete observations to spatial statements"
     ]
   },
   {
-    "objectID": "block2/index.html#exercises",
-    "href": "block2/index.html#exercises",
-    "title": "Understanding spatial patterns: how to measure and compare them",
-    "section": "",
-    "text": "Download the exercises repository as a ZIP file from https://github.com/Nowosad/eon2026-exercises/archive/refs/heads/main.zip and unpack it on your computer. Then open the .Rproj file in RStudio and start working on the exercises.",
+    "objectID": "block5/mc_index.html#project-zip",
+    "href": "block5/mc_index.html#project-zip",
+    "title": "From discrete observations to spatial statements",
+    "section": "Project ZIP",
+    "text": "Project ZIP\nThe practical part runs from a local R project. Download and unpack the project ZIP before the session.\n\nDownload the project ZIP.\nUnpack the ZIP on your computer.\nOpen the project folder in RStudio or Positron.\nInstall the required R packages.\nRun the workshop scripts from the unpacked project folder.\n\n\nDownload project ZIP\nOpen data sources",
     "crumbs": [
-      "Block 2: Describing and comparing spatial patterns",
-      "Understanding spatial patterns: how to measure and compare them"
+      "Block 5: Measuring and modelling microclimate with mobile climate station",
+      "From discrete observations to spatial statements"
     ]
   },
   {
-    "objectID": "block1_magdon/01_Design_based_sampling.html",
-    "href": "block1_magdon/01_Design_based_sampling.html",
-    "title": "Design-based sampling in a Nutshell",
-    "section": "",
-    "text": "rm(list=ls())\nlibrary(sf)\nlibrary(terra)\nlibrary(ggplot2)\nlibrary(rprojroot)\n\ndata_dir=paste0(find_rstudio_root_file(),\"/block1_magdon/data/\")",
+    "objectID": "block5/mc_index.html#install-r-packages",
+    "href": "block5/mc_index.html#install-r-packages",
+    "title": "From discrete observations to spatial statements",
+    "section": "Install R packages",
+    "text": "Install R packages\nUse a recent R installation with RStudio or Positron.\nInstall the required packages before the session:\ninstall.packages(c(\n  \"sf\",\n  \"terra\",\n  \"gstat\",\n  \"randomForest\"\n))\nGeospatial packages such as sf and terra may require GDAL, GEOS, and PROJ support.",
     "crumbs": [
-      "Block 1: Introduction to forest monitoring",
-      "Design-based sampling in a Nutshell"
+      "Block 5: Measuring and modelling microclimate with mobile climate station",
+      "From discrete observations to spatial statements"
     ]
   },
   {
-    "objectID": "block1_magdon/01_Design_based_sampling.html#srs-estimators",
-    "href": "block1_magdon/01_Design_based_sampling.html#srs-estimators",
-    "title": "Design-based sampling in a Nutshell",
-    "section": "SRS-Estimators",
-    "text": "SRS-Estimators\nDepending on the sampling design (the way we select samples) the correct estimators need to be used to provide unbiased and precise estimates. The most simple estimators assume a pure random selection of samples -&gt; Simple Random Sampling (SRS).\nWe can estimate the mean value \\(\\bar{y}\\) as:\n\\[\n\\bar{y} = \\frac{\\sum_{i=1}^n{y_i}}{n}\n\\]\nand the standard deviation \\(s\\) as:\n\\[\n{s} =\\sqrt{\\frac{\\sum_{i=1}^n{(y_i-\\bar{y}})^2}{n-1}}\n\\]",
+    "objectID": "block5/mc_index.html#workshop-structure",
+    "href": "block5/mc_index.html#workshop-structure",
+    "title": "From discrete observations to spatial statements",
+    "section": "Workshop structure",
+    "text": "Workshop structure\nThe workshop has two parts.\nFirst, prepared station measurements and a DEM are used to produce four spatial statements: nearest station, distance decay, altitude relation, and flexible data-driven relation.\nSecond, the results are read critically. The central question is not which map looks best, but which statement is defensible for the data, the process, the statement area, the validation task, and the intended scale.",
     "crumbs": [
-      "Block 1: Introduction to forest monitoring",
-      "Design-based sampling in a Nutshell"
+      "Block 5: Measuring and modelling microclimate with mobile climate station",
+      "From discrete observations to spatial statements"
     ]
   },
   {
-    "objectID": "block1_magdon/01_Design_based_sampling.html#collect-a-random-sample",
-    "href": "block1_magdon/01_Design_based_sampling.html#collect-a-random-sample",
-    "title": "Design-based sampling in a Nutshell",
-    "section": "Collect a random sample",
-    "text": "Collect a random sample\nTo estimate the mean above ground in the National Park Harz, we start with a simple random sample. As common in forest inventories, we assume that our population is the infinite number of dimensionless points within the boundaries of the NP. Thus, for the sampling, random points are chosen. We start with a random sample with \\(n=100\\) sample points.\n\nn=100\n\n# Create n random points inside the boundary of the NP as a sample\np1 = sf::st_sample(np_boundary,size=n)\n\n# Plot the samples on the map\nggplot()+geom_sf(data=np_boundary,fill=NA)+\n  geom_sf(data=p1)\n\n\n\n\n\n\n\n\nFor our simulation study, we can now extract the true AGB observations at each sample location from the map and calculate the mean across all sample points. In a real forest monitoring project, however, this is not possible. Instead, you would have to visit each selected point in the field and manually record the observations.\n\n# Extract population and modelled values at sample locations\n\nsample &lt;- terra::extract((agb_pop),vect(p1))\nnames(sample)&lt;-c('ID','AGB')\n\nmean_est &lt;- mean(sample$AGB,na.rm=T)\nsd_est &lt;- sd(sample$AGB,na.rm=T)\n\nUsing the random sample we estimate the mean values \\(\\bar{y}\\) as 166.65 and the standard deviation \\(s\\)§ as \\(\\bar{y}\\) as 52.49.\n\n\n\n\n\\(\\bar{y}\\) (t/ha)\n\\(\\mu\\)(t/ha)\n\n\n\n\n166.65\n163.98\n\n\n\n\nAt this point, we cannot yet tell whether our estimate is unbiased. In other words: Is this result just due to chance, or would we obtain a similar estimate if we repeated the sampling with a different set of random points?",
+    "objectID": "block5/mc_index.html#core-message",
+    "href": "block5/mc_index.html#core-message",
+    "title": "From discrete observations to spatial statements",
+    "section": "Core message",
+    "text": "Core message\nA spatial result is not the observation itself. It is a modelled statement about space.",
     "crumbs": [
-      "Block 1: Introduction to forest monitoring",
-      "Design-based sampling in a Nutshell"
-    ]
-  },
-  {
-    "objectID": "block1_magdon/01_Design_based_sampling.html#estimate-mean-values",
-    "href": "block1_magdon/01_Design_based_sampling.html#estimate-mean-values",
-    "title": "Design-based sampling in a Nutshell",
-    "section": "Estimate mean values",
-    "text": "Estimate mean values\nTo check if our sample based estimates are unbiased we can run a small simulation and repeat the sampling \\(k\\) times.\n\n\n[1] 1\n[1] 2\n[1] 3\n[1] 4\n[1] 5\n[1] 6\n[1] 7\n[1] 8\n[1] 9\n[1] 10\n[1] 11\n[1] 12\n[1] 13\n[1] 14\n[1] 15\n[1] 16\n[1] 17\n[1] 18\n[1] 19\n[1] 20\n[1] 21\n[1] 22\n[1] 23\n[1] 24\n[1] 25\n[1] 26\n[1] 27\n[1] 28\n[1] 29\n[1] 30\n[1] 31\n[1] 32\n[1] 33\n[1] 34\n[1] 35\n[1] 36\n[1] 37\n[1] 38\n[1] 39\n[1] 40\n[1] 41\n[1] 42\n[1] 43\n[1] 44\n[1] 45\n[1] 46\n[1] 47\n[1] 48\n[1] 49\n[1] 50\n[1] 51\n[1] 52\n[1] 53\n[1] 54\n[1] 55\n[1] 56\n[1] 57\n[1] 58\n[1] 59\n[1] 60\n[1] 61\n[1] 62\n[1] 63\n[1] 64\n[1] 65\n[1] 66\n[1] 67\n[1] 68\n[1] 69\n[1] 70\n[1] 71\n[1] 72\n[1] 73\n[1] 74\n[1] 75\n[1] 76\n[1] 77\n[1] 78\n[1] 79\n[1] 80\n[1] 81\n[1] 82\n[1] 83\n[1] 84\n[1] 85\n[1] 86\n[1] 87\n[1] 88\n[1] 89\n[1] 90\n[1] 91\n[1] 92\n[1] 93\n[1] 94\n[1] 95\n[1] 96\n[1] 97\n[1] 98\n[1] 99\n[1] 100\n\n\n\n\n\n\n\n\n\nThe simulation shows two important aspects of SRS-Sampling:\n1.) the true mean (\\(\\mu\\)) and the estimated mean (\\(\\bar{y}\\)) of the \\(k\\) simulation runs are almost equal. Thus, we have shown that the SRS-Estimator is unbiased!\n2.) the distribution of the mean estimates over the \\(k=100\\) simulation runs approximates a normal distribution",
-    "crumbs": [
-      "Block 1: Introduction to forest monitoring",
-      "Design-based sampling in a Nutshell"
-    ]
-  },
-  {
-    "objectID": "block1_magdon/01_Design_based_sampling.html#precision-of-estimates",
-    "href": "block1_magdon/01_Design_based_sampling.html#precision-of-estimates",
-    "title": "Design-based sampling in a Nutshell",
-    "section": "Precision of estimates",
-    "text": "Precision of estimates\nThe figure above shows that the estimates from samples with n=100 points vary considerably. Most estimates are close to the true population mean, but some deviate substantially—for example, values around 180 t/ha. We would expect that a sampling method producing estimates with little variation is more precise than one producing highly variable estimates. When we express the variation of the estimated means as a standard deviation, we obtain what is called the standard error \\(S\\) —a key statistic for assessing the precision of an estimate.\nFor the mean value we can express the standard error of the mean \\(S_\\bar{y}\\) as:\n\\[\nS_\\bar{y} = \\frac{S}{\\sqrt{n}}\n\\]\nBut how does the sample size \\(n\\) affects the precision?\n\n\n[1] 1\n[1] 2\n[1] 3\n[1] 4\n[1] 5\n[1] 6\n[1] 7\n[1] 8\n[1] 9\n[1] 10\n[1] 11\n[1] 12\n[1] 13\n[1] 14\n[1] 15\n[1] 16\n[1] 17\n[1] 18\n[1] 19\n[1] 20\n[1] 21\n[1] 22\n[1] 23\n[1] 24\n[1] 25\n[1] 26\n[1] 27\n[1] 28\n[1] 29\n[1] 30\n[1] 31\n[1] 32\n[1] 33\n[1] 34\n[1] 35\n[1] 36\n[1] 37\n[1] 38\n[1] 39\n[1] 40\n[1] 41\n[1] 42\n[1] 43\n[1] 44\n[1] 45\n[1] 46\n[1] 47\n[1] 48\n[1] 49\n[1] 50\n[1] 51\n[1] 52\n[1] 53\n[1] 54\n[1] 55\n[1] 56\n[1] 57\n[1] 58\n[1] 59\n[1] 60\n[1] 61\n[1] 62\n[1] 63\n[1] 64\n[1] 65\n[1] 66\n[1] 67\n[1] 68\n[1] 69\n[1] 70\n[1] 71\n[1] 72\n[1] 73\n[1] 74\n[1] 75\n[1] 76\n[1] 77\n[1] 78\n[1] 79\n[1] 80\n[1] 81\n[1] 82\n[1] 83\n[1] 84\n[1] 85\n[1] 86\n[1] 87\n[1] 88\n[1] 89\n[1] 90\n[1] 91\n[1] 92\n[1] 93\n[1] 94\n[1] 95\n[1] 96\n[1] 97\n[1] 98\n[1] 99\n[1] 100\n\n\n\n\n\n\n\n\n\nWe see that the precision of the estimates is increased when we use more samples.\nHow much did the uncertainty decrease when we increase the sample size from \\(n=100\\) to \\(n=200\\)?\n\nsd(mean)/sd(mean_2)\n\n[1] 1.3079",
-    "crumbs": [
-      "Block 1: Introduction to forest monitoring",
-      "Design-based sampling in a Nutshell"
-    ]
-  },
-  {
-    "objectID": "block1_magdon/02_TrainingDataCollection.html",
-    "href": "block1_magdon/02_TrainingDataCollection.html",
-    "title": "Collection of training data for remote sensing modelling based on spectral variability",
-    "section": "",
-    "text": "#install.packages(\"devtools\")\n#devtools::install_github(\"bleutner/RStoolbox\")\nrm(list=ls())\nlibrary(sf)\n\nWarning: Paket 'sf' wurde unter R Version 4.5.3 erstellt\n\n\nLinking to GEOS 3.14.1, GDAL 3.12.1, PROJ 9.7.1; sf_use_s2() is TRUE\n\nlibrary(RStoolbox)\n\nWarning: Paket 'RStoolbox' wurde unter R Version 4.5.3 erstellt\n\n\nThis is version 1.0.2.3 of RStoolbox\n\nlibrary(terra)\n\nWarning: Paket 'terra' wurde unter R Version 4.5.3 erstellt\n\n\nterra 1.9.46\n\nlibrary(ggplot2)\n\nWarning: Paket 'ggplot2' wurde unter R Version 4.5.3 erstellt\n\nlibrary(mapview)\n\nWarning: Paket 'mapview' wurde unter R Version 4.5.3 erstellt\n\nlibrary(kableExtra)\n\nWarning: Paket 'kableExtra' wurde unter R Version 4.5.3 erstellt\n\nlibrary(dplyr)\n\nWarning: Paket 'dplyr' wurde unter R Version 4.5.3 erstellt\n\n\n\nAttache Paket: 'dplyr'\n\n\nDas folgende Objekt ist maskiert 'package:kableExtra':\n\n    group_rows\n\n\nDie folgenden Objekte sind maskiert von 'package:terra':\n\n    intersect, union\n\n\nDie folgenden Objekte sind maskiert von 'package:stats':\n\n    filter, lag\n\n\nDie folgenden Objekte sind maskiert von 'package:base':\n\n    intersect, setdiff, setequal, union\n\nlibrary(rprojroot)\n\nWarning: Paket 'rprojroot' wurde unter R Version 4.5.3 erstellt\n\nlibrary(patchwork)\n\nWarning: Paket 'patchwork' wurde unter R Version 4.5.3 erstellt\n\n\n\nAttache Paket: 'patchwork'\n\n\nDas folgende Objekt ist maskiert 'package:terra':\n\n    area\n\nlibrary(rmarkdown)\n\nWarning: Paket 'rmarkdown' wurde unter R Version 4.5.3 erstellt\n\nlibrary(tidyr)\n\nWarning: Paket 'tidyr' wurde unter R Version 4.5.3 erstellt\n\n\n\nAttache Paket: 'tidyr'\n\n\nDas folgende Objekt ist maskiert 'package:terra':\n\n    extract\n\nlibrary(tibble)\n\nWarning: Paket 'tibble' wurde unter R Version 4.5.3 erstellt",
-    "crumbs": [
-      "Block 1: Introduction to forest monitoring",
-      "Collection of training data for remote sensing based modelling"
-    ]
-  },
-  {
-    "objectID": "block1_magdon/02_TrainingDataCollection.html#dimension-reduction-pca",
-    "href": "block1_magdon/02_TrainingDataCollection.html#dimension-reduction-pca",
-    "title": "Collection of training data for remote sensing modelling based on spectral variability",
-    "section": "Dimension reduction (PCA)",
-    "text": "Dimension reduction (PCA)\nIn a fist step we reduce the dimensions of the 9 Sentinel-2 bands while maintaining most of the information, using a principal component analysis (PCA).\n\n# Calculation of the principlal components using the RStoolbox\npca&lt;-RStoolbox::rasterPCA(s2,nSamples = 5000, spca=TRUE )\n\n\n|---------|---------|---------|---------|\n=========================================\n                                          \n\n# Extracting the first three components\nrgb_raster &lt;- subset(pca$map, 1:3)\n\n# Function to scale the pixel values to 0-255\nscale_fun &lt;- function(x) {\n  # Calculation of the 2% and 98% quantile\n  q &lt;- quantile(x, c(0.02, 0.98), na.rm = TRUE)\n  \n  # scaling the values\n  x &lt;- (x - q[1]) / (q[2] - q[1]) * 255\n  \n  # restrict the values to 0-255\n  x &lt;- pmin(pmax(x, 0), 255)\n  \n  return(x)\n}\n\n# Scaling of each band\nfor (i in 1:3) {\n  rgb_raster[[i]] &lt;- app(rgb_raster[[i]], scale_fun)\n}\n\n# Plot the first three principal components as RGB\nplotRGB(rgb_raster, r = 1, g = 2, b = 3)\n\n\n\n\n\n\n\n# Show importance of componentes\nsummary(pca$model)\n\nImportance of components:\n                          Comp.1    Comp.2     Comp.3    Comp.4     Comp.5\nStandard deviation     2.2412546 1.8018943 0.67425744 0.3711219 0.26391425\nProportion of Variance 0.5581358 0.3607581 0.05051368 0.0153035 0.00773897\nCumulative Proportion  0.5581358 0.9188939 0.96940759 0.9847111 0.99245005\n                            Comp.6      Comp.7       Comp.8       Comp.9\nStandard deviation     0.175123529 0.163155072 0.0810277070 0.0640014828\nProportion of Variance 0.003407583 0.002957731 0.0007294988 0.0004551322\nCumulative Proportion  0.995857638 0.998815369 0.9995448678 1.0000000000\n\n\nFrom the output of the PCA we see that we can capture 92% of the variability with the first two components. Thus we will only use the PC1 and PC2 for the subsequent analysis.",
-    "crumbs": [
-      "Block 1: Introduction to forest monitoring",
-      "Collection of training data for remote sensing based modelling"
-    ]
-  },
-  {
-    "objectID": "block1_magdon/02_TrainingDataCollection.html#unsupervised-clustering",
-    "href": "block1_magdon/02_TrainingDataCollection.html#unsupervised-clustering",
-    "title": "Collection of training data for remote sensing modelling based on spectral variability",
-    "section": "Unsupervised clustering",
-    "text": "Unsupervised clustering\nIn the next step we run an unsupervised classification of the PC1 and PC2 to get a clustered map. For the unsupervised classification we need to take a decision on the number of classes/clusters to be created. Here we will take \\(n=5\\) classes. However, depending on the target variable this value need to be adjusted.\n\nset.seed(2222)\ncluster &lt;- RStoolbox::unsuperClass(pca$map[[c('PC1','PC2')]], nSamples = 100, nClasses = 5, nStarts = 5)\n\n\n## Plots\ncolors &lt;- rainbow(5)\nplot(cluster$map, col = colors, legend = TRUE, axes = TRUE, box =TRUE)\n\n\n\n\n\n\n\n\nThe map shows a clear spatial patterns related to the elevation, tree species and vitality status of the National Park forests.",
-    "crumbs": [
-      "Block 1: Introduction to forest monitoring",
-      "Collection of training data for remote sensing based modelling"
-    ]
-  },
-  {
-    "objectID": "block1_magdon/02_TrainingDataCollection.html#implement-a-plot-design",
-    "href": "block1_magdon/02_TrainingDataCollection.html#implement-a-plot-design",
-    "title": "Collection of training data for remote sensing modelling based on spectral variability",
-    "section": "Implement a plot design",
-    "text": "Implement a plot design\nTo extract pixel values for the sample location we need to define a plot design. For this exercise we will simulate a circular fixed area plot with a radius of 13 m.\n\n# Create a training by extracting the mean value of all pixels touching\n# a buffered area with 13m around the plot center\n\nplots &lt;- sf::st_buffer(sf_samples,dist = 13)\ntrain&lt;-terra::extract(s2,plots,fun='mean',bind=FALSE,na.rm=TRUE)\n\nplots &lt;- plots %&gt;% mutate(ID=row_number())\ntrain &lt;- plots %&gt;% left_join(train, by= \"ID\")\nmapview::mapview(train, zcol=\"class_unsupervised\",\n        map.types = c(\"Esri.WorldShadedRelief\", \"OpenStreetMap.DE\"))+\n  mapview(np_boundary,alpha.regions = 0.2, aplha = 1)",
-    "crumbs": [
-      "Block 1: Introduction to forest monitoring",
-      "Collection of training data for remote sensing based modelling"
-    ]
-  },
-  {
-    "objectID": "block3_dobelmann/Box_dimension.html",
-    "href": "block3_dobelmann/Box_dimension.html",
-    "title": "Measuring Tree/Forest Structural Complexity with (Fractal) Box Dimension \\((D_b)\\) from 3D Point Clouds",
-    "section": "",
-    "text": "Clouds are not spheres, mountains are not cones, coastlines are not circles, and bark is not smooth, nor does lightning travel in a straight line.” - Mandelbrot (1983)\nA fractal is a geometric object that shows self-similarity; its parts resemble the whole, no matter the scale of observation. Imagine zooming in on a fern leaf, a coastline, or a broccoli head: at each magnification, similar patterns reappear. Unlike simple geometric figures, fractals are irregular and infinitely nested in structure. They are found widely in nature and are best described not by whole-number dimensions (like 1D lines or 2D surfaces), but by fractional, non-integer dimensions, known as the fractal dimension. This dimension is crucial for quantifying the complexity of self-similar systems, whether exact (mathematical fractals) or statistical (natural systems).\n\n\n\nKoch Curve\n\n\n\n\n\nSierpinski triangle\n\n\n\n\nThe fractal dimension quantifies how complex and space-filling a pattern is. Unlike familiar Euclidean dimensions (1D for a line, 2D for a surface), fractal dimensions can take non-integer values between whole numbers.\nSeveral methods exist to estimate fractal dimension, but the box-counting method is the most widely used. In this approach, the object is covered with boxes of a certain size, and the number of boxes required to contain the shape is counted. This process is repeated with progressively smaller boxes.\nIf the logarithm of the number of boxes is plotted against the logarithm of the box size, the result is typically a straight line. The slope of this line gives the fractal dimension: steeper slopes correspond to more intricate, space-filling structures.\n\n\n\nBecause trees are fractal structures.\n\n\n\nTrees are fractals\n\n\nTrees exhibit self-similar branching patterns: smaller branches resemble the overall structure of the tree. While we can measure conventional forestry attributes such as height, DBH, basal area, crown dimensions, and volume, these do not capture overall structural complexity. To do this, we turn to fractal analysis—specifically the box dimension.\n\n\n\n\n0-D: point\n\n1-D: line\n\n2-D: plane/filled region\n\n3-D: solid volume\n\nFractal dimension fills the gaps between integers and quantifies how space-filling a structure is.\n\nA classic example is the Menger sponge, which has a box dimension ≈ 2.7268. Despite its infinite surface area, it has zero volume, an extreme case of fractal geometry.\n\n\n\nThe box dimension is a method of fractal analysis used to quantify the structural complexity of an object, often derived from 3D point cloud data. The idea is simple:\n- Cover the object with boxes of decreasing size.\n- Count how many boxes are required to contain the shape.\n- Plot the logarithm of the box count against the logarithm of box size.\nIf the relationship is linear, the slope of that line gives the box dimension.\n\n\n\nSeidel et al 2019\n\n\nFormally, if the box size is \\((\\varepsilon)\\) and the number of occupied boxes is \\(N(\\varepsilon)\\):\n\\[\nN(\\varepsilon) \\propto \\varepsilon^{-D_b}\n\\quad\\Rightarrow\\quad\n\\log N(\\varepsilon) = D_b \\,\\log(1/\\varepsilon) + c\n\\]\nWhere: - \\((D_b)\\) is the box dimension.\n- For 3D point clouds:\n- \\((D_b \\approx 1)\\): line-like structures\n- \\((D_b \\approx 2)\\): sheet-like structures\n- \\((D_b \\approx 3)\\): volume-filling structures\n- Trees typically have \\((D_b)\\) between 1.0 and 2.2 (method and data dependent).\n- A higher \\(R^2\\) of the fit indicates stronger self-similarity across scales.\n\n\nBox dimension estimates depend on: 1. Point density/resolution\n2. Occlusion or shadowing\n3. Extent of the scanned scene\n4. Scale interval chosen for fitting\nHigh-quality point clouds (low occlusion, ~0–1 cm spacing) are optimal for robust estimates.\n\n\n\nIn practice, box-counting in 3D is implemented as voxel counting. Voxels are the 3D equivalent of pixels, small cubic volume elements. A point cloud is discretized into a voxel grid, and the occupied voxels are counted at multiple scales.\n\n\n\nSource Seidel et al (2020)\n\n\nThis process converts a 3D model or point cloud into a grid of voxels, each labeled as “occupied” or “empty.”\n\n\n\nSource: Dorji et al (2021)\n\n\n\n\n\n\nBox dimension ranges from 1 (line) to 3 (solid cube).\n\nA dimension of 2.72 corresponds to the Menger sponge (infinite surface, zero volume).\n\nMost trees fall between 1.0 and 2.2, reflecting their branching complexity.\n\nLow resolution → oversimplification (underestimates (\\(D_b\\))).\n\nHigh occlusion → too few boxes at small scales (also biases (\\(D_b\\))).\n\nThus, careful preprocessing and high-quality scans are critical for meaningful box-dimension analysis.\n\n\n\nTo apply this concept to forests, we calculate the box-dimension (\\((D_b\\)) as a measure of tree or stand structural complexity using the rTwig package in R.\nThe algorithm for \\((D_b)\\) was developed initially in Mathematica (Wolfram Research, Champaign, IL, USA) (Seidel, 2018; Ehbrecht, 2019; Basnet, 2025). It integrates all elements of a scanned scene into a single value, thereby fully leveraging the potential of 3D laser scanning.\nIn short:\n- The point cloud of a tree or stand is enclosed in boxes of decreasing size.\n- For each box size, the number of occupied boxes is counted.\n- The scaling relationship between box size and number of boxes gives the box dimension $(D_b$).\nThis workflow is implemented in the rTwig R package, making it straightforward to estimate structural complexity directly from normalized point cloud data.\n\n\n\n\n\nMandelbrot, B. B. (1983). The Fractal Geometry of Nature. W.H. Freeman.\nSeidel, D. et al. (2019). How a measure of tree structural complexity relates to architectural benefit-to-cost ratio, light availability, and growth of trees. Ecology and Evolution, 9(12), 7134–7142. https://doi.org/10.1002/ece3.5281\nSeidel, D., Annighöfer, P., Ehbrecht, M., Magdon, P., Wöllauer, S., & Ammer, C. (2020). Deriving Stand Structural Complexity from Airborne Laser Scanning Data—What Does It Tell Us about a Forest? Remote Sensing, 12(11), 1854. https://doi.org/10.3390/rs12111854\nDorji, Y., Schuldt, B., Neudam, L., Dorji, R., Middleby, K., Isasa, E., & Körber, K. et al. (2021). Trees, 35(4), 1385–1398. https://doi.org/10.1007/s00468-021-02124-9\nBasnet, P., Das, S., Hölscher, D., Pierick, K., & Seidel, D. (2025). Drivers of forest structural complexity in mountain forests of Nepal. Mountain Research and Development, 45(1), R1–R10. https://doi.org/10.1659/mrd.2024.00009\nrTwig vignette (Box Dimension): https://cran.r-project.org/web/packages/rTwig/vignettes/Box-Dimension.html",
-    "crumbs": [
-      "Block 3: Processing of 3D LiDAR data to assess forest structure",
-      "Measuring Tree/Forest Structural Complexity with (Fractal) Box Dimension $(D_b)$ from 3D Point Clouds"
-    ]
-  },
-  {
-    "objectID": "block3_dobelmann/Box_dimension.html#how-do-you-measure-the-fractal-dimension",
-    "href": "block3_dobelmann/Box_dimension.html#how-do-you-measure-the-fractal-dimension",
-    "title": "Measuring Tree/Forest Structural Complexity with (Fractal) Box Dimension \\((D_b)\\) from 3D Point Clouds",
-    "section": "",
-    "text": "The fractal dimension quantifies how complex and space-filling a pattern is. Unlike familiar Euclidean dimensions (1D for a line, 2D for a surface), fractal dimensions can take non-integer values between whole numbers.\nSeveral methods exist to estimate fractal dimension, but the box-counting method is the most widely used. In this approach, the object is covered with boxes of a certain size, and the number of boxes required to contain the shape is counted. This process is repeated with progressively smaller boxes.\nIf the logarithm of the number of boxes is plotted against the logarithm of the box size, the result is typically a straight line. The slope of this line gives the fractal dimension: steeper slopes correspond to more intricate, space-filling structures.",
-    "crumbs": [
-      "Block 3: Processing of 3D LiDAR data to assess forest structure",
-      "Measuring Tree/Forest Structural Complexity with (Fractal) Box Dimension $(D_b)$ from 3D Point Clouds"
-    ]
-  },
-  {
-    "objectID": "block3_dobelmann/Box_dimension.html#why-are-we-discussing-this-here",
-    "href": "block3_dobelmann/Box_dimension.html#why-are-we-discussing-this-here",
-    "title": "Measuring Tree/Forest Structural Complexity with (Fractal) Box Dimension \\((D_b)\\) from 3D Point Clouds",
-    "section": "",
-    "text": "Because trees are fractal structures.\n\n\n\nTrees are fractals\n\n\nTrees exhibit self-similar branching patterns: smaller branches resemble the overall structure of the tree. While we can measure conventional forestry attributes such as height, DBH, basal area, crown dimensions, and volume, these do not capture overall structural complexity. To do this, we turn to fractal analysis—specifically the box dimension.",
-    "crumbs": [
-      "Block 3: Processing of 3D LiDAR data to assess forest structure",
-      "Measuring Tree/Forest Structural Complexity with (Fractal) Box Dimension $(D_b)$ from 3D Point Clouds"
-    ]
-  },
-  {
-    "objectID": "block3_dobelmann/Box_dimension.html#from-euclidean-to-fractal-dimension-quick-intuition",
-    "href": "block3_dobelmann/Box_dimension.html#from-euclidean-to-fractal-dimension-quick-intuition",
-    "title": "Measuring Tree/Forest Structural Complexity with (Fractal) Box Dimension \\((D_b)\\) from 3D Point Clouds",
-    "section": "",
-    "text": "0-D: point\n\n1-D: line\n\n2-D: plane/filled region\n\n3-D: solid volume\n\nFractal dimension fills the gaps between integers and quantifies how space-filling a structure is.\n\nA classic example is the Menger sponge, which has a box dimension ≈ 2.7268. Despite its infinite surface area, it has zero volume, an extreme case of fractal geometry.",
-    "crumbs": [
-      "Block 3: Processing of 3D LiDAR data to assess forest structure",
-      "Measuring Tree/Forest Structural Complexity with (Fractal) Box Dimension $(D_b)$ from 3D Point Clouds"
-    ]
-  },
-  {
-    "objectID": "block3_dobelmann/Box_dimension.html#box-dimension",
-    "href": "block3_dobelmann/Box_dimension.html#box-dimension",
-    "title": "Measuring Tree/Forest Structural Complexity with (Fractal) Box Dimension \\((D_b)\\) from 3D Point Clouds",
-    "section": "",
-    "text": "The box dimension is a method of fractal analysis used to quantify the structural complexity of an object, often derived from 3D point cloud data. The idea is simple:\n- Cover the object with boxes of decreasing size.\n- Count how many boxes are required to contain the shape.\n- Plot the logarithm of the box count against the logarithm of box size.\nIf the relationship is linear, the slope of that line gives the box dimension.\n\n\n\nSeidel et al 2019\n\n\nFormally, if the box size is \\((\\varepsilon)\\) and the number of occupied boxes is \\(N(\\varepsilon)\\):\n\\[\nN(\\varepsilon) \\propto \\varepsilon^{-D_b}\n\\quad\\Rightarrow\\quad\n\\log N(\\varepsilon) = D_b \\,\\log(1/\\varepsilon) + c\n\\]\nWhere: - \\((D_b)\\) is the box dimension.\n- For 3D point clouds:\n- \\((D_b \\approx 1)\\): line-like structures\n- \\((D_b \\approx 2)\\): sheet-like structures\n- \\((D_b \\approx 3)\\): volume-filling structures\n- Trees typically have \\((D_b)\\) between 1.0 and 2.2 (method and data dependent).\n- A higher \\(R^2\\) of the fit indicates stronger self-similarity across scales.\n\n\nBox dimension estimates depend on: 1. Point density/resolution\n2. Occlusion or shadowing\n3. Extent of the scanned scene\n4. Scale interval chosen for fitting\nHigh-quality point clouds (low occlusion, ~0–1 cm spacing) are optimal for robust estimates.\n\n\n\nIn practice, box-counting in 3D is implemented as voxel counting. Voxels are the 3D equivalent of pixels, small cubic volume elements. A point cloud is discretized into a voxel grid, and the occupied voxels are counted at multiple scales.\n\n\n\nSource Seidel et al (2020)\n\n\nThis process converts a 3D model or point cloud into a grid of voxels, each labeled as “occupied” or “empty.”\n\n\n\nSource: Dorji et al (2021)\n\n\n\n\n\n\nBox dimension ranges from 1 (line) to 3 (solid cube).\n\nA dimension of 2.72 corresponds to the Menger sponge (infinite surface, zero volume).\n\nMost trees fall between 1.0 and 2.2, reflecting their branching complexity.\n\nLow resolution → oversimplification (underestimates (\\(D_b\\))).\n\nHigh occlusion → too few boxes at small scales (also biases (\\(D_b\\))).\n\nThus, careful preprocessing and high-quality scans are critical for meaningful box-dimension analysis.\n\n\n\nTo apply this concept to forests, we calculate the box-dimension (\\((D_b\\)) as a measure of tree or stand structural complexity using the rTwig package in R.\nThe algorithm for \\((D_b)\\) was developed initially in Mathematica (Wolfram Research, Champaign, IL, USA) (Seidel, 2018; Ehbrecht, 2019; Basnet, 2025). It integrates all elements of a scanned scene into a single value, thereby fully leveraging the potential of 3D laser scanning.\nIn short:\n- The point cloud of a tree or stand is enclosed in boxes of decreasing size.\n- For each box size, the number of occupied boxes is counted.\n- The scaling relationship between box size and number of boxes gives the box dimension $(D_b$).\nThis workflow is implemented in the rTwig R package, making it straightforward to estimate structural complexity directly from normalized point cloud data.",
-    "crumbs": [
-      "Block 3: Processing of 3D LiDAR data to assess forest structure",
-      "Measuring Tree/Forest Structural Complexity with (Fractal) Box Dimension $(D_b)$ from 3D Point Clouds"
-    ]
-  },
-  {
-    "objectID": "block3_dobelmann/Box_dimension.html#references",
-    "href": "block3_dobelmann/Box_dimension.html#references",
-    "title": "Measuring Tree/Forest Structural Complexity with (Fractal) Box Dimension \\((D_b)\\) from 3D Point Clouds",
-    "section": "",
-    "text": "Mandelbrot, B. B. (1983). The Fractal Geometry of Nature. W.H. Freeman.\nSeidel, D. et al. (2019). How a measure of tree structural complexity relates to architectural benefit-to-cost ratio, light availability, and growth of trees. Ecology and Evolution, 9(12), 7134–7142. https://doi.org/10.1002/ece3.5281\nSeidel, D., Annighöfer, P., Ehbrecht, M., Magdon, P., Wöllauer, S., & Ammer, C. (2020). Deriving Stand Structural Complexity from Airborne Laser Scanning Data—What Does It Tell Us about a Forest? Remote Sensing, 12(11), 1854. https://doi.org/10.3390/rs12111854\nDorji, Y., Schuldt, B., Neudam, L., Dorji, R., Middleby, K., Isasa, E., & Körber, K. et al. (2021). Trees, 35(4), 1385–1398. https://doi.org/10.1007/s00468-021-02124-9\nBasnet, P., Das, S., Hölscher, D., Pierick, K., & Seidel, D. (2025). Drivers of forest structural complexity in mountain forests of Nepal. Mountain Research and Development, 45(1), R1–R10. https://doi.org/10.1659/mrd.2024.00009\nrTwig vignette (Box Dimension): https://cran.r-project.org/web/packages/rTwig/vignettes/Box-Dimension.html",
-    "crumbs": [
-      "Block 3: Processing of 3D LiDAR data to assess forest structure",
-      "Measuring Tree/Forest Structural Complexity with (Fractal) Box Dimension $(D_b)$ from 3D Point Clouds"
+      "Block 5: Measuring and modelling microclimate with mobile climate station",
+      "From discrete observations to spatial statements"
     ]
   },
   {
@@ -449,5 +545,431 @@
       "Block 4  Machine learning and validation",
       "Machine learning for remote sensing applications"
     ]
+  },
+  {
+    "objectID": "block3_dobelmann/Box_dimension.html",
+    "href": "block3_dobelmann/Box_dimension.html",
+    "title": "Measuring Tree/Forest Structural Complexity with (Fractal) Box Dimension \\((D_b)\\) from 3D Point Clouds",
+    "section": "",
+    "text": "Clouds are not spheres, mountains are not cones, coastlines are not circles, and bark is not smooth, nor does lightning travel in a straight line.” - Mandelbrot (1983)\nA fractal is a geometric object that shows self-similarity; its parts resemble the whole, no matter the scale of observation. Imagine zooming in on a fern leaf, a coastline, or a broccoli head: at each magnification, similar patterns reappear. Unlike simple geometric figures, fractals are irregular and infinitely nested in structure. They are found widely in nature and are best described not by whole-number dimensions (like 1D lines or 2D surfaces), but by fractional, non-integer dimensions, known as the fractal dimension. This dimension is crucial for quantifying the complexity of self-similar systems, whether exact (mathematical fractals) or statistical (natural systems).\n\n\n\nKoch Curve\n\n\n\n\n\nSierpinski triangle\n\n\n\n\nThe fractal dimension quantifies how complex and space-filling a pattern is. Unlike familiar Euclidean dimensions (1D for a line, 2D for a surface), fractal dimensions can take non-integer values between whole numbers.\nSeveral methods exist to estimate fractal dimension, but the box-counting method is the most widely used. In this approach, the object is covered with boxes of a certain size, and the number of boxes required to contain the shape is counted. This process is repeated with progressively smaller boxes.\nIf the logarithm of the number of boxes is plotted against the logarithm of the box size, the result is typically a straight line. The slope of this line gives the fractal dimension: steeper slopes correspond to more intricate, space-filling structures.\n\n\n\nBecause trees are fractal structures.\n\n\n\nTrees are fractals\n\n\nTrees exhibit self-similar branching patterns: smaller branches resemble the overall structure of the tree. While we can measure conventional forestry attributes such as height, DBH, basal area, crown dimensions, and volume, these do not capture overall structural complexity. To do this, we turn to fractal analysis—specifically the box dimension.\n\n\n\n\n0-D: point\n\n1-D: line\n\n2-D: plane/filled region\n\n3-D: solid volume\n\nFractal dimension fills the gaps between integers and quantifies how space-filling a structure is.\n\nA classic example is the Menger sponge, which has a box dimension ≈ 2.7268. Despite its infinite surface area, it has zero volume, an extreme case of fractal geometry.\n\n\n\nThe box dimension is a method of fractal analysis used to quantify the structural complexity of an object, often derived from 3D point cloud data. The idea is simple:\n- Cover the object with boxes of decreasing size.\n- Count how many boxes are required to contain the shape.\n- Plot the logarithm of the box count against the logarithm of box size.\nIf the relationship is linear, the slope of that line gives the box dimension.\n\n\n\nSeidel et al 2019\n\n\nFormally, if the box size is \\((\\varepsilon)\\) and the number of occupied boxes is \\(N(\\varepsilon)\\):\n\\[\nN(\\varepsilon) \\propto \\varepsilon^{-D_b}\n\\quad\\Rightarrow\\quad\n\\log N(\\varepsilon) = D_b \\,\\log(1/\\varepsilon) + c\n\\]\nWhere: - \\((D_b)\\) is the box dimension.\n- For 3D point clouds:\n- \\((D_b \\approx 1)\\): line-like structures\n- \\((D_b \\approx 2)\\): sheet-like structures\n- \\((D_b \\approx 3)\\): volume-filling structures\n- Trees typically have \\((D_b)\\) between 1.0 and 2.2 (method and data dependent).\n- A higher \\(R^2\\) of the fit indicates stronger self-similarity across scales.\n\n\nBox dimension estimates depend on: 1. Point density/resolution\n2. Occlusion or shadowing\n3. Extent of the scanned scene\n4. Scale interval chosen for fitting\nHigh-quality point clouds (low occlusion, ~0–1 cm spacing) are optimal for robust estimates.\n\n\n\nIn practice, box-counting in 3D is implemented as voxel counting. Voxels are the 3D equivalent of pixels, small cubic volume elements. A point cloud is discretized into a voxel grid, and the occupied voxels are counted at multiple scales.\n\n\n\nSource Seidel et al (2020)\n\n\nThis process converts a 3D model or point cloud into a grid of voxels, each labeled as “occupied” or “empty.”\n\n\n\nSource: Dorji et al (2021)\n\n\n\n\n\n\nBox dimension ranges from 1 (line) to 3 (solid cube).\n\nA dimension of 2.72 corresponds to the Menger sponge (infinite surface, zero volume).\n\nMost trees fall between 1.0 and 2.2, reflecting their branching complexity.\n\nLow resolution → oversimplification (underestimates (\\(D_b\\))).\n\nHigh occlusion → too few boxes at small scales (also biases (\\(D_b\\))).\n\nThus, careful preprocessing and high-quality scans are critical for meaningful box-dimension analysis.\n\n\n\nTo apply this concept to forests, we calculate the box-dimension (\\((D_b\\)) as a measure of tree or stand structural complexity using the rTwig package in R.\nThe algorithm for \\((D_b)\\) was developed initially in Mathematica (Wolfram Research, Champaign, IL, USA) (Seidel, 2018; Ehbrecht, 2019; Basnet, 2025). It integrates all elements of a scanned scene into a single value, thereby fully leveraging the potential of 3D laser scanning.\nIn short:\n- The point cloud of a tree or stand is enclosed in boxes of decreasing size.\n- For each box size, the number of occupied boxes is counted.\n- The scaling relationship between box size and number of boxes gives the box dimension $(D_b$).\nThis workflow is implemented in the rTwig R package, making it straightforward to estimate structural complexity directly from normalized point cloud data.\n\n\n\n\n\nMandelbrot, B. B. (1983). The Fractal Geometry of Nature. W.H. Freeman.\nSeidel, D. et al. (2019). How a measure of tree structural complexity relates to architectural benefit-to-cost ratio, light availability, and growth of trees. Ecology and Evolution, 9(12), 7134–7142. https://doi.org/10.1002/ece3.5281\nSeidel, D., Annighöfer, P., Ehbrecht, M., Magdon, P., Wöllauer, S., & Ammer, C. (2020). Deriving Stand Structural Complexity from Airborne Laser Scanning Data—What Does It Tell Us about a Forest? Remote Sensing, 12(11), 1854. https://doi.org/10.3390/rs12111854\nDorji, Y., Schuldt, B., Neudam, L., Dorji, R., Middleby, K., Isasa, E., & Körber, K. et al. (2021). Trees, 35(4), 1385–1398. https://doi.org/10.1007/s00468-021-02124-9\nBasnet, P., Das, S., Hölscher, D., Pierick, K., & Seidel, D. (2025). Drivers of forest structural complexity in mountain forests of Nepal. Mountain Research and Development, 45(1), R1–R10. https://doi.org/10.1659/mrd.2024.00009\nrTwig vignette (Box Dimension): https://cran.r-project.org/web/packages/rTwig/vignettes/Box-Dimension.html",
+    "crumbs": [
+      "Block 3: Processing of 3D LiDAR data to assess forest structure",
+      "Measuring Tree/Forest Structural Complexity with (Fractal) Box Dimension $(D_b)$ from 3D Point Clouds"
+    ]
+  },
+  {
+    "objectID": "block3_dobelmann/Box_dimension.html#how-do-you-measure-the-fractal-dimension",
+    "href": "block3_dobelmann/Box_dimension.html#how-do-you-measure-the-fractal-dimension",
+    "title": "Measuring Tree/Forest Structural Complexity with (Fractal) Box Dimension \\((D_b)\\) from 3D Point Clouds",
+    "section": "",
+    "text": "The fractal dimension quantifies how complex and space-filling a pattern is. Unlike familiar Euclidean dimensions (1D for a line, 2D for a surface), fractal dimensions can take non-integer values between whole numbers.\nSeveral methods exist to estimate fractal dimension, but the box-counting method is the most widely used. In this approach, the object is covered with boxes of a certain size, and the number of boxes required to contain the shape is counted. This process is repeated with progressively smaller boxes.\nIf the logarithm of the number of boxes is plotted against the logarithm of the box size, the result is typically a straight line. The slope of this line gives the fractal dimension: steeper slopes correspond to more intricate, space-filling structures.",
+    "crumbs": [
+      "Block 3: Processing of 3D LiDAR data to assess forest structure",
+      "Measuring Tree/Forest Structural Complexity with (Fractal) Box Dimension $(D_b)$ from 3D Point Clouds"
+    ]
+  },
+  {
+    "objectID": "block3_dobelmann/Box_dimension.html#why-are-we-discussing-this-here",
+    "href": "block3_dobelmann/Box_dimension.html#why-are-we-discussing-this-here",
+    "title": "Measuring Tree/Forest Structural Complexity with (Fractal) Box Dimension \\((D_b)\\) from 3D Point Clouds",
+    "section": "",
+    "text": "Because trees are fractal structures.\n\n\n\nTrees are fractals\n\n\nTrees exhibit self-similar branching patterns: smaller branches resemble the overall structure of the tree. While we can measure conventional forestry attributes such as height, DBH, basal area, crown dimensions, and volume, these do not capture overall structural complexity. To do this, we turn to fractal analysis—specifically the box dimension.",
+    "crumbs": [
+      "Block 3: Processing of 3D LiDAR data to assess forest structure",
+      "Measuring Tree/Forest Structural Complexity with (Fractal) Box Dimension $(D_b)$ from 3D Point Clouds"
+    ]
+  },
+  {
+    "objectID": "block3_dobelmann/Box_dimension.html#from-euclidean-to-fractal-dimension-quick-intuition",
+    "href": "block3_dobelmann/Box_dimension.html#from-euclidean-to-fractal-dimension-quick-intuition",
+    "title": "Measuring Tree/Forest Structural Complexity with (Fractal) Box Dimension \\((D_b)\\) from 3D Point Clouds",
+    "section": "",
+    "text": "0-D: point\n\n1-D: line\n\n2-D: plane/filled region\n\n3-D: solid volume\n\nFractal dimension fills the gaps between integers and quantifies how space-filling a structure is.\n\nA classic example is the Menger sponge, which has a box dimension ≈ 2.7268. Despite its infinite surface area, it has zero volume, an extreme case of fractal geometry.",
+    "crumbs": [
+      "Block 3: Processing of 3D LiDAR data to assess forest structure",
+      "Measuring Tree/Forest Structural Complexity with (Fractal) Box Dimension $(D_b)$ from 3D Point Clouds"
+    ]
+  },
+  {
+    "objectID": "block3_dobelmann/Box_dimension.html#box-dimension",
+    "href": "block3_dobelmann/Box_dimension.html#box-dimension",
+    "title": "Measuring Tree/Forest Structural Complexity with (Fractal) Box Dimension \\((D_b)\\) from 3D Point Clouds",
+    "section": "",
+    "text": "The box dimension is a method of fractal analysis used to quantify the structural complexity of an object, often derived from 3D point cloud data. The idea is simple:\n- Cover the object with boxes of decreasing size.\n- Count how many boxes are required to contain the shape.\n- Plot the logarithm of the box count against the logarithm of box size.\nIf the relationship is linear, the slope of that line gives the box dimension.\n\n\n\nSeidel et al 2019\n\n\nFormally, if the box size is \\((\\varepsilon)\\) and the number of occupied boxes is \\(N(\\varepsilon)\\):\n\\[\nN(\\varepsilon) \\propto \\varepsilon^{-D_b}\n\\quad\\Rightarrow\\quad\n\\log N(\\varepsilon) = D_b \\,\\log(1/\\varepsilon) + c\n\\]\nWhere: - \\((D_b)\\) is the box dimension.\n- For 3D point clouds:\n- \\((D_b \\approx 1)\\): line-like structures\n- \\((D_b \\approx 2)\\): sheet-like structures\n- \\((D_b \\approx 3)\\): volume-filling structures\n- Trees typically have \\((D_b)\\) between 1.0 and 2.2 (method and data dependent).\n- A higher \\(R^2\\) of the fit indicates stronger self-similarity across scales.\n\n\nBox dimension estimates depend on: 1. Point density/resolution\n2. Occlusion or shadowing\n3. Extent of the scanned scene\n4. Scale interval chosen for fitting\nHigh-quality point clouds (low occlusion, ~0–1 cm spacing) are optimal for robust estimates.\n\n\n\nIn practice, box-counting in 3D is implemented as voxel counting. Voxels are the 3D equivalent of pixels, small cubic volume elements. A point cloud is discretized into a voxel grid, and the occupied voxels are counted at multiple scales.\n\n\n\nSource Seidel et al (2020)\n\n\nThis process converts a 3D model or point cloud into a grid of voxels, each labeled as “occupied” or “empty.”\n\n\n\nSource: Dorji et al (2021)\n\n\n\n\n\n\nBox dimension ranges from 1 (line) to 3 (solid cube).\n\nA dimension of 2.72 corresponds to the Menger sponge (infinite surface, zero volume).\n\nMost trees fall between 1.0 and 2.2, reflecting their branching complexity.\n\nLow resolution → oversimplification (underestimates (\\(D_b\\))).\n\nHigh occlusion → too few boxes at small scales (also biases (\\(D_b\\))).\n\nThus, careful preprocessing and high-quality scans are critical for meaningful box-dimension analysis.\n\n\n\nTo apply this concept to forests, we calculate the box-dimension (\\((D_b\\)) as a measure of tree or stand structural complexity using the rTwig package in R.\nThe algorithm for \\((D_b)\\) was developed initially in Mathematica (Wolfram Research, Champaign, IL, USA) (Seidel, 2018; Ehbrecht, 2019; Basnet, 2025). It integrates all elements of a scanned scene into a single value, thereby fully leveraging the potential of 3D laser scanning.\nIn short:\n- The point cloud of a tree or stand is enclosed in boxes of decreasing size.\n- For each box size, the number of occupied boxes is counted.\n- The scaling relationship between box size and number of boxes gives the box dimension $(D_b$).\nThis workflow is implemented in the rTwig R package, making it straightforward to estimate structural complexity directly from normalized point cloud data.",
+    "crumbs": [
+      "Block 3: Processing of 3D LiDAR data to assess forest structure",
+      "Measuring Tree/Forest Structural Complexity with (Fractal) Box Dimension $(D_b)$ from 3D Point Clouds"
+    ]
+  },
+  {
+    "objectID": "block3_dobelmann/Box_dimension.html#references",
+    "href": "block3_dobelmann/Box_dimension.html#references",
+    "title": "Measuring Tree/Forest Structural Complexity with (Fractal) Box Dimension \\((D_b)\\) from 3D Point Clouds",
+    "section": "",
+    "text": "Mandelbrot, B. B. (1983). The Fractal Geometry of Nature. W.H. Freeman.\nSeidel, D. et al. (2019). How a measure of tree structural complexity relates to architectural benefit-to-cost ratio, light availability, and growth of trees. Ecology and Evolution, 9(12), 7134–7142. https://doi.org/10.1002/ece3.5281\nSeidel, D., Annighöfer, P., Ehbrecht, M., Magdon, P., Wöllauer, S., & Ammer, C. (2020). Deriving Stand Structural Complexity from Airborne Laser Scanning Data—What Does It Tell Us about a Forest? Remote Sensing, 12(11), 1854. https://doi.org/10.3390/rs12111854\nDorji, Y., Schuldt, B., Neudam, L., Dorji, R., Middleby, K., Isasa, E., & Körber, K. et al. (2021). Trees, 35(4), 1385–1398. https://doi.org/10.1007/s00468-021-02124-9\nBasnet, P., Das, S., Hölscher, D., Pierick, K., & Seidel, D. (2025). Drivers of forest structural complexity in mountain forests of Nepal. Mountain Research and Development, 45(1), R1–R10. https://doi.org/10.1659/mrd.2024.00009\nrTwig vignette (Box Dimension): https://cran.r-project.org/web/packages/rTwig/vignettes/Box-Dimension.html",
+    "crumbs": [
+      "Block 3: Processing of 3D LiDAR data to assess forest structure",
+      "Measuring Tree/Forest Structural Complexity with (Fractal) Box Dimension $(D_b)$ from 3D Point Clouds"
+    ]
+  },
+  {
+    "objectID": "block1_magdon/02_TrainingDataCollection.html",
+    "href": "block1_magdon/02_TrainingDataCollection.html",
+    "title": "Collection of training data for remote sensing modelling based on spectral variability",
+    "section": "",
+    "text": "#install.packages(\"devtools\")\n#devtools::install_github(\"bleutner/RStoolbox\")\nrm(list=ls())\nlibrary(sf)\n\nWarning: Paket 'sf' wurde unter R Version 4.5.3 erstellt\n\n\nLinking to GEOS 3.14.1, GDAL 3.12.1, PROJ 9.7.1; sf_use_s2() is TRUE\n\nlibrary(RStoolbox)\n\nWarning: Paket 'RStoolbox' wurde unter R Version 4.5.3 erstellt\n\n\nThis is version 1.0.2.3 of RStoolbox\n\nlibrary(terra)\n\nWarning: Paket 'terra' wurde unter R Version 4.5.3 erstellt\n\n\nterra 1.9.46\n\nlibrary(ggplot2)\n\nWarning: Paket 'ggplot2' wurde unter R Version 4.5.3 erstellt\n\nlibrary(mapview)\n\nWarning: Paket 'mapview' wurde unter R Version 4.5.3 erstellt\n\nlibrary(kableExtra)\n\nWarning: Paket 'kableExtra' wurde unter R Version 4.5.3 erstellt\n\nlibrary(dplyr)\n\nWarning: Paket 'dplyr' wurde unter R Version 4.5.3 erstellt\n\n\n\nAttache Paket: 'dplyr'\n\n\nDas folgende Objekt ist maskiert 'package:kableExtra':\n\n    group_rows\n\n\nDie folgenden Objekte sind maskiert von 'package:terra':\n\n    intersect, union\n\n\nDie folgenden Objekte sind maskiert von 'package:stats':\n\n    filter, lag\n\n\nDie folgenden Objekte sind maskiert von 'package:base':\n\n    intersect, setdiff, setequal, union\n\nlibrary(rprojroot)\n\nWarning: Paket 'rprojroot' wurde unter R Version 4.5.3 erstellt\n\nlibrary(patchwork)\n\nWarning: Paket 'patchwork' wurde unter R Version 4.5.3 erstellt\n\n\n\nAttache Paket: 'patchwork'\n\n\nDas folgende Objekt ist maskiert 'package:terra':\n\n    area\n\nlibrary(rmarkdown)\n\nWarning: Paket 'rmarkdown' wurde unter R Version 4.5.3 erstellt\n\nlibrary(tidyr)\n\nWarning: Paket 'tidyr' wurde unter R Version 4.5.3 erstellt\n\n\n\nAttache Paket: 'tidyr'\n\n\nDas folgende Objekt ist maskiert 'package:terra':\n\n    extract\n\nlibrary(tibble)\n\nWarning: Paket 'tibble' wurde unter R Version 4.5.3 erstellt",
+    "crumbs": [
+      "Block 1: Introduction to forest monitoring",
+      "Collection of training data for remote sensing based modelling"
+    ]
+  },
+  {
+    "objectID": "block1_magdon/02_TrainingDataCollection.html#dimension-reduction-pca",
+    "href": "block1_magdon/02_TrainingDataCollection.html#dimension-reduction-pca",
+    "title": "Collection of training data for remote sensing modelling based on spectral variability",
+    "section": "Dimension reduction (PCA)",
+    "text": "Dimension reduction (PCA)\nIn a fist step we reduce the dimensions of the 9 Sentinel-2 bands while maintaining most of the information, using a principal component analysis (PCA).\n\n# Calculation of the principlal components using the RStoolbox\npca&lt;-RStoolbox::rasterPCA(s2,nSamples = 5000, spca=TRUE )\n\n\n|---------|---------|---------|---------|\n=========================================\n                                          \n\n# Extracting the first three components\nrgb_raster &lt;- subset(pca$map, 1:3)\n\n# Function to scale the pixel values to 0-255\nscale_fun &lt;- function(x) {\n  # Calculation of the 2% and 98% quantile\n  q &lt;- quantile(x, c(0.02, 0.98), na.rm = TRUE)\n  \n  # scaling the values\n  x &lt;- (x - q[1]) / (q[2] - q[1]) * 255\n  \n  # restrict the values to 0-255\n  x &lt;- pmin(pmax(x, 0), 255)\n  \n  return(x)\n}\n\n# Scaling of each band\nfor (i in 1:3) {\n  rgb_raster[[i]] &lt;- app(rgb_raster[[i]], scale_fun)\n}\n\n# Plot the first three principal components as RGB\nplotRGB(rgb_raster, r = 1, g = 2, b = 3)\n\n\n\n\n\n\n\n# Show importance of componentes\nsummary(pca$model)\n\nImportance of components:\n                          Comp.1    Comp.2     Comp.3    Comp.4     Comp.5\nStandard deviation     2.2412546 1.8018943 0.67425744 0.3711219 0.26391425\nProportion of Variance 0.5581358 0.3607581 0.05051368 0.0153035 0.00773897\nCumulative Proportion  0.5581358 0.9188939 0.96940759 0.9847111 0.99245005\n                            Comp.6      Comp.7       Comp.8       Comp.9\nStandard deviation     0.175123529 0.163155072 0.0810277070 0.0640014828\nProportion of Variance 0.003407583 0.002957731 0.0007294988 0.0004551322\nCumulative Proportion  0.995857638 0.998815369 0.9995448678 1.0000000000\n\n\nFrom the output of the PCA we see that we can capture 92% of the variability with the first two components. Thus we will only use the PC1 and PC2 for the subsequent analysis.",
+    "crumbs": [
+      "Block 1: Introduction to forest monitoring",
+      "Collection of training data for remote sensing based modelling"
+    ]
+  },
+  {
+    "objectID": "block1_magdon/02_TrainingDataCollection.html#unsupervised-clustering",
+    "href": "block1_magdon/02_TrainingDataCollection.html#unsupervised-clustering",
+    "title": "Collection of training data for remote sensing modelling based on spectral variability",
+    "section": "Unsupervised clustering",
+    "text": "Unsupervised clustering\nIn the next step we run an unsupervised classification of the PC1 and PC2 to get a clustered map. For the unsupervised classification we need to take a decision on the number of classes/clusters to be created. Here we will take \\(n=5\\) classes. However, depending on the target variable this value need to be adjusted.\n\nset.seed(2222)\ncluster &lt;- RStoolbox::unsuperClass(pca$map[[c('PC1','PC2')]], nSamples = 100, nClasses = 5, nStarts = 5)\n\n\n## Plots\ncolors &lt;- rainbow(5)\nplot(cluster$map, col = colors, legend = TRUE, axes = TRUE, box =TRUE)\n\n\n\n\n\n\n\n\nThe map shows a clear spatial patterns related to the elevation, tree species and vitality status of the National Park forests.",
+    "crumbs": [
+      "Block 1: Introduction to forest monitoring",
+      "Collection of training data for remote sensing based modelling"
+    ]
+  },
+  {
+    "objectID": "block1_magdon/02_TrainingDataCollection.html#implement-a-plot-design",
+    "href": "block1_magdon/02_TrainingDataCollection.html#implement-a-plot-design",
+    "title": "Collection of training data for remote sensing modelling based on spectral variability",
+    "section": "Implement a plot design",
+    "text": "Implement a plot design\nTo extract pixel values for the sample location we need to define a plot design. For this exercise we will simulate a circular fixed area plot with a radius of 13 m.\n\n# Create a training by extracting the mean value of all pixels touching\n# a buffered area with 13m around the plot center\n\nplots &lt;- sf::st_buffer(sf_samples,dist = 13)\ntrain&lt;-terra::extract(s2,plots,fun='mean',bind=FALSE,na.rm=TRUE)\n\nplots &lt;- plots %&gt;% mutate(ID=row_number())\ntrain &lt;- plots %&gt;% left_join(train, by= \"ID\")\nmapview::mapview(train, zcol=\"class_unsupervised\",\n        map.types = c(\"Esri.WorldShadedRelief\", \"OpenStreetMap.DE\"))+\n  mapview(np_boundary,alpha.regions = 0.2, aplha = 1)",
+    "crumbs": [
+      "Block 1: Introduction to forest monitoring",
+      "Collection of training data for remote sensing based modelling"
+    ]
+  },
+  {
+    "objectID": "block1_magdon/01_Design_based_sampling.html",
+    "href": "block1_magdon/01_Design_based_sampling.html",
+    "title": "Design-based sampling in a Nutshell",
+    "section": "",
+    "text": "rm(list=ls())\nlibrary(sf)\nlibrary(terra)\nlibrary(ggplot2)\nlibrary(rprojroot)\n\ndata_dir=paste0(find_rstudio_root_file(),\"/block1_magdon/data/\")",
+    "crumbs": [
+      "Block 1: Introduction to forest monitoring",
+      "Design-based sampling in a Nutshell"
+    ]
+  },
+  {
+    "objectID": "block1_magdon/01_Design_based_sampling.html#srs-estimators",
+    "href": "block1_magdon/01_Design_based_sampling.html#srs-estimators",
+    "title": "Design-based sampling in a Nutshell",
+    "section": "SRS-Estimators",
+    "text": "SRS-Estimators\nDepending on the sampling design (the way we select samples) the correct estimators need to be used to provide unbiased and precise estimates. The most simple estimators assume a pure random selection of samples -&gt; Simple Random Sampling (SRS).\nWe can estimate the mean value \\(\\bar{y}\\) as:\n\\[\n\\bar{y} = \\frac{\\sum_{i=1}^n{y_i}}{n}\n\\]\nand the standard deviation \\(s\\) as:\n\\[\n{s} =\\sqrt{\\frac{\\sum_{i=1}^n{(y_i-\\bar{y}})^2}{n-1}}\n\\]",
+    "crumbs": [
+      "Block 1: Introduction to forest monitoring",
+      "Design-based sampling in a Nutshell"
+    ]
+  },
+  {
+    "objectID": "block1_magdon/01_Design_based_sampling.html#collect-a-random-sample",
+    "href": "block1_magdon/01_Design_based_sampling.html#collect-a-random-sample",
+    "title": "Design-based sampling in a Nutshell",
+    "section": "Collect a random sample",
+    "text": "Collect a random sample\nTo estimate the mean above ground in the National Park Harz, we start with a simple random sample. As common in forest inventories, we assume that our population is the infinite number of dimensionless points within the boundaries of the NP. Thus, for the sampling, random points are chosen. We start with a random sample with \\(n=100\\) sample points.\n\nn=100\n\n# Create n random points inside the boundary of the NP as a sample\np1 = sf::st_sample(np_boundary,size=n)\n\n# Plot the samples on the map\nggplot()+geom_sf(data=np_boundary,fill=NA)+\n  geom_sf(data=p1)\n\n\n\n\n\n\n\n\nFor our simulation study, we can now extract the true AGB observations at each sample location from the map and calculate the mean across all sample points. In a real forest monitoring project, however, this is not possible. Instead, you would have to visit each selected point in the field and manually record the observations.\n\n# Extract population and modelled values at sample locations\n\nsample &lt;- terra::extract((agb_pop),vect(p1))\nnames(sample)&lt;-c('ID','AGB')\n\nmean_est &lt;- mean(sample$AGB,na.rm=T)\nsd_est &lt;- sd(sample$AGB,na.rm=T)\n\nUsing the random sample we estimate the mean values \\(\\bar{y}\\) as 166.65 and the standard deviation \\(s\\)§ as \\(\\bar{y}\\) as 52.49.\n\n\n\n\n\\(\\bar{y}\\) (t/ha)\n\\(\\mu\\)(t/ha)\n\n\n\n\n166.65\n163.98\n\n\n\n\nAt this point, we cannot yet tell whether our estimate is unbiased. In other words: Is this result just due to chance, or would we obtain a similar estimate if we repeated the sampling with a different set of random points?",
+    "crumbs": [
+      "Block 1: Introduction to forest monitoring",
+      "Design-based sampling in a Nutshell"
+    ]
+  },
+  {
+    "objectID": "block1_magdon/01_Design_based_sampling.html#estimate-mean-values",
+    "href": "block1_magdon/01_Design_based_sampling.html#estimate-mean-values",
+    "title": "Design-based sampling in a Nutshell",
+    "section": "Estimate mean values",
+    "text": "Estimate mean values\nTo check if our sample based estimates are unbiased we can run a small simulation and repeat the sampling \\(k\\) times.\n\n\n[1] 1\n[1] 2\n[1] 3\n[1] 4\n[1] 5\n[1] 6\n[1] 7\n[1] 8\n[1] 9\n[1] 10\n[1] 11\n[1] 12\n[1] 13\n[1] 14\n[1] 15\n[1] 16\n[1] 17\n[1] 18\n[1] 19\n[1] 20\n[1] 21\n[1] 22\n[1] 23\n[1] 24\n[1] 25\n[1] 26\n[1] 27\n[1] 28\n[1] 29\n[1] 30\n[1] 31\n[1] 32\n[1] 33\n[1] 34\n[1] 35\n[1] 36\n[1] 37\n[1] 38\n[1] 39\n[1] 40\n[1] 41\n[1] 42\n[1] 43\n[1] 44\n[1] 45\n[1] 46\n[1] 47\n[1] 48\n[1] 49\n[1] 50\n[1] 51\n[1] 52\n[1] 53\n[1] 54\n[1] 55\n[1] 56\n[1] 57\n[1] 58\n[1] 59\n[1] 60\n[1] 61\n[1] 62\n[1] 63\n[1] 64\n[1] 65\n[1] 66\n[1] 67\n[1] 68\n[1] 69\n[1] 70\n[1] 71\n[1] 72\n[1] 73\n[1] 74\n[1] 75\n[1] 76\n[1] 77\n[1] 78\n[1] 79\n[1] 80\n[1] 81\n[1] 82\n[1] 83\n[1] 84\n[1] 85\n[1] 86\n[1] 87\n[1] 88\n[1] 89\n[1] 90\n[1] 91\n[1] 92\n[1] 93\n[1] 94\n[1] 95\n[1] 96\n[1] 97\n[1] 98\n[1] 99\n[1] 100\n\n\n\n\n\n\n\n\n\nThe simulation shows two important aspects of SRS-Sampling:\n1.) the true mean (\\(\\mu\\)) and the estimated mean (\\(\\bar{y}\\)) of the \\(k\\) simulation runs are almost equal. Thus, we have shown that the SRS-Estimator is unbiased!\n2.) the distribution of the mean estimates over the \\(k=100\\) simulation runs approximates a normal distribution",
+    "crumbs": [
+      "Block 1: Introduction to forest monitoring",
+      "Design-based sampling in a Nutshell"
+    ]
+  },
+  {
+    "objectID": "block1_magdon/01_Design_based_sampling.html#precision-of-estimates",
+    "href": "block1_magdon/01_Design_based_sampling.html#precision-of-estimates",
+    "title": "Design-based sampling in a Nutshell",
+    "section": "Precision of estimates",
+    "text": "Precision of estimates\nThe figure above shows that the estimates from samples with n=100 points vary considerably. Most estimates are close to the true population mean, but some deviate substantially—for example, values around 180 t/ha. We would expect that a sampling method producing estimates with little variation is more precise than one producing highly variable estimates. When we express the variation of the estimated means as a standard deviation, we obtain what is called the standard error \\(S\\) —a key statistic for assessing the precision of an estimate.\nFor the mean value we can express the standard error of the mean \\(S_\\bar{y}\\) as:\n\\[\nS_\\bar{y} = \\frac{S}{\\sqrt{n}}\n\\]\nBut how does the sample size \\(n\\) affects the precision?\n\n\n[1] 1\n[1] 2\n[1] 3\n[1] 4\n[1] 5\n[1] 6\n[1] 7\n[1] 8\n[1] 9\n[1] 10\n[1] 11\n[1] 12\n[1] 13\n[1] 14\n[1] 15\n[1] 16\n[1] 17\n[1] 18\n[1] 19\n[1] 20\n[1] 21\n[1] 22\n[1] 23\n[1] 24\n[1] 25\n[1] 26\n[1] 27\n[1] 28\n[1] 29\n[1] 30\n[1] 31\n[1] 32\n[1] 33\n[1] 34\n[1] 35\n[1] 36\n[1] 37\n[1] 38\n[1] 39\n[1] 40\n[1] 41\n[1] 42\n[1] 43\n[1] 44\n[1] 45\n[1] 46\n[1] 47\n[1] 48\n[1] 49\n[1] 50\n[1] 51\n[1] 52\n[1] 53\n[1] 54\n[1] 55\n[1] 56\n[1] 57\n[1] 58\n[1] 59\n[1] 60\n[1] 61\n[1] 62\n[1] 63\n[1] 64\n[1] 65\n[1] 66\n[1] 67\n[1] 68\n[1] 69\n[1] 70\n[1] 71\n[1] 72\n[1] 73\n[1] 74\n[1] 75\n[1] 76\n[1] 77\n[1] 78\n[1] 79\n[1] 80\n[1] 81\n[1] 82\n[1] 83\n[1] 84\n[1] 85\n[1] 86\n[1] 87\n[1] 88\n[1] 89\n[1] 90\n[1] 91\n[1] 92\n[1] 93\n[1] 94\n[1] 95\n[1] 96\n[1] 97\n[1] 98\n[1] 99\n[1] 100\n\n\n\n\n\n\n\n\n\nWe see that the precision of the estimates is increased when we use more samples.\nHow much did the uncertainty decrease when we increase the sample size from \\(n=100\\) to \\(n=200\\)?\n\nsd(mean)/sd(mean_2)\n\n[1] 1.3079",
+    "crumbs": [
+      "Block 1: Introduction to forest monitoring",
+      "Design-based sampling in a Nutshell"
+    ]
+  },
+  {
+    "objectID": "block2/index.html",
+    "href": "block2/index.html",
+    "title": "Understanding spatial patterns: how to measure and compare them",
+    "section": "",
+    "text": "The workshop slides are at https://jakubnowosad.com/eon2026/.\n\n\n\nParticipants are expected to have a recent version of R and an R IDE installed.\n\nR: https://cloud.r-project.org/\nRStudio: https://posit.co/download/rstudio-desktop/#download\n\nInstall the required packages from CRAN before working on the exercises.\ninstall.packages(c(\n  \"terra\",\n  \"sf\",\n  \"landscapemetrics\",\n  \"motif\",\n  \"dplyr\",\n  \"tidyr\"\n))\n\n\n\nDownload the exercises repository as a ZIP file from https://github.com/Nowosad/eon2026-exercises/archive/refs/heads/main.zip and unpack it on your computer. Then open the .Rproj file in RStudio and start working on the exercises.",
+    "crumbs": [
+      "Block 2: Describing and comparing spatial patterns",
+      "Understanding spatial patterns: how to measure and compare them"
+    ]
+  },
+  {
+    "objectID": "block2/index.html#slides",
+    "href": "block2/index.html#slides",
+    "title": "Understanding spatial patterns: how to measure and compare them",
+    "section": "",
+    "text": "The workshop slides are at https://jakubnowosad.com/eon2026/.",
+    "crumbs": [
+      "Block 2: Describing and comparing spatial patterns",
+      "Understanding spatial patterns: how to measure and compare them"
+    ]
+  },
+  {
+    "objectID": "block2/index.html#prerequisites",
+    "href": "block2/index.html#prerequisites",
+    "title": "Understanding spatial patterns: how to measure and compare them",
+    "section": "",
+    "text": "Participants are expected to have a recent version of R and an R IDE installed.\n\nR: https://cloud.r-project.org/\nRStudio: https://posit.co/download/rstudio-desktop/#download\n\nInstall the required packages from CRAN before working on the exercises.\ninstall.packages(c(\n  \"terra\",\n  \"sf\",\n  \"landscapemetrics\",\n  \"motif\",\n  \"dplyr\",\n  \"tidyr\"\n))",
+    "crumbs": [
+      "Block 2: Describing and comparing spatial patterns",
+      "Understanding spatial patterns: how to measure and compare them"
+    ]
+  },
+  {
+    "objectID": "block2/index.html#exercises",
+    "href": "block2/index.html#exercises",
+    "title": "Understanding spatial patterns: how to measure and compare them",
+    "section": "",
+    "text": "Download the exercises repository as a ZIP file from https://github.com/Nowosad/eon2026-exercises/archive/refs/heads/main.zip and unpack it on your computer. Then open the .Rproj file in RStudio and start working on the exercises.",
+    "crumbs": [
+      "Block 2: Describing and comparing spatial patterns",
+      "Understanding spatial patterns: how to measure and compare them"
+    ]
+  },
+  {
+    "objectID": "block3_dobelmann/lidar_forest_structure.html",
+    "href": "block3_dobelmann/lidar_forest_structure.html",
+    "title": "Processing of 3D Lidar data to assess forest structure",
+    "section": "",
+    "text": "In this tutorial we will learn how to work with LiDAR data to estimate forest structure. To do so we will compare two forest plots in Lower Saxony of varying structure: One in the Göttinger Forest and the other in the Solling. Though both plots are dominated by beech stands of similar age, they differ in structural properties like tree height, canopy cover and understory regeneration. By looking into the vertical distribution of lidar returns, we can capture these differences.",
+    "crumbs": [
+      "Block 3: Processing of 3D LiDAR data to assess forest structure",
+      "Processing of 3D Lidar data to assess forest structure"
+    ]
+  },
+  {
+    "objectID": "block3_dobelmann/lidar_forest_structure.html#the-las-format",
+    "href": "block3_dobelmann/lidar_forest_structure.html#the-las-format",
+    "title": "Processing of 3D Lidar data to assess forest structure",
+    "section": "The LAS format",
+    "text": "The LAS format\nprint() reveals that the two files are not stored identically: the Göttingen data are LAS version 1.4, point data record format 7, the Solling data LAS version 1.2, point data record format 3. Both numbers matter:\n\nThe version defines the structure of the file as a whole — its header, the coordinate scaling, and which record formats are permitted.\nThe point data record format (PDRF) defines which attributes are stored for each individual point.\n\nWhat exactly changes between versions and formats is laid out in the specification, which is maintained by the American Society for Photogrammetry and Remote Sensing (ASPRS) — also the reason the classification codes (2 = ground, 5 = high vegetation, …) are known as ASPRS classes.\nFull specification: https://publicdocuments.asprs.org/las-v14-r16-2025",
+    "crumbs": [
+      "Block 3: Processing of 3D LiDAR data to assess forest structure",
+      "Processing of 3D Lidar data to assess forest structure"
+    ]
+  },
+  {
+    "objectID": "block3_dobelmann/lidar_forest_structure.html#pointcloud-visualisation",
+    "href": "block3_dobelmann/lidar_forest_structure.html#pointcloud-visualisation",
+    "title": "Processing of 3D Lidar data to assess forest structure",
+    "section": "Pointcloud visualisation",
+    "text": "Pointcloud visualisation\nplot() opens an interactive 3D window in which the point cloud can be rotated and zoomed. Colouring the points by height makes the vertical structure easier to read.\n\nplot(las_goe, color = \"Z\", bg = \"white\")\nplot(las_sol, color = \"Z\", bg = \"white\")\n\nBased on this first visual inspection, what structural differences can you see between the two stands?\n\nCutting a transect\nThe 3D view is useful for a first impression, but it is hard to compare two stands in a rotating window, so let’s cut a slice through the pointcloud and project it onto a plane, so we can see the vertical profile. We’ll use a little helper function that cuts a 5 m wide slice along the centre line of each point cloud.\n\n# helper function for transect-clipping\nget_transect &lt;- function(las) {\n  b &lt;- st_bbox(las)\n  cy &lt;- (b$ymin + b$ymax) / 2\n  clip_transect(las, c(b$xmin, cy), c(b$xmax, cy), width = 5, xz = TRUE)\n}\n\n# clipping the transects \nlas_tr_goe &lt;- get_transect(las_goe)\nlas_tr_sol &lt;- get_transect(las_sol)\n\nprint(las_tr_goe)\n\nclass        : LAS (v1.4 format 7)\nmemory       : 18 Mb \nextent       : 0, 60.07, 0, 4.9999 (xmin, xmax, ymin, ymax)\ncoord. ref.  : WGS 84 / UTM zone 32N \narea         : 300 m²\npoints       : 262 thousand points\ntype         : terrestrial\ndensity      : 873.44 points/m²\ndensity      : 384.73 pulses/m²\n\n\n\n\nPlotting the transects\n\n## plot the transects with ggplot\np_goe &lt;- ggplot(payload(las_tr_goe), aes(X,Z)) + \n  geom_point(size = 0.5, color = \"black\") + \n  labs(title = \"Göttinger Forest\",\n       x = \"X\",\n       y = \"Height (ASL)\"\n       ) + \n  coord_equal() + \n  theme_minimal() \n\np_sol &lt;- ggplot(payload(las_tr_sol), aes(X,Z)) + \n  geom_point(size = 0.5, color = \"black\") + \n  labs(title = \"Solling Forest\",\n       x = \"X\",\n       y = \"Height (ASL)\"\n  ) +\n  coord_equal() + \n  theme_minimal() \n\n# side by side plotting using patchwork \np_goe | p_sol\n\n\n\n\n\n\n\n\nThe profiles show the vertical structure, but the Z values are still heights above sea level (ASL). Together with the sloping terrain it is impossible to compare the actual tree heights between the two sites.\nNormalisation solves this: we subtract the terrain height from every point, so that Z becomes height above ground. normalize_height() overwrites the original Z value with the height above Ground (HAG)\nThe function needs two things: which classification code identifies the ground points (2 under the ASPRS scheme), and an algorithm to interpolate a continuous terrain surface from them. Here we use tin(), a Delaunay triangulation of the ground returns, from which the height beneath each point is then subtracted.\n\n\nNormalizing Height\n\n# normalize height \nlas_goe_norm &lt;- normalize_height(las = las_goe, \n                        algorithm = tin(), \n                        use_class = 2)\n\n\nlas_sol_norm &lt;- normalize_height(las = las_sol, \n                            algorithm = tin(), \n                            use_class = 2)\n\nWith the normalised heights in place, we can cut the transects again and plot HAG instead of Z. The ground now forms a flat line at zero, and the vertical axis reads directly as tree height.\nCompare the two profiles again. Which differences that were hidden by the terrain are now visible, and how tall are the tallest trees in each stand?\n\nlas_tr_goe &lt;- get_transect(las_goe_norm)\nlas_tr_sol &lt;- get_transect(las_sol_norm)\n\np_goe &lt;- ggplot(payload(las_tr_goe), aes(X,Z)) + \n  geom_point(size = 0.5, color = \"black\") + \n  labs(title = \"Göttinger Forest\",\n       x = \"X\",\n       y = \"Height Above Ground (HAG)\"\n       ) + \n  ylim(c(0,40)) + \n  coord_equal() + \n  theme_minimal() \n\np_sol &lt;- ggplot(payload(las_tr_sol), aes(X,Z)) + \n  geom_point(size = 0.5, color = \"black\") + \n  labs(title = \"Solling Forest\",\n       x = \"X\",\n       y = \"Height Above Ground (HAG)\"\n  ) +\n  ylim(c(0,40)) + \n  coord_equal() + \n  theme_minimal() \n\n# side by side plotting \np_goe | p_sol\n\n\n\n\n\n\n\n\n\n\nAdd vertical distribution of points\nTo quantify these structural differences, we can look into the vertical distribution of the returns. Let’s add a density curve beside each transect that shows how the points are spread over height. We keep only points above ground, since ground returns would otherwise produce a spike at zero that dominates the curve.\n\n# Height distributions\nh_goe &lt;- ggplot(subset(payload(las_goe_norm), Z &gt; 0), aes(Z)) +\n  geom_density(fill = \"grey70\", color = NA) +\n  xlim(0, 40) +\n  coord_flip() +\n  theme_void()\n\nh_sol &lt;- ggplot(subset(payload(las_sol_norm), Z &gt; 0), aes(Z)) +\n  geom_density(fill = \"grey70\", color = NA) +\n  xlim(0, 40) +\n  coord_flip() +\n  theme_void()\n\n# Combine\n(p_goe | h_goe) + plot_layout(widths = c(5, 1)) \n\n\n\n\n\n\n\n(p_sol | h_sol) + plot_layout(widths = c(5, 1))",
+    "crumbs": [
+      "Block 3: Processing of 3D LiDAR data to assess forest structure",
+      "Processing of 3D Lidar data to assess forest structure"
+    ]
+  },
+  {
+    "objectID": "block3_dobelmann/lidar_forest_structure.html#calculating-canopy-height-models",
+    "href": "block3_dobelmann/lidar_forest_structure.html#calculating-canopy-height-models",
+    "title": "Processing of 3D Lidar data to assess forest structure",
+    "section": "Calculating Canopy Height Models",
+    "text": "Calculating Canopy Height Models\nSo far we have looked at the point cloud from the side. Now let’s look at it from above. A Canopy Height Model (CHM) is a raster in which every cell holds the height of the highest point within it.\nThis only works because we normalised the point clouds earlier. Since Z is now height above ground, the raster values can be read directly as tree height.\nres = 0.5 sets the cell size in metres. The resolution should match the point density\ndsmtin() builds the surface by Delaunay triangulation of the first returns, the same principle we used for the terrain model in normalize_height(), only applied to the top of the canopy instead of the ground. Each raster cell then takes its value from the triangulated surface.\n\nchm_goe &lt;- rasterize_canopy(las_goe_norm, res = 0.5, algorithm = dsmtin())\n\nchm_sol &lt;- rasterize_canopy(las_sol_norm, res = 0.5, algorithm = dsmtin())\n\npar(mfrow = c(1,2))\nplot(chm_goe, main = \"CHM Göttingen\")\nplot(chm_sol, main = \"CHM Solling\")\n\n\n\n\n\n\n\n\nCompare the two rasters and consider:\n\nWhere is the canopy closed, and where do you see gaps reaching down towards the ground?\n\nHow variable is the canopy surface within each stand? A rough, uneven surface points to trees of differing age and size, a smooth one to a uniform stand.\n\nCan you identify individual crowns? In which of the two stands is this easier, and why?\n\n\nMetrics at the plot level\nWe can also put numbers to this visual impression. cloud_metrics() calculates a set of summary statistics for the whole point cloud. .stdmetrics_z is lidR’s standard collection of height metrics. Two filters are applied before calculating the metrics: Only first returns are used and points below zero are dropped.\n\n# first returns only, and drop points below the interpolated ground surface\nprep &lt;- function(las){\n  filter_poi(filter_first(las), Z &gt;= 0)\n             }\n\n# calculate metrics\nm_goe &lt;- cloud_metrics(prep(las_goe_norm), .stdmetrics_z)\nm_sol &lt;- cloud_metrics(prep(las_sol_norm), .stdmetrics_z)\n\n# here we use a selection of metrics only \nvars &lt;- c(\"zmax\", \"zmean\", \"zsd\", \"zq95\", \"pzabove2\", \"pzabovezmean\", \"zentropy\")\n\n# combine results \nround(rbind(Göttinger = unlist(m_goe)[vars],\n            Solling   = unlist(m_sol)[vars]), 2)\n\n           zmax zmean   zsd  zq95 pzabove2 pzabovezmean zentropy\nGöttinger 38.19 28.11 10.11 34.99    90.03        79.79     0.68\nSolling   33.31 21.54  6.89 27.89    93.99        67.65     0.79\n\n\nAre these results what you expected after looking at the transects? Which stand appeared structurally more diverse there, and which one comes out on top here?",
+    "crumbs": [
+      "Block 3: Processing of 3D LiDAR data to assess forest structure",
+      "Processing of 3D Lidar data to assess forest structure"
+    ]
+  },
+  {
+    "objectID": "block3_dobelmann/lidar_forest_structure.html#individual-tree-detection",
+    "href": "block3_dobelmann/lidar_forest_structure.html#individual-tree-detection",
+    "title": "Processing of 3D Lidar data to assess forest structure",
+    "section": "Individual Tree Detection",
+    "text": "Individual Tree Detection\nSo far we have described the stands as a whole. The next step is to resolve them into individual trees.\nThis happens in two steps. Individual Tree Detection (ITD) locates the position and height of each treetop. Individual Tree Segmentation (ITS) then assigns every return in the point cloud to one of those trees.\n\nThe local maximum filter\nThe standard approach is a Local Maximum Filter (LMF). A window is moved across the canopy surface, and wherever the centre cell is the highest point within that window, a tree top is recorded. The window size is a crucial parameter here.\nSince crown size scales with tree height, we let the window grow with the height of the point being tested. we calculate window size as a function of height.\n\n# variable window size as a function of height\nf &lt;- function(x) {\n  y &lt;- 2.6 * (-(exp(-0.08 * (x - 2)) - 1)) + 3\n  # after https://r-lidar.github.io/lidRbook/itd.html\n  y[x &lt; 2]  &lt;- 3\n  y[x &gt; 20] &lt;- 5\n  return(y)\n}\n\nheights &lt;- seq(0, 40, 0.5)\n\nplot(heights, f(heights), type = \"l\", ylim = c(0, 6),\n     xlab = \"Height above ground (m)\", ylab = \"Window size (m)\",\n     main = \"Variable window size\")\n\n\n\n\n\n\n\n\n\n\nRunning the tree detection\n\nttops_goe &lt;- locate_trees(chm_goe, lmf(ws = f, hmin = 5))\nttops_sol &lt;- locate_trees(chm_sol, lmf(ws = f, hmin = 5))\n\nhmin = 5 sets a detection floor at 5 m, so that understorey vegetation and noise near the ground are not counted as trees. The result is an sf object with one point per tree, carrying its coordinates and its height. We can add the tree tops on top of the Canopy Height model to visually inspect the results.\nWhich plot has more trees in total?\n\npar(mfrow = c(1, 2))\nplot(chm_goe, main = \"Göttinger Forest\")\nplot(st_geometry(ttops_goe), add = TRUE, pch = 3, cex = 0.6)\nplot(chm_sol, main = \"Solling\")\nplot(st_geometry(ttops_sol), add = TRUE, pch = 3, cex = 0.6)",
+    "crumbs": [
+      "Block 3: Processing of 3D LiDAR data to assess forest structure",
+      "Processing of 3D Lidar data to assess forest structure"
+    ]
+  },
+  {
+    "objectID": "block3_dobelmann/lidar_forest_structure.html#individual-tree-segmentation",
+    "href": "block3_dobelmann/lidar_forest_structure.html#individual-tree-segmentation",
+    "title": "Processing of 3D Lidar data to assess forest structure",
+    "section": "Individual Tree Segmentation",
+    "text": "Individual Tree Segmentation\nDetection gives us points. Segmentation gives us trees: every return in the cloud is assigned to one of the detected treetops.\ndalponte2016() works on the raster. Starting from each treetop, it grows a region outwards into neighbouring cells as long as they stay within a plausible height range for that crown, and stops where the surface drops off or another crown is reached. segment_trees() then transfers the resulting crown outlines back to the point cloud and writes a new attribute, treeID, into every point.\n\n# segment point cloud\nlas_goe_norm &lt;- segment_trees(las_goe_norm, dalponte2016(chm_goe, ttops_goe)) \nlas_sol_norm &lt;- segment_trees(las_sol_norm, dalponte2016(chm_sol, ttops_sol)) \n\nColouring the point cloud by treeID shows how well the delineation worked.\n\n# 3D plot\nx &lt;- plot(las_goe_norm, bg = \"white\", size = 4,color = \"treeID\")\nadd_treetops3d(x, ttops_goe)\n\nx &lt;- plot(las_sol_norm, bg = \"white\", size = 4,color = \"treeID\")\nadd_treetops3d(x, ttops_sol)\n\nDid the tree segmentation work equally well in both plots? If not, what could be the reason for the differences?\n\nMetrics at the tree level\nBecause every point now knows which tree it belongs to, we can derive attributes per tree rather than per plot:\n\ncrowns_goe &lt;- crown_metrics(las_goe_norm, func = .stdtreemetrics)\ncrowns_sol &lt;- crown_metrics(las_sol_norm, func = .stdtreemetrics)\n\ncrowns_goe\n\nSimple feature collection with 87 features and 4 fields\nGeometry type: POINT\nDimension:     XYZ\nBounding box:  xmin: 572440.7 ymin: 5709015 xmax: 572499.8 ymax: 5709075\nz_range:       zmin: 33.2567 zmax: 38.1914\nProjected CRS: WGS 84 / UTM zone 32N\nFirst 10 features:\n   treeID       Z npoints convhull_area                       geometry\n1       1 35.6074   29305        28.451 POINT Z (572464 5709075 35....\n2       2 35.1106   28892        27.443 POINT Z (572479.9 5709075 3...\n3       3 34.0275   21620        20.376 POINT Z (572447.4 5709075 3...\n4       4 35.6105   13285        18.301 POINT Z (572456.9 5709075 3...\n5       5 34.9293   43504        32.055 POINT Z (572472.9 5709074 3...\n6       6 35.2873   20382        26.778 POINT Z (572488.7 5709074 3...\n7       7 34.7442   19111        17.602 POINT Z (572497.2 5709074 3...\n8       8 34.7135     321         0.238 POINT Z (572440.7 5709074 3...\n9       9 35.6219   78760        57.968 POINT Z (572486.3 5709071 3...\n10     10 35.5465   36980        42.155 POINT Z (572455.1 5709072 3...\n\ncrowns_sol\n\nSimple feature collection with 68 features and 4 fields\nGeometry type: POINT\nDimension:     XYZ\nBounding box:  xmin: 540410.7 ymin: 5733562 xmax: 540470.4 ymax: 5733622\nz_range:       zmin: 25.7802 zmax: 33.3098\nProjected CRS: WGS 84 / UTM zone 32N\nFirst 10 features:\n   treeID       Z npoints convhull_area                       geometry\n1       1 28.9618   21970        21.789 POINT Z (540425.2 5733622 2...\n2       2 27.8154   31249        37.403 POINT Z (540460.2 5733622 2...\n3       3 27.9368   26667        29.971 POINT Z (540465.9 5733621 2...\n4       4 29.4133   43033        40.053 POINT Z (540433.9 5733620 2...\n5       5 29.5430   53989        48.467 POINT Z (540412.7 5733621 2...\n6       6 29.5167   55967        55.482 POINT Z (540448.5 5733619 2...\n7       7 30.0066   44581        46.869 POINT Z (540428.9 5733618 3...\n8       8 28.7825   50441        41.740 POINT Z (540420 5733618 28....\n9       9 26.9113   25725        32.666 POINT Z (540464.6 5733617 2...\n10     10 30.0389   62112        70.262 POINT Z (540451.1 5733616 3...\n\n\nThis gives us the height of each tree and the area of each tree crown.",
+    "crumbs": [
+      "Block 3: Processing of 3D LiDAR data to assess forest structure",
+      "Processing of 3D Lidar data to assess forest structure"
+    ]
+  },
+  {
+    "objectID": "block3_dobelmann/lidar_forest_structure.html#forest-structural-complexity-the-box-dimension",
+    "href": "block3_dobelmann/lidar_forest_structure.html#forest-structural-complexity-the-box-dimension",
+    "title": "Processing of 3D Lidar data to assess forest structure",
+    "section": "Forest structural complexity: the box dimension",
+    "text": "Forest structural complexity: the box dimension\nEvery metric so far captured one aspect of structure, and each ranked our two stands differently. The box dimension (Db) condenses all of it into a single number.\nThe point cloud is divided into cubic voxels, and the occupied ones are counted. The voxels are then made progressively smaller and the count repeated. Db is the slope of the regression between log box count and log inverse box size: A structure that is simple and open gains little from finer inspection and yields a low value. One that fills space with detail at every scale — many crowns, several layers, branches occupying the gaps between them — keeps producing newly occupied voxels and yields a high one. The R² of the fit indicates how consistently that behaviour repeats across scales.\nThe concept is covered in detail in the accompanying document on fractal complexity — here we simply apply it.\nfirst we filter only points above 0,5 m height, to exclude ground and ground vegetation.\n\n# X, Y, Z of all points above 0.5 m, from the normalised clouds\ncloud_goe &lt;- las_goe_norm@data[Z &gt; 0.5, 1:3]\ncloud_sol &lt;- las_sol_norm@data[Z &gt; 0.5, 1:3]\n\nlowercutoff = 0.1 sets the smallest voxel edge to 10 cm — below that the count would describe the scanner’s sampling pattern rather than the forest. rm_int_box = TRUE drops the single box enclosing the whole cloud, which carries no structural information but would leverage the slope.\n\ndb_goe &lt;- box_dimension(cloud_goe, lowercutoff = 0.1, rm_int_box = TRUE, plot = \"2D\")\n\n\n\n\n\n\n\ndb_sol &lt;- box_dimension(cloud_sol, lowercutoff = 0.1, rm_int_box = TRUE, plot = \"2D\")\n\n\n\n\n\n\n\n\nWhich stand has the higher box dimension, and does the ranking agree with zentropy and the transect profiles?\nOne caveat: the method was developed for terrestrial scans at centimetre resolution. Our drone data are denser than most ALS but far from that standard, and the closed Göttinger canopy occludes its understorey more than the Solling does. The comparison between our two plots holds — same sensor, same configuration — but the absolute values should not be compared to published TLS-based figures.",
+    "crumbs": [
+      "Block 3: Processing of 3D LiDAR data to assess forest structure",
+      "Processing of 3D Lidar data to assess forest structure"
+    ]
+  },
+  {
+    "objectID": "block5/mc_data.html",
+    "href": "block5/mc_data.html",
+    "title": "Data Sources",
+    "section": "",
+    "text": "The tutorial uses prepared data so that the practical work can focus on the modelling step. The raw station dashboards and position files remain listed here for transparency and later reuse.\n\n\n\nStation — Dead Fir plot, Ecowitt dashboard; login required\nStation — Clear-cut site, Ecowitt dashboard; login required\nPosition data — climate stations\n\n\n\n\n\nPosition data — climate stations\nStation data — Ecowitt share link\n\n\n\n\n\nStation data — Douglas Fir, site 20166; Ecowitt\nStation data — Douglas Fir, site 20163; Ecowitt\nPosition data — climate stations\n\n\n\n\n\nDownload project ZIP\nOpen project repository\nOpen slides"
+  },
+  {
+    "objectID": "block5/mc_data.html#tutorial-data",
+    "href": "block5/mc_data.html#tutorial-data",
+    "title": "Data Sources",
+    "section": "",
+    "text": "The tutorial uses prepared data so that the practical work can focus on the modelling step. The raw station dashboards and position files remain listed here for transparency and later reuse.\n\n\n\nStation — Dead Fir plot, Ecowitt dashboard; login required\nStation — Clear-cut site, Ecowitt dashboard; login required\nPosition data — climate stations\n\n\n\n\n\nPosition data — climate stations\nStation data — Ecowitt share link\n\n\n\n\n\nStation data — Douglas Fir, site 20166; Ecowitt\nStation data — Douglas Fir, site 20163; Ecowitt\nPosition data — climate stations\n\n\n\n\n\nDownload project ZIP\nOpen project repository\nOpen slides"
+  },
+  {
+    "objectID": "block5/mc_data.html#fine-offset-sensors",
+    "href": "block5/mc_data.html#fine-offset-sensors",
+    "title": "Data Sources",
+    "section": "Fine Offset sensors",
+    "text": "Fine Offset sensors\nThe sensors used in the EON microclimate work are produced by Fine Offset and re-branded or partly modified by different resellers. This page refers mainly to sensors sold by the German reseller froggit and the US reseller ecowitt.\nThe relevant gateway family is the DP-/GW SmartHub, a WiFi gateway for temperature, humidity, and pressure measurements developed by Fine Offset. Its practical strength for field courses is the large number of compatible radio-based sensors.\n\nSensor suppliers\n\nFroggit shop [DE]\nEcowitt shop [US]\nFine Offset"
+  },
+  {
+    "objectID": "block5/mc_data.html#compatible-sensor-types",
+    "href": "block5/mc_data.html#compatible-sensor-types",
+    "title": "Data Sources",
+    "section": "Compatible sensor types",
+    "text": "Compatible sensor types\nDepending on the gateway, up to 8 sensors of the following types can be connected at the same time:\n\nDP150/WN51 soil temperature sensors\nDP50/WH31 multi-channel temperature and humidity sensors\nWN34 wire probe thermometer\nDP10/WN35 leaf wetness sensors\nDP100 soil moisture sensors\n\nUp to 4 sensors of the following types can be connected:\n\nDP200/WH41/WH43 PM2.5/PM10 sensors\nWH45 water leak sensors\n\nUp to 2 sensors of the following types can be connected:\n\nDP250/WH45 CO2 / PM2.5 / PM10 / temperature / humidity indoor air quality sensor\nDP60/WH57 lightning sensor\n\nFor basic weather parameters such as rainfall, wind vector, solar radiation, temperature, and humidity, compatible outdoor base units such as the DP1100 or WH3000 can be used."
+  },
+  {
+    "objectID": "block5/mc_data.html#calibration-concept",
+    "href": "block5/mc_data.html#calibration-concept",
+    "title": "Data Sources",
+    "section": "Calibration concept",
+    "text": "Calibration concept\nLow-budget sensors usually do not provide stable measurement quality without checks. Reliable microclimate data therefore require a calibration concept before the measurements are used for spatial modelling.\n\nMeasurements from all sensors should be analysed together, preferably under controlled conditions such as a climate chamber, to identify sensors with systematic or significant outliers.\nThe sensors should then be checked against an operational high-quality reference station in the field."
+  },
+  {
+    "objectID": "block5/mc_tec.html",
+    "href": "block5/mc_tec.html",
+    "title": "Microclimate Sensors",
+    "section": "",
+    "text": "Froggit shop [DE]\n  \n  \n    \n     Ecowitt shop [US]\n  \n  \n    \n     Fine Offset\n  \n\n      \nThe sensors from Fine Offset are re-branded and partly modified by the resellers. This article deals with sensors from the german re-seller froggit and the US re-seller ecowitt. More precise the DP-/GW SmartHubs WiFi Gateway with temperature, humidity & Pressure which is developed by fine offset. The unique selling point of the LoRa-Wifi gateway is the extraordinarily extensive possibility of connecting radio-bound sensors."
+  },
+  {
+    "objectID": "block5/mc_tec.html#calibration-concept",
+    "href": "block5/mc_tec.html#calibration-concept",
+    "title": "Microclimate Sensors",
+    "section": "Calibration Concept",
+    "text": "Calibration Concept\nThe low budget sensors are usually lacking of a stable measurement quality. To obtain reliable micro climate data a two step calibration process is suggested.\n\nThe measurements of all sensors (preferably in a climate chamber) will be statistically analysed to identify sensor which produce systematic and significant outliers.\nThe sensors are calibrated against an operational running high price reference station in the field."
+  },
+  {
+    "objectID": "block5/mc_warmup_reader_en.html",
+    "href": "block5/mc_warmup_reader_en.html",
+    "title": "Reader: From Discrete Observations to Spatial Statements",
+    "section": "",
+    "text": "Geoscientific data rarely describe a complete spatial or spatio-temporal continuum. We usually work with discrete observations: measurement points, pixels, samples, segments, training areas, or selected timestamps. Nevertheless, we often need to make spatial statements about continuous areas and temporal situations.\nThis is the central problem of the EON warmup: how can incomplete observations be translated into a defensible spatial statement?\nMicroclimate is only one example. It makes the problem visible because a small number of sensors observe selected locations and timestamps, while the question concerns a spatially connected field. The same logic appears in sampling, UAV and LiDAR workflows, segmentation, regression, classification, interpolation, and validation.\nThe goal of this reader is not to present interpolation as a detached method collection. The goal is to understand gap filling as a modelling step between observation and spatial claim.\nSpatial gap filling is the controlled translation of discrete observations into a spatial statement. The core decisions concern neighborhood, distance, process, scale, statement area, and validation.\nThe following map shows the project region and the measurement situation used in the warmup.\n\n\n\nPolsterhaus excursion research area stations 2023 (stars) 2024 (crosses)"
+  },
+  {
+    "objectID": "block5/mc_warmup_reader_en.html#why-this-matters",
+    "href": "block5/mc_warmup_reader_en.html#why-this-matters",
+    "title": "Reader: From Discrete Observations to Spatial Statements",
+    "section": "",
+    "text": "Geoscientific data rarely describe a complete spatial or spatio-temporal continuum. We usually work with discrete observations: measurement points, pixels, samples, segments, training areas, or selected timestamps. Nevertheless, we often need to make spatial statements about continuous areas and temporal situations.\nThis is the central problem of the EON warmup: how can incomplete observations be translated into a defensible spatial statement?\nMicroclimate is only one example. It makes the problem visible because a small number of sensors observe selected locations and timestamps, while the question concerns a spatially connected field. The same logic appears in sampling, UAV and LiDAR workflows, segmentation, regression, classification, interpolation, and validation.\nThe goal of this reader is not to present interpolation as a detached method collection. The goal is to understand gap filling as a modelling step between observation and spatial claim.\nSpatial gap filling is the controlled translation of discrete observations into a spatial statement. The core decisions concern neighborhood, distance, process, scale, statement area, and validation.\nThe following map shows the project region and the measurement situation used in the warmup.\n\n\n\nPolsterhaus excursion research area stations 2023 (stars) 2024 (crosses)"
+  },
+  {
+    "objectID": "block5/mc_warmup_reader_en.html#role-of-this-reader",
+    "href": "block5/mc_warmup_reader_en.html#role-of-this-reader",
+    "title": "Reader: From Discrete Observations to Spatial Statements",
+    "section": "Role of this reader",
+    "text": "Role of this reader\nThis reader provides the vocabulary for the two EON blocks.\nBefore the hands-on, it clarifies basic terms: observation point, raster surface, neighborhood, distance, model assumption, and valid statement area. During the hands-on, it helps interpret the four simple model assumptions. In the second block, it supports the critical reading of the generated maps: what they show, what they claim, and where their validity stops.\nThe EON structure is deliberately small:\ndiscrete observations in reality\n-&gt; spatial statement\n-&gt; model assumption\n-&gt; minimal validation\n-&gt; model criticism"
+  },
+  {
+    "objectID": "block5/mc_warmup_reader_en.html#distance-and-data-representation",
+    "href": "block5/mc_warmup_reader_en.html#distance-and-data-representation",
+    "title": "Reader: From Discrete Observations to Spatial Statements",
+    "section": "Distance and data representation",
+    "text": "Distance and data representation\nThe first modelling decision is the definition of proximity. Proximity is not only a geometric property. It is an operational statement about which observations may inform another location and how strongly they should do so.\nSpatial relationships can be described by neighborhoods and distances. Measurement points are zero-dimensional observations: they have a location, but no area. Their neighborhood is therefore often defined by distance: the nearest station, the nearest group of stations, all stations within a radius, or all stations inside a valid statement area. Raster cells have area, so their values refer to cell supports and their distances are evaluated between cell centres or along raster surfaces. The relevant distance rule depends on the support represented in the model.\nTobler’s First Law of Geography provides a common default: near things are more related than distant things.1 This is a useful starting assumption, not a universal law for every process. In many real cases spatial influence cannot be measured directly. It must be operationalized through a distance metric, a neighborhood rule, and a model assumption.\nA simple Euclidean distance can be a defensible starting point when no stronger process relation or knowledge is available. Other questions may require network distance, travel time, cost distance, flow direction, slope position, wind exposure, or similarity in measurable environmental conditions (covariates). The important step is to state what “near” means for the concrete process and scale of use."
+  },
+  {
+    "objectID": "block5/mc_warmup_reader_en.html#filling-spatial-gaps-concepts",
+    "href": "block5/mc_warmup_reader_en.html#filling-spatial-gaps-concepts",
+    "title": "Reader: From Discrete Observations to Spatial Statements",
+    "section": "Filling spatial gaps: concepts",
+    "text": "Filling spatial gaps: concepts\nWith distance and neighborhood defined, we can turn to gap filling: predicting or assigning values at locations where no observation exists.\nEach method encodes an assumption about how values continue between observations. The practical question is therefore not which method is generally best. The practical question is which assumption is defensible for this data situation, this process question, and this intended scale of use.\nA spatial continuum derived from point measurements is never a direct observation. It is a modelled statement between observed locations. The same measurement points can lead to different spatial representations — raster fields, Voronoi polygons, buffers, or neighbourhood zones — because the assumptions differ. This is why the this lecture compares simple alternatives instead of hiding the modelling decision inside one polished result.\nThe four alternatives in the warmup are not a ranking of interpolation methods. They are chosen because each one makes a different modelling assumption visible:\n\nnearest station: the closest observation is taken as the relevant reference;\ndistance decay: nearby observations receive more weight than distant observations;\nelevation relation: temperature is linked to elevation as a simple process-related variable;\ndata-driven patterning from few observations: a flexible model can create plausible-looking spatial patterns even when the data basis is thin.\n\nMore complex methods only become defensible when the process relation, the relevant scale, the data support, and the validation target can be stated clearly. Without that justification, additional complexity does not make the spatial statement stronger. It only hides the modelling decision."
+  },
+  {
+    "objectID": "block5/mc_warmup_reader_en.html#process-scale-and-method-choice",
+    "href": "block5/mc_warmup_reader_en.html#process-scale-and-method-choice",
+    "title": "Reader: From Discrete Observations to Spatial Statements",
+    "section": "Process, scale, and method choice",
+    "text": "Process, scale, and method choice\nThe decisive issue is the spatial claim that the model is supposed to support. Before choosing an algorithm, the process question, the relevant scale, the data support, and the validation target must be clear. Only then can a modelling assumption be defended.\nThe first question is what kind of spatial relation is plausible. Is the expected pattern controlled mainly by the nearest observation, by gradual distance decay, by a covariate such as elevation, or by a data-driven combination of position and environment? The answer depends on the phenomenon, the station layout, the observation support, and the scale at which the result will be used.\nThe second question is whether the available data can support the desired complexity. A method with more parameters or more flexible structure is not automatically better. It can produce a convincing-looking surface from very little evidence. If the process relation, scale, and validation target cannot be stated clearly, a simpler method is often the more correct method because it exposes rather than hides the assumption.\nFor this workflow it means: Voronoi, IDW, and LM altitude are not “primitive” fallbacks. They are transparent statements. Random Forest is included as a warning example because a flexible data-driven surface can look plausible even when the number of points is too small to support a robust spatial interpretation."
+  },
+  {
+    "objectID": "block5/mc_warmup_reader_en.html#four-eon-model-assumptions",
+    "href": "block5/mc_warmup_reader_en.html#four-eon-model-assumptions",
+    "title": "Reader: From Discrete Observations to Spatial Statements",
+    "section": "Four EON model assumptions",
+    "text": "Four EON model assumptions\nIn all four variants, the measured station temperature is the value to be transferred into space. The methods differ in how they connect these measured values to unsampled locations.\n\nVoronoi / nearest station uses only station position. The measured temperature of the nearest station is assigned to each prediction location.\nIDW / distance decay uses station position and distance. The measured temperatures of nearby stations receive more weight than those of distant stations.\nLM altitude uses the measured station temperatures as the response variable and elevation as an explanatory variable. The fitted altitude relation is then applied to the DEM.\nRandom Forest uses the measured station temperatures as the response variable and coordinates plus elevation as explanatory variables. The fitted relation is then applied to all prediction locations.\n\nThe important difference is therefore not whether a method “uses the measurements”. All methods use the measured temperatures. The difference is how each method turns those measurements into a spatial statement: by nearest assignment, by distance weighting, by a simple altitude relation, or by a flexible data-driven relation.\n\nVoronoi / nearest station\nVoronoi uses the nearest station. The map becomes a set of hard station areas.\nThe assumption is piecewise constancy: within each area, the nearest observed value is taken as representative. The effective scale is determined by the station layout. This is transparent and restrictive. It is useful when the task is to expose station control and avoid pretending to know gradients that are not supported by the data.\nThis method is also useful because it makes the support problem visible. It shows how the study area is partitioned by point location alone. It is often a good first diagnostic when nothing beyond position is justified.\n\n\nIDW / distance decay\nIDW uses distance weighting. Nearby stations count more than distant stations.\nThe assumption is gradual isotropic decay from observation points. The spatial pattern is smoother than Voronoi but still mainly controlled by station geometry. The method is easy to understand and useful when local spatial proximity is a plausible but limited assumption.\nIDW does not know the process. It does not know wind, shade, cold-air drainage, land cover, or sensor exposure unless these are indirectly reflected in the observed values and station layout.\n\n\nLM altitude / simple explanatory model\nThe linear altitude model uses elevation as a simple explanatory variable.\nThe assumption is that part of the temperature pattern can be transferred through a relationship with altitude. The predicted values therefore inherit the spatial structure of the DEM. This can be defensible when elevation is a plausible driver at the scale of interest.\nThis is not a richer microclimate model. It is a deliberately narrow altitude transfer. Local shade, vegetation, surface material, buildings, and drainage processes are outside this assumption unless they are indirectly expressed through elevation or the station values.\n\n\nRandom Forest / flexible data-driven relation\nRandom Forest also transfers the measured station temperatures to unsampled locations. In this warmup, the measured temperature is the response variable. Coordinates and elevation are explanatory variables. The model learns a relation from the few station values and then applies that relation to all prediction locations.\nThis is different from nearest station, IDW, and the altitude model. Voronoi transfers the nearest measured value. IDW transfers measured values through distance weights. The altitude model transfers measured values through one global elevation relation. Random Forest can combine coordinate position and elevation in many local decision rules. The resulting spatial statement can therefore look more detailed than the data situation supports.\nThe warning is not that Random Forest is generally wrong. The warning is that technical flexibility can hide a weak spatial claim. With few stations, the model may mainly learn where high and low values happened to occur in this specific station layout. A low error value does not prove that the predicted pattern is a defensible microclimatic relation. The result still has to be judged against the process question, the scale of use, the sampling layout, the valid statement area, and the validation target."
+  },
+  {
+    "objectID": "block5/mc_warmup_reader_en.html#hands-on-warmup-workflow",
+    "href": "block5/mc_warmup_reader_en.html#hands-on-warmup-workflow",
+    "title": "Reader: From Discrete Observations to Spatial Statements",
+    "section": "Hands-on: warmup workflow",
+    "text": "Hands-on: warmup workflow\nThe warmup follows the minimal script as a compact modelling chain. It starts from prepared station measurements and elevation information, produces four alternative spatial statements, and then reads the resulting maps and RMSE values critically.\nThe important point is not each technical line of code. The important point is the sequence: observed station values are transferred to unsampled locations, different assumptions produce different spatial representations, and the outputs must be read as modelled statements rather than as direct observations.\nThe data are prepared so that the warmup can focus on the modelling step. In real projects, this step only becomes defensible after sensor behaviour, timestamps, missing values, CRS, DEM fit, station exposure, and the valid statement area have been checked.\nThe minimal script is the technical counterpart of this reader. It demonstrates how observed station values are transferred to unsampled locations, and why every resulting spatial representation depends on an explicit modelling assumption.\nThe real-world link is important. Before such a workflow can be used in an actual project, the measurements would have to be checked: sensor behaviour, timestamps, missing values, coordinate reference systems, DEM fit, station exposure, and the valid statement area all affect what can be claimed. The warmup does not compute a full cleaning workflow. It uses prepared data so that the modelling step itself becomes visible."
+  },
+  {
+    "objectID": "block5/mc_warmup_reader_en.html#minimal-validation-what-is-checked",
+    "href": "block5/mc_warmup_reader_en.html#minimal-validation-what-is-checked",
+    "title": "Reader: From Discrete Observations to Spatial Statements",
+    "section": "Minimal validation: what is checked?",
+    "text": "Minimal validation: what is checked?\nThe warmup does not stop after producing spatial statements. It also asks whether the models can reproduce measurements that were temporarily withheld.\nLeave-one-out cross-validation (LOOCV) does this in a simple way: one station is removed, the model is fitted with the remaining stations, and the removed station is predicted. This is repeated for all stations. The difference between observed and predicted station values gives a point-based error.\nRMSE summarizes these errors into one number. A lower RMSE means that, in this specific test, the withheld station values were predicted more closely."
+  },
+  {
+    "objectID": "block5/mc_warmup_reader_en.html#reading-the-spatial-statements-critically",
+    "href": "block5/mc_warmup_reader_en.html#reading-the-spatial-statements-critically",
+    "title": "Reader: From Discrete Observations to Spatial Statements",
+    "section": "Reading the spatial statements critically",
+    "text": "Reading the spatial statements critically\nAfter the results have been produced, the main task is not to choose the best-looking map or the lowest RMSE. The task is to decide what each spatial statement is allowed to say about the real situation.\nFor each result, ask:\n\nWhich measured values are transferred into the unsampled space?\nWhich assumption performs this transfer?\nWhich part of the area is supported by the station layout?\nWhere would the statement turn into extrapolation?\nWhich real process could explain the pattern, and which process is missing?\nWhat exactly did LOOCV check: station prediction, spatial process, or only the chosen validation task?\n\nLOOCV is useful because it forces the model to predict known measurements without using them directly. But it remains a point-based test under the given station layout. It does not prove that visible gradients or zones correspond to real microclimatic processes. It also does not test whether the station network covers the relevant situations in the field.\nRMSE is therefore a prompt for model criticism. A low RMSE can make a result worth inspecting, but it cannot replace the scientific question: is this spatial statement defensible for the observed process, the data support, the scale of use, and the valid statement area?"
+  },
+  {
+    "objectID": "block5/mc_warmup_reader_en.html#reality-check-prepared-data-are-not-raw-data",
+    "href": "block5/mc_warmup_reader_en.html#reality-check-prepared-data-are-not-raw-data",
+    "title": "Reader: From Discrete Observations to Spatial Statements",
+    "section": "Reality check: prepared data are not raw data",
+    "text": "Reality check: prepared data are not raw data\nThe data are prepared so that the workshop can focus on the modelling step. Real projects require work before modelling starts.\nAt minimum, the data situation has to be checked: sensor plausibility, timestamp consistency, missing values, coordinate reference systems, DEM reference, station exposure, valid statement area, documentation, and data provenance.\nThese steps are not developed into a full cleaning workflow in this reader. They are introduced as conditions for valid spatial statements. A map can only be as defensible as the observation network, preprocessing choices, statement area, and validation design behind it."
+  },
+  {
+    "objectID": "block5/mc_warmup_reader_en.html#core-message",
+    "href": "block5/mc_warmup_reader_en.html#core-message",
+    "title": "Reader: From Discrete Observations to Spatial Statements",
+    "section": "Core message",
+    "text": "Core message\nA map from point measurements is not an automatic output. It is a modelled spatial statement.\nThe correct question is not “which method is best?” The correct question is whether the model assumption, process logic, scale of use, data support, statement area, and validation boundary fit together.\nWhen this cannot be shown, the simpler and more transparent assumption is often the scientifically stronger one."
+  },
+  {
+    "objectID": "block5/mc_warmup_reader_en.html#footnotes",
+    "href": "block5/mc_warmup_reader_en.html#footnotes",
+    "title": "Reader: From Discrete Observations to Spatial Statements",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nTobler, W. R. (1970). A computer movie simulating urban growth in the Detroit region. Economic Geography, 46(Supplement), 234–240. https://doi.org/10.2307/143141.↩︎"
   }
 ]
