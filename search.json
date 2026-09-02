@@ -872,14 +872,70 @@
     "href": "block5/mc_tec.html",
     "title": "Microclimate Sensors",
     "section": "",
-    "text": "Froggit shop [DE]\n  \n  \n    \n     Ecowitt shop [US]\n  \n  \n    \n     Fine Offset\n  \n\n      \nThe sensors from Fine Offset are re-branded and partly modified by the resellers. This article deals with sensors from the german re-seller froggit and the US re-seller ecowitt. More precise the DP-/GW SmartHubs WiFi Gateway with temperature, humidity & Pressure which is developed by fine offset. The unique selling point of the LoRa-Wifi gateway is the extraordinarily extensive possibility of connecting radio-bound sensors."
+    "text": "Froggit shop [DE]\n  \n  \n    \n     Ecowitt shop [EU]\n  \n  \n    \n     Fine Offset\n  \n\n      \nThe sensors produced by Fine Offset are re-branded and partly modified by resellers. This article deals with sensors from the German reseller froggit and the ecowitt product family. More precisely, it focuses on the DP-/GW SmartHub family of Wi-Fi gateways and compatible radio-connected sensors. All components used in this tutorial must be the European 868 MHz versions."
+  },
+  {
+    "objectID": "block5/mc_tec.html#manufacturer-brands-and-model-names",
+    "href": "block5/mc_tec.html#manufacturer-brands-and-model-names",
+    "title": "Microclimate Sensors",
+    "section": "Manufacturer, brands, and model names",
+    "text": "Manufacturer, brands, and model names\nShenzhen Fine Offset Electronics develops and manufactures the underlying hardware and radio ecosystem. Ecowitt is the manufacturer’s international retail brand. Froggit and several other regional suppliers sell Fine Offset hardware under their own product names and may combine it with different enclosures, firmware, documentation, cloud services, or accessories. These companies are therefore described here as resellers or re-branders; the term licensee should only be used where a corresponding contractual relationship is documented.\nThe same hardware can consequently appear under several names:\n\n\n\n\n\n\n\n\nFine Offset / Ecowitt model\nExample Froggit designation\nFunction\n\n\n\n\nWN34S\nDP150\nsoil temperature\n\n\nWH31 / WN31\nDP50\nair temperature and relative humidity\n\n\nWN35\nDP10\nleaf wetness\n\n\nWH51\nDP100\nsoil moisture\n\n\nWH41 / WH43\nDP200\nparticulate matter\n\n\nWH45\nDP250\nindoor air quality\n\n\nWH57\nDP60\nlightning detection\n\n\nWS6210S\nWittField WS6210S\nsolar-powered mobile 4G/Wi-Fi field gateway\n\n\n\nOther brands, including Ambient Weather, Sainlogic, Misol, Watson, and various retailer labels, also sell products based on Fine Offset designs. However, visual similarity or a related model name does not guarantee interoperability. A reseller may alter firmware, supported services, channel limits, or radio configuration, and not every product sold by these brands necessarily originates from Fine Offset.\nFor compatibility checks, use the underlying Fine Offset/Ecowitt model identifier whenever it is available and verify all of the following:\n\nradio frequency — 868 MHz for this European network;\nsensor type and radio protocol;\ngateway firmware and supported channel count;\ncloud, local API, and application support;\nregional hardware version rather than housing appearance alone."
+  },
+  {
+    "objectID": "block5/mc_tec.html#up-to-8-channels",
+    "href": "block5/mc_tec.html#up-to-8-channels",
+    "title": "Microclimate Sensors",
+    "section": "Up to 8 channels",
+    "text": "Up to 8 channels\n\nDP150 / WN34S soil temperature sensor — manual and specifications (PDF)\nDP50 / WH31 / WN31 multi-channel temperature and humidity sensor — manual and specifications (PDF)\nWN34L wire-probe liquid temperature sensor — manual and specifications (PDF)\nDP10 / WN35 leaf-wetness sensor — manual and specifications (PDF)\nDP100 / WH51 soil-moisture sensor — manual and specifications (PDF)\n\nCurrent gateways and firmware may support up to 16 WH51 soil-moisture channels. Older gateways may expose only eight channels. Therefore, the gateway manual and installed firmware are authoritative for the actual channel limit."
+  },
+  {
+    "objectID": "block5/mc_tec.html#up-to-4-channels",
+    "href": "block5/mc_tec.html#up-to-4-channels",
+    "title": "Microclimate Sensors",
+    "section": "Up to 4 channels",
+    "text": "Up to 4 channels\n\nDP200 / WH41 / WH43 PM2.5/PM10 sensor — manual and specifications (PDF)\nWH55 water-leak sensor — manual and specifications (PDF)"
+  },
+  {
+    "objectID": "block5/mc_tec.html#up-to-2-channels",
+    "href": "block5/mc_tec.html#up-to-2-channels",
+    "title": "Microclimate Sensors",
+    "section": "Up to 2 channels",
+    "text": "Up to 2 channels\n\nDP250 / WH45 indoor CO2, PM2.5, PM10, temperature, and humidity sensor — manual and specifications (PDF)\nDP60 / WH57 lightning sensor — manual and specifications (PDF)\n\nThe WH55 is the water-leak sensor. The WH45 is the indoor five-in-one air-quality sensor."
+  },
+  {
+    "objectID": "block5/mc_tec.html#six-in-one-outdoor-sensor",
+    "href": "block5/mc_tec.html#six-in-one-outdoor-sensor",
+    "title": "Microclimate Sensors",
+    "section": "Six-in-one outdoor sensor",
+    "text": "Six-in-one outdoor sensor\n\nWS80 ultrasonic six-in-one outdoor sensor — manual and specifications (PDF)\n\nThe WS80 measures wind speed, wind direction, air temperature, relative humidity, UV index, and solar radiation. This tutorial requires the European 868 MHz version. The WS80 does not measure precipitation; rainfall requires a separate compatible 868 MHz rain gauge such as the WH40.\nOlder integrated arrays such as the WS69/WH65 combine wind, rain, radiation, temperature, and humidity in one unit, but use a different sensor design."
+  },
+  {
+    "objectID": "block5/mc_tec.html#mobile-field-uplink-gateway",
+    "href": "block5/mc_tec.html#mobile-field-uplink-gateway",
+    "title": "Microclimate Sensors",
+    "section": "Mobile field uplink gateway",
+    "text": "Mobile field uplink gateway\n\nWS6210S 4G and Wi-Fi weather-station mobile gateway with external RF antenna — manual, compatibility, and specifications (PDF)\nWS6210/WS6210S product page — available configurations and accessories\n\nThe WS6210S, rather than the GW1200, is the mobile uplink gateway intended here. It receives measurements from compatible radio sensors and uploads them using either 4G/LTE or Wi-Fi. This makes it suitable for autonomous field installations without permanent local network access.\nThe WS6210S includes an external sub-GHz RF antenna, a solar panel, rechargeable batteries, a SIM-card facility, and local microSD storage. It is a gateway rather than a sensor: weather and soil measurements are supplied by separately connected devices such as the WH51 soil-moisture sensor.\nThis tutorial requires the European 868 MHz version. All connected Fine Offset/Ecowitt/Froggit radio sensors must also use compatible 868 MHz versions. The 4G frequency and the 868 MHz sensor frequency perform different tasks: 868 MHz connects sensors to the WS6210S, while 4G or Wi-Fi transfers the collected data to the server."
+  },
+  {
+    "objectID": "block5/mc_tec.html#android-software",
+    "href": "block5/mc_tec.html#android-software",
+    "title": "Microclimate Sensors",
+    "section": "Android software",
+    "text": "Android software\n\nEcowitt app for Android — Google Play\nOfficial Ecowitt application download page\n\nThe Ecowitt app provides the cloud-oriented workflow. Depending on gateway and firmware, local-network configuration and customized uploads may additionally use WS View Plus or the gateway’s web interface."
+  },
+  {
+    "objectID": "block5/mc_tec.html#complete-weather-parameters",
+    "href": "block5/mc_tec.html#complete-weather-parameters",
+    "title": "Microclimate Sensors",
+    "section": "Complete weather parameters",
+    "text": "Complete weather parameters\nFor rain, wind vector, solar radiation, air temperature, and relative humidity, combine a compatible 868 MHz gateway with either an integrated outdoor array or modular sensors. The WS80 covers the six non-rain parameters and requires a separate rain gauge."
   },
   {
     "objectID": "block5/mc_tec.html#calibration-concept",
     "href": "block5/mc_tec.html#calibration-concept",
     "title": "Microclimate Sensors",
-    "section": "Calibration Concept",
-    "text": "Calibration Concept\nThe low budget sensors are usually lacking of a stable measurement quality. To obtain reliable micro climate data a two step calibration process is suggested.\n\nThe measurements of all sensors (preferably in a climate chamber) will be statistically analysed to identify sensor which produce systematic and significant outliers.\nThe sensors are calibrated against an operational running high price reference station in the field."
+    "section": "Calibration concept",
+    "text": "Calibration concept\nLow-budget sensors often lack stable measurement quality. To obtain reliable microclimate data, a two-step calibration process is suggested.\n\nMeasurements from all sensors should preferably be compared under controlled and homogeneous conditions, ideally in a climate chamber, to identify sensors producing systematic and significant outliers.\nThe remaining sensors should be calibrated against an operational high-quality reference station under representative field conditions."
   },
   {
     "objectID": "block5/mc_warmup_reader_en.html",

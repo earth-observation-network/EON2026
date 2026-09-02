@@ -443,9 +443,17 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#features" id="toc-features" class="nav-link active" data-scroll-target="#features">Features</a>
+  <li><a href="#manufacturer-brands-and-model-names" id="toc-manufacturer-brands-and-model-names" class="nav-link active" data-scroll-target="#manufacturer-brands-and-model-names">Manufacturer, brands, and model names</a></li>
+  <li><a href="#features" id="toc-features" class="nav-link" data-scroll-target="#features">Features</a>
   <ul class="collapse">
-  <li><a href="#calibration-concept" id="toc-calibration-concept" class="nav-link" data-scroll-target="#calibration-concept">Calibration Concept</a></li>
+  <li><a href="#up-to-8-channels" id="toc-up-to-8-channels" class="nav-link" data-scroll-target="#up-to-8-channels">Up to 8 channels</a></li>
+  <li><a href="#up-to-4-channels" id="toc-up-to-4-channels" class="nav-link" data-scroll-target="#up-to-4-channels">Up to 4 channels</a></li>
+  <li><a href="#up-to-2-channels" id="toc-up-to-2-channels" class="nav-link" data-scroll-target="#up-to-2-channels">Up to 2 channels</a></li>
+  <li><a href="#six-in-one-outdoor-sensor" id="toc-six-in-one-outdoor-sensor" class="nav-link" data-scroll-target="#six-in-one-outdoor-sensor">Six-in-one outdoor sensor</a></li>
+  <li><a href="#mobile-field-uplink-gateway" id="toc-mobile-field-uplink-gateway" class="nav-link" data-scroll-target="#mobile-field-uplink-gateway">Mobile field uplink gateway</a></li>
+  <li><a href="#android-software" id="toc-android-software" class="nav-link" data-scroll-target="#android-software">Android software</a></li>
+  <li><a href="#complete-weather-parameters" id="toc-complete-weather-parameters" class="nav-link" data-scroll-target="#complete-weather-parameters">Complete weather parameters</a></li>
+  <li><a href="#calibration-concept" id="toc-calibration-concept" class="nav-link" data-scroll-target="#calibration-concept">Calibration concept</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/earth-observation-network/EON2026/edit/main/block5/mc_tec.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/earth-observation-network/EON2026/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
@@ -484,9 +492,9 @@ window.Quarto = {
     <i class="bi bi-shop-window"></i>
      <span class="about-link-text">Froggit shop [DE]</span>
   </a>
-  <a href="https://shop.ecowitt.com/collections/wifi-sensor" class="about-link" rel="" target="">
+  <a href="https://shop.ecowitt.com/" class="about-link" rel="" target="">
     <i class="bi bi-shop-window"></i>
-     <span class="about-link-text">Ecowitt shop [US]</span>
+     <span class="about-link-text">Ecowitt shop [EU]</span>
   </a>
   <a href="https://www.foshk.com/" class="about-link" rel="" target="">
     <i class="bi bi-building-gear"></i>
@@ -494,7 +502,7 @@ window.Quarto = {
   </a>
 </div>
       <div class="about-contents"><div id="image-heading">
-<p>The sensors from <code>Fine Offset</code> are re-branded and partly modified by the resellers. This article deals with sensors from the german re-seller <code>froggit</code> and the US re-seller <code>ecowitt</code>. More precise the <a href="https://www.foshk.com/Wifi_Weather_Station/GW1100.html">DP-/GW SmartHubs</a> WiFi Gateway with temperature, humidity &amp; Pressure which is developed by fine offset. The unique selling point of the LoRa-Wifi gateway is the extraordinarily extensive possibility of connecting radio-bound sensors.</p>
+<p>The sensors produced by <code>Fine Offset</code> are re-branded and partly modified by resellers. This article deals with sensors from the German reseller <code>froggit</code> and the <code>ecowitt</code> product family. More precisely, it focuses on the DP-/GW SmartHub family of Wi-Fi gateways and compatible radio-connected sensors. All components used in this tutorial must be the <strong>European 868 MHz versions</strong>.</p>
 </div></div>
     </div>
     <img src="../images/froggit_1.jpg" class="about-image
@@ -502,33 +510,141 @@ window.Quarto = {
   </div>
 </div>
 
+<section id="manufacturer-brands-and-model-names" class="level2">
+<h2 data-anchor-id="manufacturer-brands-and-model-names">Manufacturer, brands, and model names</h2>
+<p><a href="https://shop.ecowitt.com/pages/our-company">Shenzhen Fine Offset Electronics</a> develops and manufactures the underlying hardware and radio ecosystem. <code>Ecowitt</code> is the manufacturer’s international retail brand. <code>Froggit</code> and several other regional suppliers sell Fine Offset hardware under their own product names and may combine it with different enclosures, firmware, documentation, cloud services, or accessories. These companies are therefore described here as <strong>resellers or re-branders</strong>; the term <em>licensee</em> should only be used where a corresponding contractual relationship is documented.</p>
+<p>The same hardware can consequently appear under several names:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Fine Offset / Ecowitt model</th>
+<th>Example Froggit designation</th>
+<th>Function</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>WN34S</td>
+<td>DP150</td>
+<td>soil temperature</td>
+</tr>
+<tr class="even">
+<td>WH31 / WN31</td>
+<td>DP50</td>
+<td>air temperature and relative humidity</td>
+</tr>
+<tr class="odd">
+<td>WN35</td>
+<td>DP10</td>
+<td>leaf wetness</td>
+</tr>
+<tr class="even">
+<td>WH51</td>
+<td>DP100</td>
+<td>soil moisture</td>
+</tr>
+<tr class="odd">
+<td>WH41 / WH43</td>
+<td>DP200</td>
+<td>particulate matter</td>
+</tr>
+<tr class="even">
+<td>WH45</td>
+<td>DP250</td>
+<td>indoor air quality</td>
+</tr>
+<tr class="odd">
+<td>WH57</td>
+<td>DP60</td>
+<td>lightning detection</td>
+</tr>
+<tr class="even">
+<td>WS6210S</td>
+<td>WittField WS6210S</td>
+<td>solar-powered mobile 4G/Wi-Fi field gateway</td>
+</tr>
+</tbody>
+</table>
+<p>Other brands, including Ambient Weather, Sainlogic, Misol, Watson, and various retailer labels, also sell products based on Fine Offset designs. However, visual similarity or a related model name does <strong>not</strong> guarantee interoperability. A reseller may alter firmware, supported services, channel limits, or radio configuration, and not every product sold by these brands necessarily originates from Fine Offset.</p>
+<p>For compatibility checks, use the underlying Fine Offset/Ecowitt model identifier whenever it is available and verify all of the following:</p>
+<ul>
+<li>radio frequency — <strong>868 MHz for this European network</strong>;</li>
+<li>sensor type and radio protocol;</li>
+<li>gateway firmware and supported channel count;</li>
+<li>cloud, local API, and application support;</li>
+<li>regional hardware version rather than housing appearance alone.</li>
+</ul>
+</section>
 <section id="features" class="level1">
 <h1>Features</h1>
-<p>Currently, depending on the gateway, a maximum of 8 sensors of the following types can be connected at the same time:</p>
+<p>The exact number of simultaneously supported sensors depends on the gateway, its firmware, and the sensor type. The linked manuals contain operating instructions and technical specifications.</p>
+<section id="up-to-8-channels" class="level2">
+<h2 data-anchor-id="up-to-8-channels">Up to 8 channels</h2>
 <ul>
-<li><a href="https://www.froggit.de/media/products/DP150_BDA_EN.pdf">DP150/WN51</a> soil temperature sensors,</li>
-<li><a href="https://www.froggit.de/media/products/DP50_BDA(DE).pdf">DP50/WH31</a> multi channel temperature and humidity sensors</li>
-<li><a href="https://osswww.ecowitt.net/uploads/20220803/WN34S%20WN34L%20Manual.pdf">WN34</a> wire probe thermometer</li>
-<li><a href="https://www.froggit.de/media/products/DP10_BDA_EN.pdf">DP10/WN35</a> leaf wetness sensors</li>
-<li><a href="https://www.froggit.de/media/products/DP100_BDA(DE).pdf">DP100</a> soil moisture sensors;</li>
+<li><a href="https://oss.ecowitt.net/uploads/20260402/WN34SManual.pdf">DP150 / WN34S</a> soil temperature sensor — manual and specifications (PDF)</li>
+<li><a href="https://oss.ecowitt.net/uploads/20250829/WN31A.pdf">DP50 / WH31 / WN31</a> multi-channel temperature and humidity sensor — manual and specifications (PDF)</li>
+<li><a href="https://oss.ecowitt.net/uploads/20260402/WN34LManual.pdf">WN34L</a> wire-probe liquid temperature sensor — manual and specifications (PDF)</li>
+<li><a href="https://oss.ecowitt.net/uploads/20260224/WN35Manual.pdf">DP10 / WN35</a> leaf-wetness sensor — manual and specifications (PDF)</li>
+<li><a href="https://oss.ecowitt.net/uploads/20251226/WH51Manual.pdf">DP100 / WH51</a> soil-moisture sensor — manual and specifications (PDF)</li>
 </ul>
-<p>a maximum of 4:</p>
+<p>Current gateways and firmware may support up to 16 WH51 soil-moisture channels. Older gateways may expose only eight channels. Therefore, the gateway manual and installed firmware are authoritative for the actual channel limit.</p>
+</section>
+<section id="up-to-4-channels" class="level2">
+<h2 data-anchor-id="up-to-4-channels">Up to 4 channels</h2>
 <ul>
-<li><a href="https://www.froggit.de/media/products/DP200_BDA(DE)_1.pdf">DP200/WH41/WH43</a> PM2.5/PM10 sensors</li>
-<li><a href="https://osswww.ecowitt.net/uploads/20220803/WH55%20Manual.pdf">WH45</a> Water leak sensors</li>
+<li><a href="https://osswww.ecowitt.net/uploads/20220803/WH41%20Manual.pdf">DP200 / WH41 / WH43</a> PM2.5/PM10 sensor — manual and specifications (PDF)</li>
+<li><a href="https://osswww.ecowitt.net/uploads/20220803/WH55%20Manual.pdf">WH55</a> water-leak sensor — manual and specifications (PDF)</li>
 </ul>
-<p>a maximum of 2:</p>
+</section>
+<section id="up-to-2-channels" class="level2">
+<h2 data-anchor-id="up-to-2-channels">Up to 2 channels</h2>
 <ul>
-<li><a href="https://www.froggit.de/product_info.php?info=p483_dp250-5-in-1-co2-pm2-5-pm10-temperatur-luftfeuchte-innenraum-luftqualitaets-funksensor.html">DP250/WH45</a> CO2 / PM2.5 / PM10 / temperatur / moisture sensor</li>
-<li><a href="https://www.froggit.de/media/products/DP60-Manual_EN_.pdf">DP60/WH57</a> Lightning sensor</li>
+<li><a href="https://oss.ecowitt.net/uploads/20260318/WH45Manual.pdf">DP250 / WH45</a> indoor CO2, PM2.5, PM10, temperature, and humidity sensor — manual and specifications (PDF)</li>
+<li><a href="https://osswww.ecowitt.net/uploads/20220803/WH57%20Manual.pdf">DP60 / WH57</a> lightning sensor — manual and specifications (PDF)</li>
 </ul>
-<p>For the basic weather parameters as rain, wind vector insolation temperature and humidity one of the compatible outdoor basis units as the <a href="https://www.froggit.de/media/products/DP1100_BDA_DE_.pdf">DP1100</a> or <a href="https://www.froggit.de/media/products/WH3000_BDA_Ausseneinheit_DE_.pdf">WH3000</a></p>
+<p>The <strong>WH55</strong> is the water-leak sensor. The <strong>WH45</strong> is the indoor five-in-one air-quality sensor.</p>
+</section>
+<section id="six-in-one-outdoor-sensor" class="level2">
+<h2 data-anchor-id="six-in-one-outdoor-sensor">Six-in-one outdoor sensor</h2>
+<ul>
+<li><a href="https://oss.ecowitt.net/uploads/20260226/WS80.pdf">WS80</a> ultrasonic six-in-one outdoor sensor — manual and specifications (PDF)</li>
+</ul>
+<p>The WS80 measures wind speed, wind direction, air temperature, relative humidity, UV index, and solar radiation. This tutorial requires the <strong>European 868 MHz version</strong>. The WS80 does not measure precipitation; rainfall requires a separate compatible <strong>868 MHz</strong> rain gauge such as the WH40.</p>
+<p>Older integrated arrays such as the WS69/WH65 combine wind, rain, radiation, temperature, and humidity in one unit, but use a different sensor design.</p>
+</section>
+<section id="mobile-field-uplink-gateway" class="level2">
+<h2 data-anchor-id="mobile-field-uplink-gateway">Mobile field uplink gateway</h2>
+<ul>
+<li><a href="https://oss.ecowitt.net/uploads/20251229/FG-WS6210AS-Manual%201229.pdf">WS6210S</a> 4G and Wi-Fi weather-station mobile gateway with external RF antenna — manual, compatibility, and specifications (PDF)</li>
+<li><a href="https://shop.ecowitt.com/products/wittfield-ws6210-ws6210s">WS6210/WS6210S product page</a> — available configurations and accessories</li>
+</ul>
+<p>The <strong>WS6210S</strong>, rather than the GW1200, is the mobile uplink gateway intended here. It receives measurements from compatible radio sensors and uploads them using either 4G/LTE or Wi-Fi. This makes it suitable for autonomous field installations without permanent local network access.</p>
+<p>The WS6210S includes an external sub-GHz RF antenna, a solar panel, rechargeable batteries, a SIM-card facility, and local microSD storage. It is a gateway rather than a sensor: weather and soil measurements are supplied by separately connected devices such as the WH51 soil-moisture sensor.</p>
+<p>This tutorial requires the <strong>European 868 MHz version</strong>. All connected Fine Offset/Ecowitt/Froggit radio sensors must also use compatible 868 MHz versions. The 4G frequency and the 868 MHz sensor frequency perform different tasks: 868 MHz connects sensors to the WS6210S, while 4G or Wi-Fi transfers the collected data to the server.</p>
+</section>
+<section id="android-software" class="level2">
+<h2 data-anchor-id="android-software">Android software</h2>
+<ul>
+<li><a href="https://play.google.com/store/apps/details?id=com.ost.ecowitt">Ecowitt app for Android</a> — Google Play</li>
+<li><a href="https://api.ecowitt.net/api/app/download">Official Ecowitt application download page</a></li>
+</ul>
+<p>The Ecowitt app provides the cloud-oriented workflow. Depending on gateway and firmware, local-network configuration and customized uploads may additionally use WS View Plus or the gateway’s web interface.</p>
+</section>
+<section id="complete-weather-parameters" class="level2">
+<h2 data-anchor-id="complete-weather-parameters">Complete weather parameters</h2>
+<p>For rain, wind vector, solar radiation, air temperature, and relative humidity, combine a compatible 868 MHz gateway with either an integrated outdoor array or modular sensors. The WS80 covers the six non-rain parameters and requires a separate rain gauge.</p>
+</section>
 <section id="calibration-concept" class="level2">
-<h2 data-anchor-id="calibration-concept">Calibration Concept</h2>
-<p>The low budget sensors are usually lacking of a stable measurement quality. To obtain reliable micro climate data a two step calibration process is suggested.</p>
+<h2 data-anchor-id="calibration-concept">Calibration concept</h2>
+<p>Low-budget sensors often lack stable measurement quality. To obtain reliable microclimate data, a two-step calibration process is suggested.</p>
 <ol type="1">
-<li>The measurements of all sensors (preferably in a climate chamber) will be statistically analysed to identify sensor which produce systematic and significant outliers.</li>
-<li>The sensors are calibrated against an operational running high price reference station in the field.</li>
+<li>Measurements from all sensors should preferably be compared under controlled and homogeneous conditions, ideally in a climate chamber, to identify sensors producing systematic and significant outliers.</li>
+<li>The remaining sensors should be calibrated against an operational high-quality reference station under representative field conditions.</li>
 </ol>
 
 
