@@ -45,9 +45,8 @@ which defines our population.
 
 Before we start, you should download the following files:
 
-1.  [AGB_pop](https://cloud.hawk.de/index.php/s/fJzigXwzbHRLNdy)
-2.  [National park
-    boundary](https://cloud.hawk.de/index.php/s/2G4XCatn87S8FsX)
+1.  [AGB_pop](https://cloud.hawk.de/index.php/s/tkYbSZwFkJdYJGF)
+2.  [National park boundary](https://cloud.hawk.de/index.php/s/PeCAtDfGMWjQEGH)
 
 Place all files into a sub folder 'data' of this tutorial.
 
@@ -174,7 +173,7 @@ random points?
 To check if our sample based estimates are unbiased we can run a small
 simulation and repeat the sampling $k$ times.
 
-```{r simulation, echo=FALSE}
+```{r simulation}
 # We set a seed to ensure we can repeat the simulation
 seed<- 12324
 
@@ -183,7 +182,7 @@ n <- 100 # 100 samples per repetition
 mean <- rep(0,k) 
 
 for (i in 1:k) {
-  print(i)
+  #print(i)
   p1 = sf::st_sample(np_boundary,size=n)
   sample <- terra::extract((agb_pop),vect(p1))
   names(sample)<-c('ID','AGB')
@@ -231,13 +230,13 @@ $$
 
 But how does the sample size $n$ affects the precision?
 
-```{r Simulation2, echo=FALSE, message=FALSE}
+```{r Simulation2, message=FALSE}
 k <- 100
 n <- 200
 mean_2 <- rep(0,k) 
 
 for (i in 1:k) {
-  print(i)
+  #print(i)
   p1 = sf::st_sample(np_boundary,size=n)
   sample <- terra::extract((agb_pop),vect(p1))
   names(sample)<-c('ID','AGB')
@@ -299,7 +298,7 @@ n <- 100
 mean_3 <- rep(0,k) 
 
 for (i in 1:k) {
-  print(i)
+  #print(i)
   p2 = sf::st_sample(np_boundary,size=n,type='regular')
   sample <- terra::extract((agb_pop),vect(p2))
   names(sample)<-c('ID','AGB')

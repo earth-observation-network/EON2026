@@ -44,7 +44,8 @@ The practical part runs from a local R project. Download and unpack the project 
 5. Run the workshop scripts from the unpacked project folder.
 
 - [Download project ZIP](block5-material.zip)
-- [Open data sources](data_sources.html)
+- [Data sources](mc_data.qmd)
+- [Tech-Specs](mc_tec.qmd)
 
 ## Install R packages
 
