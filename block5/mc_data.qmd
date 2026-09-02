@@ -40,7 +40,12 @@ The tutorial uses prepared data so that the practical work can focus on the mode
 
 - [Station data — Douglas Fir, site 20166; Ecowitt](https://www.ecowitt.net/home/index?id=20166)
 - [Station data — Douglas Fir, site 20163; Ecowitt](https://www.ecowitt.net/home/index?id=20163)
-- [Position data — climate stations](https://github.com/earth-observation-network/EON2025/blob/main/block4_5/data/Mikroklima_Stationen_EON25.gpkg)
+- [Position data — climate stations](https://github.com/earth-observation-network/EON2026/blob/main/block4_5/data/Mikroklima_Stationen_EON25.gpkg)
+
+### EON 2026
+- [Station data — Douglas Fir; Ecowitt](https://www.ecowitt.net/home/index?id=335306)
+- [Position data — climate stations](https://github.com/earth-observation-network/EON2026/blob/main/block4_5/data/Mikroklima_Stationen_EON25.gpkg)
+
 
 ### Tutorial project
 
