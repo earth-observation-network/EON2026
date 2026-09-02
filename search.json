@@ -419,7 +419,7 @@
     "href": "block5/mc_index.html#project-zip",
     "title": "From discrete observations to spatial statements",
     "section": "Project ZIP",
-    "text": "Project ZIP\nThe practical part runs from a local R project. Download and unpack the project ZIP before the session.\n\nDownload the project ZIP.\nUnpack the ZIP on your computer.\nOpen the project folder in RStudio or Positron.\nInstall the required R packages.\nRun the workshop scripts from the unpacked project folder.\n\n\nDownload project ZIP\nOpen data sources",
+    "text": "Project ZIP\nThe practical part runs from a local R project. Download and unpack the project ZIP before the session.\n\nDownload the project ZIP.\nUnpack the ZIP on your computer.\nOpen the project folder in RStudio or Positron.\nInstall the required R packages.\nRun the workshop scripts from the unpacked project folder.\n\n\nDownload project ZIP\nData sources\nTech-Specs",
     "crumbs": [
       "Block 5: Measuring and modelling microclimate with mobile climate station",
       "From discrete observations to spatial statements"
