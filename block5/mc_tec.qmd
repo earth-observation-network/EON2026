@@ -3,7 +3,7 @@ title: "Microclimate Sensors"
 subtitle: "Tutorial: EON Summer School 2026"
 author: Chris Reudenbach, Philipps University Marburg (PUM)
 date: "2026-08-30"
-#comments: false
+# comments: false
 
 image: ../images/froggit_1.jpg
 about:
@@ -16,44 +16,103 @@ about:
       text: Froggit shop [DE]
       href: https://www.froggit.de/?cat=c40_Raumklima-und-Luftqualitaet---IP-Wettersysteme-dp-serie.html
     - icon: shop-window
-      text: Ecowitt shop [US]
-      href: https://shop.ecowitt.com/collections/wifi-sensor
+      text: Ecowitt shop [EU]
+      href: https://shop.ecowitt.com/
     - icon: building-gear
       text: Fine Offset
       href: https://www.foshk.com/
 ---
 
-
 ::: {#image-heading}
-The sensors from `Fine Offset` are re-branded and partly modified by the resellers. This article deals with sensors from the german re-seller `froggit` and the US re-seller `ecowitt`. More precise the [DP-/GW SmartHubs](https://www.foshk.com/Wifi_Weather_Station/GW1100.html) WiFi Gateway with temperature, humidity & Pressure which is developed by fine offset. The unique selling point of the LoRa-Wifi gateway is the extraordinarily extensive possibility of connecting radio-bound sensors.
+The sensors produced by `Fine Offset` are re-branded and partly modified by resellers. This article deals with sensors from the German reseller `froggit` and the `ecowitt` product family. More precisely, it focuses on the DP-/GW SmartHub family of Wi-Fi gateways and compatible radio-connected sensors. All components used in this tutorial must be the **European 868 MHz versions**.
 :::
+
+## Manufacturer, brands, and model names
+
+[Shenzhen Fine Offset Electronics](https://shop.ecowitt.com/pages/our-company) develops and manufactures the underlying hardware and radio ecosystem. `Ecowitt` is the manufacturer's international retail brand. `Froggit` and several other regional suppliers sell Fine Offset hardware under their own product names and may combine it with different enclosures, firmware, documentation, cloud services, or accessories. These companies are therefore described here as **resellers or re-branders**; the term *licensee* should only be used where a corresponding contractual relationship is documented.
+
+The same hardware can consequently appear under several names:
+
+| Fine Offset / Ecowitt model | Example Froggit designation | Function |
+|---|---|---|
+| WN34S | DP150 | soil temperature |
+| WH31 / WN31 | DP50 | air temperature and relative humidity |
+| WN35 | DP10 | leaf wetness |
+| WH51 | DP100 | soil moisture |
+| WH41 / WH43 | DP200 | particulate matter |
+| WH45 | DP250 | indoor air quality |
+| WH57 | DP60 | lightning detection |
+| WS6210S | WittField WS6210S | solar-powered mobile 4G/Wi-Fi field gateway |
+
+Other brands, including Ambient Weather, Sainlogic, Misol, Watson, and various retailer labels, also sell products based on Fine Offset designs. However, visual similarity or a related model name does **not** guarantee interoperability. A reseller may alter firmware, supported services, channel limits, or radio configuration, and not every product sold by these brands necessarily originates from Fine Offset.
+
+For compatibility checks, use the underlying Fine Offset/Ecowitt model identifier whenever it is available and verify all of the following:
+
+- radio frequency — **868 MHz for this European network**;
+- sensor type and radio protocol;
+- gateway firmware and supported channel count;
+- cloud, local API, and application support;
+- regional hardware version rather than housing appearance alone.
 
 # Features
 
-Currently, depending on the gateway, a maximum of 8 sensors of the following types can be connected at the same time:
+The exact number of simultaneously supported sensors depends on the gateway, its firmware, and the sensor type. The linked manuals contain operating instructions and technical specifications.
 
--   [DP150/WN51](https://www.froggit.de/media/products/DP150_BDA_EN.pdf) soil temperature sensors,
--   [DP50/WH31](https://www.froggit.de/media/products/DP50_BDA(DE).pdf) multi channel temperature and humidity sensors
--   [WN34](https://osswww.ecowitt.net/uploads/20220803/WN34S%20WN34L%20Manual.pdf) wire probe thermometer
--   [DP10/WN35](https://www.froggit.de/media/products/DP10_BDA_EN.pdf) leaf wetness sensors
--   [DP100](https://www.froggit.de/media/products/DP100_BDA(DE).pdf) soil moisture sensors;
+## Up to 8 channels
 
-a maximum of 4:
+- [DP150 / WN34S](https://oss.ecowitt.net/uploads/20260402/WN34SManual.pdf) soil temperature sensor — manual and specifications (PDF)
+- [DP50 / WH31 / WN31](https://oss.ecowitt.net/uploads/20250829/WN31A.pdf) multi-channel temperature and humidity sensor — manual and specifications (PDF)
+- [WN34L](https://oss.ecowitt.net/uploads/20260402/WN34LManual.pdf) wire-probe liquid temperature sensor — manual and specifications (PDF)
+- [DP10 / WN35](https://oss.ecowitt.net/uploads/20260224/WN35Manual.pdf) leaf-wetness sensor — manual and specifications (PDF)
+- [DP100 / WH51](https://oss.ecowitt.net/uploads/20251226/WH51Manual.pdf) soil-moisture sensor — manual and specifications (PDF)
 
--   [DP200/WH41/WH43](https://www.froggit.de/media/products/DP200_BDA(DE)_1.pdf) PM2.5/PM10 sensors
--   [WH45](https://osswww.ecowitt.net/uploads/20220803/WH55%20Manual.pdf) Water leak sensors
+Current gateways and firmware may support up to 16 WH51 soil-moisture channels. Older gateways may expose only eight channels. Therefore, the gateway manual and installed firmware are authoritative for the actual channel limit.
 
-a maximum of 2:
+## Up to 4 channels
 
--   [DP250/WH45](https://www.froggit.de/product_info.php?info=p483_dp250-5-in-1-co2-pm2-5-pm10-temperatur-luftfeuchte-innenraum-luftqualitaets-funksensor.html) CO2 / PM2.5 / PM10 / temperatur / moisture sensor
--   [DP60/WH57](https://www.froggit.de/media/products/DP60-Manual_EN_.pdf) Lightning sensor
+- [DP200 / WH41 / WH43](https://osswww.ecowitt.net/uploads/20220803/WH41%20Manual.pdf) PM2.5/PM10 sensor — manual and specifications (PDF)
+- [WH55](https://osswww.ecowitt.net/uploads/20220803/WH55%20Manual.pdf) water-leak sensor — manual and specifications (PDF)
 
-For the basic weather parameters as rain, wind vector insolation temperature and humidity one of the compatible outdoor basis units as the [DP1100](https://www.froggit.de/media/products/DP1100_BDA_DE_.pdf) or [WH3000](https://www.froggit.de/media/products/WH3000_BDA_Ausseneinheit_DE_.pdf)
+## Up to 2 channels
 
+- [DP250 / WH45](https://oss.ecowitt.net/uploads/20260318/WH45Manual.pdf) indoor CO2, PM2.5, PM10, temperature, and humidity sensor — manual and specifications (PDF)
+- [DP60 / WH57](https://osswww.ecowitt.net/uploads/20220803/WH57%20Manual.pdf) lightning sensor — manual and specifications (PDF)
 
-## Calibration Concept
+The **WH55** is the water-leak sensor. The **WH45** is the indoor five-in-one air-quality sensor.
 
-The low budget sensors are usually lacking of a stable measurement quality. To obtain reliable micro climate data a two step calibration process is suggested.
+## Six-in-one outdoor sensor
 
-1.  The measurements of all sensors (preferably in a climate chamber) will be statistically analysed to identify sensor which produce systematic and significant outliers.
-2.  The sensors are calibrated against an operational running high price reference station in the field.
+- [WS80](https://oss.ecowitt.net/uploads/20260226/WS80.pdf) ultrasonic six-in-one outdoor sensor — manual and specifications (PDF)
+
+The WS80 measures wind speed, wind direction, air temperature, relative humidity, UV index, and solar radiation. This tutorial requires the **European 868 MHz version**. The WS80 does not measure precipitation; rainfall requires a separate compatible **868 MHz** rain gauge such as the WH40.
+
+Older integrated arrays such as the WS69/WH65 combine wind, rain, radiation, temperature, and humidity in one unit, but use a different sensor design.
+
+## Mobile field uplink gateway
+
+- [WS6210S](https://oss.ecowitt.net/uploads/20251229/FG-WS6210AS-Manual%201229.pdf) 4G and Wi-Fi weather-station mobile gateway with external RF antenna — manual, compatibility, and specifications (PDF)
+- [WS6210/WS6210S product page](https://shop.ecowitt.com/products/wittfield-ws6210-ws6210s) — available configurations and accessories
+
+The **WS6210S**, rather than the GW1200, is the mobile uplink gateway intended here. It receives measurements from compatible radio sensors and uploads them using either 4G/LTE or Wi-Fi. This makes it suitable for autonomous field installations without permanent local network access.
+
+The WS6210S includes an external sub-GHz RF antenna, a solar panel, rechargeable batteries, a SIM-card facility, and local microSD storage. It is a gateway rather than a sensor: weather and soil measurements are supplied by separately connected devices such as the WH51 soil-moisture sensor.
+
+This tutorial requires the **European 868 MHz version**. All connected Fine Offset/Ecowitt/Froggit radio sensors must also use compatible 868 MHz versions. The 4G frequency and the 868 MHz sensor frequency perform different tasks: 868 MHz connects sensors to the WS6210S, while 4G or Wi-Fi transfers the collected data to the server.
+
+## Android software
+
+- [Ecowitt app for Android](https://play.google.com/store/apps/details?id=com.ost.ecowitt) — Google Play
+- [Official Ecowitt application download page](https://api.ecowitt.net/api/app/download)
+
+The Ecowitt app provides the cloud-oriented workflow. Depending on gateway and firmware, local-network configuration and customized uploads may additionally use WS View Plus or the gateway's web interface.
+
+## Complete weather parameters
+
+For rain, wind vector, solar radiation, air temperature, and relative humidity, combine a compatible 868 MHz gateway with either an integrated outdoor array or modular sensors. The WS80 covers the six non-rain parameters and requires a separate rain gauge.
+
+## Calibration concept
+
+Low-budget sensors often lack stable measurement quality. To obtain reliable microclimate data, a two-step calibration process is suggested.
+
+1. Measurements from all sensors should preferably be compared under controlled and homogeneous conditions, ideally in a climate chamber, to identify sensors producing systematic and significant outliers.
+2. The remaining sensors should be calibrated against an operational high-quality reference station under representative field conditions.
