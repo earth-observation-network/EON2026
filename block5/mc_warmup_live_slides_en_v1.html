@@ -157,7 +157,13 @@
 <p>A predicted raster is not an additional observation.</p>
 <p>It is a modelled transfer from measured to unmeasured locations.</p>
 </section></section>
-<section>
+<section id="a-point-is-not-a-surface" class="title-slide slide level1 center">
+<h1>A point is not a surface</h1>
+<p>A station observes one location and one time.</p>
+<p>A raster cell is a prediction made from an explicit rule.</p>
+
+<img data-src="figure_1.png" class="r-stretch quarto-figure-center"><p class="caption">Point measurements do not directly describe a continuous field. A model turns them into a spatial statement.</p></section>
+
 <section id="every-map-makes-assumptions" class="title-slide slide level1 center">
 <h1>Every map makes assumptions</h1>
 <div class="callout callout-note no-icon callout-style-simple">
@@ -173,17 +179,19 @@
 </div>
 <p>The same stations can produce very different maps because the transfer rules differ.</p>
 </section>
-<section id="before-choosing-a-model" class="slide level2">
-<h2>Before choosing a model</h2>
-<p>Ask four questions:</p>
-<ul>
-<li>What process could create this pattern?</li>
-<li>At which scale is the claim useful?</li>
-<li>Which conditions are represented by the stations?</li>
-<li>What prediction task does validation test?</li>
-</ul>
 
-<img data-src="figure_3.png" class="r-stretch quarto-figure-center"><p class="caption">A spatial model is sufficient only when process, scale, data support, and validation target are consistent with the claim.</p></section></section>
+<section id="neighbourhood-and-distance" class="title-slide slide level1 center">
+<h1>Neighbourhood and distance</h1>
+<p>Which stations contribute, and how is separation or similarity measured?</p>
+
+<img data-src="figure_2.png" class="r-stretch quarto-figure-center"><p class="caption">Topology and metric: spatial relations concern both who contributes and how separation is measured.</p></section>
+
+<section id="four-conditions-for-a-defensible-map" class="title-slide slide level1 center">
+<h1>Four conditions for a defensible map</h1>
+<p>Process · scale · data support · validation target</p>
+
+<img data-src="figure_3.png" class="r-stretch quarto-figure-center"><p class="caption">A spatial model is sufficient only when process, scale, data support, and validation target are consistent with the claim.</p></section>
+
 <section>
 <section id="six-transfer-assumptions" class="title-slide slide level1 center">
 <h1>Six transfer assumptions</h1>

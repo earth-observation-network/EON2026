@@ -84,13 +84,6 @@
     "text": "The central question\n\nHow can incomplete observations become a defensible spatial statement?\n\nA predicted raster is not an additional observation.\nIt is a modelled transfer from measured to unmeasured locations."
   },
   {
-    "objectID": "block5/mc_warmup_live_slides_en_v1.html#before-choosing-a-model",
-    "href": "block5/mc_warmup_live_slides_en_v1.html#before-choosing-a-model",
-    "title": "From point measurements to spatial statements",
-    "section": "Before choosing a model",
-    "text": "Before choosing a model\nAsk four questions:\n\nWhat process could create this pattern?\nAt which scale is the claim useful?\nWhich conditions are represented by the stations?\nWhat prediction task does validation test?\n\n\nA spatial model is sufficient only when process, scale, data support, and validation target are consistent with the claim."
-  },
-  {
     "objectID": "block5/mc_warmup_live_slides_en_v1.html#the-six-models-in-one-sentence-each",
     "href": "block5/mc_warmup_live_slides_en_v1.html#the-six-models-in-one-sentence-each",
     "title": "From point measurements to spatial statements",
