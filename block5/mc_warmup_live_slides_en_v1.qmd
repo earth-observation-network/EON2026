@@ -31,6 +31,14 @@ A predicted raster is not an additional observation.
 
 It is a modelled transfer from measured to unmeasured locations.
 
+# A point is not a surface
+
+A station observes one location and one time.
+
+A raster cell is a prediction made from an explicit rule.
+
+![Point measurements do not directly describe a continuous field. A model turns them into a spatial statement.](figure_1.png)
+
 # Every map makes assumptions
 
 ::: {.callout-note appearance="minimal"}
@@ -47,14 +55,15 @@ observations
 
 The same stations can produce very different maps because the transfer rules differ.
 
-## Before choosing a model
+# Neighbourhood and distance
 
-Ask four questions:
+Which stations contribute, and how is separation or similarity measured?
 
-- What process could create this pattern?
-- At which scale is the claim useful?
-- Which conditions are represented by the stations?
-- What prediction task does validation test?
+![Topology and metric: spatial relations concern both who contributes and how separation is measured.](figure_2.png)
+
+# Four conditions for a defensible map
+
+Process · scale · data support · validation target
 
 ![A spatial model is sufficient only when process, scale, data support, and validation target are consistent with the claim.](figure_3.png)
 

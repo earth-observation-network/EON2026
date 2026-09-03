@@ -25,13 +25,13 @@ Microclimate measurements are used as the example. The wider problem is general:
 
 Start with the slides.
 
-- [Open slides](mc_warmup_live_slides_en.html)
+- [Open slides](mc_warmup_live_slides_en_v1.qmd)
 
 ## Optional reader
 
 The reader gives the conceptual background. It is optional because the slides contain the core structure needed for the workshop.
 
-- [Open reader](mc_warmup_reader_en.html)
+- [Open reader](mc_warmup_reader_en_current_data_aoa.qmd)
 
 ## Project ZIP
 
