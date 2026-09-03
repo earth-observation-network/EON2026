@@ -9,9 +9,9 @@
 # statement, not an additional observation.
 #
 # Required files:
-#   block5/data/MobilePolsterhaus_spatial_hourly.rds
-#   block5/data/dem1_d.tif
-#   block5/data/dom1_d.tif
+#   data/MobilePolsterhaus_spatial_hourly.rds
+#   data/dem1_d.tif
+#   data/dom1_d.tif
 #
 # Model comparison:
 #   Voronoi       nearest observed station
@@ -31,9 +31,9 @@ library(randomForest)
 # 1. Data and the time slot with the largest spatial contrast
 # -----------------------------------------------------------------------------
 
-m <- readRDS("block5/data/MobilePolsterhaus_spatial_hourly.rds")
-dem <- rast("block5/data/dem1_d.tif")
-dom <- rast("block5/data/dom1_d.tif")
+m <- readRDS("data/MobilePolsterhaus_spatial_hourly.rds")
+dem <- rast("data/dem1_d.tif")
+dom <- rast("data/dom1_d.tif")
 names(dem) <- "altitude"
 
 # DEM and DOM must occupy the same cells before they can be subtracted.
@@ -286,35 +286,6 @@ model_error <- data.frame(
 )
 
 print(model_error)
-
-
-# -----------------------------------------------------------------------------
-# Optional add-on: DI and AOA for the LM canopy-height model
-# -----------------------------------------------------------------------------
-#
-# DI asks whether a raster cell has canopy-height conditions similar to the
-# eight stations. AOA turns this into an in/out map using the same leave-one-out
-# design as above. It applies only to `temp ~ chm`: a support diagnostic must
-# use exactly the predictor(s) of the model it describes.
-#
-# CAST is optional so that the six-model warmup still runs without it.
-if (requireNamespace("CAST", quietly = TRUE)) {
-  aoa_chm <- CAST::aoa(
-    newdata = chm,
-    train = st_drop_geometry(pts)[, "chm", drop = FALSE],
-    variables = "chm",
-    CVtest = seq_len(nrow(pts)),
-    verbose = FALSE
-  )
-
-  # Low DI means familiar canopy-height conditions; AOA is 1 inside the
-  # conditions represented by leave-one-out cross-validation.
-  par(mfrow = c(1, 2))
-  plot(aoa_chm$DI, main = "DI | LM canopy height")
-  plot(aoa_chm$AOA, main = "AOA | LM canopy height")
-  points(pts, pch = 21, bg = "white", cex = 1)
-  par(mfrow = c(1, 1))
-}
 
 
 # =============================================================================
