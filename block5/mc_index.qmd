@@ -43,9 +43,9 @@ The practical part runs from a local R project. Download and unpack the project 
 4. Install the required R packages.
 5. Run the workshop scripts from the unpacked project folder.
 
-- [Download project ZIP](block5-material.zip)
-- [Data sources](mc_data.qmd)
-- [Tech-Specs](mc_tec.qmd)
+- [Download project ZIP](block5.zip)
+- [Data sources and Sensor Specs](mc_data.qmd)
+
 
 ## Install R packages
 

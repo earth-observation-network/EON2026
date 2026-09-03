@@ -1,5 +1,5 @@
 ---
-title: "Data Sources"
+title: "Data Sources and Sensor References"
 subtitle: "Tutorial: EON Summer School 2026"
 author: "Chris Reudenbach, Philipps University Marburg (PUM)"
 date: "2026-08-30"
@@ -47,49 +47,173 @@ The tutorial uses prepared data so that the practical work can focus on the mode
 - [Position data — climate stations](https://github.com/earth-observation-network/EON2026/blob/main/block4_5/data/Mikroklima_Stationen_EON25.gpkg)
 
 
-### Tutorial project
 
-- [Download project ZIP](https://github.com/gisma/EON-Obs2SpatState/archive/refs/heads/main.zip)
-- [Open project repository](https://github.com/gisma/EON-Obs2SpatState)
-- [Open slides](mc_warmup_live_slides_en.html)
+### Project data EON2026
 
-## Fine Offset sensors
+- [Download project ZIP](block5-material.zip)
+- [Data Cleaning & Aggregation Script](ecowitt_excel_to_rds.r)
+- [Data Visualisation Script](plotting.r)
+- [Interpolaton Script](microclimate_warmup_minimal_chm.r)
 
-The sensors used in the EON microclimate work are produced by `Fine Offset` and re-branded or partly modified by different resellers. This page refers mainly to sensors sold by the German reseller `froggit` and the US reseller `ecowitt`.
+### Sensors
 
-The relevant gateway family is the [DP-/GW SmartHub](https://www.foshk.com/Wifi_Weather_Station/GW1100.html), a WiFi gateway for temperature, humidity, and pressure measurements developed by Fine Offset. Its practical strength for field courses is the large number of compatible radio-based sensors.
+The sensors used in the EON microclimate work are produced by `Fine Offset` and re-branded or partly modified by different resellers. This article focuses on products sold under the German `froggit` brand and the international `Ecowitt` product family. More precisely, it covers the DP-/GW SmartHub family of Wi-Fi gateways, the mobile WS6210S field gateway, and compatible radio-connected sensors.
 
-### Sensor suppliers
+All components used in this tutorial must be the **European 868 MHz versions**.
 
-- [Froggit shop [DE]](https://www.froggit.de/?cat=c40_Raumklima-und-Luftqualitaet---IP-Wettersysteme-dp-serie.html)
-- [Ecowitt shop [US]](https://shop.ecowitt.com/collections/wifi-sensor)
-- [Fine Offset](https://www.foshk.com/)
 
-## Compatible sensor types
+## Manufacturer, brands, and model names
 
-Depending on the gateway, up to 8 sensors of the following types can be connected at the same time:
+[Shenzhen Fine Offset Electronics](https://shop.ecowitt.com/pages/our-company) develops and manufactures the underlying hardware and radio ecosystem. `Ecowitt` is the manufacturer's international retail brand. `Froggit` and several other regional suppliers sell Fine Offset hardware under their own product names and may combine it with different enclosures, firmware, documentation, cloud services, or accessories.
 
-- [DP150/WN51](https://www.froggit.de/media/products/DP150_BDA_EN.pdf) soil temperature sensors
-- [DP50/WH31](https://www.froggit.de/media/products/DP50_BDA%28DE%29.pdf) multi-channel temperature and humidity sensors
-- [WN34](https://osswww.ecowitt.net/uploads/20220803/WN34S%20WN34L%20Manual.pdf) wire probe thermometer
-- [DP10/WN35](https://www.froggit.de/media/products/DP10_BDA_EN.pdf) leaf wetness sensors
-- [DP100](https://www.froggit.de/media/products/DP100_BDA%28DE%29.pdf) soil moisture sensors
+These companies are therefore described here as **resellers or re-branders**. The term *licensee* should only be used where a corresponding contractual relationship is documented.
 
-Up to 4 sensors of the following types can be connected:
+The same or closely related hardware can consequently appear under several names:
 
-- [DP200/WH41/WH43](https://www.froggit.de/media/products/DP200_BDA%28DE%29_1.pdf) PM2.5/PM10 sensors
-- [WH45](https://osswww.ecowitt.net/uploads/20220803/WH55%20Manual.pdf) water leak sensors
+| Fine Offset / Ecowitt model | Example Froggit designation | Function |
+|---|---|---|
+| WN34S | DP150 | soil temperature |
+| WH31 / WN31 | DP50 | air temperature and relative humidity |
+| WN35 | DP10 | leaf wetness |
+| WH51 | DP100 | soil moisture |
+| WH41 / WH43 | DP200 | particulate matter |
+| WH45 | DP250 | indoor air quality |
+| WH57 | DP60 | lightning detection |
+| WS6210S | WittField WS6210S | solar-powered mobile 4G/Wi-Fi field gateway |
 
-Up to 2 sensors of the following types can be connected:
+Other brands, including Ambient Weather, Sainlogic, Misol, Watson, and various retailer labels, also sell products based on Fine Offset designs. However, visual similarity or a related model name does **not** guarantee interoperability. A reseller may alter firmware, supported services, channel limits, or radio configuration, and not every product sold by these brands necessarily originates from Fine Offset.
 
-- [DP250/WH45](https://www.froggit.de/product_info.php?info=p483_dp250-5-in-1-co2-pm2-5-pm10-temperatur-luftfeuchte-innenraum-luftqualitaets-funksensor.html) CO2 / PM2.5 / PM10 / temperature / humidity indoor air quality sensor
-- [DP60/WH57](https://www.froggit.de/media/products/DP60-Manual_EN_.pdf) lightning sensor
+For compatibility checks, use the underlying Fine Offset/Ecowitt model identifier whenever it is available and verify all of the following:
 
-For basic weather parameters such as rainfall, wind vector, solar radiation, temperature, and humidity, compatible outdoor base units such as the [DP1100](https://www.froggit.de/media/products/DP1100_BDA_DE_.pdf) or [WH3000](https://www.froggit.de/media/products/WH3000_BDA_Ausseneinheit_DE_.pdf) can be used.
+- radio frequency - **868 MHz for this European network**;
+- sensor type and radio protocol;
+- gateway firmware and supported channel count;
+- cloud, local API, and application support;
+- regional hardware version rather than housing appearance alone.
 
-## Calibration concept
+## Suppliers and documentation
 
-Low-budget sensors usually do not provide stable measurement quality without checks. Reliable microclimate data therefore require a calibration concept before the measurements are used for spatial modelling.
+- [Froggit shop](https://www.froggit.de/?cat=c40_Raumklima-und-Luftqualitaet---IP-Wettersysteme-dp-serie.html) - German reseller
+- [Ecowitt shop](https://shop.ecowitt.com/collections/wifi-sensor) - international Fine Offset retail brand
+- [Fine Offset](https://www.foshk.com/) - manufacturer
+- [DP-/GW SmartHub family](https://www.foshk.com/Wifi_Weather_Station/GW1100.html) - Wi-Fi gateways for compatible radio sensors
 
-1. Measurements from all sensors should be analysed together, preferably under controlled conditions such as a climate chamber, to identify sensors with systematic or significant outliers.
-2. The sensors should then be checked against an operational high-quality reference station in the field.
+The practical strength of the SmartHub ecosystem is the large range of compatible radio-connected sensors. The exact number of simultaneously supported sensors depends on the gateway, its firmware, and the sensor type. The linked manuals are authoritative for operating instructions and technical specifications.
+
+# Compatible sensors
+
+## Up to 8 channels
+
+- [DP150 / WN34S](https://oss.ecowitt.net/uploads/20260402/WN34SManual.pdf) soil-temperature sensor - manual and specifications
+- [DP50 / WH31 / WN31](https://oss.ecowitt.net/uploads/20250829/WN31A.pdf) multi-channel temperature and relative-humidity sensor - manual and specifications
+- [WN34L](https://oss.ecowitt.net/uploads/20260402/WN34LManual.pdf) wire-probe liquid-temperature sensor - manual and specifications
+- [DP10 / WN35](https://oss.ecowitt.net/uploads/20260224/WN35Manual.pdf) leaf-wetness sensor - manual and specifications
+- [DP100 / WH51](https://oss.ecowitt.net/uploads/20251226/WH51Manual.pdf) soil-moisture sensor - manual and specifications
+
+Current gateways and firmware may support up to 16 WH51 soil-moisture channels. Older gateways may expose only eight channels. The gateway manual and installed firmware are therefore authoritative for the actual channel limit.
+
+## Up to 4 channels
+
+- [DP200 / WH41 / WH43](https://osswww.ecowitt.net/uploads/20220803/WH41%20Manual.pdf) PM2.5/PM10 sensor - manual and specifications
+- [WH55](https://osswww.ecowitt.net/uploads/20220803/WH55%20Manual.pdf) water-leak sensor - manual and specifications
+
+## Up to 2 channels
+
+- [DP250 / WH45](https://oss.ecowitt.net/uploads/20260318/WH45Manual.pdf) indoor CO2, PM2.5, PM10, temperature, and relative-humidity sensor - manual and specifications
+- [DP60 / WH57](https://osswww.ecowitt.net/uploads/20220803/WH57%20Manual.pdf) lightning sensor - manual and specifications
+
+The **WH55** is the water-leak sensor. The **WH45** is the indoor five-in-one air-quality sensor.
+
+## Six-in-one outdoor sensor
+
+- [WS80](https://oss.ecowitt.net/uploads/20260226/WS80.pdf) ultrasonic six-in-one outdoor sensor - manual and specifications
+
+The WS80 measures:
+
+- wind speed;
+- wind direction;
+- air temperature;
+- relative humidity;
+- UV index;
+- solar radiation.
+
+The WS80 does not measure precipitation. Rainfall requires a separate compatible **868 MHz** rain gauge such as the WH40.
+
+Older integrated arrays such as the WS69/WH65 combine wind, rain, radiation, temperature, and humidity in one unit but use a different sensor design.
+
+This tutorial requires the **European 868 MHz version** of the WS80 and all additional radio sensors.
+
+## Mobile field uplink gateway
+
+- [WS6210S manual](https://oss.ecowitt.net/uploads/20251229/FG-WS6210AS-Manual%201229.pdf) - 4G and Wi-Fi mobile gateway with external RF antenna
+- [WS6210/WS6210S product page](https://shop.ecowitt.com/products/wittfield-ws6210-ws6210s) - configurations and accessories
+
+The **WS6210S**, rather than the GW1200, is the mobile uplink gateway intended for the autonomous field installation described here. It receives measurements from compatible radio sensors and uploads them using either 4G/LTE or Wi-Fi. It can therefore be operated at field sites without permanent access to a local network.
+
+The WS6210S includes:
+
+- an external sub-GHz RF antenna;
+- a solar panel;
+- rechargeable batteries;
+- a SIM-card facility;
+- local microSD storage.
+
+The WS6210S is a gateway rather than a sensor. Weather and soil measurements are supplied by separately connected devices such as the WS80, WN34S, WH31, or WH51.
+
+The sensor radio connection and the internet uplink use different frequencies and perform different tasks:
+
+- **868 MHz** connects the sensors to the WS6210S;
+- **4G/LTE or Wi-Fi** transfers the collected measurements from the gateway to the server.
+
+The gateway and every connected radio sensor must use mutually compatible **European 868 MHz hardware versions**.
+
+## Android software
+
+- [Ecowitt app for Android](https://play.google.com/store/apps/details?id=com.ost.ecowitt) - Google Play
+- [Official Ecowitt application download page](https://api.ecowitt.net/api/app/download)
+
+The application can be used to register compatible gateways, configure supported services, inspect current measurements, and manage connected sensors. The functions available depend on the gateway model and installed firmware.
+
+# Calibration and quality-control concept
+
+Low-cost sensors should not be assumed to provide stable and directly comparable measurements without prior checks. Reliable microclimate data therefore require a calibration and quality-control concept before the measurements are used for temporal analysis or spatial modelling.
+
+## 1. Sensor intercomparison
+
+All sensors of the same type should first be operated together under conditions that are as similar as possible. A controlled environment such as a climate chamber is preferable.
+
+The simultaneous measurements can be used to identify:
+
+- systematic differences between sensors;
+- individual sensors with conspicuous offsets;
+- differences in response time;
+- implausible values or intermittent transmission failures;
+- sensors with unusually high variability.
+
+This intercomparison identifies relative differences within the sensor network. By itself, it does not establish traceability to an external reference.
+
+## 2. Comparison with a reference station
+
+The sensors should subsequently be compared with an operational, higher-quality reference station under field conditions.
+
+This comparison should cover environmental conditions relevant to the intended deployment, including different temperature and humidity levels where possible. It provides evidence about systematic deviations from the reference and about whether corrections derived under controlled conditions remain applicable in the field.
+
+## 3. Documentation and correction
+
+The following information should be retained for every sensor:
+
+- manufacturer and reseller designation;
+- underlying Fine Offset/Ecowitt model identifier;
+- individual sensor ID;
+- radio channel;
+- regional frequency version;
+- gateway and firmware version;
+- installation and radiation-shield configuration;
+- dates and conditions of the intercomparison;
+- reference instrument;
+- detected offset or correction model;
+- sensors excluded from subsequent analysis.
+
+Any correction must be applied to the individual sensor rather than indiscriminately to the entire product type.
+
+> Calibration and intercomparison do not remove all measurement uncertainty. They document whether the sensors are sufficiently consistent for the intended temporal and spatial comparison.
