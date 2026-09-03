@@ -127,11 +127,11 @@ window.Quarto = {
 
 <link rel="stylesheet" href="../css/styles.css">
 <meta property="og:title" content="Reader: From Discrete Observations to Spatial Statements – Forest Monitoring Summer School 2026">
-<meta property="og:description" content="Gap filling, prediction, scale, and process">
-<meta property="og:image" content="https://earth-observation-network.github.io/EON2026/block5/rgb_hub_stations.png">
+<meta property="og:description" content="Gap filling, process, scale, support, and validity">
+<meta property="og:image" content="https://earth-observation-network.github.io/EON2026/block5/figure_0.png">
 <meta property="og:site_name" content="Forest Monitoring Summer School 2026">
-<meta property="og:image:height" content="1179">
-<meta property="og:image:width" content="1631">
+<meta property="og:image:height" content="693">
+<meta property="og:image:width" content="778">
 </head>
 
 <body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
@@ -333,7 +333,7 @@ window.Quarto = {
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">Reader: From Discrete Observations to Spatial Statements</h1>
-            <p class="subtitle lead">Gap filling, prediction, scale, and process</p>
+            <p class="subtitle lead">Gap filling, process, scale, support, and validity</p>
                       </div>
   </div>
     
@@ -493,24 +493,47 @@ window.Quarto = {
    
   <ul>
   <li><a href="#why-this-matters" id="toc-why-this-matters" class="nav-link active" data-scroll-target="#why-this-matters">Why this matters</a></li>
-  <li><a href="#role-of-this-reader" id="toc-role-of-this-reader" class="nav-link" data-scroll-target="#role-of-this-reader">Role of this reader</a></li>
-  <li><a href="#distance-and-data-representation" id="toc-distance-and-data-representation" class="nav-link" data-scroll-target="#distance-and-data-representation">Distance and data representation</a></li>
-  <li><a href="#filling-spatial-gaps-concepts" id="toc-filling-spatial-gaps-concepts" class="nav-link" data-scroll-target="#filling-spatial-gaps-concepts">Filling spatial gaps: concepts</a></li>
-  <li><a href="#process-scale-and-method-choice" id="toc-process-scale-and-method-choice" class="nav-link" data-scroll-target="#process-scale-and-method-choice">Process, scale, and method choice</a></li>
-  <li><a href="#four-eon-model-assumptions" id="toc-four-eon-model-assumptions" class="nav-link" data-scroll-target="#four-eon-model-assumptions">Four EON model assumptions</a>
+  <li><a href="#role-and-learning-goals-of-this-reader" id="toc-role-and-learning-goals-of-this-reader" class="nav-link" data-scroll-target="#role-and-learning-goals-of-this-reader">Role and learning goals of this reader</a></li>
+  <li><a href="#observation-locations-are-points-measurements-are-not" id="toc-observation-locations-are-points-measurements-are-not" class="nav-link" data-scroll-target="#observation-locations-are-points-measurements-are-not">Observation locations are points, measurements are not</a></li>
+  <li><a href="#neighbourhood-and-distance-what-does-near-mean" id="toc-neighbourhood-and-distance-what-does-near-mean" class="nav-link" data-scroll-target="#neighbourhood-and-distance-what-does-near-mean">Neighbourhood and distance: what does “near” mean?</a></li>
+  <li><a href="#four-meanings-of-scale" id="toc-four-meanings-of-scale" class="nav-link" data-scroll-target="#four-meanings-of-scale">Four meanings of scale</a>
+  <ul class="collapse">
+  <li><a href="#scale-consistency" id="toc-scale-consistency" class="nav-link" data-scroll-target="#scale-consistency">Scale consistency</a></li>
+  </ul></li>
+  <li><a href="#process-regimes-and-temporal-validity" id="toc-process-regimes-and-temporal-validity" class="nav-link" data-scroll-target="#process-regimes-and-temporal-validity">Process regimes and temporal validity</a></li>
+  <li><a href="#process-scale-data-support-and-validation-target" id="toc-process-scale-data-support-and-validation-target" class="nav-link" data-scroll-target="#process-scale-data-support-and-validation-target">Process, scale, data support, and validation target</a>
+  <ul class="collapse">
+  <li><a href="#process" id="toc-process" class="nav-link" data-scroll-target="#process">Process</a></li>
+  <li><a href="#scale" id="toc-scale" class="nav-link" data-scroll-target="#scale">Scale</a></li>
+  <li><a href="#data-support" id="toc-data-support" class="nav-link" data-scroll-target="#data-support">Data support</a></li>
+  <li><a href="#validation-target" id="toc-validation-target" class="nav-link" data-scroll-target="#validation-target">Validation target</a></li>
+  </ul></li>
+  <li><a href="#model-domain-is-not-an-area-of-validity" id="toc-model-domain-is-not-an-area-of-validity" class="nav-link" data-scroll-target="#model-domain-is-not-an-area-of-validity">Model domain is not an area of validity</a></li>
+  <li><a href="#six-transfer-assumptions" id="toc-six-transfer-assumptions" class="nav-link" data-scroll-target="#six-transfer-assumptions">Six transfer assumptions</a>
   <ul class="collapse">
   <li><a href="#voronoi-nearest-station" id="toc-voronoi-nearest-station" class="nav-link" data-scroll-target="#voronoi-nearest-station">Voronoi / nearest station</a></li>
   <li><a href="#idw-distance-decay" id="toc-idw-distance-decay" class="nav-link" data-scroll-target="#idw-distance-decay">IDW / distance decay</a></li>
-  <li><a href="#lm-altitude-simple-explanatory-model" id="toc-lm-altitude-simple-explanatory-model" class="nav-link" data-scroll-target="#lm-altitude-simple-explanatory-model">LM altitude / simple explanatory model</a></li>
-  <li><a href="#random-forest-flexible-data-driven-relation" id="toc-random-forest-flexible-data-driven-relation" class="nav-link" data-scroll-target="#random-forest-flexible-data-driven-relation">Random Forest / flexible data-driven relation</a></li>
+  <li><a href="#linear-models-alternative-process-hypotheses" id="toc-linear-models-alternative-process-hypotheses" class="nav-link" data-scroll-target="#linear-models-alternative-process-hypotheses">Linear models / alternative process hypotheses</a></li>
+  <li><a href="#random-forest-adding-predictors-within-one-algorithm" id="toc-random-forest-adding-predictors-within-one-algorithm" class="nav-link" data-scroll-target="#random-forest-adding-predictors-within-one-algorithm">Random Forest / adding predictors within one algorithm</a></li>
   </ul></li>
-  <li><a href="#hands-on-warmup-workflow" id="toc-hands-on-warmup-workflow" class="nav-link" data-scroll-target="#hands-on-warmup-workflow">Hands-on: warmup workflow</a></li>
-  <li><a href="#minimal-validation-what-is-checked" id="toc-minimal-validation-what-is-checked" class="nav-link" data-scroll-target="#minimal-validation-what-is-checked">Minimal validation: what is checked?</a></li>
-  <li><a href="#reading-the-spatial-statements-critically" id="toc-reading-the-spatial-statements-critically" class="nav-link" data-scroll-target="#reading-the-spatial-statements-critically">Reading the spatial statements critically</a></li>
+  <li><a href="#three-layers-of-validity-diagnostics" id="toc-three-layers-of-validity-diagnostics" class="nav-link" data-scroll-target="#three-layers-of-validity-diagnostics">Three layers of validity diagnostics</a>
+  <ul class="collapse">
+  <li><a href="#process-and-scale-support" id="toc-process-and-scale-support" class="nav-link" data-scroll-target="#process-and-scale-support">1. Process and scale support</a></li>
+  <li><a href="#geographic-support" id="toc-geographic-support" class="nav-link" data-scroll-target="#geographic-support">2. Geographic support</a></li>
+  <li><a href="#predictor-space-support" id="toc-predictor-space-support" class="nav-link" data-scroll-target="#predictor-space-support">3. Predictor-space support</a></li>
+  </ul></li>
+  <li><a href="#validation-what-is-actually-checked" id="toc-validation-what-is-actually-checked" class="nav-link" data-scroll-target="#validation-what-is-actually-checked">Validation: what is actually checked?</a></li>
+  <li><a href="#from-a-global-error-to-local-interpretability" id="toc-from-a-global-error-to-local-interpretability" class="nav-link" data-scroll-target="#from-a-global-error-to-local-interpretability">From a global error to local interpretability</a>
+  <ul class="collapse">
+  <li><a href="#diaoa-add-on" id="toc-diaoa-add-on" class="nav-link" data-scroll-target="#diaoa-add-on">DI/AOA add-on</a></li>
+  </ul></li>
+  <li><a href="#hands-on-workflow" id="toc-hands-on-workflow" class="nav-link" data-scroll-target="#hands-on-workflow">Hands-on workflow</a></li>
+  <li><a href="#model-specific-interpretation-matrix" id="toc-model-specific-interpretation-matrix" class="nav-link" data-scroll-target="#model-specific-interpretation-matrix">Model-specific interpretation matrix</a></li>
+  <li><a href="#questions-for-reading-the-results" id="toc-questions-for-reading-the-results" class="nav-link" data-scroll-target="#questions-for-reading-the-results">Questions for reading the results</a></li>
   <li><a href="#reality-check-prepared-data-are-not-raw-data" id="toc-reality-check-prepared-data-are-not-raw-data" class="nav-link" data-scroll-target="#reality-check-prepared-data-are-not-raw-data">Reality check: prepared data are not raw data</a></li>
   <li><a href="#core-message" id="toc-core-message" class="nav-link" data-scroll-target="#core-message">Core message</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/earth-observation-network/EON2026/edit/main/block5/mc_warmup_reader_en.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/earth-observation-network/EON2026/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/earth-observation-network/EON2026/edit/main/block5/mc_warmup_reader_en_current_data_aoa.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/earth-observation-network/EON2026/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
@@ -522,133 +545,523 @@ window.Quarto = {
 
 <section id="why-this-matters" class="level2">
 <h2 class="anchored" data-anchor-id="why-this-matters">Why this matters</h2>
-<p>Geoscientific data rarely describe a complete spatial or spatio-temporal continuum. We usually work with discrete observations: measurement points, pixels, samples, segments, training areas, or selected timestamps. Nevertheless, we often need to make spatial statements about continuous areas and temporal situations.</p>
-<p>This is the central problem of the EON warmup: how can incomplete observations be translated into a defensible spatial statement?</p>
-<p>Microclimate is only one example. It makes the problem visible because a small number of sensors observe selected locations and timestamps, while the question concerns a spatially connected field. The same logic appears in sampling, UAV and LiDAR workflows, segmentation, regression, classification, interpolation, and validation.</p>
-<p>The goal of this reader is not to present interpolation as a detached method collection. The goal is to understand gap filling as a modelling step between observation and spatial claim.</p>
-<p>Spatial gap filling is the controlled translation of discrete observations into a spatial statement. The core decisions concern neighborhood, distance, process, scale, statement area, and validation.</p>
-<p>The following map shows the project region and the measurement situation used in the warmup.</p>
+<p>Geoscientific data rarely describe a complete spatial or spatio-temporal continuum. We usually work with discrete observations: measurement locations, pixels, samples, segments, training areas, or selected timestamps. Nevertheless, our questions often concern continuous areas, unobserved locations, and other times.</p>
+<p>This is the central problem of the EON warmup:</p>
+<blockquote class="blockquote">
+<p>How can incomplete observations be translated into a defensible spatial statement, and where does that statement stop being supported?</p>
+</blockquote>
+<p>Microclimate makes this problem particularly visible. A small number of sensors observe selected locations and times, while the scientific question concerns a spatially connected and temporally changing field. The same logic occurs in environmental sampling, UAV and LiDAR workflows, segmentation, regression, classification, interpolation, and validation.</p>
+<p>Spatial gap filling is therefore not merely a technical operation. It is a modelling step between observation and claim. It requires decisions about neighbourhood, distance, process, scale, model domain, data support, and validation.</p>
+<p>The following map shows the project region and measurement situation used in the warmup.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="rgb_hub_stations.png" class="img-fluid figure-img"></p>
-<figcaption>Polsterhaus excursion research area stations 2023 (stars) 2024 (crosses)</figcaption>
+<p><img src="figure_0.png" class="img-fluid figure-img"></p>
+<figcaption>Polsterhaus Douglas fir area: stations from 2026</figcaption>
 </figure>
 </div>
 </section>
-<section id="role-of-this-reader" class="level2">
-<h2 class="anchored" data-anchor-id="role-of-this-reader">Role of this reader</h2>
-<p>This reader provides the vocabulary for the two EON blocks.</p>
-<p>Before the hands-on, it clarifies basic terms: observation point, raster surface, neighborhood, distance, model assumption, and valid statement area. During the hands-on, it helps interpret the four simple model assumptions. In the second block, it supports the critical reading of the generated maps: what they show, what they claim, and where their validity stops.</p>
-<p>The EON structure is deliberately small:</p>
-<pre class="text"><code>discrete observations in reality
--&gt; spatial statement
--&gt; model assumption
--&gt; minimal validation
--&gt; model criticism</code></pre>
+<section id="role-and-learning-goals-of-this-reader" class="level2">
+<h2 class="anchored" data-anchor-id="role-and-learning-goals-of-this-reader">Role and learning goals of this reader</h2>
+<p>This reader provides the conceptual basis for the two-hour practical. It does not present a catalogue of interpolation algorithms. Instead, it develops a framework for judging whether a spatial result is supported.</p>
+<p>After the warmup, you should be able to:</p>
+<ol type="1">
+<li>distinguish an observation, a prediction surface, and a spatial claim;</li>
+<li>distinguish measurement support, sampling scale, process scale, and raster scale;</li>
+<li>explain the transfer assumptions made by Voronoi, IDW, terrain- and canopy-height models, and two Random Forest variants;</li>
+<li>distinguish a model domain from an empirically supported prediction area;</li>
+<li>distinguish geographic support from support in predictor space;</li>
+<li>explain what leave-one-out cross-validation does and does not validate;</li>
+<li>use scale, distance, dissimilarity, and validation error to criticize a map.</li>
+</ol>
+<p>The compact workflow is:</p>
+<pre class="text"><code>reality and process
+-&gt; discrete observations with limited support
+-&gt; explicit model assumption
+-&gt; spatial prediction inside a model domain
+-&gt; scale and support diagnostics
+-&gt; validation for a specified prediction task
+-&gt; bounded spatial claim</code></pre>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figure_1.png" class="img-fluid figure-img"></p>
+<figcaption>Point measurements do not directly describe a continuous field. A model turns them into a spatial statement.</figcaption>
+</figure>
+</div>
 </section>
-<section id="distance-and-data-representation" class="level2">
-<h2 class="anchored" data-anchor-id="distance-and-data-representation">Distance and data representation</h2>
-<p>The first modelling decision is the definition of <em>proximity</em>. Proximity is not only a geometric property. It is an operational statement about which observations may inform another location and how strongly they should do so.</p>
-<p>Spatial relationships can be described by <em><strong>neighborhoods</strong></em> and <em><strong>distances</strong></em>. Measurement points are zero-dimensional observations: they have a location, but no area. Their neighborhood is therefore often defined by distance: the nearest station, the nearest group of stations, all stations within a radius, or all stations inside a valid statement area. Raster cells have area, so their values refer to cell supports and their distances are evaluated between cell centres or along raster surfaces. The relevant distance rule depends on the support represented in the model.</p>
-<p>Tobler’s First Law of Geography provides a common default: near things are more related than distant things.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> This is a useful starting assumption, not a universal law for every process. In many real cases spatial influence cannot be measured directly. It must be operationalized through a distance metric, a neighborhood rule, and a model assumption.</p>
-<p>A simple Euclidean distance can be a defensible starting point when no stronger process relation or knowledge is available. Other questions may require network distance, travel time, cost distance, flow direction, slope position, wind exposure, or similarity in measurable environmental conditions (covariates). The important step is to state what “near” means for the concrete process and scale of use.</p>
-</section>
-<section id="filling-spatial-gaps-concepts" class="level2">
-<h2 class="anchored" data-anchor-id="filling-spatial-gaps-concepts">Filling spatial gaps: concepts</h2>
-<p>With distance and neighborhood defined, we can turn to gap filling: predicting or assigning values at locations where no observation exists.</p>
-<p>Each method encodes an assumption about how values continue between observations. The practical question is therefore not which method is generally best. The practical question is which assumption is defensible for this data situation, this process question, and this intended scale of use.</p>
-<p>A spatial continuum derived from point measurements is never a direct observation. It is a modelled statement between observed locations. The same measurement points can lead to different spatial representations — raster fields, Voronoi polygons, buffers, or neighbourhood zones — because the assumptions differ. This is why the this lecture compares simple alternatives instead of hiding the modelling decision inside one polished result.</p>
-<p>The four alternatives in the warmup are not a ranking of interpolation methods. They are chosen because each one makes a different modelling assumption visible:</p>
+<section id="observation-locations-are-points-measurements-are-not" class="level2">
+<h2 class="anchored" data-anchor-id="observation-locations-are-points-measurements-are-not">Observation locations are points, measurements are not</h2>
+<p>Sensor locations are represented geometrically as points. The measured values, however, are not truly dimensionless. Every temperature value has a spatial and temporal support determined by factors such as:</p>
 <ul>
-<li><strong>nearest station</strong>: the closest observation is taken as the relevant reference;</li>
-<li><strong>distance decay</strong>: nearby observations receive more weight than distant observations;</li>
-<li><strong>elevation relation</strong>: temperature is linked to elevation as a simple process-related variable;</li>
-<li><strong>data-driven patterning from few observations</strong>: a flexible model can create plausible-looking spatial patterns even when the data basis is thin.</li>
+<li>the sensing volume and housing;</li>
+<li>sensor response time and temporal aggregation;</li>
+<li>installation height and exposure;</li>
+<li>ventilation, radiation, and surrounding surfaces;</li>
+<li>the process regime during the selected timestamp.</li>
 </ul>
-<p>More complex methods only become defensible when the process relation, the relevant scale, the data support, and the validation target can be stated clearly. Without that justification, additional complexity does not make the spatial statement stronger. It only hides the modelling decision.</p>
+<p>This distinction matters because modelling changes support. A station measurement is transferred to an unsampled location or raster cell. The raster cell is not a new observation and its size is not the scale at which the original process was observed.</p>
+<blockquote class="blockquote">
+<p>A fine raster grid creates fine display cells. It does not create fine-scale process information.</p>
+</blockquote>
 </section>
-<section id="process-scale-and-method-choice" class="level2">
-<h2 class="anchored" data-anchor-id="process-scale-and-method-choice">Process, scale, and method choice</h2>
-<p>The decisive issue is the spatial claim that the model is supposed to support. Before choosing an algorithm, the process question, the relevant scale, the data support, and the validation target must be clear. Only then can a modelling assumption be defended.</p>
-<p>The first question is what kind of spatial relation is plausible. Is the expected pattern controlled mainly by the nearest observation, by gradual distance decay, by a covariate such as elevation, or by a data-driven combination of position and environment? The answer depends on the phenomenon, the station layout, the observation support, and the scale at which the result will be used.</p>
-<p>The second question is whether the available data can support the desired complexity. A method with more parameters or more flexible structure is not automatically better. It can produce a convincing-looking surface from very little evidence. If the process relation, scale, and validation target cannot be stated clearly, a simpler method is often the more correct method because it exposes rather than hides the assumption.</p>
-<p>For this workflow it means: Voronoi, IDW, and LM altitude are not “primitive” fallbacks. They are transparent statements. Random Forest is included as a <em>warning</em> example because a flexible data-driven surface can look plausible even when the number of points is too small to support a robust spatial interpretation.</p>
-</section>
-<section id="four-eon-model-assumptions" class="level2">
-<h2 class="anchored" data-anchor-id="four-eon-model-assumptions">Four EON model assumptions</h2>
-<p>In all four variants, the measured station temperature is the value to be transferred into space. The methods differ in how they connect these measured values to unsampled locations.</p>
+<section id="neighbourhood-and-distance-what-does-near-mean" class="level2">
+<h2 class="anchored" data-anchor-id="neighbourhood-and-distance-what-does-near-mean">Neighbourhood and distance: what does “near” mean?</h2>
+<p>The first modelling decision is the definition of proximity. Proximity is not only a geometric property. It is an operational statement about which observations may inform a prediction location and how strongly they should do so.</p>
+<p>Tobler’s First Law of Geography provides a common default: near things are more related than distant things.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> This is a useful starting assumption, not a universal law for every process. Spatial influence has to be operationalized through a distance or similarity measure and a neighbourhood rule.</p>
+<p>Spatial relationships have two connected aspects:</p>
 <ul>
-<li><strong>Voronoi / nearest station</strong> uses only station position. The measured temperature of the nearest station is assigned to each prediction location.</li>
-<li><strong>IDW / distance decay</strong> uses station position and distance. The measured temperatures of nearby stations receive more weight than those of distant stations.</li>
-<li><strong>LM altitude</strong> uses the measured station temperatures as the response variable and elevation as an explanatory variable. The fitted altitude relation is then applied to the DEM.</li>
-<li><strong>Random Forest</strong> uses the measured station temperatures as the response variable and coordinates plus elevation as explanatory variables. The fitted relation is then applied to all prediction locations.</li>
+<li>a <strong>neighbourhood rule</strong> determines which observations contribute;</li>
+<li>a <strong>metric</strong> determines how separation, cost, or similarity is measured.</li>
 </ul>
-<p>The important difference is therefore not whether a method “uses the measurements”. All methods use the measured temperatures. The difference is how each method turns those measurements into a spatial statement: by nearest assignment, by distance weighting, by a simple altitude relation, or by a flexible data-driven relation.</p>
+<p>For example, a metric may rank all stations by Euclidean distance, while a neighbourhood rule selects only the first or first four stations. Other processes may require flow distance, travel cost, slope position, wind exposure, barriers, or similarity in environmental conditions.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figure_2.png" class="img-fluid figure-img"></p>
+<figcaption>Topology and metric: spatial relations concern both who contributes and how separation is measured.</figcaption>
+</figure>
+</div>
+<p>The important question is not whether Euclidean distance is simple. The question is whether it is defensible for the process and scale of the intended claim.</p>
+</section>
+<section id="four-meanings-of-scale" class="level2">
+<h2 class="anchored" data-anchor-id="four-meanings-of-scale">Four meanings of scale</h2>
+<p>The word <em>scale</em> is often used too loosely. At least four different scales are involved in this exercise.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Scale</th>
+<th>Operational meaning</th>
+<th>Warmup example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Measurement support</td>
+<td>What one recorded value represents in space and time</td>
+<td>air temperature at one installation and timestamp</td>
+</tr>
+<tr class="even">
+<td>Sampling scale</td>
+<td>Distances and density of the station network</td>
+<td>nearest-station and fourth-neighbour distances</td>
+</tr>
+<tr class="odd">
+<td>Process scale</td>
+<td>Distance over which the temperature field remains spatially related</td>
+<td>structure visible in an empirical variogram</td>
+</tr>
+<tr class="even">
+<td>Representation scale</td>
+<td>Grain and extent of the output</td>
+<td>DEM/CHM cell size and model domain</td>
+</tr>
+</tbody>
+</table>
+<p>These scales are related but not interchangeable. A 1 m output grid can be calculated from stations spaced 100 m apart. The resulting file has a 1 m grain, but the evidence does not resolve temperature variation at 1 m.</p>
+<p>Similarly, the extent of a map says where values were calculated, not where they are equally reliable.</p>
+<section id="scale-consistency" class="level3">
+<h3 class="anchored" data-anchor-id="scale-consistency">Scale consistency</h3>
+<p>A spatial statement becomes questionable when:</p>
+<ul>
+<li>the output grain suggests detail far below the sampling or process scale;</li>
+<li>the mapped extent exceeds the environments or distances represented by the observations;</li>
+<li>the covariates are used at a scale unrelated to the response process;</li>
+<li>validation removes points under much easier conditions than those encountered in the final map.</li>
+</ul>
+<p>The original, larger workflow estimated empirical correlation scales and tuned covariates across several smoothing radii. The two-hour warmup does not reproduce that complete optimization. It retains the essential diagnostic question:</p>
+<blockquote class="blockquote">
+<p>Are the raster grain, station spacing, identifiable process scale, and intended claim mutually consistent?</p>
+</blockquote>
+</section>
+</section>
+<section id="process-regimes-and-temporal-validity" class="level2">
+<h2 class="anchored" data-anchor-id="process-regimes-and-temporal-validity">Process regimes and temporal validity</h2>
+<p>Microclimate is dynamic. The controls on a temperature field can change between daytime heating, evening transition, nocturnal cooling, cold-air drainage, and early-morning inversion.</p>
+<p>Therefore, a model fitted to one timestamp does not automatically describe a general microclimate pattern. It describes one observed state under one process regime.</p>
+<p>The warmup deliberately uses one timestamp first. It selects 1 September 2026 at 14:00 CEST, the hour with the largest temperature contrast among the eight stations in the available record. This keeps all six model assumptions comparable because every method receives the same response values. The resulting validity is correspondingly narrow:</p>
+<pre class="text"><code>validity for the selected timestamp
+!= validity for every time of day
+!= validity for every weather situation</code></pre>
+<p>At the end of the exercise, changing the selected temperature column provides a compact process check. If model ranking, spatial structure, or identifiable scale changes, the earlier result was regime-specific rather than universal.</p>
+</section>
+<section id="process-scale-data-support-and-validation-target" class="level2">
+<h2 class="anchored" data-anchor-id="process-scale-data-support-and-validation-target">Process, scale, data support, and validation target</h2>
+<p>A defensible map requires more than a plausible algorithm. Four questions must be answered together.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figure_3.png" class="img-fluid figure-img"></p>
+<figcaption>A spatial model is sufficient only when process, scale, data support, and validation target are consistent with the claim.</figcaption>
+</figure>
+</div>
+<section id="process" class="level3">
+<h3 class="anchored" data-anchor-id="process">Process</h3>
+<p>What mechanism could generate the pattern? Possible controls include elevation, terrain form, radiation, vegetation, cold-air drainage, surface cover, and wind exposure. A model does not become process-aware merely because it produces a smooth surface.</p>
+</section>
+<section id="scale" class="level3">
+<h3 class="anchored" data-anchor-id="scale">Scale</h3>
+<p>At what grain and extent will the result be used? Does the station network resolve the relevant process scale? Are covariates represented at a scale that matches the response?</p>
+</section>
+<section id="data-support" class="level3">
+<h3 class="anchored" data-anchor-id="data-support">Data support</h3>
+<p>Do the observations represent the relevant distances, elevations, environments, gradients, and extremes? Dense sampling in one environmental situation does not compensate for missing other situations.</p>
+</section>
+<section id="validation-target" class="level3">
+<h3 class="anchored" data-anchor-id="validation-target">Validation target</h3>
+<p>Which prediction task is tested: another station in the existing network, an unsampled spatial block, a new time, or a genuinely independent campaign? Validation results apply only to the task represented by the validation design.</p>
+<p>Independent data would provide the strongest test. The warmup has no independent reference surface. Its leave-one-out procedure is therefore an internal diagnostic, not independent validation.</p>
+</section>
+</section>
+<section id="model-domain-is-not-an-area-of-validity" class="level2">
+<h2 class="anchored" data-anchor-id="model-domain-is-not-an-area-of-validity">Model domain is not an area of validity</h2>
+<p>The practical needs a finite region in which raster predictions are calculated. It uses the convex hull of the stations plus a small buffer. This region is the <strong>model and reporting domain</strong>.</p>
+<p>It prevents unlimited mapping across the full DEM and CHM, but it does not prove validity. Even inside the convex hull, a location can be poorly supported because it is:</p>
+<ul>
+<li>far from all stations;</li>
+<li>surrounded by stations only in one direction;</li>
+<li>outside the observed elevation or environmental distribution;</li>
+<li>affected by a process not represented by the model;</li>
+<li>predicted under conditions unlike those tested during cross-validation.</li>
+</ul>
+<p>The reporting domain answers:</p>
+<blockquote class="blockquote">
+<p>Where do we calculate and display predictions?</p>
+</blockquote>
+<p>Support diagnostics answer:</p>
+<blockquote class="blockquote">
+<p>Where are these predictions comparable to situations represented by the observations and validation?</p>
+</blockquote>
+<p>These questions must not be collapsed into one polygon.</p>
+</section>
+<section id="six-transfer-assumptions" class="level2">
+<h2 class="anchored" data-anchor-id="six-transfer-assumptions">Six transfer assumptions</h2>
+<p>All six warmup models use the same eight measured station temperatures as the response to be transferred into space. They differ in the transfer rule and in the environmental information supplied to the model.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Model</th>
+<th>Transfer rule</th>
+<th>Information used</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Voronoi</td>
+<td>assign the nearest measured value</td>
+<td>position and first neighbour</td>
+</tr>
+<tr class="even">
+<td>IDW</td>
+<td>combine nearby values using distance weights</td>
+<td>position, distance, and four neighbours</td>
+</tr>
+<tr class="odd">
+<td>LM terrain elevation</td>
+<td>apply one fitted temperature-terrain relationship</td>
+<td>terrain elevation from the DEM</td>
+</tr>
+<tr class="even">
+<td>LM canopy height</td>
+<td>apply one fitted temperature-canopy relationship</td>
+<td>canopy height from the CHM</td>
+</tr>
+<tr class="odd">
+<td>RF terrain</td>
+<td>learn flexible partitions from the observed sample</td>
+<td>coordinates and terrain elevation</td>
+</tr>
+<tr class="even">
+<td>RF terrain + CHM</td>
+<td>add canopy structure to the same RF formulation</td>
+<td>coordinates, terrain elevation, and canopy height</td>
+</tr>
+</tbody>
+</table>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figure_5.png" class="img-fluid figure-img"></p>
+<figcaption>Four core transfer ideas: nearest station, distance weighting, terrain-based linear regression, and Random Forest. The script extends these with canopy-height models.</figcaption>
+</figure>
+</div>
 <section id="voronoi-nearest-station" class="level3">
 <h3 class="anchored" data-anchor-id="voronoi-nearest-station">Voronoi / nearest station</h3>
-<p>Voronoi uses the nearest station. The map becomes a set of hard station areas.</p>
-<p>The assumption is piecewise constancy: within each area, the nearest observed value is taken as representative. The effective scale is determined by the station layout. This is transparent and restrictive. It is useful when the task is to expose station control and avoid pretending to know gradients that are not supported by the data.</p>
-<p>This method is also useful because it makes the support problem visible. It shows how the study area is partitioned by point location alone. It is often a good first diagnostic when nothing beyond position is justified.</p>
+<p>Voronoi assigns the measured value of the nearest station. The resulting field is piecewise constant and contains hard station-control zones.</p>
+<p>Its strength is transparency: it does not invent a continuous gradient. Its limitation is equally transparent: an observation can be transferred over a long distance, and the method does not know whether a barrier, elevation change, or different surface lies between station and prediction location.</p>
+<p>For this model, distance to the nearest training station, (d_1), completely describes the geometric transfer distance used by the algorithm.</p>
 </section>
 <section id="idw-distance-decay" class="level3">
 <h3 class="anchored" data-anchor-id="idw-distance-decay">IDW / distance decay</h3>
-<p>IDW uses distance weighting. Nearby stations count more than distant stations.</p>
-<p>The assumption is gradual isotropic decay from observation points. The spatial pattern is smoother than Voronoi but still mainly controlled by station geometry. The method is easy to understand and useful when local spatial proximity is a plausible but limited assumption.</p>
-<p>IDW does not know the process. It does not know wind, shade, cold-air drainage, land cover, or sensor exposure unless these are indirectly reflected in the observed values and station layout.</p>
+<p>IDW combines station measurements using weights that decrease with distance. In the warmup, the four nearest stations contribute and inverse squared distance is used.</p>
+<p>The method assumes isotropic and gradual spatial decay. It does not know wind, shade, cold-air drainage, land cover, or exposure unless their effects happen to be represented by the station values and geometry.</p>
+<p>For IDW, nearest distance alone is insufficient. The result also depends on the other selected neighbours and the concentration of their weights. The first- and fourth-neighbour distances, (d_1) and (d_4), provide a compact first support diagnostic, but not a complete interpolation uncertainty model.</p>
 </section>
-<section id="lm-altitude-simple-explanatory-model" class="level3">
-<h3 class="anchored" data-anchor-id="lm-altitude-simple-explanatory-model">LM altitude / simple explanatory model</h3>
-<p>The linear altitude model uses elevation as a simple explanatory variable.</p>
-<p>The assumption is that part of the temperature pattern can be transferred through a relationship with altitude. The predicted values therefore inherit the spatial structure of the DEM. This can be defensible when elevation is a plausible driver at the scale of interest.</p>
-<p>This is not a richer microclimate model. It is a deliberately narrow altitude transfer. Local shade, vegetation, surface material, buildings, and drainage processes are outside this assumption unless they are indirectly expressed through elevation or the station values.</p>
+<section id="linear-models-alternative-process-hypotheses" class="level3">
+<h3 class="anchored" data-anchor-id="linear-models-alternative-process-hypotheses">Linear models / alternative process hypotheses</h3>
+<p>The first linear model estimates one terrain-elevation relationship:</p>
+<p><span class="math display">\[
+T = \beta_0 + \beta_1\,z + \varepsilon,
+\]</span></p>
+<p>where (z) is terrain elevation. Its predicted field inherits the geometry of the DEM, but the fitted information remains one global elevation relationship estimated from eight stations.</p>
+<p>The second linear model has the same mathematical form but replaces terrain elevation with canopy height:</p>
+<p><span class="math display">\[
+T = \beta_0 + \beta_1\,h + \varepsilon,
+\]</span></p>
+<p>where (h) is canopy height calculated as DSM minus DEM. Comparing the two linear models isolates the substantive choice of environmental predictor: similar terrain elevation and similar canopy height are different hypotheses about why two locations should have similar temperatures.</p>
+<p>The fine structure of either raster must not be confused with equally fine temperature evidence. A familiar predictor value may also occur far from any station. Geographic support and predictor-space support are therefore separate diagnostics.</p>
 </section>
-<section id="random-forest-flexible-data-driven-relation" class="level3">
-<h3 class="anchored" data-anchor-id="random-forest-flexible-data-driven-relation">Random Forest / flexible data-driven relation</h3>
-<p>Random Forest also transfers the measured station temperatures to unsampled locations. In this warmup, the measured temperature is the response variable. Coordinates and elevation are explanatory variables. The model learns a relation from the few station values and then applies that relation to all prediction locations.</p>
-<p>This is different from nearest station, IDW, and the altitude model. Voronoi transfers the nearest measured value. IDW transfers measured values through distance weights. The altitude model transfers measured values through one global elevation relation. Random Forest can combine coordinate position and elevation in many local decision rules. The resulting spatial statement can therefore look more detailed than the data situation supports.</p>
-<p>The warning is not that Random Forest is generally wrong. The warning is that technical flexibility can hide a weak spatial claim. With few stations, the model may mainly learn where high and low values happened to occur in this specific station layout. A low error value does not prove that the predicted pattern is a defensible microclimatic relation. The result still has to be judged against the process question, the scale of use, the sampling layout, the valid statement area, and the validation target.</p>
+<section id="random-forest-adding-predictors-within-one-algorithm" class="level3">
+<h3 class="anchored" data-anchor-id="random-forest-adding-predictors-within-one-algorithm">Random Forest / adding predictors within one algorithm</h3>
+<p>The first Random Forest uses coordinates and terrain elevation. The second uses the same inputs and additionally receives canopy height. This paired comparison asks whether CHM contributes useful information within the same flexible algorithm.</p>
+<p>Both models can combine the predictors into local decision rules and produce a detailed-looking field from few observations. Coordinates can act as spatial proxies and allow the model to reproduce the layout of this particular network without necessarily learning transferable microclimatic processes.</p>
+<p>A low internal error does not prove that the mapped pattern is process-valid. Predictor-space support, spatial validation distance, and the meaning of the coordinate predictors must be inspected separately.</p>
 </section>
 </section>
-<section id="hands-on-warmup-workflow" class="level2">
-<h2 class="anchored" data-anchor-id="hands-on-warmup-workflow">Hands-on: warmup workflow</h2>
-<p>The warmup follows the minimal script as a compact modelling chain. It starts from prepared station measurements and elevation information, produces four alternative spatial statements, and then reads the resulting maps and RMSE values critically.</p>
-<p>The important point is not each technical line of code. The important point is the sequence: observed station values are transferred to unsampled locations, different assumptions produce different spatial representations, and the outputs must be read as modelled statements rather than as direct observations.</p>
-<p>The data are prepared so that the warmup can focus on the modelling step. In real projects, this step only becomes defensible after sensor behaviour, timestamps, missing values, CRS, DEM fit, station exposure, and the valid statement area have been checked.</p>
-<p>The minimal script is the technical counterpart of this reader. It demonstrates how observed station values are transferred to unsampled locations, and why every resulting spatial representation depends on an explicit modelling assumption.</p>
-<p>The real-world link is important. Before such a workflow can be used in an actual project, the measurements would have to be checked: sensor behaviour, timestamps, missing values, coordinate reference systems, DEM fit, station exposure, and the valid statement area all affect what can be claimed. The warmup does not compute a full cleaning workflow. It uses prepared data so that the modelling step itself becomes visible.</p>
+<section id="three-layers-of-validity-diagnostics" class="level2">
+<h2 class="anchored" data-anchor-id="three-layers-of-validity-diagnostics">Three layers of validity diagnostics</h2>
+<p>The warmup separates three questions that are often incorrectly combined.</p>
+<section id="process-and-scale-support" class="level3">
+<h3 class="anchored" data-anchor-id="process-and-scale-support">1. Process and scale support</h3>
+<p>An empirical variogram summarizes how dissimilarity between observations changes with distance. It can indicate whether a characteristic spatial correlation scale is visible in the sampled field.</p>
+<p>The variogram is a diagnostic, not an automatic truth machine. With few stations, clustered sampling, or weak structure, a stable range may not be identifiable. “The process scale cannot be identified from this network” is a valid scientific result.</p>
+<p>The practical compares:</p>
+<ul>
+<li>raster grain;</li>
+<li>distribution of station spacing;</li>
+<li>empirical semivariance across distance;</li>
+<li>intended scale of interpretation.</li>
+</ul>
 </section>
-<section id="minimal-validation-what-is-checked" class="level2">
-<h2 class="anchored" data-anchor-id="minimal-validation-what-is-checked">Minimal validation: what is checked?</h2>
-<p>The warmup does not stop after producing spatial statements. It also asks whether the models can reproduce measurements that were temporarily withheld.</p>
-<p>Leave-one-out cross-validation (LOOCV) does this in a simple way: one station is removed, the model is fitted with the remaining stations, and the removed station is predicted. This is repeated for all stations. The difference between observed and predicted station values gives a point-based error.</p>
-<p>RMSE summarizes these errors into one number. A lower RMSE means that, in this specific test, the withheld station values were predicted more closely.</p>
+<section id="geographic-support" class="level3">
+<h3 class="anchored" data-anchor-id="geographic-support">2. Geographic support</h3>
+<p>For every prediction cell, distances to the observed stations can be calculated. These continuous distance fields show how far measurements are transferred.</p>
+<p>The same distances are calculated for withheld stations during cross-validation. This connects the map to the validation task:</p>
+<blockquote class="blockquote">
+<p>A global CV error is most defensible where prediction distances resemble those represented during CV.</p>
+</blockquote>
+<p>For the warmup:</p>
+<ul>
+<li>(d_1) is the primary support measure for Voronoi;</li>
+<li>(d_1) and (d_4) are initial support measures for four-neighbour IDW;</li>
+<li>geographic distance remains informative for LM and RF, even though they use covariates.</li>
+</ul>
 </section>
-<section id="reading-the-spatial-statements-critically" class="level2">
-<h2 class="anchored" data-anchor-id="reading-the-spatial-statements-critically">Reading the spatial statements critically</h2>
-<p>After the results have been produced, the main task is not to choose the best-looking map or the lowest RMSE. The task is to decide what each spatial statement is allowed to say about the real situation.</p>
-<p>For each result, ask:</p>
+<section id="predictor-space-support" class="level3">
+<h3 class="anchored" data-anchor-id="predictor-space-support">3. Predictor-space support</h3>
+<p>Regression and machine-learning models may be geographically close to observations but encounter unfamiliar combinations of predictors. The <strong>Dissimilarity Index (DI)</strong> measures how different a prediction location is from the training data in predictor space.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<p>The DI is continuous:</p>
+<pre class="text"><code>small DI  -&gt; conditions similar to the training data
+large DI  -&gt; increasingly unfamiliar predictor conditions</code></pre>
+<p>An <strong>Area of Applicability (AOA)</strong> is obtained by applying a threshold to the DI. The threshold is tied to the cross-validation design and marks the area in which the reported CV performance is expected to be applicable. The AOA is therefore not a generic confidence map and not a substitute for process knowledge.</p>
+<p>The optional CAST add-on illustrates DI and AOA for the LM canopy-height model only. It uses canopy height because this is the sole predictor in that model. A support diagnostic must use exactly the predictor(s) of the model it describes.</p>
+<p>Voronoi and IDW transfer measurements through geographic distance, not an environmental predictor space. Applying this predictor-space AOA to them would answer the wrong support question.</p>
+</section>
+</section>
+<section id="validation-what-is-actually-checked" class="level2">
+<h2 class="anchored" data-anchor-id="validation-what-is-actually-checked">Validation: what is actually checked?</h2>
+<p>Leave-one-out cross-validation removes one station, refits the model using all remaining stations, and predicts the withheld value. Repeating this for all stations produces one prediction error per station.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figure_4.png" class="img-fluid figure-img"></p>
+<figcaption>Leave-one-out cross-validation: withhold one station, fit with the remaining stations, predict the withheld station, and repeat for every station.</figcaption>
+</figure>
+</div>
+<p>MAE summarizes the average absolute magnitude of these errors:</p>
+<p><span class="math display">\[
+MAE = \frac{1}{n}\sum_{i=1}^{n}|\hat{y}_i-y_i|.
+\]</span></p>
+<p>RMSE gives additional weight to individual large errors:</p>
+<p><span class="math display">\[
+RMSE = \sqrt{\frac{1}{n}\sum_{i=1}^{n}(\hat{y}_i-y_i)^2}.
+\]</span></p>
+<p>Lower MAE and RMSE values mean that withheld station values were predicted more closely in this particular internal test. A substantially larger RMSE than MAE indicates that one or more stations have particularly large errors. Neither measure proves that the full surface is correct.</p>
+<p>LOOCV in this warmup tests:</p>
+<blockquote class="blockquote">
+<p>Prediction of another station from the remaining stations under the distances, predictor values, timestamp, and network geometry represented in the dataset.</p>
+</blockquote>
+<p>It does not test:</p>
+<ul>
+<li>an independent measurement campaign;</li>
+<li>every raster cell between stations;</li>
+<li>spatial structures below the sampling scale;</li>
+<li>a new temporal process regime;</li>
+<li>missing environmental situations;</li>
+<li>whether a visually plausible gradient represents the true mechanism.</li>
+</ul>
+<p>Spatial dependence can make ordinary resampling optimistic when training and test observations remain close. More demanding tasks require spatially separated folds or distance-matched cross-validation.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> These approaches belong to the larger workflow; the warmup introduces the reason they are needed.</p>
+</section>
+<section id="from-a-global-error-to-local-interpretability" class="level2">
+<h2 class="anchored" data-anchor-id="from-a-global-error-to-local-interpretability">From a global error to local interpretability</h2>
+<p>A single RMSE is a global summary. Prediction conditions vary across the map. The warmup therefore reads error together with support.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Diagnostic</th>
+<th>Question answered</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>MAE</td>
+<td>What was the typical absolute error at a withheld station?</td>
+</tr>
+<tr class="even">
+<td>RMSE</td>
+<td>Were withheld stations predicted closely when large errors receive additional weight?</td>
+</tr>
+<tr class="odd">
+<td>empirical variogram</td>
+<td>Is a spatial process scale identifiable from the observations?</td>
+</tr>
+<tr class="even">
+<td>(d_1), (d_4)</td>
+<td>How far are measurements transferred locally?</td>
+</tr>
+<tr class="odd">
+<td>DI</td>
+<td>How unfamiliar are the predictor conditions?</td>
+</tr>
+<tr class="even">
+<td>AOA</td>
+<td>Where is the CV performance considered transferable under the chosen threshold?</td>
+</tr>
+</tbody>
+</table>
+<p>A high DI or unusual prediction distance does not automatically prove that a prediction is wrong. It shows that the available validation result has weak empirical support there.</p>
+<section id="diaoa-add-on" class="level3">
+<h3 class="anchored" data-anchor-id="diaoa-add-on">DI/AOA add-on</h3>
+<p>The optional add-on maps DI and AOA for the LM canopy-height model without changing any of the six prediction models. Low DI means canopy-height conditions similar to the stations. AOA identifies where the LOOCV performance of this specific model is considered transferable.</p>
+</section>
+</section>
+<section id="hands-on-workflow" class="level2">
+<h2 class="anchored" data-anchor-id="hands-on-workflow">Hands-on workflow</h2>
+<p>The practical script implements a deliberately compact chain:</p>
 <ol type="1">
-<li>Which measured values are transferred into the unsampled space?</li>
-<li>Which assumption performs this transfer?</li>
-<li>Which part of the area is supported by the station layout?</li>
-<li>Where would the statement turn into extrapolation?</li>
-<li>Which real process could explain the pattern, and which process is missing?</li>
-<li>What exactly did LOOCV check: station prediction, spatial process, or only the chosen validation task?</li>
+<li>load the prepared hourly station data, DEM, and DSM;</li>
+<li>calculate canopy height as DSM minus DEM;</li>
+<li>select 1 September 2026 at 14:00 CEST;</li>
+<li>align coordinate systems and extract terrain and canopy height at the stations;</li>
+<li>define a model and reporting domain around the eight stations;</li>
+<li>calculate six alternative spatial statements;</li>
+<li>perform leave-one-out cross-validation and calculate MAE and RMSE;</li>
+<li>compare DEM-only and DEM-plus-CHM formulations within LM and RF;</li>
+<li>optionally map DI and AOA for the LM canopy-height model;</li>
+<li>read error, process assumptions, geographic support, and predictor support together.</li>
 </ol>
-<p>LOOCV is useful because it forces the model to predict known measurements without using them directly. But it remains a point-based test under the given station layout. It does not prove that visible gradients or zones correspond to real microclimatic processes. It also does not test whether the station network covers the relevant situations in the field.</p>
-<p>RMSE is therefore a prompt for model criticism. A low RMSE can make a result worth inspecting, but it cannot replace the scientific question: is this spatial statement defensible for the observed process, the data support, the scale of use, and the valid statement area?</p>
+<p>The script is not a complete microclimate model. It is a controlled comparison of transfer assumptions and their validity boundaries.</p>
+</section>
+<section id="model-specific-interpretation-matrix" class="level2">
+<h2 class="anchored" data-anchor-id="model-specific-interpretation-matrix">Model-specific interpretation matrix</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Model</th>
+<th>What creates the field?</th>
+<th>Primary support diagnostic</th>
+<th>Main missing information</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Voronoi</td>
+<td>nearest measured value</td>
+<td>(d_1) relative to CV distances</td>
+<td>barriers and environmental differences</td>
+</tr>
+<tr class="even">
+<td>IDW</td>
+<td>four distance-weighted values</td>
+<td>(d_1), (d_4), and weight concentration</td>
+<td>process direction and covariates</td>
+</tr>
+<tr class="odd">
+<td>LM terrain elevation</td>
+<td>global terrain-elevation relationship</td>
+<td>geographic distance</td>
+<td>non-terrain processes and local residual structure</td>
+</tr>
+<tr class="even">
+<td>LM canopy height</td>
+<td>global canopy-height relationship</td>
+<td>CHM DI/AOA add-on plus geographic distance</td>
+<td>non-canopy processes and local residual structure</td>
+</tr>
+<tr class="odd">
+<td>RF terrain</td>
+<td>partitions in coordinate-terrain space</td>
+<td>geographic distance</td>
+<td>process interpretation and independent transfer evidence</td>
+</tr>
+<tr class="even">
+<td>RF terrain + CHM</td>
+<td>partitions in coordinate-terrain-CHM space</td>
+<td>geographic distance</td>
+<td>support for fine canopy structure and independent transfer evidence</td>
+</tr>
+</tbody>
+</table>
+<p>No diagnostic makes a model universally valid. Each diagnostic exposes a specific boundary of the spatial claim.</p>
+</section>
+<section id="questions-for-reading-the-results" class="level2">
+<h2 class="anchored" data-anchor-id="questions-for-reading-the-results">Questions for reading the results</h2>
+<p>For every model, ask:</p>
+<ol type="1">
+<li>Which measured values are transferred into unsampled space?</li>
+<li>Which rule performs the transfer?</li>
+<li>What spatial and temporal support does one observation have?</li>
+<li>Is the raster grain finer than the information actually resolved?</li>
+<li>Is a process scale identifiable from the station network?</li>
+<li>Are local prediction distances represented during cross-validation?</li>
+<li>Are terrain elevation, canopy height, and their predictor combinations represented by the stations?</li>
+<li>Which process could explain the pattern, and which process is missing?</li>
+<li>What exact prediction task did LOOCV test?</li>
+<li>Would the statement still be defensible at another timestamp?</li>
+</ol>
+<p>The objective is not to select the most attractive map. It is to state where and for what task each map is supported.</p>
 </section>
 <section id="reality-check-prepared-data-are-not-raw-data" class="level2">
 <h2 class="anchored" data-anchor-id="reality-check-prepared-data-are-not-raw-data">Reality check: prepared data are not raw data</h2>
-<p>The data are prepared so that the workshop can focus on the modelling step. Real projects require work before modelling starts.</p>
-<p>At minimum, the data situation has to be checked: sensor plausibility, timestamp consistency, missing values, coordinate reference systems, DEM reference, station exposure, valid statement area, documentation, and data provenance.</p>
-<p>These steps are not developed into a full cleaning workflow in this reader. They are introduced as conditions for valid spatial statements. A map can only be as defensible as the observation network, preprocessing choices, statement area, and validation design behind it.</p>
+<p>Prepared data allow the session to focus on spatial modelling. Real projects require additional checks before any interpolation or prediction:</p>
+<ul>
+<li>sensor plausibility and calibration;</li>
+<li>timestamp and time-zone consistency;</li>
+<li>missing values and data provenance;</li>
+<li>coordinate reference systems and DEM/DSM alignment;</li>
+<li>installation height and station exposure;</li>
+<li>temporal aggregation and weather regime;</li>
+<li>sampling design and environmental coverage;</li>
+<li>independent or spatially appropriate validation data.</li>
+</ul>
+<p>These steps are not replaced by an AOA, small MAE or RMSE values, or a visually convincing surface.</p>
 </section>
 <section id="core-message" class="level2">
 <h2 class="anchored" data-anchor-id="core-message">Core message</h2>
-<p>A map from point measurements is not an automatic output. It is a modelled spatial statement.</p>
-<p>The correct question is not “which method is best?” The correct question is whether the model assumption, process logic, scale of use, data support, statement area, and validation boundary fit together.</p>
-<p>When this cannot be shown, the simpler and more transparent assumption is often the scientifically stronger one.</p>
+<p>A map from point measurements is not an automatic output. It is a modelled spatial statement whose validity is conditional.</p>
+<p>The correct question is not simply:</p>
+<pre class="text"><code>Which method has the smallest MAE or RMSE?</code></pre>
+<p>The correct questions are:</p>
+<pre class="text"><code>Which process and scale are represented?
+Where is the prediction geographically supported?
+Where are predictor conditions represented?
+Which prediction task was validated?
+For which timestamp and process regime does the claim apply?</code></pre>
+<p>A simple method can be the scientifically stronger choice when it exposes its assumptions and limitations. A complex method is defensible only when its additional structure is supported by observations, process knowledge, scale consistency, and an appropriate validation design.</p>
 
 
 </section>
@@ -657,7 +1070,9 @@ window.Quarto = {
 <div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
-<li id="fn1"><p>Tobler, W. R. (1970). A computer movie simulating urban growth in the Detroit region. <em>Economic Geography</em>, 46(Supplement), 234–240. https://doi.org/10.2307/143141.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>Tobler, W. R. (1970). A computer movie simulating urban growth in the Detroit region. <em>Economic Geography</em>, 46(Supplement), 234–240. https://doi.org/10.2307/143141<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Meyer, H., &amp; Pebesma, E. (2021). Predicting into unknown space? Estimating the area of applicability of spatial prediction models. <em>Methods in Ecology and Evolution</em>, 12, 1620–1633. https://doi.org/10.1111/2041-210X.13650<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Milà, C., Mateu, J., Pebesma, E., &amp; Meyer, H. (2022). Nearest neighbour distance matching leave-one-out cross-validation for map validation. <em>Methods in Ecology and Evolution</em>, 13, 1304–1316. https://doi.org/10.1111/2041-210X.13851<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -1088,7 +1503,7 @@ window.Quarto = {
     </div>   
     <div class="nav-footer-center">
 <p>Earth Observation Network Harz Summer School (2026)</p>
-<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/earth-observation-network/EON2026/edit/main/block5/mc_warmup_reader_en.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/earth-observation-network/EON2026/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/earth-observation-network/EON2026/edit/main/block5/mc_warmup_reader_en_current_data_aoa.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/earth-observation-network/EON2026/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
