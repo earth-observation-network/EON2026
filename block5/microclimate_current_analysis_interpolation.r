@@ -32,12 +32,12 @@
 # =============================================================================
 
 # Aktuelles räumliches Stunden-RDS.
-data_file <- "block5/data/MobilePolsterhaus_spatial_hourly.rds"
+data_file <- "data/MobilePolsterhaus_spatial_hourly.rds"
 
 # Optionales Höhenmodell. Wenn diese Datei nicht vorhanden ist oder NULL
 # eingetragen wird, werden nur Voronoi und IDW berechnet.
 # Beispiel: dem_file <- "DEM1.tif"
-dem_file <- "block5/data/DEM1_d.tif"
+dem_file <- "data/DEM1_d.tif"
 
 # Gewünschter Zeitpunkt:
 #   NULL  = automatisch jüngster Zeitpunkt mit der maximal verfügbaren Zahl
@@ -61,7 +61,7 @@ idw_nmax <- 4L
 idw_power <- 2
 
 # Ergebnisordner.
-output_dir <- "block5/interpolation_aktuelle_daten"
+output_dir <- "interpolation_aktuelle_daten"
 dir.create(output_dir, showWarnings = FALSE, recursive = TRUE)
 
 

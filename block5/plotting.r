@@ -17,7 +17,7 @@ library(ggplot2)
 # 1. Fertigen Datensatz einlesen
 # ------------------------------------------------------------
 
-dat <- readRDS("block5/data/MobilePolsterhaus_spatial_hourly.rds")
+dat <- readRDS("data/MobilePolsterhaus_spatial_hourly.rds")
 
 # Für Ganglinien wird die räumliche Geometriespalte nicht benötigt.
 # Die übrigen Attribute des Datensatzes bleiben erhalten.
